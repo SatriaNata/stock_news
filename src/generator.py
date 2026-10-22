@@ -25,6 +25,11 @@ from config import (
     PAST_NEWS_HTML_PATH,
     TIMEZONE,
 )
+from src.quality import CATEGORIES as QUALITY_CATEGORIES
+
+# Jumlah berita per halaman pada setiap kartu emiten (sisanya lewat paginasi)
+NEWS_PAGE_SIZE = 4
+MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
 
 
 def get_archive_list() -> List[dict]:
@@ -73,10 +78,14 @@ def render_dashboard_html(
     sorted_stocks: Dict[str, dict],
     archives: List[dict],
     is_archive_page: bool = False,
+    past_months: List[str] = None,
 ) -> str:
     """
     Menghasilkan kode HTML lengkap (CSS + JS inline) untuk dashboard.
+    session 'lama' menghasilkan halaman Berita Lama yang memuat data per bulan (past_months) lewat JavaScript.
     """
+    is_lama = session == "lama"
+    past_months = past_months or []
     now_wib = datetime.now(TIMEZONE).strftime("%d %b %Y, %H:%M WIB")
     total_stocks = len(sorted_stocks)
 
@@ -95,10 +104,8 @@ def render_dashboard_html(
 
     # Buat HTML kartu saham
     def render_stock_card(code, stock):
-        sentiment = stock.get("sentiment", "Netral")
-        # Sentimen kosong = berita lama yang belum pernah dianalisis AI
-        pill_class = f"pill-{sentiment.lower()}" if sentiment else "pill-none"
-        sentiment_text = sentiment or "Tanpa AI"
+        sentiment = stock.get("sentiment") or "Netral"
+        pill_class = f"pill-{sentiment.lower()}"
         company_name = stock.get("company_name", code)
         summary = stock.get("summary", "")
         news_items = stock.get("news", [])
@@ -106,28 +113,23 @@ def render_dashboard_html(
 
         # Komponen ringkasan AI
         summary_html = ""
-        ai_from = stock.get("ai_from", "")
-        ai_from_html = f' <span class="ai-from">· dari sesi {ai_from.replace("-pagi", " pagi").replace("-siang", " siang")}</span>' if ai_from else ""
         if summary:
             summary_html = f"""
             <div class="summary-box">
                 <div class="summary-header">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-                    Ringkasan AI{ai_from_html}
+                    Ringkasan AI
                 </div>
                 <p class="summary-text">{summary}</p>
             </div>
             """
 
-        # Daftar judul berita untuk saham ini — pisahkan 3 teratas dan sisanya
-        MAX_VISIBLE = 3
-        visible_items = news_items[:MAX_VISIBLE]
-        extra_items = news_items[MAX_VISIBLE:]
-        extra_count = len(extra_items)
-
-        def render_news_li(n):
+        # Semua berita dalam satu daftar; berita di luar halaman pertama disembunyikan
+        # (hidden="until-found" agar tetap bisa ditemukan Ctrl+F) dan diatur paginasi JavaScript
+        def render_news_li(index, n):
+            hidden_attr = ' hidden="until-found"' if index >= NEWS_PAGE_SIZE else ""
             return f"""
-            <li class="news-item">
+            <li class="news-item"{hidden_attr}>
                 <a href="{n['link']}" target="_blank" rel="noopener noreferrer" class="news-link">
                     {n['title']}
                 </a>
@@ -139,23 +141,7 @@ def render_dashboard_html(
             </li>
             """
 
-        visible_lis = "".join([render_news_li(n) for n in visible_items])
-
-        # Bangun bagian extra (accordion) jika ada lebih dari 3 berita
-        extra_section = ""
-        if extra_count > 0:
-            extra_lis = "".join([render_news_li(n) for n in extra_items])
-            extra_section = f"""
-                <div class="news-extra" hidden="until-found">
-                    <ul class="news-list">
-                        {extra_lis}
-                    </ul>
-                </div>
-                <button class="expand-btn" type="button" aria-expanded="false" data-extra-count="{extra_count}">
-                    <svg class="expand-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-                    <span class="expand-label">Lihat {extra_count} berita lainnya</span>
-                </button>
-            """
+        news_lis = "".join(render_news_li(i, n) for i, n in enumerate(news_items))
 
         # Buat badge aksi korporasi jika ada
         has_buyback = stock.get("has_buyback", False)
@@ -176,7 +162,7 @@ def render_dashboard_html(
                 </div>
                 <div class="badge-group">
                     {action_pills_html}
-                    <span class="sentiment-pill {pill_class}">{sentiment_text}</span>
+                    <span class="sentiment-pill {pill_class}">{sentiment}</span>
                     <span class="count-badge">{news_count} Berita</span>
                 </div>
             </div>
@@ -184,9 +170,8 @@ def render_dashboard_html(
             <div class="card-news-section">
                 <div class="section-label">Berita Terkait:</div>
                 <ul class="news-list">
-                    {visible_lis}
+                    {news_lis}
                 </ul>
-                {extra_section}
             </div>
         </article>
         """
@@ -250,14 +235,41 @@ def render_dashboard_html(
     history_href = "#" if session == "lama" else f"{prefix}berita-lama.html"
     history_btn_html = f'<a href="{history_href}" class="history-btn{history_active}">{history_icon} Berita Lama</a>'
 
-    if session == "lama":
+    month_bar_html = ""
+    if is_lama:
+        # Filter kategori (dari aturan skor) menggantikan filter sentimen
+        category_buttons = "".join(
+            f'<button class="filter-btn" data-filter="{label}">{label} (<span class="filter-count">0</span>)</button>'
+            for label, _, _ in QUALITY_CATEGORIES
+        )
+        filter_buttons_html = f'<button class="filter-btn active" data-filter="all">Semua (<span class="filter-count">0</span>)</button>{category_buttons}'
+        month_buttons = "".join(
+            f'<button type="button" class="month-btn" data-month="{m}">{MONTH_NAMES[int(m[5:7]) - 1]} {m[:4]}</button>'
+            for m in past_months
+        )
+        month_bar_html = f'<div class="month-bar" id="monthBar">{month_buttons}</div>'
+    else:
+        filter_buttons_html = f"""<button class="filter-btn active" data-filter="all">Semua (<span class="filter-count">{total_stocks}</span>)</button>
+                <button class="filter-btn" data-filter="Positif">Positif (<span class="filter-count">{count_positif}</span>)</button>
+                <button class="filter-btn" data-filter="Netral">Netral (<span class="filter-count">{count_netral}</span>)</button>
+                <button class="filter-btn" data-filter="Negatif">Negatif (<span class="filter-count">{count_negatif}</span>)</button>
+                <button class="filter-btn filter-action-btn btn-buyback" data-filter="buyback">🎯 Buyback (<span class="filter-count">{count_buyback}</span>)</button>
+                <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement (<span class="filter-count">{count_pp}</span>)</button>"""
+
+    if is_lama:
         header_badge = "BERITA LAMA"
         session_title = f"Berita Lama · {session_label}"
-        past_note_html = '<div class="past-note">Kumpulan berita sebelum sesi pagi &amp; siang hari ini (sejak 1 Juli 2025), bertambah setiap update. Ringkasan AI hanya muncul jika berita tersebut pernah dianalisis di sesi sebelumnya.</div>'
-        empty_text = "Belum ada berita lama."
+        dashboard_title = "Berita Saham Sebelumnya"
+        past_note_html = (
+            '<div class="past-note">Berita sebelum sesi pagi hari ini, sejak 1 Juni 2026. Disaring otomatis: '
+            'hanya berita yang menyebut emiten di judul dengan skor kualitas cukup, maksimal 3 berita terbaik '
+            'per emiten per hari. Label di tiap berita menunjukkan kategorinya.</div>'
+        )
+        empty_text = "Memuat berita…"
     else:
         header_badge = "RANGKUMAN PAGI" if session == "pagi" else "RANGKUMAN SIANG"
         session_title = "Sesi Pagi · 13.20–07.00 WIB" if session == "pagi" else "Sesi Siang · 07.00–13.20 WIB"
+        dashboard_title = "Berita Saham Hari Ini"
         past_note_html = ""
         empty_text = "Tidak ada saham yang memenuhi kriteria filter."
 
@@ -582,11 +594,49 @@ def render_dashboard_html(
         }}
 
         /* Daftar Kartu Saham */
-        .stock-cards-list {{
+        .stock-column {{
             display: flex;
             flex-direction: column;
             gap: 16px;
             min-width: 0;
+        }}
+
+        .stock-cards-list {{
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }}
+
+        /* Pilihan bulan di halaman Berita Lama */
+        .month-bar {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }}
+
+        .month-btn {{
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            padding: 7px 14px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }}
+
+        .month-btn:hover {{
+            border-color: var(--border-hover);
+            color: var(--text-main);
+        }}
+
+        .month-btn.active {{
+            background-color: var(--blue-accent);
+            border-color: var(--blue-accent);
+            color: #FFFFFF;
         }}
 
         .past-note {{
@@ -602,17 +652,6 @@ def render_dashboard_html(
             text-align: center;
             color: var(--text-muted);
             padding: 32px 16px;
-        }}
-
-        .pill-none {{
-            background-color: var(--bg-page);
-            color: var(--text-muted);
-            border: 1px dashed var(--border-color);
-        }}
-
-        .ai-from {{
-            font-weight: 400;
-            color: var(--text-muted);
         }}
 
         .stock-card {{
@@ -786,15 +825,16 @@ def render_dashboard_html(
 
         .news-list {{
             list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            margin-bottom: -10px;
         }}
 
-        .news-item {{
+        /* Item di halaman lain diberi hidden="until-found"; display hanya untuk item yang tampil
+           agar browser tetap bisa menyembunyikannya dan Ctrl+F tetap bisa menemukannya */
+        .news-item:not([hidden]) {{
             display: flex;
             flex-direction: column;
             gap: 2px;
+            margin-bottom: 10px;
         }}
 
         .news-link {{
@@ -815,8 +855,18 @@ def render_dashboard_html(
             font-size: 11.5px;
             color: var(--text-secondary);
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 6px;
+        }}
+
+        .cat-tag {{
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--blue-accent);
+            background-color: var(--blue-light);
+            border-radius: var(--radius-pill);
+            padding: 1px 8px;
         }}
 
         .news-source {{
@@ -828,58 +878,49 @@ def render_dashboard_html(
             color: var(--text-muted);
         }}
 
-        /* Accordion: Berita Tersembunyi & Tombol Expand */
-        .news-extra {{
-            overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.25s ease;
-        }}
-
-        /* hidden="until-found" tetap bisa ditemukan Ctrl+F; browser membukanya lewat event beforematch */
-        .news-extra[hidden] {{
-            max-height: 0;
-            opacity: 0;
-            pointer-events: none;
-        }}
-
-        .news-extra:not([hidden]) {{
-            max-height: 5000px;
-            opacity: 1;
-            margin-top: 10px;
-        }}
-
-        .expand-btn {{
-            display: inline-flex;
+        /* Paginasi berita per emiten */
+        .pager {{
+            display: flex;
+            flex-wrap: wrap;
             align-items: center;
-            gap: 6px;
-            margin-top: 10px;
-            padding: 6px 14px;
+            gap: 4px;
+            margin-top: 14px;
+        }}
+
+        .pager-btn {{
+            min-width: 30px;
+            height: 30px;
+            padding: 0 8px;
             font-size: 12.5px;
             font-weight: 600;
             font-family: var(--font-sans);
-            color: var(--blue-accent);
-            background-color: var(--blue-light);
-            border: 1px solid var(--blue-border);
-            border-radius: var(--radius-pill);
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.15s ease;
         }}
 
-        .expand-btn:hover {{
-            background-color: #DBEAFE;
+        .pager-btn:hover:not(:disabled):not(.active) {{
+            border-color: var(--border-hover);
+            color: var(--text-main);
         }}
 
-        .expand-btn[aria-expanded="true"] {{
-            background-color: var(--bg-page);
-            color: var(--text-secondary);
-            border-color: var(--border-color);
+        .pager-btn.active {{
+            background-color: var(--blue-accent);
+            border-color: var(--blue-accent);
+            color: #FFFFFF;
         }}
 
-        .expand-btn[aria-expanded="true"] .expand-icon {{
-            transform: rotate(180deg);
+        .pager-btn:disabled {{
+            opacity: 0.4;
+            cursor: not-allowed;
         }}
 
-        .expand-icon {{
-            transition: transform 0.2s ease;
+        .pager-gap {{
+            color: var(--text-muted);
+            padding: 0 2px;
         }}
 
         /* Sidebar */
@@ -1085,7 +1126,7 @@ def render_dashboard_html(
             .sidebar {{
                 order: 2;
             }}
-            .stock-cards-list {{
+            .stock-column {{
                 order: 1;
             }}
         }}
@@ -1133,7 +1174,7 @@ def render_dashboard_html(
             <div class="header-top">
                 <div>
                     <span class="header-tag">{header_badge}</span>
-                    <h1 class="dashboard-title">Berita Saham Hari Ini</h1>
+                    <h1 class="dashboard-title">{dashboard_title}</h1>
                     <div class="header-meta">
                         <span class="meta-session">{session_title}</span>
                         <span>•</span>
@@ -1153,15 +1194,15 @@ def render_dashboard_html(
             <!-- Tiga Kotak Angka Ringkasan -->
             <div class="stat-grid">
                 <div class="stat-box">
-                    <span class="stat-value">{total_news}</span>
+                    <span class="stat-value" id="statNews">{total_news}</span>
                     <span class="stat-label">Total Berita Disaring</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-value">{total_stocks}</span>
+                    <span class="stat-value" id="statStocks">{total_stocks}</span>
                     <span class="stat-label">Saham IDX Dibahas</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-value">{total_sources}</span>
+                    <span class="stat-value" id="statSources">{total_sources}</span>
                     <span class="stat-label">Sumber Berita Aktif</span>
                 </div>
             </div>
@@ -1169,6 +1210,8 @@ def render_dashboard_html(
     </header>
 
     <div class="container">
+        {month_bar_html}
+
         <!-- Toolbar Pencarian & Filter Sentimen Interaktif -->
         <div class="toolbar">
             <div class="search-box">
@@ -1176,22 +1219,19 @@ def render_dashboard_html(
                 <input type="text" id="searchInput" class="search-input" placeholder="Cari kode saham, nama emiten, atau judul berita (misal: BBCA, Bank Mandiri, dividen)...">
             </div>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Semua (<span class="filter-count">{total_stocks}</span>)</button>
-                <button class="filter-btn" data-filter="Positif">Positif (<span class="filter-count">{count_positif}</span>)</button>
-                <button class="filter-btn" data-filter="Netral">Netral (<span class="filter-count">{count_netral}</span>)</button>
-                <button class="filter-btn" data-filter="Negatif">Negatif (<span class="filter-count">{count_negatif}</span>)</button>
-                <button class="filter-btn filter-action-btn btn-buyback" data-filter="buyback">🎯 Buyback (<span class="filter-count">{count_buyback}</span>)</button>
-                <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement (<span class="filter-count">{count_pp}</span>)</button>
+                {filter_buttons_html}
             </div>
         </div>
 
         <!-- Tata Letak Utama -->
         <main class="main-layout">
             <!-- Kolom Kiri: Kartu Saham -->
-            <section class="stock-cards-list" id="stockCardsContainer">
+            <div class="stock-column">
                 {past_note_html}
-                {''.join(cards_html) if cards_html else f'<div class="empty-state">{empty_text}</div>'}
-            </section>
+                <section class="stock-cards-list" id="stockCardsContainer">
+                    {''.join(cards_html) if cards_html else f'<div class="empty-state">{empty_text}</div>'}
+                </section>
+            </div>
 
             <!-- Kolom Kanan / Bawah: Sidebar -->
             <aside class="sidebar">
@@ -1201,13 +1241,13 @@ def render_dashboard_html(
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
                         Paling Ramai Diberitakan
                     </h2>
-                    <div class="top-ranks">
+                    <div class="top-ranks" id="topRanks">
                         {''.join(top_5_bars_html)}
                     </div>
                 </div>
 
-                <!-- Widget Rekap Sentimen -->
-                <div class="side-widget">
+                <!-- Widget Rekap Sentimen (tidak dipakai di Berita Lama karena tanpa AI) -->
+                <div class="side-widget"{' hidden' if is_lama else ''}>
                     <h2 class="widget-title">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
                         Rekap Sentimen Saham
@@ -1250,110 +1290,127 @@ def render_dashboard_html(
         </footer>
     </div>
 
-    <!-- JavaScript Murni untuk Pencarian & Filter Instan -->
+    <!-- JavaScript Murni: Paginasi Berita, Pencarian & Filter Instan -->
     <script>
+        const NEWS_PAGE_SIZE = {NEWS_PAGE_SIZE};
+        const IS_LAMA = {'true' if is_lama else 'false'};
+        const LAMA_MONTHS = {json.dumps(past_months)};
+
         document.addEventListener('DOMContentLoaded', function() {{
             const searchInput = document.getElementById('searchInput');
             const filterButtons = document.querySelectorAll('.filter-btn');
-            const cards = document.querySelectorAll('.stock-card');
+            const container = document.getElementById('stockCardsContainer');
+            let cards = [];
             let currentFilter = 'all';
 
-            // Buka / tutup daftar berita tambahan (lebih dari 3) pada sebuah kartu
-            function setExpanded(card, open) {{
-                const extra = card.querySelector('.news-extra');
-                const btn = card.querySelector('.expand-btn');
-                if (!extra || !btn) return;
-                if (open) {{
-                    extra.removeAttribute('hidden');
-                }} else {{
-                    extra.setAttribute('hidden', 'until-found');
-                }}
-                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-                btn.querySelector('.expand-label').textContent = open
-                    ? 'Sembunyikan berita'
-                    : `Lihat ${{btn.dataset.extraCount}} berita lainnya`;
+            const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({{'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}})[c]);
+
+            // ===== Paginasi berita per emiten =====
+            function pageCount(card) {{
+                return Math.max(1, Math.ceil(card._items.length / NEWS_PAGE_SIZE));
             }}
 
-            cards.forEach(card => {{
-                const btn = card.querySelector('.expand-btn');
-                const extra = card.querySelector('.news-extra');
-                if (!btn || !extra) return;
-
-                btn.addEventListener('click', function() {{
-                    delete card.dataset.autoExpanded;
-                    setExpanded(card, this.getAttribute('aria-expanded') !== 'true');
+            function showPage(card, page) {{
+                page = Math.max(0, Math.min(page, pageCount(card) - 1));
+                card._page = page;
+                card._items.forEach((li, i) => {{
+                    if (Math.floor(i / NEWS_PAGE_SIZE) === page) {{
+                        li.removeAttribute('hidden');
+                    }} else {{
+                        li.setAttribute('hidden', 'until-found');
+                    }}
                 }});
+                renderPager(card);
+            }}
 
-                // Ctrl+F / Cmd+F menemukan teks di berita tersembunyi -> sinkronkan tombol
-                extra.addEventListener('beforematch', function() {{
-                    setExpanded(card, true);
+            function renderPager(card) {{
+                if (!card._pager) return;
+                const total = pageCount(card), page = card._page;
+                // Nomor halaman ringkas: 1 … (p-1) p (p+1) … N
+                const nums = [...new Set([0, page - 1, page, page + 1, total - 1])]
+                    .filter(p => p >= 0 && p < total).sort((a, b) => a - b);
+                let html = `<button type="button" class="pager-btn" data-page="${{page - 1}}" ${{page === 0 ? 'disabled' : ''}} aria-label="Halaman sebelumnya">‹</button>`;
+                nums.forEach((p, i) => {{
+                    if (i > 0 && p - nums[i - 1] > 1) html += '<span class="pager-gap">…</span>';
+                    html += `<button type="button" class="pager-btn${{p === page ? ' active' : ''}}" data-page="${{p}}">${{p + 1}}</button>`;
                 }});
-            }});
+                html += `<button type="button" class="pager-btn" data-page="${{page + 1}}" ${{page === total - 1 ? 'disabled' : ''}} aria-label="Halaman berikutnya">›</button>`;
+                card._pager.innerHTML = html;
+            }}
 
-            // Fallback untuk browser tanpa dukungan hidden="until-found": buka semua saat Ctrl+F ditekan
+            function setupCard(card) {{
+                const list = card.querySelector('.news-list');
+                card._items = Array.from(list.children);
+                card._titles = card._items.map(li => li.querySelector('.news-link').textContent.toLowerCase());
+                if (card._items.length > NEWS_PAGE_SIZE) {{
+                    card._pager = document.createElement('nav');
+                    card._pager.className = 'pager';
+                    card._pager.setAttribute('aria-label', 'Halaman berita ' + card.dataset.code);
+                    list.after(card._pager);
+                    card._pager.addEventListener('click', e => {{
+                        const btn = e.target.closest('.pager-btn');
+                        if (!btn || btn.disabled) return;
+                        delete card.dataset.autoPage;
+                        showPage(card, Number(btn.dataset.page));
+                    }});
+                    // Ctrl+F menemukan berita di halaman lain -> pindah ke halaman tersebut
+                    card._items.forEach((li, i) => li.addEventListener('beforematch', () => showPage(card, Math.floor(i / NEWS_PAGE_SIZE))));
+                }}
+                showPage(card, 0);
+            }}
+
+            // Fallback untuk browser tanpa dukungan hidden="until-found": tampilkan semua berita saat Ctrl+F ditekan
             if (!('onbeforematch' in document.body)) {{
-                document.addEventListener('keydown', function(e) {{
+                document.addEventListener('keydown', e => {{
                     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {{
-                        cards.forEach(card => setExpanded(card, true));
+                        cards.forEach(card => card._items.forEach(li => li.removeAttribute('hidden')));
                     }}
                 }});
             }}
 
+            // ===== Pencarian & filter =====
             function applyFilters() {{
                 const query = searchInput.value.toLowerCase().trim();
 
                 cards.forEach(card => {{
-                    const code = card.getAttribute('data-code').toLowerCase();
-                    const name = card.getAttribute('data-name').toLowerCase();
-                    const sentiment = card.getAttribute('data-sentiment');
-                    const hasBuyback = card.getAttribute('data-has-buyback') === 'true';
-                    const hasPP = card.getAttribute('data-has-pp') === 'true';
+                    const code = card.dataset.code.toLowerCase();
+                    const name = card.dataset.name.toLowerCase();
+                    const hasBuyback = card.dataset.hasBuyback === 'true';
+                    const hasPP = card.dataset.hasPp === 'true';
+                    const categories = (card.dataset.categories || '').split('|');
+                    const titleHit = query ? card._titles.findIndex(t => t.includes(query)) : -1;
 
-                    const extraTitles = Array.from(card.querySelectorAll('.news-extra .news-link'))
-                        .map(a => a.textContent.toLowerCase());
-                    const allTitles = Array.from(card.querySelectorAll('.news-link'))
-                        .map(a => a.textContent.toLowerCase());
-
-                    const matchesSearch = !query || code.includes(query) || name.includes(query)
-                        || allTitles.some(t => t.includes(query))
+                    const matchesSearch = !query || code.includes(query) || name.includes(query) || titleHit >= 0
                         || (query === 'buyback' && hasBuyback)
                         || (query.includes('placement') && hasPP);
 
-                    // Otomatis buka berita tambahan jika kata kunci ditemukan di dalamnya;
-                    // tutup kembali yang dibuka otomatis saat pencarian berubah / dikosongkan
-                    if (query && extraTitles.some(t => t.includes(query))) {{
-                        if (card.querySelector('.expand-btn')?.getAttribute('aria-expanded') !== 'true') {{
-                            card.dataset.autoExpanded = '1';
-                            setExpanded(card, true);
-                        }}
-                    }} else if (card.dataset.autoExpanded) {{
-                        delete card.dataset.autoExpanded;
-                        setExpanded(card, false);
+                    // Lompat ke halaman berisi berita yang cocok; kembali ke halaman 1 saat pencarian berubah
+                    if (titleHit >= 0) {{
+                        card.dataset.autoPage = '1';
+                        showPage(card, Math.floor(titleHit / NEWS_PAGE_SIZE));
+                    }} else if (card.dataset.autoPage) {{
+                        delete card.dataset.autoPage;
+                        showPage(card, 0);
                     }}
 
-                    let matchesFilter = false;
-                    if (currentFilter === 'all') {{
-                        matchesFilter = true;
-                    }} else if (currentFilter === 'buyback') {{
-                        matchesFilter = hasBuyback;
-                    }} else if (currentFilter === 'pp') {{
-                        matchesFilter = hasPP;
-                    }} else {{
-                        matchesFilter = (sentiment === currentFilter);
-                    }}
+                    let matchesFilter;
+                    if (currentFilter === 'all') matchesFilter = true;
+                    else if (currentFilter === 'buyback') matchesFilter = hasBuyback;
+                    else if (currentFilter === 'pp') matchesFilter = hasPP;
+                    else matchesFilter = card.dataset.sentiment === currentFilter || categories.includes(currentFilter);
 
-                    if (matchesSearch && matchesFilter) {{
-                        card.classList.remove('hidden');
-                    }} else {{
-                        card.classList.add('hidden');
-                    }}
+                    card.classList.toggle('hidden', !(matchesSearch && matchesFilter));
                 }});
             }}
 
-            // Event listener pencarian
+            function initCards() {{
+                cards = Array.from(container.querySelectorAll('.stock-card'));
+                cards.forEach(setupCard);
+                applyFilters();
+            }}
+
             searchInput.addEventListener('input', applyFilters);
 
-            // Event listener tombol filter sentimen
             filterButtons.forEach(btn => {{
                 btn.addEventListener('click', function() {{
                     filterButtons.forEach(b => b.classList.remove('active'));
@@ -1362,6 +1419,91 @@ def render_dashboard_html(
                     applyFilters();
                 }});
             }});
+
+            // ===== Berita Lama: data dimuat per bulan dari data/berita-lama/YYYY-MM.json =====
+            function buildLamaCards(data) {{
+                const groups = {{}};
+                data.items.forEach(n => n.codes.forEach(code => (groups[code] = groups[code] || []).push(n)));
+                const codes = Object.keys(groups).sort((a, b) => groups[b].length - groups[a].length || a.localeCompare(b));
+
+                container.innerHTML = codes.length ? codes.map(code => {{
+                    const items = groups[code];
+                    const name = data.names[code] || code;
+                    const cats = [...new Set(items.map(n => n.category))];
+                    const lis = items.map((n, i) => `
+                        <li class="news-item"${{i >= NEWS_PAGE_SIZE ? ' hidden="until-found"' : ''}}>
+                            <a href="${{esc(n.link)}}" target="_blank" rel="noopener noreferrer" class="news-link">${{esc(n.title)}}</a>
+                            <div class="news-meta">
+                                <span class="cat-tag">${{esc(n.category)}}</span>
+                                <span class="news-source">${{esc(n.source)}}</span>
+                                <span class="news-dot">•</span>
+                                <span class="news-time">${{esc(n.pub_date_str)}}</span>
+                            </div>
+                        </li>`).join('');
+                    return `
+                    <article class="stock-card" data-code="${{esc(code)}}" data-name="${{esc(name.toLowerCase())}}" data-sentiment="" data-categories="${{esc(cats.join('|'))}}" data-has-buyback="false" data-has-pp="false">
+                        <div class="card-top">
+                            <div class="ticker-group">
+                                <span class="ticker-code">${{esc(code)}}</span>
+                                <span class="company-name" title="${{esc(name)}}">${{esc(name)}}</span>
+                            </div>
+                            <div class="badge-group">
+                                <span class="count-badge">${{items.length}} Berita</span>
+                            </div>
+                        </div>
+                        <div class="card-news-section">
+                            <div class="section-label">Berita Terkait:</div>
+                            <ul class="news-list">${{lis}}</ul>
+                        </div>
+                    </article>`;
+                }}).join('') : '<div class="empty-state">Belum ada berita lama di bulan ini.</div>';
+
+                // Statistik, top 5, dan jumlah emiten per kategori
+                document.getElementById('statNews').textContent = data.items.length;
+                document.getElementById('statStocks').textContent = codes.length;
+                document.getElementById('statSources').textContent = new Set(data.items.map(n => n.source)).size;
+                const max = codes.length ? groups[codes[0]].length : 1;
+                document.getElementById('topRanks').innerHTML = codes.slice(0, 5).map(code => `
+                    <div class="rank-item">
+                        <div class="rank-info">
+                            <span class="rank-ticker">${{esc(code)}}</span>
+                            <span class="rank-count">${{groups[code].length}} berita</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-bar" style="width: ${{Math.round(groups[code].length / max * 100)}}%"></div>
+                        </div>
+                    </div>`).join('');
+                filterButtons.forEach(btn => {{
+                    const f = btn.dataset.filter;
+                    btn.querySelector('.filter-count').textContent = f === 'all'
+                        ? codes.length
+                        : codes.filter(c => groups[c].some(n => n.category === f)).length;
+                }});
+            }}
+
+            async function loadMonth(month) {{
+                document.querySelectorAll('.month-btn').forEach(b => b.classList.toggle('active', b.dataset.month === month));
+                container.innerHTML = '<div class="empty-state">Memuat berita…</div>';
+                try {{
+                    const res = await fetch(`data/berita-lama/${{month}}.json`);
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    buildLamaCards(await res.json());
+                }} catch (e) {{
+                    container.innerHTML = `<div class="empty-state">Gagal memuat berita bulan ${{esc(month)}} (${{esc(e.message)}}).</div>`;
+                }}
+                initCards();
+            }}
+
+            if (IS_LAMA) {{
+                document.querySelectorAll('.month-btn').forEach(b => b.addEventListener('click', () => loadMonth(b.dataset.month)));
+                if (LAMA_MONTHS.length) {{
+                    loadMonth(LAMA_MONTHS[0]);
+                }} else {{
+                    container.innerHTML = '<div class="empty-state">Belum ada berita lama.</div>';
+                }}
+            }} else {{
+                initCards();
+            }}
         }});
     </script>
 </body>
@@ -1377,8 +1519,7 @@ def generate_dashboard(
     total_sources: int,
     sorted_stocks: Dict[str, dict],
     news_items: List[dict] = None,
-    past_stocks: Dict[str, dict] = None,
-    past_news_items: List[dict] = None,
+    past_months: List[str] = None,
 ) -> dict:
     """
     Fungsi utama pembuatan dan penyimpanan file dashboard:
@@ -1424,17 +1565,17 @@ def generate_dashboard(
     with open(archive_filepath, "w", encoding="utf-8") as f:
         f.write("")
 
-    # 2. Halaman global Berita Lama (berada di root, sejajar index.html)
-    past_news_items = past_news_items or []
+    # 2. Halaman global Berita Lama (berada di root, sejajar index.html); isinya dimuat per bulan oleh JavaScript
     lama_html = render_dashboard_html(
         session="lama",
-        session_label=f"sebelum sesi {date_str}",
+        session_label="sejak 1 Jun 2026",
         date_str=date_str,
-        total_news=len(past_news_items),
-        total_sources=len({n["source"] for n in past_news_items}),
-        sorted_stocks=past_stocks or {},
+        total_news=0,
+        total_sources=0,
+        sorted_stocks={},
         archives=archives,
         is_archive_page=False,
+        past_months=past_months,
     )
     with open(PAST_NEWS_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(lama_html)

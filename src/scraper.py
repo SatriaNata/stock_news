@@ -35,7 +35,7 @@ from config import (
     REQUEST_TIMEOUT,
     DATA_DIR,
     MIN_NEWS_DATE,
-    PAST_NEWS_STORE_PATH,
+    PAST_NEWS_DIR,
 )
 
 # Konfigurasi logging agar mudah dibaca di terminal dan file log GitHub Actions
@@ -474,61 +474,75 @@ def _as_datetime(value):
     return None
 
 
-def update_past_news_store(new_past_items: list, date_str: str, current_session_items: list) -> list:
+def update_past_news_store(candidates: list, ref_date: datetime.date) -> list:
     """
-    Memperbarui kumpulan "Berita Lama" di data/berita-lama.json lalu mengembalikan seluruh isinya.
-    - Menambahkan berita lama dari run ini + berita sesi pagi/siang dari tanggal sebelumnya
-      (berita sesi kemarin otomatis menjadi berita lama hari ini).
-    - Berita yang sedang tampil di sesi pagi/siang hari ini tidak dimasukkan.
-    - Hanya berita sejak MIN_NEWS_DATE; duplikat (link sama) diabaikan.
+    Memperbarui kumpulan "Berita Lama" per bulan di data/berita-lama/YYYY-MM.json.
+    - Kandidat: berita lama dari run ini + berita sesi pagi/siang dari tanggal sebelumnya.
+    - Hanya berita sejak MIN_NEWS_DATE sampai sebelum awal sesi pagi ref_date.
+    - Setiap bulan yang tersentuh disaring ulang (skor kualitas & maks berita per emiten per hari).
+    Mengembalikan daftar bulan yang tersedia (terbaru dulu).
     """
-    store = []
-    if os.path.exists(PAST_NEWS_STORE_PATH):
-        try:
-            with open(PAST_NEWS_STORE_PATH, "r", encoding="utf-8") as f:
-                store = json.load(f).get("news_items", [])
-        except Exception as e:
-            logger.warning(f"Gagal membaca {PAST_NEWS_STORE_PATH} ({e}). Memulai kumpulan Berita Lama baru.")
+    from src.quality import select_quality_news  # impor lokal: quality bergantung pada modul ini
 
-    # Berita sesi hari ini (sesi yang sedang berjalan + sesi lain di tanggal yang sama)
-    today_links = {n["link"].strip() for n in current_session_items}
-    candidates = list(new_past_items)
+    cutoff, _, _ = get_session_window("pagi", ref_date)
+    date_str = ref_date.strftime("%Y-%m-%d")
+
+    # Berita sesi pagi/siang dari 7 hari sebelumnya ikut menjadi berita lama
+    week_ago = (ref_date - timedelta(days=7)).strftime("%Y-%m-%d")
     for path in sorted(glob.glob(os.path.join(DATA_DIR, "*-*-*-*.json"))):
-        name = os.path.basename(path).replace(".json", "")
-        file_date, _, file_session = name.rpartition("-")
-        if file_session not in ("pagi", "siang"):
-            continue
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                session_items = json.load(f).get("news_items", [])
-        except Exception:
-            continue
-        if file_date == date_str:
-            today_links.update(n["link"].strip() for n in session_items)
-        elif file_date < date_str:
-            candidates.extend(session_items)
+        file_date, _, file_session = os.path.basename(path).replace(".json", "").rpartition("-")
+        if file_session in ("pagi", "siang") and week_ago <= file_date < date_str:
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    candidates = candidates + json.load(f).get("news_items", [])
+            except Exception as e:
+                logger.warning(f"Gagal membaca {path} ({e}). Dilewati.")
 
-    store_links = {n["link"].strip() for n in store}
-    merged = {}
-    added = 0
-    for item in store + candidates:
-        link = item["link"].strip()
+    by_month = {}
+    for item in candidates:
         pub_dt = _as_datetime(item.get("pub_datetime"))
-        if link in merged or link in today_links:
+        if pub_dt is None or not (MIN_NEWS_DATE <= pub_dt < cutoff):
             continue
-        if pub_dt is not None and pub_dt < MIN_NEWS_DATE:
-            continue
-        if link not in store_links:
-            added += 1
-        merged[link] = {**item, "pub_datetime": pub_dt.isoformat() if pub_dt else None}
+        clean = {
+            "title": item["title"],
+            "link": item["link"].strip(),
+            "source": item["source"],
+            "pub_datetime": pub_dt.isoformat(),
+            "pub_date_str": pub_dt.strftime("%Y-%m-%d %H:%M WIB"),
+        }
+        by_month.setdefault(pub_dt.strftime("%Y-%m"), {})[clean["link"]] = clean
 
-    items = sorted(merged.values(), key=lambda x: x["pub_datetime"] or "", reverse=True)
-    with open(PAST_NEWS_STORE_PATH, "w", encoding="utf-8") as f:
-        json.dump({"updated": datetime.now(TIMEZONE).isoformat(), "news_items": items}, f, ensure_ascii=False, indent=2)
+    os.makedirs(PAST_NEWS_DIR, exist_ok=True)
+    for month, new_items in sorted(by_month.items()):
+        path = os.path.join(PAST_NEWS_DIR, f"{month}.json")
+        existing = []
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                existing = json.load(f).get("items", [])
+        merged = {n["link"]: n for n in existing}
+        added = sum(1 for link in new_items if link not in merged)
+        for link, n in new_items.items():
+            merged.setdefault(link, n)
 
-    logger.info(f"Kumpulan Berita Lama: {len(items)} berita ({added} baru ditambahkan).")
-    return items
+        fields = ("title", "link", "source", "pub_datetime", "pub_date_str")
+        selected, names = select_quality_news([{k: n[k] for k in fields} for n in merged.values()])
+        selected.sort(key=lambda n: n["pub_datetime"], reverse=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({
+                "month": month,
+                "updated": datetime.now(TIMEZONE).isoformat(),
+                "names": names,
+                "items": [{k: n[k] for k in fields + ("codes", "score", "category")} for n in selected],
+            }, f, ensure_ascii=False, separators=(",", ":"))
+        logger.info(f"Berita Lama {month}: {len(selected)} berita lolos saringan ({added} kandidat baru).")
 
+    return list_past_news_months()
+
+
+def list_past_news_months() -> list:
+    """Daftar bulan Berita Lama yang tersedia, terbaru dulu."""
+    files = glob.glob(os.path.join(PAST_NEWS_DIR, "*.json"))
+    return sorted((os.path.basename(p).replace(".json", "") for p in files), reverse=True)
 
 if __name__ == "__main__":
     import sys

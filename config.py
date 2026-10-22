@@ -52,7 +52,7 @@ SESSION_CONFIG = {
 
 # Batas tanggal terbit paling lama yang diterima (WIB).
 # Tetap berlaku meskipun --ignore-time-filter aktif, agar berita lama dari RSS tidak ikut terambil.
-MIN_NEWS_DATE = datetime(2025, 7, 1, tzinfo=TIMEZONE)
+MIN_NEWS_DATE = datetime(2026, 6, 1, tzinfo=TIMEZONE)
 
 # ==============================================================================
 # 2. DAFTAR SUMBER BERITA (RSS FEEDS)
@@ -182,5 +182,5 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 ARCHIVE_DIR = os.path.join(BASE_DIR, "arsip")
 EMITEN_CSV_PATH = os.path.join(DATA_DIR, "emiten.csv")
 INDEX_HTML_PATH = os.path.join(BASE_DIR, "index.html")
-PAST_NEWS_STORE_PATH = os.path.join(DATA_DIR, "berita-lama.json")  # Kumpulan Berita Lama (bertambah tiap run)
+PAST_NEWS_DIR = os.path.join(DATA_DIR, "berita-lama")  # Kumpulan Berita Lama per bulan: YYYY-MM.json
 PAST_NEWS_HTML_PATH = os.path.join(BASE_DIR, "berita-lama.html")
