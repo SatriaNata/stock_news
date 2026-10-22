@@ -2,9 +2,1786 @@
   "date": "2026-10-22",
   "session": "siang",
   "session_label": "07.00 – 13.20 WIB",
-  "total_news": 0,
-  "total_sources": 0,
-  "total_stocks": 0,
-  "stocks": {},
-  "news_items": []
+  "total_news": 101,
+  "total_sources": 13,
+  "total_stocks": 36,
+  "stocks": {
+    "BNGA": {
+      "code": "BNGA",
+      "company_name": "Bank CIMB Niaga Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 6,
+      "news": [
+        {
+          "title": "CIMB Group Pastikan Penuhi Aturan Free Float Bank CIMB Niaga (BNGA) - Bisnis.com",
+          "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPd004bVNJdElfRGNMQ25CUFpsVk50S0hHSUItZllCQ1FCSVJlRld4N29ocUpvel9hTWRUVzB0a2ZITDNVS0VTWk44aXVzYTdpdEpVUzJueGVJaE5GMl9lUUdkZE9LcnAwdkRVMFU1MWFHYVJNNWYySGRMSkxpaXZNVi1sYVNNZldTSGpHaW5abHRLdEdEN3V1U3UwMElIV2RpcUpJNmdxZS1rVXNZMnR1ZzU4RUZlNXlXcWln?oc=5",
+          "description": "CIMB Group Pastikan Penuhi Aturan Free Float Bank CIMB Niaga (BNGA) Bisnis.com",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 13:15:15+07:00",
+          "pub_date_str": "2026-10-22 13:15 WIB",
+          "id": "7e3b265a0983"
+        },
+        {
+          "title": "CIMB Bantah BNGA Mau Cabut dari Bursa - detikFinance",
+          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNNllyR21icXdzbDFrSmxENjhPQmFBWWdXcW80SVBVc2hKWHQ4VV9pNnBELW5KSlhQZkJ6aVAzYjNzRGVkcUZVZ0g4aXpuOUt6MkgwWGdTMlJtZkw1ZElYMG1LVEhDa1V4cWxOX2ZFYUFFQnlrMGg0SVdMek1xYkxCbWJIeE9RQmgzaFFELVJtU2QtZknSAZgBQVVfeXFMUGpJdm9hSmhxc0dfNUJCa3pmMDdwVUVHcko0N09hRDZ6eE90NmtPc09temtYS29OMC1PRExMMG0zd0lYTjUtemJVQ3E5eVpKUU45N3dlNkRsSTRpaHFwRk1WVmZEbkZmcU9Ba0FvTGpCNmlISnRFS2ZJdkFDZks3SkZwQnJBUE9fbmlCRWh0cmFOY0hOVnNXaTI?oc=5",
+          "description": "CIMB Bantah BNGA Mau Cabut dari Bursa detikFinance",
+          "source": "Detik Finance via Google News",
+          "pub_datetime": "2026-10-22 12:25:30+07:00",
+          "pub_date_str": "2026-10-22 12:25 WIB",
+          "id": "bed9774045ce"
+        },
+        {
+          "title": "CIMB Group bantah kabar rencana go private Bank CIMB Niaga - IDNFinancials",
+          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOSjRaZnlNTHVCT1pDNVYweXVjNExDRWNHcS16X01JdXBjeklvbTltZldNQ3phUGpOdXRtaUtwbmVocFZBY3VsOGhUWmhwb1VQUUlValJ6aGduZDZUM2xQVnVWMHA0SXZHVkxEdVNWV3ptTVZqWC1VS2plcDYtNGotX1lsVFJEc0JSOUFzaF93S3pDVGpOOG9lR0RMd2dXaGt1d3dMOQ?oc=5",
+          "description": "CIMB Group bantah kabar rencana go private Bank CIMB Niaga IDNFinancials",
+          "source": "IDNFinancials via Google News",
+          "pub_datetime": "2026-10-22 11:40:00+07:00",
+          "pub_date_str": "2026-10-22 11:40 WIB",
+          "id": "9b63da33101e"
+        },
+        {
+          "title": "Menghijau di Tengah Wacana Delisting, Intip Kembali Profil Emiten BNGA dan Kinerjanya - kontan.co.id",
+          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQVzlvR3pWUWxiLWFOb1l5RjFBbWlvT0w5d0p6VnhxVkNSc0F6NEw5a2xBX2xXM1BWMERaempXaTloOFFmTVhJV3dMLXpWNm9yNXhKLXlDRjZTd3hlR3A0M19zWU5TMHRIb0J5ZXhsNl8yU2dJRGpGWjRwZHRqOHhya2wxOXdmbmFLdC1VZjRCZDB6OEctSEhLcy1zQkFlZkpLbkdqYXNyRWMzbHRrX1R2bzdXTDFjVF85ODhWdNIBtAFBVV95cUxNU2huVXlhSnpNMmtKRE5jaFMyZGVfLUZzUzV0NHNWTWQtUW1tamc5ZTdVR2ZxanFNSnBzd3hLeHFRcUN5aVpTZWdpQjJveVhxazJBVUtwMVU1YkY3TVVMX09VX05UcDhlSUZuTVJ3MkZtS2p2UTdYR01ncE9WZXdtalNSLTUtYkJEUUprcy01UFNGRG4wcmc1TzhmNGNBWW1PMEFFU0pZS3Bac1M1Q09tb3pxNjc?oc=5",
+          "description": "Menghijau di Tengah Wacana Delisting, Intip Kembali Profil Emiten BNGA dan Kinerjanya kontan.co.id",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 11:03:44+07:00",
+          "pub_date_str": "2026-10-22 11:03 WIB",
+          "id": "3bdabcda18e0"
+        },
+        {
+          "title": "CIMB Group Bantah Kabar Delisting Saham CIMB Niaga (BNGA) - kontan.co.id",
+          "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQ3kzSlI0MHZVNjJiN1ptTmdOd1ZscE1qUk9xdGVjY0FqWWtPbU9YQnVjUGRnb0U0OE02el9Bd1ptazdDVHdBZjdhRDEtZnphVTJfc21YZzdPZVRFejJLQXl0b3dweE1tY2RJU0YwVDNSRlYxLVROWUIxM0VmX3hpQVBpQm50TU9lMmJxTThGWlNjTUZt0gGOAUFVX3lxTE5Ed2l1TDBlRElQdjF2alBIUGZQcVZQa3RyU1NCX0RENDFPZzBTNWhLWG1DYmdVNjRlQXl5OGRtak84dmIyRkpoUkx2aXlhc0h6YXFKVUFvWFdZY21FcW5ndEQ2V2xHU21aeDgta0Q1TkVHbElPUENERVhDSHlteW1BVTFYQ2I1ZnlLakRZMnc?oc=5",
+          "description": "CIMB Group Bantah Kabar Delisting Saham CIMB Niaga (BNGA) kontan.co.id",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 10:43:25+07:00",
+          "pub_date_str": "2026-10-22 10:43 WIB",
+          "id": "01ff7dbddb98"
+        },
+        {
+          "title": "CIMB Bantah Rencana Privatisasi Saham CIMB Niaga (BNGA) - IDX Channel",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNV1d6SUdmMS14UEhQd29hb2c2ZEVsQW8wZGRLRkxRaF9hUzd4cXVoSHpuVko2aTVnR19GZ19Kd0p4Y3RGRGZzclJiTXhnM1dWdmdQem0wbFdfZXVJdGNqNUxhelluRzV0Q3dUUHN2bUgzVkRyV0RyS0swVkV0OTJKN3pnTVJHcXRKZkQxaXZtLXdaZlNMS0RZ0gGcAUFVX3lxTE9QcjVnbUxZRV9sNzF4MEVGdURfXzJFVHJ6MG5pclpQaHNzX0NrNklkOFBXMTZkcVhIYjljcVJERzU4WXNPNldWZE9ZZHNaNDUyaVY4N0JxcDd0Q0N1S1hXeld6VjhIa2k5TklDTWt0aHM4d3UtXzlWbHkzU3pzRkhqZlFYQkQ5OVNVckQ4UmhnMXpjWXFnOTJRXzFFVQ?oc=5",
+          "description": "CIMB Bantah Rencana Privatisasi Saham CIMB Niaga (BNGA) IDX Channel",
+          "source": "IDX Channel via Google News",
+          "pub_datetime": "2026-10-22 10:34:00+07:00",
+          "pub_date_str": "2026-10-22 10:34 WIB",
+          "id": "cc577e2e04b4"
+        }
+      ]
+    },
+    "TPIA": {
+      "code": "TPIA",
+      "company_name": "Chandra Asri Pacific Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 2,
+      "news": [
+        {
+          "title": "Ekspansi ke Bisnis Avtur Changi dan Kantongi Kas Jumbo, Begini Prospek Saham TPIA - kontan.co.id",
+          "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNbXhiOG5CZWpSbnVQQ3U0djNIb2NKYUJLWDZfUnNvZVRIYVRoVTF2RVNneWFCcVl3Tk9CQktGTklTRnphdEZKd1JVZV93OTcwWXJhX2VEQXF1V0xjd2J6YklyTW10WVBVRDZua0NMLTdsVG9EOGJLb1p2aE50emMzVjhXenQxZWVUZjlRWUthVTVCSmJlRDJwSXZ3Y01TQnh2UmNJY1RreTc1NkE3QmJjV05xT0E0TWPSAa8BQVVfeXFMTXlIQk5YaTBnQnc1T0pxZk0wZ3dWS3VDaGxkbWc1QURLX19oRnNXWEtfVmNRVWRFYnk3S0JXWnFjUmJORC1Qck83djB0cFdCWmUzTWNCSHRNVnpYTWVlZ3o0YTJpZnJMRUxIOHd5cWFiS3hsMjZILWhPLUoxYTB5RlVtSDRKUHNHMFcwMS16b1g1OURRVXFzVk5fT1BqbVEyS1V6ZFM3WWppaXUycFY5QQ?oc=5",
+          "description": "Ekspansi ke Bisnis Avtur Changi dan Kantongi Kas Jumbo, Begini Prospek Saham TPIA kontan.co.id",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 13:03:48+07:00",
+          "pub_date_str": "2026-10-22 13:03 WIB",
+          "id": "51810edbc29f"
+        },
+        {
+          "title": "IHSG Dibuka Turun 2,51% ke 5.194, Saham TPIA hingga CUAN Longsor - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOWjNLT043ekZoWV9uZnpkM2hQeE1kODh0X1pkRGFnWFlJdDE1bzlTMWJaUEQ5N3hfbE9ibkQ3N2RvTHcyXy1TdmFlczNURG1NZVhTQ2Z1Smo4amYwOTRvbFlhZVloTUlqblhBWFhkVHl1S2tFakxUV1dGQXVkWmlVcGNrRTlLZjFlWXB5M2UtT1QxMGl1d09ybm1QaEJUU05oQktPNzFGc1RHbW95d1pz?oc=5",
+          "description": "IHSG Dibuka Turun 2,51% ke 5.194, Saham TPIA hingga CUAN Longsor Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 09:17:09+07:00",
+          "pub_date_str": "2026-10-22 09:17 WIB",
+          "id": "2419d228d288"
+        }
+      ]
+    },
+    "BUMI": {
+      "code": "BUMI",
+      "company_name": "Bumi Resources Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 2,
+      "news": [
+        {
+          "title": "IHSG Sesi I Melonjak, Saham BBRI, TLKM, BUMI Menguat - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcXlON1FrSTAyRXJIUEd1MmVGSmFwc1VLdlJyZl84RnVPSU5Lb2pDQ2p6X2g0YzdKbm42YW9HSVdTOTlHY3UtVG1KX1BTUHM5SjdlYU0yV1BlS1VOcjRrZ0pGcmlfSEwyV1pweENFVUh2dF93bUhLanpPamxTMTRHX3J6SmpZbVFsOVdib2JFb2VkcXJZY3dLWnpudjZkZ2h5?oc=5",
+          "description": "IHSG Sesi I Melonjak, Saham BBRI, TLKM, BUMI Menguat Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 12:54:59+07:00",
+          "pub_date_str": "2026-10-22 12:54 WIB",
+          "id": "526260de7936"
+        },
+        {
+          "title": "IHSG Balik Menguat ke 5.418,9 di Sesi Pertama, Top Gainers LQ45: MAPI, BUMI, MBMA - kontan.co.id",
+          "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNY2Vsb1dkRm5iRzc2b1NjandDTDdpZ2J4UHNxUklGeC0yc2RlWjBOYXp1MjdzdzRST1VHQnIxUXRnSlZ0dmFJRHlxeFVTZXEzaEhKYUI2T0tEb1hBTXRPUmdnNlFzblZkbTV0N1BnUUFHdXhHTzNSNmlndjFOMlZMYjBUTV9FZ204Z0FUU1JrZGVDcUtvMlBSUEViRXBVM1QxNDJTemRONDM3ZVdaYy1kdNIBqAFBVV95cUxQdG03bXVJWVFRZHFMZElQZG8yRFVKVExrNW9DTE5RWHJ2SVNxUndBbU01NUYxS2dOYzdkcGcwTmdWVnRlbk9kNElQSnN1ODgxWjhucDZIakY1LTRmdHl1YWhJODI0VmtVci1aekhsWjUtUVY0RVJ2aFJjVVo4Ny1GdFNkc0ZCbElQRnZiaHAwUHpDdFU2bmVzRjVqT2h5Um9MTzJfQVhMaXo?oc=5",
+          "description": "IHSG Balik Menguat ke 5.418,9 di Sesi Pertama, Top Gainers LQ45: MAPI, BUMI, MBMA kontan.co.id",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 12:08:47+07:00",
+          "pub_date_str": "2026-10-22 12:08 WIB",
+          "id": "3926a5bf4ce9"
+        }
+      ]
+    },
+    "TLKM": {
+      "code": "TLKM",
+      "company_name": "Telkom Indonesia (Persero) Tbk",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 2,
+      "news": [
+        {
+          "title": "IHSG Sesi I Melonjak, Saham BBRI, TLKM, BUMI Menguat - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcXlON1FrSTAyRXJIUEd1MmVGSmFwc1VLdlJyZl84RnVPSU5Lb2pDQ2p6X2g0YzdKbm42YW9HSVdTOTlHY3UtVG1KX1BTUHM5SjdlYU0yV1BlS1VOcjRrZ0pGcmlfSEwyV1pweENFVUh2dF93bUhLanpPamxTMTRHX3J6SmpZbVFsOVdib2JFb2VkcXJZY3dLWnpudjZkZ2h5?oc=5",
+          "description": "IHSG Sesi I Melonjak, Saham BBRI, TLKM, BUMI Menguat Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 12:54:59+07:00",
+          "pub_date_str": "2026-10-22 12:54 WIB",
+          "id": "526260de7936"
+        },
+        {
+          "title": "Potensi Menggiurkan Saham TLKM - investor.id",
+          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE1TbGlHNmhWbTJucGhrc0I5U3ZiQ0c4N0lQejR4Y1JJdTQ5RWsyZkR3RmZmc0hULTJ2UXB4YzNTR2M5anYwbmYyTEEyQWpKYzJCdXhVWW9WVkgzYXE5R2lYak94ODQyYzBEWmFHbEZ6Mi1ldw?oc=5",
+          "description": "Potensi Menggiurkan Saham TLKM investor.id",
+          "source": "Investor.id via Google News",
+          "pub_datetime": "2026-10-22 11:15:00+07:00",
+          "pub_date_str": "2026-10-22 11:15 WIB",
+          "id": "c18b9882333b"
+        }
+      ]
+    },
+    "DMAS": {
+      "code": "DMAS",
+      "company_name": "Puradelta Lestari Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 2,
+      "news": [
+        {
+          "title": "Saham DMAS Akab Bagi Dividen Rp1,4 T, Simak Jadwal Selengkapnya - Ajaib",
+          "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNaTB3UWdYRGdiQ0x0ZndTQ2ZqNXVnOEdNWWtjcWJBSTNIQUNPa2NHSU9pREtmWkdNcTNHb2VkdF9IT1Z3MUlFUWowVXZ5cGZGMWVtWklESUxtVDI5YTlSY2VFQWtJQ1AyaVg0aWNWU3BWazNLNkFtYVlSWV9YSWtNYWhVNXF2MGhwV3F3SmJmOGh3cTNuSldIWnhfUk4?oc=5",
+          "description": "Saham DMAS Akab Bagi Dividen Rp1,4 T, Simak Jadwal Selengkapnya Ajaib",
+          "source": "Google News (Topik: Saham)",
+          "pub_datetime": "2026-10-22 12:46:26+07:00",
+          "pub_date_str": "2026-10-22 12:46 WIB",
+          "id": "dcaf96055c15"
+        },
+        {
+          "title": "DMAS Bagi Dividen Rp1,4 Triliun, IPCC Catat Trafik Kargo Naik 19% - detikFinance",
+          "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOF9jYk85Q2JHc0FqWDBmWUFYbURiUGtBajhwSUNGdXVhU2htQ1h0V3pma0VsV3VIbkFtSmozbWVONlAwTGFoU1prQUlJcnNPdzlWNmYtcWRYMXN3ZnMwX2RGeEl1Vy1FXzMxNkVwM21kRmFfMVpWNzBhQU9HWlVOZG5CUEh4SkVzYWJobF9yQmduUURUVzVlSVl0dzcySDQ4WkxlMUtjS0ZNQTNYR1c2YXFPMWZTQdIBuwFBVV95cUxNVUdvTFFkOGUtXzZ6QzhQWVpzeWp1Y0p6NGFidERudWpwSXBpa0ktT0dDZlBjNUd0c2VITlFyOU16eTRZLXJLOHdtclQyOFg4VnhsTmlvTGh0M1p3Y0l3b3BiSklvRXJmemdMbjlrY0J5RzJrMFdTc1ZkeWRhT0tsWlk0T29ZT2JGd2pURmhXRlpwbmxGY1l4UVhRc0Z6UDdtYnVCSk54c2htWkdGS3ZiY0RhcWJyMlBjUDVV?oc=5",
+          "description": "DMAS Bagi Dividen Rp1,4 Triliun, IPCC Catat Trafik Kargo Naik 19% detikFinance",
+          "source": "Detik Finance via Google News",
+          "pub_datetime": "2026-10-22 08:45:32+07:00",
+          "pub_date_str": "2026-10-22 08:45 WIB",
+          "id": "b96b2c4b9b23"
+        }
+      ]
+    },
+    "MBMA": {
+      "code": "MBMA",
+      "company_name": "Merdeka Battery Materials Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 2,
+      "news": [
+        {
+          "title": "IHSG Balik Menguat ke 5.418,9 di Sesi Pertama, Top Gainers LQ45: MAPI, BUMI, MBMA - kontan.co.id",
+          "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNY2Vsb1dkRm5iRzc2b1NjandDTDdpZ2J4UHNxUklGeC0yc2RlWjBOYXp1MjdzdzRST1VHQnIxUXRnSlZ0dmFJRHlxeFVTZXEzaEhKYUI2T0tEb1hBTXRPUmdnNlFzblZkbTV0N1BnUUFHdXhHTzNSNmlndjFOMlZMYjBUTV9FZ204Z0FUU1JrZGVDcUtvMlBSUEViRXBVM1QxNDJTemRONDM3ZVdaYy1kdNIBqAFBVV95cUxQdG03bXVJWVFRZHFMZElQZG8yRFVKVExrNW9DTE5RWHJ2SVNxUndBbU01NUYxS2dOYzdkcGcwTmdWVnRlbk9kNElQSnN1ODgxWjhucDZIakY1LTRmdHl1YWhJODI0VmtVci1aekhsWjUtUVY0RVJ2aFJjVVo4Ny1GdFNkc0ZCbElQRnZiaHAwUHpDdFU2bmVzRjVqT2h5Um9MTzJfQVhMaXo?oc=5",
+          "description": "IHSG Balik Menguat ke 5.418,9 di Sesi Pertama, Top Gainers LQ45: MAPI, BUMI, MBMA kontan.co.id",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 12:08:47+07:00",
+          "pub_date_str": "2026-10-22 12:08 WIB",
+          "id": "3926a5bf4ce9"
+        },
+        {
+          "title": "Harga Sulfur Turun 21,17%, Saham MBMA, NCKL, dan INCO Berpeluang Diuntungkan - KONTAN",
+          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOTG1LQkxiVWVXWGF3X0g5TVZTREw1YU05NE9ZSUl6Y0VVN1VqZ1Axa1AzWVI4Q016aExfU05GUmhoNUdvTE9BNUI4a3R2TE1iRlFfZGREWlVnOTMyZmJ6Wk9obk1MdDhHVnlqcWUxZHEydEhsWDFHMUxxWS15TEZweFJYc2F3RnBMcThiYTBBeFFnMm9KeDd0bWVoRjJnZU5iNzUzdmF3TTY?oc=5",
+          "description": "Harga Sulfur Turun 21,17%, Saham MBMA, NCKL, dan INCO Berpeluang Diuntungkan KONTAN",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 07:27:46+07:00",
+          "pub_date_str": "2026-10-22 07:27 WIB",
+          "id": "af7f9c101d83"
+        }
+      ]
+    },
+    "BBNI": {
+      "code": "BBNI",
+      "company_name": "Bank Negara Indonesia (Persero",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 2,
+      "news": [
+        {
+          "title": "BRIDS Pangkas Target IHSG Jadi 6.000, Jagokan Saham AMMN, BBNI, hingga TINS - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNRjFGd1lKaG9wSVdidmJoUndIMk5Cd2N6LVdsUDRVS0F6cWVES3BnUHhCbG95bFpyRm5meV9LVEpxZWIxTFFYcDcyS01fdE5rVlRwQjZ5ZGRTMHE4Q2tZY0FFV3BodUM5ZDZOUGprUE1yRU5NcUg1Q2VEbTA4SVFIZlo1UGJhNVA4d1ZLZDJsdXFqWTBTQzE5TF9laXdyNU81MVpkdlNyUG16SW9PQkVxMUZHVGVLMUUyRVEzYThPXy0?oc=5",
+          "description": "BRIDS Pangkas Target IHSG Jadi 6.000, Jagokan Saham AMMN, BBNI, hingga TINS Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 10:42:23+07:00",
+          "pub_date_str": "2026-10-22 10:42 WIB",
+          "id": "3fbe396c9d5a"
+        },
+        {
+          "title": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA - IDX Channel",
+          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNamFiZWM3VGlvX0VNVFczNlByb1ctUVdpZ3Y5dWZvcFZrRXk3VmktX1AxYVZRMnlXZ1YzNGRJNmYwZjNPdU45TF9hd3JjUWh5SHdOd3RZNmdkTjVUVzRPalRzaEMxZkxyanBUSFlXZURNSGw1UkQzaE5KbjA5UHowb2poQ2pDOEw3em1VRHRyRDlyQjJMMlZGcDZ5YWhYVHdVUGs3QU0tdTV1Y2VIX2c00gG0AUFVX3lxTFBLc09mQXMzOW9PTndjcXlzbnRSTWFEN3ZGYUdJVXhqXzFYWlF4bzU5S3pRektuYjBpQnp2VnZyQk9RbzRaanVCNTdtSXVKbG9JNGNYclJYemsyVUlwS1ZUdVEwTkw5bkZxdnVrTmt2dFJELVJTR3V6Q2NRNklKcDlOVHF2WUVCUTM5V2x3VFlsanJBRWpteGFVY2JBSnhTaGQ2WnhIMmZtTjNJVlhlUTU1OEZzVA?oc=5",
+          "description": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA IDX Channel",
+          "source": "IDX Channel via Google News",
+          "pub_datetime": "2026-10-22 07:10:00+07:00",
+          "pub_date_str": "2026-10-22 07:10 WIB",
+          "id": "c8deb87def02"
+        }
+      ]
+    },
+    "MBSS": {
+      "code": "MBSS",
+      "company_name": "Mitrabahtera Segara Sejati Tbk",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [
+        "Buyback"
+      ],
+      "has_buyback": true,
+      "has_pp": false,
+      "news_count": 2,
+      "news": [
+        {
+          "title": "MBSS milik Grup Wibowo gelar buyback saham Rp200 miliar - IDNFinancials",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE84dVlFbk5velRDRGRUWDdNeUExZksxbUxzZXVnUmh6eE1LWnRtb3JyYmxwWUhKaUlNYkVDd0E0NmVvN0pyNEd3aF9qcTBONmRWckR6YmZ6X0hBZUJlaERnTWt6R0FJaGhqRmRyZkQ4UkRZNWtpd1VuTVpZUmp4OFFXUVVHSVRTcjZ1QnNSSnd3LUkzSkZVTnl5akNWQXB3?oc=5",
+          "description": "MBSS milik Grup Wibowo gelar buyback saham Rp200 miliar IDNFinancials",
+          "source": "Google News (Topik: Saham)",
+          "pub_datetime": "2026-10-22 09:00:00+07:00",
+          "pub_date_str": "2026-10-22 09:00 WIB",
+          "id": "03b1d8b13e33"
+        },
+        {
+          "title": "MBSS Siapkan Dana Rp 200 Miliar untuk Buyback Saham - KONTAN",
+          "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPZVh3clBZaFQ1UEQwd0pRTUM0LXVNUXVrNnlDdXp3UWdkd0ZJWFdJTGRsdTBQS0xaaUI5dXl2anVfcG9TNk85QS1wTGNjX3pFdy1pWnVlZFhma3pGNDZCVExMcU8zVENUT3UwbkhvZW9sd0Q4STFiTnpiWnlza3ctdUxfbzVkM01KaTVCRFRR?oc=5",
+          "description": "MBSS Siapkan Dana Rp 200 Miliar untuk Buyback Saham KONTAN",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 08:00:42+07:00",
+          "pub_date_str": "2026-10-22 08:00 WIB",
+          "id": "e94517fbb1ea"
+        }
+      ]
+    },
+    "BBRI": {
+      "code": "BBRI",
+      "company_name": "Bank Rakyat Indonesia (Persero",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "IHSG Sesi I Melonjak, Saham BBRI, TLKM, BUMI Menguat - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcXlON1FrSTAyRXJIUEd1MmVGSmFwc1VLdlJyZl84RnVPSU5Lb2pDQ2p6X2g0YzdKbm42YW9HSVdTOTlHY3UtVG1KX1BTUHM5SjdlYU0yV1BlS1VOcjRrZ0pGcmlfSEwyV1pweENFVUh2dF93bUhLanpPamxTMTRHX3J6SmpZbVFsOVdib2JFb2VkcXJZY3dLWnpudjZkZ2h5?oc=5",
+          "description": "IHSG Sesi I Melonjak, Saham BBRI, TLKM, BUMI Menguat Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 12:54:59+07:00",
+          "pub_date_str": "2026-10-22 12:54 WIB",
+          "id": "526260de7936"
+        }
+      ]
+    },
+    "BREN": {
+      "code": "BREN",
+      "company_name": "Barito Renewables Energy Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "IHSG Sesi I Berbalik Menguat 1,70%, Saham BREN dan BYAN jadi Penopang - Katadata.co.id",
+          "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNVDNnRldtazMxMGhFM0JnaXdnYlJGYUZ6TEttRWtHYjU0MUJpMERQck1URWowRmhoYmd4QTU3QTBSR2lmMVI5UmFGNG4yRkpER05uTXo0alNxaWU0ZUoxUjJ1UDRPUHc1a1d3YlM0MWVyb2NZRDE1MTNsTXRxaTZrT2E3bkZQSzhUclFDaUI3OFJiMGREQWlZZWZfMW9qbjE4WXpBVnBPYk1zN0NXVUxGaF9fRm5mbU5EVDh4djhKRjNER3VaWm5SWdIBwgFBVV95cUxNNWhRYk5Zb0RIa0JHZXU1YkQyNmgzbklueHp3emR6ZFMtSHRMS0lUNG9Ra0NhS0Fyc3VxUlhwbGVaYVJSeTdDaENYajR4MksyYXdPOXp4WmlhVW83eFRPUHJZMWYxVXVUSlFQUkw3VjFvMWFpYzRuYWdvT3p3bzM1TlZ5X1JBUTk0M2tkd1lRZ0t3SGUtR3JPUl9fMkZ5RmU4Y19Gb1MxNWkyR0RWVEY0RzVKanNjT2E1SDRHZWIzMVBRUQ?oc=5",
+          "description": "IHSG Sesi I Berbalik Menguat 1,70%, Saham BREN dan BYAN jadi Penopang Katadata.co.id",
+          "source": "Katadata via Google News",
+          "pub_datetime": "2026-10-22 12:39:00+07:00",
+          "pub_date_str": "2026-10-22 12:39 WIB",
+          "id": "65e12e59b02b"
+        }
+      ]
+    },
+    "BYAN": {
+      "code": "BYAN",
+      "company_name": "Bayan Resources Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "IHSG Sesi I Berbalik Menguat 1,70%, Saham BREN dan BYAN jadi Penopang - Katadata.co.id",
+          "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNVDNnRldtazMxMGhFM0JnaXdnYlJGYUZ6TEttRWtHYjU0MUJpMERQck1URWowRmhoYmd4QTU3QTBSR2lmMVI5UmFGNG4yRkpER05uTXo0alNxaWU0ZUoxUjJ1UDRPUHc1a1d3YlM0MWVyb2NZRDE1MTNsTXRxaTZrT2E3bkZQSzhUclFDaUI3OFJiMGREQWlZZWZfMW9qbjE4WXpBVnBPYk1zN0NXVUxGaF9fRm5mbU5EVDh4djhKRjNER3VaWm5SWdIBwgFBVV95cUxNNWhRYk5Zb0RIa0JHZXU1YkQyNmgzbklueHp3emR6ZFMtSHRMS0lUNG9Ra0NhS0Fyc3VxUlhwbGVaYVJSeTdDaENYajR4MksyYXdPOXp4WmlhVW83eFRPUHJZMWYxVXVUSlFQUkw3VjFvMWFpYzRuYWdvT3p3bzM1TlZ5X1JBUTk0M2tkd1lRZ0t3SGUtR3JPUl9fMkZ5RmU4Y19Gb1MxNWkyR0RWVEY0RzVKanNjT2E1SDRHZWIzMVBRUQ?oc=5",
+          "description": "IHSG Sesi I Berbalik Menguat 1,70%, Saham BREN dan BYAN jadi Penopang Katadata.co.id",
+          "source": "Katadata via Google News",
+          "pub_datetime": "2026-10-22 12:39:00+07:00",
+          "pub_date_str": "2026-10-22 12:39 WIB",
+          "id": "65e12e59b02b"
+        }
+      ]
+    },
+    "BCIC": {
+      "code": "BCIC",
+      "company_name": "Bank JTrust Indonesia Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "JTrust Bank Buka Suara soal Volatilitas Saham BCIC - kontan.co.id",
+          "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQZDE1T2NxZUUxX3hzTlBfQm9FUnZnQWNDUnlKY1FEZzZvY2dNMDVSdjdVdGl2dXJDdVlvZm81eXlBaVVySy03NVllSHNWQ1gtYW1Tc0dTVlB0cWExdHBjd2xTemlxLTI4VFlIeDh2WTdzZ29kQU5iaU1HeUxueVNYWGJveGRhcjVhZENnbWJn0gGHAUFVX3lxTE00WGUyUnJSRzVxOWhzOUxPY3B0OW4wYUV1ZGVZcnYtMUFBN2ZhbGY2Nkd3bjJ1Z2xrRExYclpqSXRrbE9KdWlRc2N1OUl2cFZ0blYzX2pyelRMa0FNS0tiVEtfMkIzMjI5Mlp6bEtaVmJfTnJCWjlSMU5pd1JpNHBSdVB1RFRZMA?oc=5",
+          "description": "JTrust Bank Buka Suara soal Volatilitas Saham BCIC kontan.co.id",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 12:34:28+07:00",
+          "pub_date_str": "2026-10-22 12:34 WIB",
+          "id": "dbc9f944e114"
+        }
+      ]
+    },
+    "UNSP": {
+      "code": "UNSP",
+      "company_name": "Bakrie Sumatera Plantations Tb",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Bakrie Sumatera (UNSP) Dirikan Anak Usaha Baru, Bidik Ekspansi Bisnis - StockWatch.id",
+          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQdmJrODItWjliX3d1R2NPdzZQVXhkdlNoOThMQjZxSW1mdGh0SXZwLVdjR2JJUTc5dGVsT2RIY0pJVm83UWlHN3lzUWIzdDNzZS1YZmx5MWZZVFlwSFZYNWh5ZFZKckRYYmFVTkxySDBGR09tZkxOSEVtYTYxY0FYOUg2ZTdqWUJwYVlLZU55cGxGblk?oc=5",
+          "description": "Bakrie Sumatera (UNSP) Dirikan Anak Usaha Baru, Bidik Ekspansi Bisnis StockWatch.id",
+          "source": "Stockwatch.id via Google News",
+          "pub_datetime": "2026-10-22 12:24:35+07:00",
+          "pub_date_str": "2026-10-22 12:24 WIB",
+          "id": "0cb9c70bc3d6"
+        }
+      ]
+    },
+    "MAPI": {
+      "code": "MAPI",
+      "company_name": "Mitra Adiperkasa Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "IHSG Balik Menguat ke 5.418,9 di Sesi Pertama, Top Gainers LQ45: MAPI, BUMI, MBMA - kontan.co.id",
+          "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNY2Vsb1dkRm5iRzc2b1NjandDTDdpZ2J4UHNxUklGeC0yc2RlWjBOYXp1MjdzdzRST1VHQnIxUXRnSlZ0dmFJRHlxeFVTZXEzaEhKYUI2T0tEb1hBTXRPUmdnNlFzblZkbTV0N1BnUUFHdXhHTzNSNmlndjFOMlZMYjBUTV9FZ204Z0FUU1JrZGVDcUtvMlBSUEViRXBVM1QxNDJTemRONDM3ZVdaYy1kdNIBqAFBVV95cUxQdG03bXVJWVFRZHFMZElQZG8yRFVKVExrNW9DTE5RWHJ2SVNxUndBbU01NUYxS2dOYzdkcGcwTmdWVnRlbk9kNElQSnN1ODgxWjhucDZIakY1LTRmdHl1YWhJODI0VmtVci1aekhsWjUtUVY0RVJ2aFJjVVo4Ny1GdFNkc0ZCbElQRnZiaHAwUHpDdFU2bmVzRjVqT2h5Um9MTzJfQVhMaXo?oc=5",
+          "description": "IHSG Balik Menguat ke 5.418,9 di Sesi Pertama, Top Gainers LQ45: MAPI, BUMI, MBMA kontan.co.id",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 12:08:47+07:00",
+          "pub_date_str": "2026-10-22 12:08 WIB",
+          "id": "3926a5bf4ce9"
+        }
+      ]
+    },
+    "PGAS": {
+      "code": "PGAS",
+      "company_name": "Perusahaan Gas Negara Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Diam-Diam Lo Kheng Hong Borong Lagi Saham PGN (PGAS) Semester II/2026 - Bisnis Indonesia Premium",
+          "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZENTc0pwOVM0RHRuazVGU3dEMkxOM0ZaTXdEbDNPU2REOFFVS1dIMXBjY3ZFQnBKc2JhbFpSSG5oQlhqNmFXX0Y4TFA3OGFscnJfd2hrVjhRemx5RDRhdmtKZTExbnpiUG10LW1ScjVqSk9VTE5odXBQV1NLSHFwY0tkVTNwWUE2THJmSUlPMV96VjliUHdORkdKbDZUYXZwVlV5YjhXd0hsNjh0M3VqTURGOWNrQWxEbkV3?oc=5",
+          "description": "Diam-Diam Lo Kheng Hong Borong Lagi Saham PGN (PGAS) Semester II/2026 Bisnis Indonesia Premium",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 11:15:00+07:00",
+          "pub_date_str": "2026-10-22 11:15 WIB",
+          "id": "be645d3a3b53"
+        }
+      ]
+    },
+    "AMMN": {
+      "code": "AMMN",
+      "company_name": "Amman Mineral Internasional Tb",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "BRIDS Pangkas Target IHSG Jadi 6.000, Jagokan Saham AMMN, BBNI, hingga TINS - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNRjFGd1lKaG9wSVdidmJoUndIMk5Cd2N6LVdsUDRVS0F6cWVES3BnUHhCbG95bFpyRm5meV9LVEpxZWIxTFFYcDcyS01fdE5rVlRwQjZ5ZGRTMHE4Q2tZY0FFV3BodUM5ZDZOUGprUE1yRU5NcUg1Q2VEbTA4SVFIZlo1UGJhNVA4d1ZLZDJsdXFqWTBTQzE5TF9laXdyNU81MVpkdlNyUG16SW9PQkVxMUZHVGVLMUUyRVEzYThPXy0?oc=5",
+          "description": "BRIDS Pangkas Target IHSG Jadi 6.000, Jagokan Saham AMMN, BBNI, hingga TINS Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 10:42:23+07:00",
+          "pub_date_str": "2026-10-22 10:42 WIB",
+          "id": "3fbe396c9d5a"
+        }
+      ]
+    },
+    "TINS": {
+      "code": "TINS",
+      "company_name": "Timah Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "BRIDS Pangkas Target IHSG Jadi 6.000, Jagokan Saham AMMN, BBNI, hingga TINS - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNRjFGd1lKaG9wSVdidmJoUndIMk5Cd2N6LVdsUDRVS0F6cWVES3BnUHhCbG95bFpyRm5meV9LVEpxZWIxTFFYcDcyS01fdE5rVlRwQjZ5ZGRTMHE4Q2tZY0FFV3BodUM5ZDZOUGprUE1yRU5NcUg1Q2VEbTA4SVFIZlo1UGJhNVA4d1ZLZDJsdXFqWTBTQzE5TF9laXdyNU81MVpkdlNyUG16SW9PQkVxMUZHVGVLMUUyRVEzYThPXy0?oc=5",
+          "description": "BRIDS Pangkas Target IHSG Jadi 6.000, Jagokan Saham AMMN, BBNI, hingga TINS Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 10:42:23+07:00",
+          "pub_date_str": "2026-10-22 10:42 WIB",
+          "id": "3fbe396c9d5a"
+        }
+      ]
+    },
+    "MSIN": {
+      "code": "MSIN",
+      "company_name": "MNC Digital Entertainment Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Sehari Disuspensi, Saham MSIN Kembali Diperdagangkan di BEI - StockWatch.id",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPY2VlR01sUEcwYzMteUNYTk5vZ2NlZ2NrNTBrZ1pPU2Y0S0NsVlZHQ2QzcWZBU1dnUWVOdDZ3aV9Gb005YWtjWWM1VmdpeFV2LW9vZ1dsSlFad0J5WTFkVjdjX09tX2lYdUJWbkU0cE9TYTl2OWhSaGJVMDdVejZaRkFEaHItejJR?oc=5",
+          "description": "Sehari Disuspensi, Saham MSIN Kembali Diperdagangkan di BEI StockWatch.id",
+          "source": "Stockwatch.id via Google News",
+          "pub_datetime": "2026-10-22 10:29:46+07:00",
+          "pub_date_str": "2026-10-22 10:29 WIB",
+          "id": "9cb7cec75f8e"
+        }
+      ]
+    },
+    "TOBA": {
+      "code": "TOBA",
+      "company_name": "TBS Energi Utama Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "TOBA Siapkan Pendanaan Rp7,83 Triliun Lewat Skema Hybrid, Tanpa Dilusi Saham Publik - Ajaib",
+          "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQSmRFM1NocExuR1prcjdLX3BtZ2ZydDBCWkcwZ1JWdnJJQ01SVmhwZVVHXzVqV0QzbGh1N2l0MFdUTzBXNGtqZ09XV3FBWDNRekZBQXplR1RWQmtlS1ZhSDAxcVVfVWJDRjNneTRwS3JuRGIzb2l3S0lFcWZlYnpXTFQ3MHlkcmgzcEctbzVHRExUZHJCUlZnUEdnRTJiRk96OHJKN1NQbmlGQmw4SkNjTklyZjM1Q0U?oc=5",
+          "description": "TOBA Siapkan Pendanaan Rp7,83 Triliun Lewat Skema Hybrid, Tanpa Dilusi Saham Publik Ajaib",
+          "source": "Google News (Topik: Saham)",
+          "pub_datetime": "2026-10-22 10:10:58+07:00",
+          "pub_date_str": "2026-10-22 10:10 WIB",
+          "id": "091d14227510"
+        }
+      ]
+    },
+    "AMRT": {
+      "code": "AMRT",
+      "company_name": "Sumber Alfaria Trijaya Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Indeks Bisnis-27 Dibuka Melemah, Saham AMRT Masih Bertenaga - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQTmtpNGpnenFlRWlHWEpnbEk5YnItSC12Vng0dFNUXzRxM1Jjcjl6TlNtWTdUbjBJMW11eUNzYTZjQXFSYkdnWGt1X1F0Q21kaVZEQnctUVlaUTdBWTBDcnVXd2U3UVlPb2hQUXZPMGViUkhKWVRPeU1Ed1ZBVV9tNDZfc0lZd0l5amRRNmdBeERoMmp2Q1lVaTB6dEE3MlFzYTNOLV9UZldDbHFU?oc=5",
+          "description": "Indeks Bisnis-27 Dibuka Melemah, Saham AMRT Masih Bertenaga Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 09:44:48+07:00",
+          "pub_date_str": "2026-10-22 09:44 WIB",
+          "id": "2e5e91fbe688"
+        }
+      ]
+    },
+    "CUAN": {
+      "code": "CUAN",
+      "company_name": "Petrindo Jaya Kreasi Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "IHSG Dibuka Turun 2,51% ke 5.194, Saham TPIA hingga CUAN Longsor - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOWjNLT043ekZoWV9uZnpkM2hQeE1kODh0X1pkRGFnWFlJdDE1bzlTMWJaUEQ5N3hfbE9ibkQ3N2RvTHcyXy1TdmFlczNURG1NZVhTQ2Z1Smo4amYwOTRvbFlhZVloTUlqblhBWFhkVHl1S2tFakxUV1dGQXVkWmlVcGNrRTlLZjFlWXB5M2UtT1QxMGl1d09ybm1QaEJUU05oQktPNzFGc1RHbW95d1pz?oc=5",
+          "description": "IHSG Dibuka Turun 2,51% ke 5.194, Saham TPIA hingga CUAN Longsor Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 09:17:09+07:00",
+          "pub_date_str": "2026-10-22 09:17 WIB",
+          "id": "2419d228d288"
+        }
+      ]
+    },
+    "DRMA": {
+      "code": "DRMA",
+      "company_name": "Dharma Polimetal Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Balik Arah! Komisaris Noel Laras Borong 10 Juta Saham DRMA Senilai Rp8 Miliar - Pasardana",
+          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxORHdXQ0tDTWZMbW1zN0I5cFRxYlVscnQ0WnFid3BjblRoN1pMcWZJQTQ3dXgzU0NQTDVLZDR3aWg2eWJLSXg3TmRnRDBRQ2R6Qzc0OWNWejdFN0d3aHZoaDlVYW9kMEJZUzhoUUpLRTNsNWFNaVJCWVNEWXVBM1pxTWEwWkR2Umw4MUY0aHF4R3l3X1pDd0dEdUV6QzBzUjd1QXFRb1I0SjNzcGowdXktSnkycw?oc=5",
+          "description": "Balik Arah! Komisaris Noel Laras Borong 10 Juta Saham DRMA Senilai Rp8 Miliar Pasardana",
+          "source": "Pasardana.id via Google News",
+          "pub_datetime": "2026-10-22 09:05:00+07:00",
+          "pub_date_str": "2026-10-22 09:05 WIB",
+          "id": "c70edf985fdb"
+        }
+      ]
+    },
+    "GULA": {
+      "code": "GULA",
+      "company_name": "Aman Agrindo Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Aman Resources Lepas 14,35 Juta Saham GULA, Nilainya Tembus Rp7,89 Miliar - Pasardana",
+          "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNZVE2ejk1RHRTSzlob1FxbkpfZ2xlR1IxSVRKWDVhS1FZcG82b0l3dU96enA1ZnZ4ZmpoZmtpZElVNklxTm9SWjlpOW1vbUNfekJ6SGRnXzE3YmQzcXVDRl9rcFR3ZF9kaTVVUnMzTUd5M2tibENzMlVlTEg1ZnB0RnNkN2lvY2h1N0FWOTJGT3pRalowUGNlLXJSaVVSTG13VWNNTW51LWtCaFpoZlE?oc=5",
+          "description": "Aman Resources Lepas 14,35 Juta Saham GULA, Nilainya Tembus Rp7,89 Miliar Pasardana",
+          "source": "Pasardana.id via Google News",
+          "pub_datetime": "2026-10-22 08:57:00+07:00",
+          "pub_date_str": "2026-10-22 08:57 WIB",
+          "id": "683be196308c"
+        }
+      ]
+    },
+    "PGEO": {
+      "code": "PGEO",
+      "company_name": "Pertamina Geothermal Energy Tb",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Pasar Saham Tertekan MSCI, PGEO Punya Penopang Kuat - investor.id",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQcXlXZlpnV2RPbXpITjEwUGRmSlk2bEJ3WnB2RkdQZHc3ejNqdXlQMHh5Z0hsYmUzbEZuZk5mVWNpUHUydEluLWxWTUU3VHd2dkd0ZWU5cWkyaDdrekt6NWJFZFgzdzdqZklCV3kxX2JNMjR6aThIbW1YVlJyWWoyOEJudUtwRVdzYUFCTw?oc=5",
+          "description": "Pasar Saham Tertekan MSCI, PGEO Punya Penopang Kuat investor.id",
+          "source": "Investor.id via Google News",
+          "pub_datetime": "2026-10-22 08:53:26+07:00",
+          "pub_date_str": "2026-10-22 08:53 WIB",
+          "id": "7ef965af4f64"
+        }
+      ]
+    },
+    "IPCC": {
+      "code": "IPCC",
+      "company_name": "Indonesia Kendaraan Terminal T",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "DMAS Bagi Dividen Rp1,4 Triliun, IPCC Catat Trafik Kargo Naik 19% - detikFinance",
+          "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOF9jYk85Q2JHc0FqWDBmWUFYbURiUGtBajhwSUNGdXVhU2htQ1h0V3pma0VsV3VIbkFtSmozbWVONlAwTGFoU1prQUlJcnNPdzlWNmYtcWRYMXN3ZnMwX2RGeEl1Vy1FXzMxNkVwM21kRmFfMVpWNzBhQU9HWlVOZG5CUEh4SkVzYWJobF9yQmduUURUVzVlSVl0dzcySDQ4WkxlMUtjS0ZNQTNYR1c2YXFPMWZTQdIBuwFBVV95cUxNVUdvTFFkOGUtXzZ6QzhQWVpzeWp1Y0p6NGFidERudWpwSXBpa0ktT0dDZlBjNUd0c2VITlFyOU16eTRZLXJLOHdtclQyOFg4VnhsTmlvTGh0M1p3Y0l3b3BiSklvRXJmemdMbjlrY0J5RzJrMFdTc1ZkeWRhT0tsWlk0T29ZT2JGd2pURmhXRlpwbmxGY1l4UVhRc0Z6UDdtYnVCSk54c2htWkdGS3ZiY0RhcWJyMlBjUDVV?oc=5",
+          "description": "DMAS Bagi Dividen Rp1,4 Triliun, IPCC Catat Trafik Kargo Naik 19% detikFinance",
+          "source": "Detik Finance via Google News",
+          "pub_datetime": "2026-10-22 08:45:32+07:00",
+          "pub_date_str": "2026-10-22 08:45 WIB",
+          "id": "b96b2c4b9b23"
+        }
+      ]
+    },
+    "ANTM": {
+      "code": "ANTM",
+      "company_name": "Aneka Tambang Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Harga Emas Antam (ANTM) Hari Ini, Kamis 22 Oktober 2026: Koreksi Berlanjut - investor.id",
+          "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOTDV5bkZOdWoxbTlRZXVIY2MwTTZUcDRLVE0wMHBMLW5qZ3VYTzNtVExpS3QtdFJOa29rUE9GV09IeldyZ0gwMzNkV2JaTGlaallEZmJYUURqUjhBa1NPWF9HWmY3Tzc4Wkc1bHRJVkF4eEtRMm9YbE1taXp5X2UybVg5bmcxX2VDczE2ZmxZT2hsSUh2ekIzRVBRZjlhQkZweDJHZkYxVQ?oc=5",
+          "description": "Harga Emas Antam (ANTM) Hari Ini, Kamis 22 Oktober 2026: Koreksi Berlanjut investor.id",
+          "source": "Investor.id via Google News",
+          "pub_datetime": "2026-10-22 08:44:47+07:00",
+          "pub_date_str": "2026-10-22 08:44 WIB",
+          "id": "233444c22f3b"
+        }
+      ]
+    },
+    "DSSA": {
+      "code": "DSSA",
+      "company_name": "Dian Swastatika Sentosa Tbk",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "OJK Beri Sanksi kepada 9 Anggota Bursa Terlibat Kasus DSSA - StockWatch.id",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPNzV4d3B3ZWh0blN1Zko5WWlWNlhlcXZtWGh4UTYwMU9lTEFtbWktQkRMZnhCLTZaRTNiZ3cwMUdBN2loekN0SXlhVDBqZlQwbjducWhXazBKcVhsb0ozajlheU1fbG1ibW9wNjUxYjQzS3FZbVcyY2x5MUdaSGktWEhjMjlaT1RY?oc=5",
+          "description": "OJK Beri Sanksi kepada 9 Anggota Bursa Terlibat Kasus DSSA StockWatch.id",
+          "source": "Stockwatch.id via Google News",
+          "pub_datetime": "2026-10-22 08:43:46+07:00",
+          "pub_date_str": "2026-10-22 08:43 WIB",
+          "id": "c3aa34b00910"
+        }
+      ]
+    },
+    "UNVR": {
+      "code": "UNVR",
+      "company_name": "Unilever Indonesia Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Aset Drop, Laba UNVR Kuartal III Tumbuh 26,12 Persen - Emitennews.com",
+          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNOEtVUVRZM0gwYnVJbmc2b05CRVdzZkxkVmNMMkZBdGY2Rzl3cHh4X2tYNEo5VlhoZXBKRVBzSzBqRUt3dExiNVNxUktLclBCOGdnejVXZ1NoSU9FSnYwMnRzZWdsS3hTZU5xc0prZDA3NjEteG9RTFFZRnZmQTVKUDdiLUQ?oc=5",
+          "description": "Aset Drop, Laba UNVR Kuartal III Tumbuh 26,12 Persen Emitennews.com",
+          "source": "Emitennews via Google News",
+          "pub_datetime": "2026-10-22 08:29:00+07:00",
+          "pub_date_str": "2026-10-22 08:29 WIB",
+          "id": "0d64526d286f"
+        }
+      ]
+    },
+    "ADRO": {
+      "code": "ADRO",
+      "company_name": "Adaro Energy Indonesia Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Trinugraha Thohir Borong 470.000 Saham ADRO, Investasi Tembus Rp1 Miliar - Pasardana",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSzdjU0pocnRpb2RDZmJxQURHUnI1VkM5STJJTVBXRUR6cEItYWVNZzBnOWVRVG1UWmxySmpMR21vcnozRl95TC1oYTBEVzVhTTAzUHFFaVFIaEdtMzlxbkxsdHhGTHVVQ0QxME9uakxEU0I0UENocEFaSTRJQTBuVWVkWkhqXzF1WjdsaUVDTXRYVG4ya19rLWZNM2szS24ySnNQUUs5NHhsbDlZ?oc=5",
+          "description": "Trinugraha Thohir Borong 470.000 Saham ADRO, Investasi Tembus Rp1 Miliar Pasardana",
+          "source": "Pasardana.id via Google News",
+          "pub_datetime": "2026-10-22 08:29:00+07:00",
+          "pub_date_str": "2026-10-22 08:29 WIB",
+          "id": "46fe647073d8"
+        }
+      ]
+    },
+    "IPAC": {
+      "code": "IPAC",
+      "company_name": "Era Graharealty Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Dapat Restu Pemegang Saham, IPAC Resmi Delisting dari BEI - KONTAN",
+          "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbjRuYlBRV1ZyNVZFdFBHamRtUk1IcWlLR1I2OTVoUDFIVzlSWHlCaFJlWUhJa0J4LWlUbzhnNFVsU3hycXZvYWNiY18wYTRMZk1ISTlFUWVfX2FUUjVObUZqaVp1SWNxYzg1WVZEM1VDaDNMTFNSUmNHZ1k5TVlsV2dHWnBMZlBIMExzMllqSnlTS3l2?oc=5",
+          "description": "Dapat Restu Pemegang Saham, IPAC Resmi Delisting dari BEI KONTAN",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 07:54:10+07:00",
+          "pub_date_str": "2026-10-22 07:54 WIB",
+          "id": "6a73f59930b6"
+        }
+      ]
+    },
+    "INCO": {
+      "code": "INCO",
+      "company_name": "Vale Indonesia Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Harga Sulfur Turun 21,17%, Saham MBMA, NCKL, dan INCO Berpeluang Diuntungkan - KONTAN",
+          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOTG1LQkxiVWVXWGF3X0g5TVZTREw1YU05NE9ZSUl6Y0VVN1VqZ1Axa1AzWVI4Q016aExfU05GUmhoNUdvTE9BNUI4a3R2TE1iRlFfZGREWlVnOTMyZmJ6Wk9obk1MdDhHVnlqcWUxZHEydEhsWDFHMUxxWS15TEZweFJYc2F3RnBMcThiYTBBeFFnMm9KeDd0bWVoRjJnZU5iNzUzdmF3TTY?oc=5",
+          "description": "Harga Sulfur Turun 21,17%, Saham MBMA, NCKL, dan INCO Berpeluang Diuntungkan KONTAN",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 07:27:46+07:00",
+          "pub_date_str": "2026-10-22 07:27 WIB",
+          "id": "af7f9c101d83"
+        }
+      ]
+    },
+    "NCKL": {
+      "code": "NCKL",
+      "company_name": "Trimegah Bangun Persada Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Harga Sulfur Turun 21,17%, Saham MBMA, NCKL, dan INCO Berpeluang Diuntungkan - KONTAN",
+          "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOTG1LQkxiVWVXWGF3X0g5TVZTREw1YU05NE9ZSUl6Y0VVN1VqZ1Axa1AzWVI4Q016aExfU05GUmhoNUdvTE9BNUI4a3R2TE1iRlFfZGREWlVnOTMyZmJ6Wk9obk1MdDhHVnlqcWUxZHEydEhsWDFHMUxxWS15TEZweFJYc2F3RnBMcThiYTBBeFFnMm9KeDd0bWVoRjJnZU5iNzUzdmF3TTY?oc=5",
+          "description": "Harga Sulfur Turun 21,17%, Saham MBMA, NCKL, dan INCO Berpeluang Diuntungkan KONTAN",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 07:27:46+07:00",
+          "pub_date_str": "2026-10-22 07:27 WIB",
+          "id": "af7f9c101d83"
+        }
+      ]
+    },
+    "HRUM": {
+      "code": "HRUM",
+      "company_name": "Harum Energy Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA - IDX Channel",
+          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNamFiZWM3VGlvX0VNVFczNlByb1ctUVdpZ3Y5dWZvcFZrRXk3VmktX1AxYVZRMnlXZ1YzNGRJNmYwZjNPdU45TF9hd3JjUWh5SHdOd3RZNmdkTjVUVzRPalRzaEMxZkxyanBUSFlXZURNSGw1UkQzaE5KbjA5UHowb2poQ2pDOEw3em1VRHRyRDlyQjJMMlZGcDZ5YWhYVHdVUGs3QU0tdTV1Y2VIX2c00gG0AUFVX3lxTFBLc09mQXMzOW9PTndjcXlzbnRSTWFEN3ZGYUdJVXhqXzFYWlF4bzU5S3pRektuYjBpQnp2VnZyQk9RbzRaanVCNTdtSXVKbG9JNGNYclJYemsyVUlwS1ZUdVEwTkw5bkZxdnVrTmt2dFJELVJTR3V6Q2NRNklKcDlOVHF2WUVCUTM5V2x3VFlsanJBRWpteGFVY2JBSnhTaGQ2WnhIMmZtTjNJVlhlUTU1OEZzVA?oc=5",
+          "description": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA IDX Channel",
+          "source": "IDX Channel via Google News",
+          "pub_datetime": "2026-10-22 07:10:00+07:00",
+          "pub_date_str": "2026-10-22 07:10 WIB",
+          "id": "c8deb87def02"
+        }
+      ]
+    },
+    "PTBA": {
+      "code": "PTBA",
+      "company_name": "Bukit Asam Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA - IDX Channel",
+          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNamFiZWM3VGlvX0VNVFczNlByb1ctUVdpZ3Y5dWZvcFZrRXk3VmktX1AxYVZRMnlXZ1YzNGRJNmYwZjNPdU45TF9hd3JjUWh5SHdOd3RZNmdkTjVUVzRPalRzaEMxZkxyanBUSFlXZURNSGw1UkQzaE5KbjA5UHowb2poQ2pDOEw3em1VRHRyRDlyQjJMMlZGcDZ5YWhYVHdVUGs3QU0tdTV1Y2VIX2c00gG0AUFVX3lxTFBLc09mQXMzOW9PTndjcXlzbnRSTWFEN3ZGYUdJVXhqXzFYWlF4bzU5S3pRektuYjBpQnp2VnZyQk9RbzRaanVCNTdtSXVKbG9JNGNYclJYemsyVUlwS1ZUdVEwTkw5bkZxdnVrTmt2dFJELVJTR3V6Q2NRNklKcDlOVHF2WUVCUTM5V2x3VFlsanJBRWpteGFVY2JBSnhTaGQ2WnhIMmZtTjNJVlhlUTU1OEZzVA?oc=5",
+          "description": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA IDX Channel",
+          "source": "IDX Channel via Google News",
+          "pub_datetime": "2026-10-22 07:10:00+07:00",
+          "pub_date_str": "2026-10-22 07:10 WIB",
+          "id": "c8deb87def02"
+        }
+      ]
+    },
+    "BUVA": {
+      "code": "BUVA",
+      "company_name": "Bukit Uluwatu Villa Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA - IDX Channel",
+          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNamFiZWM3VGlvX0VNVFczNlByb1ctUVdpZ3Y5dWZvcFZrRXk3VmktX1AxYVZRMnlXZ1YzNGRJNmYwZjNPdU45TF9hd3JjUWh5SHdOd3RZNmdkTjVUVzRPalRzaEMxZkxyanBUSFlXZURNSGw1UkQzaE5KbjA5UHowb2poQ2pDOEw3em1VRHRyRDlyQjJMMlZGcDZ5YWhYVHdVUGs3QU0tdTV1Y2VIX2c00gG0AUFVX3lxTFBLc09mQXMzOW9PTndjcXlzbnRSTWFEN3ZGYUdJVXhqXzFYWlF4bzU5S3pRektuYjBpQnp2VnZyQk9RbzRaanVCNTdtSXVKbG9JNGNYclJYemsyVUlwS1ZUdVEwTkw5bkZxdnVrTmt2dFJELVJTR3V6Q2NRNklKcDlOVHF2WUVCUTM5V2x3VFlsanJBRWpteGFVY2JBSnhTaGQ2WnhIMmZtTjNJVlhlUTU1OEZzVA?oc=5",
+          "description": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA IDX Channel",
+          "source": "IDX Channel via Google News",
+          "pub_datetime": "2026-10-22 07:10:00+07:00",
+          "pub_date_str": "2026-10-22 07:10 WIB",
+          "id": "c8deb87def02"
+        }
+      ]
+    },
+    "WIIM": {
+      "code": "WIIM",
+      "company_name": "Wismilak Inti Makmur Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Prospek Saham WIIM 2027: Peluang dari Perubahan Aturan Cukai Rokok & Rotasi Sektoral - KONTAN",
+          "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPRldqTGlEM0k1YlRYOWVNWG5ZREs1QkZMRkEyNlBmRGJXZktGZUdjeVZxX2tVd0d4YktrU2cwY0dZQTBYU1dHZHliLW1mdFpFZzI4SjY0bFgtMVBaYzdSYUpuVnV4YVltbnJ5M2FrT2dodGJQTXgwa1o1R2JxU3loZmw5RG02UkZZR2ZMcXY0SENGamU1MWVZM24wWERsRVJYNG5TcmxCbHh2amlOU3hPVDJpQzRadw?oc=5",
+          "description": "Prospek Saham WIIM 2027: Peluang dari Perubahan Aturan Cukai Rokok & Rotasi Sektoral KONTAN",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-22 07:00:04+07:00",
+          "pub_date_str": "2026-10-22 07:00 WIB",
+          "id": "a8ac23d6ab8b"
+        }
+      ]
+    }
+  },
+  "news_items": [
+    {
+      "title": "Asing gencar jual saham-saham ini saat IHSG naik 1,7% di sesi I - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQekNZUEljdXpEWGg3Q01jMDRTREdJWEIzSklZMXZuZTBpOThSNGM1dGFXejZoSkJMeEU4azhidjZ2dlhheWI3bXV1M1dpaTJibWsxZEtrQV9fOE1HTFhjYWVsSHRPX0plTGppTGFqQXRQdjVZUV80UG9mQkRsRXZRYkpvNU01OEZTNXhJc2FjVlhyQ2lQeE5tU1UwSWU4aFlIZXdFY01nTjB4Zw?oc=5",
+      "description": "Asing gencar jual saham-saham ini saat IHSG naik 1,7% di sesi I IDNFinancials",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 13:20:00+07:00",
+      "pub_date_str": "2026-10-22 13:20 WIB",
+      "id": "dda173e5a05c"
+    },
+    {
+      "title": "IHSG Bangkit 1,7% ke Level 5.419 Usai Prabowo Tantang MSCI - Warta Ekonomi",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOeHItVXZBOFRVTUg3aHlDMWlKZV9mX3N6bW5wZGpWUzBBZy1VUHNhOGhuVFFSSUNEQm84aVVmVHFnS0gyMkdXZElqSlFQNFVDME9iSENIcnZyamRSMFdmWVBoOWVhdjNzRXZ0bnZoem5fa0dJdXFyY2NsMXlmVVQyZ3pFUmtfbmRHbGhYRUVtTS1tV3gtUC1LYdIBngFBVV95cUxPNGptVDFhdWZzMnVaZEJfN0cyWXMxeWdaN19UNEhnNmRPUEc0b0xOdmZTdVkwN04tVFN3aGdTSEt1b0hmdHJTN3Nwa2NZRDBSSkFvM3cxNWROOWQzUWZhOWhxQlNsOW8wWXlTbUIxOHMwR1ZMNlY3NUM5UThHYzR2RWFWUE9aTFl5OEdybDMzXzEyMnIwZkFVa19ST0Yzdw?oc=5",
+      "description": "IHSG Bangkit 1,7% ke Level 5.419 Usai Prabowo Tantang MSCI Warta Ekonomi",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 13:20:00+07:00",
+      "pub_date_str": "2026-10-22 13:20 WIB",
+      "id": "1c2fb5a56a7b"
+    },
+    {
+      "title": "Pandu Sjahrir Berbagi Tips Memilih Saham di Tengah Prahara MSCI - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOVDdERjdIMlRfWWFyNU5EZG8wbHBKQ3lyeVVFLTAtU3AzdnQ5NWJJSXhtU2dhTXRtU3VXRFI2ZUN1c05yVU1sN0FMazJGZFBuYXk4SXo0dk9BdkJOSWV6d0F5ZjdVRVlZRHd4SDZsNnRHNU9YamgzY0tXZVNlUFZYS2tDNG96X1ZWZmQ2eWVyU1dQWWFScTJPWm1hZ3hoSENFTWc?oc=5",
+      "description": "Pandu Sjahrir Berbagi Tips Memilih Saham di Tengah Prahara MSCI investor.id",
+      "source": "Investor.id via Google News",
+      "pub_datetime": "2026-10-22 13:20:00+07:00",
+      "pub_date_str": "2026-10-22 13:20 WIB",
+      "id": "59e088084b19"
+    },
+    {
+      "title": "CIMB Group Pastikan Penuhi Aturan Free Float Bank CIMB Niaga (BNGA) - Bisnis.com",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPd004bVNJdElfRGNMQ25CUFpsVk50S0hHSUItZllCQ1FCSVJlRld4N29ocUpvel9hTWRUVzB0a2ZITDNVS0VTWk44aXVzYTdpdEpVUzJueGVJaE5GMl9lUUdkZE9LcnAwdkRVMFU1MWFHYVJNNWYySGRMSkxpaXZNVi1sYVNNZldTSGpHaW5abHRLdEdEN3V1U3UwMElIV2RpcUpJNmdxZS1rVXNZMnR1ZzU4RUZlNXlXcWln?oc=5",
+      "description": "CIMB Group Pastikan Penuhi Aturan Free Float Bank CIMB Niaga (BNGA) Bisnis.com",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 13:15:15+07:00",
+      "pub_date_str": "2026-10-22 13:15 WIB",
+      "id": "7e3b265a0983"
+    },
+    {
+      "title": "Ekspansi ke Bisnis Avtur Changi dan Kantongi Kas Jumbo, Begini Prospek Saham TPIA - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNbXhiOG5CZWpSbnVQQ3U0djNIb2NKYUJLWDZfUnNvZVRIYVRoVTF2RVNneWFCcVl3Tk9CQktGTklTRnphdEZKd1JVZV93OTcwWXJhX2VEQXF1V0xjd2J6YklyTW10WVBVRDZua0NMLTdsVG9EOGJLb1p2aE50emMzVjhXenQxZWVUZjlRWUthVTVCSmJlRDJwSXZ3Y01TQnh2UmNJY1RreTc1NkE3QmJjV05xT0E0TWPSAa8BQVVfeXFMTXlIQk5YaTBnQnc1T0pxZk0wZ3dWS3VDaGxkbWc1QURLX19oRnNXWEtfVmNRVWRFYnk3S0JXWnFjUmJORC1Qck83djB0cFdCWmUzTWNCSHRNVnpYTWVlZ3o0YTJpZnJMRUxIOHd5cWFiS3hsMjZILWhPLUoxYTB5RlVtSDRKUHNHMFcwMS16b1g1OURRVXFzVk5fT1BqbVEyS1V6ZFM3WWppaXUycFY5QQ?oc=5",
+      "description": "Ekspansi ke Bisnis Avtur Changi dan Kantongi Kas Jumbo, Begini Prospek Saham TPIA kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 13:03:48+07:00",
+      "pub_date_str": "2026-10-22 13:03 WIB",
+      "id": "51810edbc29f"
+    },
+    {
+      "title": "Disentil Muhammad Lutfi soal kebakaran, Syed Saddiq klarifikasi - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQVHktSDBWaGlQZkYwaU5iOTVNN2ZsdXhUeWNIc1QwcXpjZ25xNDFFVkNfQ2Z2c0JQX3kxa0NEZXdCbjZtME9XWGstbEpkWDc5Q0tabldfNWc4TTNIZnJvempEbjFJdG5LTlZiek1obmlFRy1YTnMteFJVUXFIWDctTHMzYURoZEt2bkdCdjl1dV9OV2daejBvR1JybWJHYjRjS1E4RFRoX3p0dw?oc=5",
+      "description": "Disentil Muhammad Lutfi soal kebakaran, Syed Saddiq klarifikasi IDNFinancials",
+      "source": "IDNFinancials via Google News",
+      "pub_datetime": "2026-10-22 13:00:00+07:00",
+      "pub_date_str": "2026-10-22 13:00 WIB",
+      "id": "ff5e43ef97eb"
+    },
+    {
+      "title": "IHSG Berbalik Naik 1,70 Persen ke Level 5.418 pada Sesi I, Seluruh Sektor Menguat - Infobanknews",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQM2JTeVNEMnkzaWotakJMU0xxUFAwd19NT1l6THlINlBoNFFCY3JOYk9QekVSdVBLVmY3eU5tNkhIaVluUDlIck1IWmRkTlRPWjBiRU5Ocy1OSkJ0LTNCcV85VWhuQ19BVEptbGlRZHEzX1FmVGFmOXFEVkx4OGtwcVhzQ1pYem5ZQlJlcGQ3Tl8xSXVaYlJjQVdaYXJVSnFrd0s5dkZrMA?oc=5",
+      "description": "IHSG Berbalik Naik 1,70 Persen ke Level 5.418 pada Sesi I, Seluruh Sektor Menguat Infobanknews",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 12:59:00+07:00",
+      "pub_date_str": "2026-10-22 12:59 WIB",
+      "id": "e87f61baece6"
+    },
+    {
+      "title": "IHSG Sesi I Melonjak, Saham BBRI, TLKM, BUMI Menguat - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcXlON1FrSTAyRXJIUEd1MmVGSmFwc1VLdlJyZl84RnVPSU5Lb2pDQ2p6X2g0YzdKbm42YW9HSVdTOTlHY3UtVG1KX1BTUHM5SjdlYU0yV1BlS1VOcjRrZ0pGcmlfSEwyV1pweENFVUh2dF93bUhLanpPamxTMTRHX3J6SmpZbVFsOVdib2JFb2VkcXJZY3dLWnpudjZkZ2h5?oc=5",
+      "description": "IHSG Sesi I Melonjak, Saham BBRI, TLKM, BUMI Menguat Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 12:54:59+07:00",
+      "pub_date_str": "2026-10-22 12:54 WIB",
+      "id": "526260de7936"
+    },
+    {
+      "title": "Saham DMAS Akab Bagi Dividen Rp1,4 T, Simak Jadwal Selengkapnya - Ajaib",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNaTB3UWdYRGdiQ0x0ZndTQ2ZqNXVnOEdNWWtjcWJBSTNIQUNPa2NHSU9pREtmWkdNcTNHb2VkdF9IT1Z3MUlFUWowVXZ5cGZGMWVtWklESUxtVDI5YTlSY2VFQWtJQ1AyaVg0aWNWU3BWazNLNkFtYVlSWV9YSWtNYWhVNXF2MGhwV3F3SmJmOGh3cTNuSldIWnhfUk4?oc=5",
+      "description": "Saham DMAS Akab Bagi Dividen Rp1,4 T, Simak Jadwal Selengkapnya Ajaib",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 12:46:26+07:00",
+      "pub_date_str": "2026-10-22 12:46 WIB",
+      "id": "dcaf96055c15"
+    },
+    {
+      "title": "IHSG Melemah, Otoritas Bursa Didesak Perkuat Transparansi dan Bebas Manipulasi - Universitas Gadjah Mada",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPeXZldEhRT2k3a3g4bVk1R01wTHVYT002NllCWWF6blN5RlhiRDQxV3VaZGNJWkhTMzR2aF9mWFBndkNQNzRHT0l4UjN5cXNCRldneFk5Z3hTY2RaN1VELXBWbExyZmEyemZDRXktQURfLWRvUFZ1dVZpcGd5bUUyWlN2ZzJnWjZxOHVZNWJYS0hua08tOVVnOEJXNDJGLWxSNi1kdTItVFlYZw?oc=5",
+      "description": "IHSG Melemah, Otoritas Bursa Didesak Perkuat Transparansi dan Bebas Manipulasi Universitas Gadjah Mada",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 12:46:00+07:00",
+      "pub_date_str": "2026-10-22 12:46 WIB",
+      "id": "cc4ba5057c96"
+    },
+    {
+      "title": "Dana Asing Kabur, RI Bisa Gunakan BPJS Ketenagakerjaan Jaga IHSG - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPWW5naGRoWjRLQXFoWURJczc2d2ZIMlBEandubEJKM1ZWT0xnQXBOYXJLb0FJRVhOOXBNXzR5LThlR0pDR3BfemRpN0lHRmZPQzFkS2FzUlVrQ0w3NjlMdjhZdG5COVBRWEk1eFZFNFVZVEhUbThaZEthRW1peDQ4WlR0UDFrTEsxSnI4a2NSakhlVmwtYjZDa2xfdmUwaUZTb0lQanN2YlN2d1ZDYU5sSld0VEtSWWVqMEdHekpvTdIBxAFBVV95cUxNWHNfWHBQYWYwZ0xpem9LaHY3cGYyTHhMdndDZU9EMmwtbkZ2eVVQQkdKRVRBRldjNmNESVM5VElHMEd4ZUxtM0xHU1RkTk5qZDdjVXZRWUtFaUJhZGZiaFZZWkdDRmxXOGFTejFOYmMzYWtJcWlUNEhOdGNzVVdfbG5vWUVVRGVGaTQwY3RkMXhmZXBwd1NaMjNrMDNjRnV3ZklkWk1YRGVDODNKLUM4OUd6bzF2QzFSU1l4bzdEUTZnek1L?oc=5",
+      "description": "Dana Asing Kabur, RI Bisa Gunakan BPJS Ketenagakerjaan Jaga IHSG CNBC Indonesia",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 12:40:43+07:00",
+      "pub_date_str": "2026-10-22 12:40 WIB",
+      "id": "082979153b9c"
+    },
+    {
+      "title": "IHSG Sesi I Berbalik Menguat 1,70%, Saham BREN dan BYAN jadi Penopang - Katadata.co.id",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNVDNnRldtazMxMGhFM0JnaXdnYlJGYUZ6TEttRWtHYjU0MUJpMERQck1URWowRmhoYmd4QTU3QTBSR2lmMVI5UmFGNG4yRkpER05uTXo0alNxaWU0ZUoxUjJ1UDRPUHc1a1d3YlM0MWVyb2NZRDE1MTNsTXRxaTZrT2E3bkZQSzhUclFDaUI3OFJiMGREQWlZZWZfMW9qbjE4WXpBVnBPYk1zN0NXVUxGaF9fRm5mbU5EVDh4djhKRjNER3VaWm5SWdIBwgFBVV95cUxNNWhRYk5Zb0RIa0JHZXU1YkQyNmgzbklueHp3emR6ZFMtSHRMS0lUNG9Ra0NhS0Fyc3VxUlhwbGVaYVJSeTdDaENYajR4MksyYXdPOXp4WmlhVW83eFRPUHJZMWYxVXVUSlFQUkw3VjFvMWFpYzRuYWdvT3p3bzM1TlZ5X1JBUTk0M2tkd1lRZ0t3SGUtR3JPUl9fMkZ5RmU4Y19Gb1MxNWkyR0RWVEY0RzVKanNjT2E1SDRHZWIzMVBRUQ?oc=5",
+      "description": "IHSG Sesi I Berbalik Menguat 1,70%, Saham BREN dan BYAN jadi Penopang Katadata.co.id",
+      "source": "Katadata via Google News",
+      "pub_datetime": "2026-10-22 12:39:00+07:00",
+      "pub_date_str": "2026-10-22 12:39 WIB",
+      "id": "65e12e59b02b"
+    },
+    {
+      "title": "Terungkap Penyebab IHSG Ngacir saat Bursa Asia Loyo - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOMWFNRlkweHVHQm9NQ3dfWDZtSGhBczJPMmlPQnNtbTBMaE4tSkhKVUZkTzhkUlJQVno5VkRjUDhFVkJQWUFmNHBCWlQtZ1ZHaTdBOUs1XzV2enZRaFBWamJqdmtJdzFZVVZ4aU1IZzR1UnlobC1GTlNBLTRyQnVhemZkNkZ4VWQwakpWOFdR?oc=5",
+      "description": "Terungkap Penyebab IHSG Ngacir saat Bursa Asia Loyo investor.id",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 12:38:46+07:00",
+      "pub_date_str": "2026-10-22 12:38 WIB",
+      "id": "3e47d35ad96d"
+    },
+    {
+      "title": "JTrust Bank Buka Suara soal Volatilitas Saham BCIC - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQZDE1T2NxZUUxX3hzTlBfQm9FUnZnQWNDUnlKY1FEZzZvY2dNMDVSdjdVdGl2dXJDdVlvZm81eXlBaVVySy03NVllSHNWQ1gtYW1Tc0dTVlB0cWExdHBjd2xTemlxLTI4VFlIeDh2WTdzZ29kQU5iaU1HeUxueVNYWGJveGRhcjVhZENnbWJn0gGHAUFVX3lxTE00WGUyUnJSRzVxOWhzOUxPY3B0OW4wYUV1ZGVZcnYtMUFBN2ZhbGY2Nkd3bjJ1Z2xrRExYclpqSXRrbE9KdWlRc2N1OUl2cFZ0blYzX2pyelRMa0FNS0tiVEtfMkIzMjI5Mlp6bEtaVmJfTnJCWjlSMU5pd1JpNHBSdVB1RFRZMA?oc=5",
+      "description": "JTrust Bank Buka Suara soal Volatilitas Saham BCIC kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 12:34:28+07:00",
+      "pub_date_str": "2026-10-22 12:34 WIB",
+      "id": "dbc9f944e114"
+    },
+    {
+      "title": "IHSG Sesi I Lanjut Reli 1,70%, Ada 574 Saham Menguat - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQXzZCb1Fqa3hmWlJMaXJEMk9FLVctUXl2eXlhVjN6SjJxdXU5UVRFUWE3aU16blUwX01DNmJyVzZ6Y2VPSlRSOFJXNmV5QlR1TF9zcHFIUW5kSnhmbVpUdDlVVGJNQjZ6T2Z5eFNURHdRVVByMDVxOTAxb1JmeTNscWRucTdkdTVTTHViQW1mZVB2WVpfWmZFeHc3aHM0SzRO?oc=5",
+      "description": "IHSG Sesi I Lanjut Reli 1,70%, Ada 574 Saham Menguat Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 12:30:27+07:00",
+      "pub_date_str": "2026-10-22 12:30 WIB",
+      "id": "17d906549509"
+    },
+    {
+      "title": "CIMB Bantah BNGA Mau Cabut dari Bursa - detikFinance",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNNllyR21icXdzbDFrSmxENjhPQmFBWWdXcW80SVBVc2hKWHQ4VV9pNnBELW5KSlhQZkJ6aVAzYjNzRGVkcUZVZ0g4aXpuOUt6MkgwWGdTMlJtZkw1ZElYMG1LVEhDa1V4cWxOX2ZFYUFFQnlrMGg0SVdMek1xYkxCbWJIeE9RQmgzaFFELVJtU2QtZknSAZgBQVVfeXFMUGpJdm9hSmhxc0dfNUJCa3pmMDdwVUVHcko0N09hRDZ6eE90NmtPc09temtYS29OMC1PRExMMG0zd0lYTjUtemJVQ3E5eVpKUU45N3dlNkRsSTRpaHFwRk1WVmZEbkZmcU9Ba0FvTGpCNmlISnRFS2ZJdkFDZks3SkZwQnJBUE9fbmlCRWh0cmFOY0hOVnNXaTI?oc=5",
+      "description": "CIMB Bantah BNGA Mau Cabut dari Bursa detikFinance",
+      "source": "Detik Finance via Google News",
+      "pub_datetime": "2026-10-22 12:25:30+07:00",
+      "pub_date_str": "2026-10-22 12:25 WIB",
+      "id": "bed9774045ce"
+    },
+    {
+      "title": "Bakrie Sumatera (UNSP) Dirikan Anak Usaha Baru, Bidik Ekspansi Bisnis - StockWatch.id",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQdmJrODItWjliX3d1R2NPdzZQVXhkdlNoOThMQjZxSW1mdGh0SXZwLVdjR2JJUTc5dGVsT2RIY0pJVm83UWlHN3lzUWIzdDNzZS1YZmx5MWZZVFlwSFZYNWh5ZFZKckRYYmFVTkxySDBGR09tZkxOSEVtYTYxY0FYOUg2ZTdqWUJwYVlLZU55cGxGblk?oc=5",
+      "description": "Bakrie Sumatera (UNSP) Dirikan Anak Usaha Baru, Bidik Ekspansi Bisnis StockWatch.id",
+      "source": "Stockwatch.id via Google News",
+      "pub_datetime": "2026-10-22 12:24:35+07:00",
+      "pub_date_str": "2026-10-22 12:24 WIB",
+      "id": "0cb9c70bc3d6"
+    },
+    {
+      "title": "Bedah Saham Tesla, Inc. (TSLA): Laba Bersih Anjlok 43%, Merger SpaceX Jadi Sorotan - Ajaib",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNZVVJOFNEaHFDN29UdVluWDYySl9qUkdHU0hBSXNqektuUjU1UEVTQnB3TV83MnhzX0dQQ2lhdXVxYjRfaWZIOS1TdWZvMHJNdXBjcnNhYS1nUUhhZ1ZrUWhDOFJnY1h6NHFqNThONGxhT3ZkMjBoV3JIYVB0QkRvdmNLVUp6bk9vQWVrZA?oc=5",
+      "description": "Bedah Saham Tesla, Inc. (TSLA): Laba Bersih Anjlok 43%, Merger SpaceX Jadi Sorotan Ajaib",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 12:21:22+07:00",
+      "pub_date_str": "2026-10-22 12:21 WIB",
+      "id": "2d5d8bf3938d"
+    },
+    {
+      "title": "MUFG waspadai efek MSCI bagi rupiah usai BI tahan suku bunga - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPczZPeXA0QWtjdlVlekVZTTVTTE5KWHVCUkhCaDV0bGU0b3I3NHAyR3JyVFRsa2VZbzcza2NGS2UtYXhqaDZYVUZzX2JhTVNOeUZWWEdXWFNGcDM2OWhJeFhGc3gzbU1BZnU0aFBYYi1LSkxPQjBnRjU1V1hhaU1sTEo4TjdrWHhWRUxhUE96VHNaaEdyZjNLUWtaWEVZY3RVQldGSXpUYw?oc=5",
+      "description": "MUFG waspadai efek MSCI bagi rupiah usai BI tahan suku bunga IDNFinancials",
+      "source": "IDNFinancials via Google News",
+      "pub_datetime": "2026-10-22 12:20:00+07:00",
+      "pub_date_str": "2026-10-22 12:20 WIB",
+      "id": "7e7327d0f5d1"
+    },
+    {
+      "title": "IHSG Sesi I Menguat 1,70 Persen ke Level 5.418 - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNNVZsZ1l1RWZ0VHFFTkdaNmRCbVNtWXVOSUN0OTJXYjdaM1ppMHF0aHI1TE12RFR5bUs5bGtlTXVWb3owdElpdTVCOE8ycHNnZzdmQml2SXFrSVpJN2JiR00xeFlILTFoQUkyOFBCbThqYnVGSG9IeDNLeVkzYzZpNWNUTlRONWJQMjNB?oc=5",
+      "description": "IHSG Sesi I Menguat 1,70 Persen ke Level 5.418 Pasardana",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 12:17:00+07:00",
+      "pub_date_str": "2026-10-22 12:17 WIB",
+      "id": "1229ad346ddf"
+    },
+    {
+      "title": "Danantara Mulai Serok Saham di Tengah Gejolak Bursa Imbas MSCI - detikFinance",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPVmp2dFozYXJfU0V6WHY4am41clYxSGFmSWYwbjBWUnQxeDJlVHlNMy1uNDVZT3E4RW96UkZZWWhYNGpvbV9zOU8xRXFndkdTLVpvR2dSNG9pZVQzSWdKMmdkM25WeW1NMXpabm94Yi10V3pZY08xX0RLWVdCZkZDbHp2V3hONTBRcTdRekFlTUM4YWZ5OWhqVGQ3TldyMEpocEU4bkRGQUgyaUI2cFl0Z0lhajXSAboBQVVfeXFMTXlsWWU2Vm12UkI1NzRfTTNGc182QXNVZmVVTllacUowUkJiTDBobGt2NGlTZjA4UEVwanV3SUowYjFYdGlzcTlkR09JbmRrVWFfSUI1NFc2TlF6UE1tdExtSDRucndqc2J3dWFUN2M0TU9UNE5GTVJIMHd0NG1qUUpvV202aFpYeHFYYmhNc2VsNFFmbElHQXFPWUdlZ2hkeVkwV3V1MXY1cl8yQ1E2ZFJrWklzNkNCeVNn?oc=5",
+      "description": "Danantara Mulai Serok Saham di Tengah Gejolak Bursa Imbas MSCI detikFinance",
+      "source": "Detik Finance via Google News",
+      "pub_datetime": "2026-10-22 12:14:53+07:00",
+      "pub_date_str": "2026-10-22 12:14 WIB",
+      "id": "4328fe381731"
+    },
+    {
+      "title": "IHSG Tancap Gas, 7 Saham Melaju Kencang - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE82VFoyN2NxT2dQWU5ucmZRV0JOdDJKMnlRTXFQekJwb0RjM3ZUOEZIdlRXaF9WOEVySWFYNFFCN1dnSnc1S18zSXNBMWVLdTcxbXZleHV1eXM2YlAyZ3FyajNlTXAzSUV0MUlta2VINnltSTlWLTBKNGZGYw?oc=5",
+      "description": "IHSG Tancap Gas, 7 Saham Melaju Kencang investor.id",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 12:12:00+07:00",
+      "pub_date_str": "2026-10-22 12:12 WIB",
+      "id": "1a4cdea31604"
+    },
+    {
+      "title": "IHSG Balik Menguat ke 5.418,9 di Sesi Pertama, Top Gainers LQ45: MAPI, BUMI, MBMA - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNY2Vsb1dkRm5iRzc2b1NjandDTDdpZ2J4UHNxUklGeC0yc2RlWjBOYXp1MjdzdzRST1VHQnIxUXRnSlZ0dmFJRHlxeFVTZXEzaEhKYUI2T0tEb1hBTXRPUmdnNlFzblZkbTV0N1BnUUFHdXhHTzNSNmlndjFOMlZMYjBUTV9FZ204Z0FUU1JrZGVDcUtvMlBSUEViRXBVM1QxNDJTemRONDM3ZVdaYy1kdNIBqAFBVV95cUxQdG03bXVJWVFRZHFMZElQZG8yRFVKVExrNW9DTE5RWHJ2SVNxUndBbU01NUYxS2dOYzdkcGcwTmdWVnRlbk9kNElQSnN1ODgxWjhucDZIakY1LTRmdHl1YWhJODI0VmtVci1aekhsWjUtUVY0RVJ2aFJjVVo4Ny1GdFNkc0ZCbElQRnZiaHAwUHpDdFU2bmVzRjVqT2h5Um9MTzJfQVhMaXo?oc=5",
+      "description": "IHSG Balik Menguat ke 5.418,9 di Sesi Pertama, Top Gainers LQ45: MAPI, BUMI, MBMA kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 12:08:47+07:00",
+      "pub_date_str": "2026-10-22 12:08 WIB",
+      "id": "3926a5bf4ce9"
+    },
+    {
+      "title": "Akhiri Sesi I, IHSG Menguat 1,7% - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPWi1NVVNpUExTMThWdUg1alMyZHVXQkRTdG5zRGVQY0RMRzZTVlN3eGMyVk9YN00yMGxKVzNWZnNLbGFENkh3aTVaRjIzSFRpV28wTUVQNzNkcEJnSHB3NVh4S201SzdobXc4LS1EUW54MjZmS01qQmdOcjR6N291OTZNMHBha204aDBMWXRId3ZVbHRNcWfSAZsBQVVfeXFMTmJ6OU5hWjdoaktaRGVZdlk2cklCVHNrN3d4RlFNZWtua1FXX2pGNlBsMFc4MDI5dHFsZGtBZWdXSzgyTExtOUJOWk1nOE85TVkzel95cUUzWGM4bUJUa1lwT3J4YkltX2YzWUFIZEVIblp3TkY2S0FJeHVoMVpMUG1Yd0I4T1JydmxBLXo1YWk2eFpNTnZ1X0V5alU?oc=5",
+      "description": "Akhiri Sesi I, IHSG Menguat 1,7% CNBC Indonesia",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 12:07:27+07:00",
+      "pub_date_str": "2026-10-22 12:07 WIB",
+      "id": "bb5dfbdf87bf"
+    },
+    {
+      "title": "Danantara Klaim Sudah Serok Saham Saat IHSG Merah - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPc3hXdTY2b2tNcFVJenNoQWdpbjdjZWJoMS05ZUhUa3dTdzhMVmJ4V0NMM0FxU3R3SnNsVWNqZm1zd1FFc2VEcnR0VTZSVW50cV9yMUp2VmFDV1l3aVZhMV9pcU5CdlNjSjBhSzdCS3N1MkxOX1VUZW9hdzlwLUhwUHRKeXJhWVp2SDRlaUtYaElkamQ4bEhmMlY4aVhoSEFsNDIzN2JJQVd5Z1RqUW5XbNIBtgFBVV95cUxPTlRhX054M3lIVU1WWDQ4SW1rRXk3Y29VUVUtN05aOE1BVW1NZnhkUW5SbFlEZm9NOGtWLXp6eTh5a1ZLS0hWVjF0RHptZ25IdWZ2VUYzR1FjTGdNamhFRkZKUlpVU2lfZGNseEgxS3loeHpoUWQyemdHai04SWZmTmlOM2tCRHMta0oxMGNXb1J4Szc4R1dwa3ZlWllxT2RWZklaN1NmRkFORnp1cTYyaDVXdzdmdw?oc=5",
+      "description": "Danantara Klaim Sudah Serok Saham Saat IHSG Merah CNBC Indonesia",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 11:44:00+07:00",
+      "pub_date_str": "2026-10-22 11:44 WIB",
+      "id": "18bfdeec74fe"
+    },
+    {
+      "title": "CIMB Group bantah kabar rencana go private Bank CIMB Niaga - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOSjRaZnlNTHVCT1pDNVYweXVjNExDRWNHcS16X01JdXBjeklvbTltZldNQ3phUGpOdXRtaUtwbmVocFZBY3VsOGhUWmhwb1VQUUlValJ6aGduZDZUM2xQVnVWMHA0SXZHVkxEdVNWV3ptTVZqWC1VS2plcDYtNGotX1lsVFJEc0JSOUFzaF93S3pDVGpOOG9lR0RMd2dXaGt1d3dMOQ?oc=5",
+      "description": "CIMB Group bantah kabar rencana go private Bank CIMB Niaga IDNFinancials",
+      "source": "IDNFinancials via Google News",
+      "pub_datetime": "2026-10-22 11:40:00+07:00",
+      "pub_date_str": "2026-10-22 11:40 WIB",
+      "id": "9b63da33101e"
+    },
+    {
+      "title": "Danantara Mulai Aksi Borong Saham, IHSG Jelang Penutupan Sesi I Menghijau - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOcHJ0dWJxYXdBUVpEUk53LWlMYXM2MGhFZkhCQVBRUC1SRm1sTU45ZXlLNTNEakJGMzF0R1NjWjcwUEhhdUVnTk83UkxpTnpmSHJNY0FSUnYweEl0d1lSRjBNcGI4TFBjc1JLZVkzZmhNbmhtWHVpVXA4cVMwaDUwOWxQSk9oOFBySk1kNGpWMUN4V2l0ejYtYW91VDF3THBneXN5M3k1clRUZVRzLWxoSdIBtgFBVV95cUxQSXhZUjZ6dURFQUlONGxjbGtBSjJCTlVCa3NMRHVqd2hvcE8zdFA2UDMtX0VXaHMzZVR4NWhtVUJ2T2dqTmFDZXIybWp3VnA1eTFYVzdjUkZLLVRhc1ZndFhRYi1UWnR4Wkd2aGs1dmd4a09tXzFOdWFjOVI1UC1BTGFybUNjRkxvcjFPNk14MjNvcTVjT0Y3VkUzYjZ5aDYybk9Nak4zekdDTXhjN08xcms4eHZpQQ?oc=5",
+      "description": "Danantara Mulai Aksi Borong Saham, IHSG Jelang Penutupan Sesi I Menghijau IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-10-22 11:39:00+07:00",
+      "pub_date_str": "2026-10-22 11:39 WIB",
+      "id": "1daac1f3027f"
+    },
+    {
+      "title": "Aksi Danantara Borong Saham saat IHSG Bergejolak, Bidik Emiten Fundamental Kuat - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPWWVrMGpkTU5aa3hlQ1g4XzBGQ1ZGeHVlWUZwdDdoNHBYdVlLMXRjSzF5YUlpVjZWOG5nYURlLWd0U2o5aXZEc0QtU3V2b29OX0VScnlmN3ZZZkthRnFnMmlSc1pCRXpNTDN3cVhqMnltbm1HR1ktTTlTZURJZUJEMlZDWGN1dm05Y2kya3BrWDVRVjdiS3hCelpUcXpVLUcxRjE2Nk10QW9Mc25oOENDMEdhZXBUUVVGdV8xWFpISjlUUDdCS2dpMGx3?oc=5",
+      "description": "Aksi Danantara Borong Saham saat IHSG Bergejolak, Bidik Emiten Fundamental Kuat Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 11:33:23+07:00",
+      "pub_date_str": "2026-10-22 11:33 WIB",
+      "id": "7a91ffc14dc7"
+    },
+    {
+      "title": "BEI Keluarkan Saham HSC dari Hitungan IHSG Mulai Bulan Depan - detikFinance",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOQWNSc2QyRUU4Z016U3lMNTlXODZGUFBBLUpqeDdvdEJWZFE2bGRZejU3TDJ1UWhBQ25NNGF4NlRHTnd4SkNkM3FpZTlRZEJQMGEzYy1IZ01KbWlJSDQ0S1c3d0NJUU50OXRCUWhwZFNIMXdtSldDaTV5RklHNDZiS0dXdHlSMEQ0elhJbDVPVUgwQm43TDcwdFBuU216ZUpubXZ5R2RvTEltM25oZ2RCQXlB0gG3AUFVX3lxTFBiVVQ5ZDJEaDRQdk5pU0JKY2EwWG4wdzlOYWlHOXZzNzd0RTVNTTFTZXJFTDFHRG1QX3BCYV81clh4N1VUVm1BUEVsNHc4YUNKS1Ruak1EWHdfWlpraVhXVlZWQm5Da0cwUEZuU2RoZ243c0FxcEtmRW0xQnFmaEJ0NzdJcDFsSENsbUFSR1BfZVJPUWJhT0UydVBidDU3X1lrZC1MZjFYSXlFMzZySVpaaDlSY3RwMA?oc=5",
+      "description": "BEI Keluarkan Saham HSC dari Hitungan IHSG Mulai Bulan Depan detikFinance",
+      "source": "Detik Finance via Google News",
+      "pub_datetime": "2026-10-22 11:31:49+07:00",
+      "pub_date_str": "2026-10-22 11:31 WIB",
+      "id": "cfd497a53150"
+    },
+    {
+      "title": "BEI Sesuaikan Kriteria Evaluasi IHSG, Efektif 2 November 2026 - Infobanknews",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQRVVKVVgtWmpIT0FzZjRnclJWVFFmaENDSkNvVWlVYjZTeUxhUWp6cDB0ZWxZa0g0a0lVQ3B6ci1JX2Jzamx5Yk5mSFNtSG5ra3Q4VWJXMlI0d2RsUVpQTl9mX2ZkQUM4YUFsajFRM2RibkNGd2NxU2VEeXl6UUdETE1XTHRLN0JESU41WVl3?oc=5",
+      "description": "BEI Sesuaikan Kriteria Evaluasi IHSG, Efektif 2 November 2026 Infobanknews",
+      "source": "Infobanknews via Google News",
+      "pub_datetime": "2026-10-22 11:23:00+07:00",
+      "pub_date_str": "2026-10-22 11:23 WIB",
+      "id": "783560037cf5"
+    },
+    {
+      "title": "IHSG Diproyeksi Menguat Hingga Pekan Depan, Analis Sarankan Selektif Pilih Saham - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOb0M5d1hKcDZ5MVBzZ1JwRzFLU0d0cnhHbHlKWl9MR2FOOXE3azYyRFZicnZVUUNkWmg5LW5GT2pHSjZ3eTV2MURuZlBQYVNUWjdMSkxUbjdTZjI2UWxFRUdYbFAxT1dHdWRxczFxQ04yd2RNQk9iTHVqMlNzODA2SjJLQS1UTS02SWRqak42a2dmamVad0llSjh3ZTkyZDEyNmJmYjgyWWFfQ01pdDVHSERoWGN1Z9IBrgFBVV95cUxNajBDYWVic1E4Q2JNWm5PZ1NIcVZjMmdXUjVRaTRuekNfRFFJYTN1dC1uZTR3b0pyTUQ4dHhkM2JMSGh6Q01XdUh6REtwcEppRkh5bEpadGxWbGp4U1lfNFJPZ1lwNkdtZmdoYVhUZy1GczZnMnRMN2NpRXpOM2xUOVNSSGFtRjU4eFBkREpkR2hmMVc4cktFbFRVa3VqQmdZdmN1UktpQVgxOExWVWc?oc=5",
+      "description": "IHSG Diproyeksi Menguat Hingga Pekan Depan, Analis Sarankan Selektif Pilih Saham kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 11:22:54+07:00",
+      "pub_date_str": "2026-10-22 11:22 WIB",
+      "id": "fcf525bae5c9"
+    },
+    {
+      "title": "IHSG menguat di tengah pasar cermati perkembangan regulasi dan MSCI - ANTARA News",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOUno5cXJwX3FQMHFidDRPcTJBVHl2dXdBNGF2MXdJR3JYY2UwQlZFQkY5eEllNHpIcGRiNC1qSkx4QVY1OWFoRTJvTTFaV0lDbjdDaURVWkRwQmhmUVEtcmY5YVhRNEpWRUl1RGNqbUlHcWFOZVpXbmswY0p5Ml85V0xKa05MaV9ZQ1hCOEgwOEw0MlFjc1NHU0JSMGthR1gzZWo1aFRMTUV5b3VwalhN0gG0AUFVX3lxTE1WWkxNZ05fMU1pTXc5ZVpTY1VMMzVPUEJYcGFPWTc5TmZ1bFJ3c1d0OVRWU21EUmVzNkJaMGhuX280Slo5eGllaVJrX3R5S2UycUJDVXVoaEhVeXV5Y0xqWU1GSkpsMGZfWFRWeGRmXzVWVlU1T0lUbFR5V1J0Nlk3R05lalV6NWpqRGVRYk1fQTctSmVqWEhiVldoSUtmMVhwTTlLV0Vwd2JsdG90VG8zd2lBQw?oc=5",
+      "description": "IHSG menguat di tengah pasar cermati perkembangan regulasi dan MSCI ANTARA News",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 11:20:12+07:00",
+      "pub_date_str": "2026-10-22 11:20 WIB",
+      "id": "2276b6a17fb0"
+    },
+    {
+      "title": "Danantara Mulai Borong Saham, Tambah Investasi saat Bursa Tertekan Imbas MSCI - Katadata.co.id",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQQlJIcjI0eHJmMHgxeDl6b3hDcWFEYmVobko3OUFpMXZvTEhmVzh2a3FwRlE3MVV4ejVzZkhxVDZ3T2dsbm9vSGZ3dFNVc2dMNnQyazRRWjNxRmZyQzNONnlGYzVjMkUwbVBoWkdHMDFzVERRZ3ZfRzhBd2tWVzdsRVNJUW83RzJsRFY3RDFnSFZSRGJHdEtYaXpZbGJLNnVMU2VUYXd2dVhCT0k3a2QwXzl5UGdXUzhPNHU4UDlrY1BVdmZpa2kzctIBzgFBVV95cUxPb3R3UDNQVXUteHJIcjJ3bWhReGFNcUZsel92a2h1WXU0TjBTamtzUUJmNFFXaE1zT2hBcnpoNzE3aW85QWtVMndiQ0F0Z21aQlJOYnhRT3liZmFlNUdYSmdVQzlWYm9mSG5MenRmeFZVeGRKSmxhbHZRQnEzX1Vja2JLVWtUNDlVWVRQa1I5UmdFdVhUTGwwNWZwdDAzOUxVaVMycl9ENXlBZzlFOGtoa2hNTTVfRFdiYnZ6TXUtbjN5YVhWcXEtNTdiQnVUUQ?oc=5",
+      "description": "Danantara Mulai Borong Saham, Tambah Investasi saat Bursa Tertekan Imbas MSCI Katadata.co.id",
+      "source": "Katadata via Google News",
+      "pub_datetime": "2026-10-22 11:17:00+07:00",
+      "pub_date_str": "2026-10-22 11:17 WIB",
+      "id": "85a196e25997"
+    },
+    {
+      "title": "Diam-Diam Lo Kheng Hong Borong Lagi Saham PGN (PGAS) Semester II/2026 - Bisnis Indonesia Premium",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZENTc0pwOVM0RHRuazVGU3dEMkxOM0ZaTXdEbDNPU2REOFFVS1dIMXBjY3ZFQnBKc2JhbFpSSG5oQlhqNmFXX0Y4TFA3OGFscnJfd2hrVjhRemx5RDRhdmtKZTExbnpiUG10LW1ScjVqSk9VTE5odXBQV1NLSHFwY0tkVTNwWUE2THJmSUlPMV96VjliUHdORkdKbDZUYXZwVlV5YjhXd0hsNjh0M3VqTURGOWNrQWxEbkV3?oc=5",
+      "description": "Diam-Diam Lo Kheng Hong Borong Lagi Saham PGN (PGAS) Semester II/2026 Bisnis Indonesia Premium",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 11:15:00+07:00",
+      "pub_date_str": "2026-10-22 11:15 WIB",
+      "id": "be645d3a3b53"
+    },
+    {
+      "title": "Potensi Menggiurkan Saham TLKM - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE1TbGlHNmhWbTJucGhrc0I5U3ZiQ0c4N0lQejR4Y1JJdTQ5RWsyZkR3RmZmc0hULTJ2UXB4YzNTR2M5anYwbmYyTEEyQWpKYzJCdXhVWW9WVkgzYXE5R2lYak94ODQyYzBEWmFHbEZ6Mi1ldw?oc=5",
+      "description": "Potensi Menggiurkan Saham TLKM investor.id",
+      "source": "Investor.id via Google News",
+      "pub_datetime": "2026-10-22 11:15:00+07:00",
+      "pub_date_str": "2026-10-22 11:15 WIB",
+      "id": "c18b9882333b"
+    },
+    {
+      "title": "Menghijau di Tengah Wacana Delisting, Intip Kembali Profil Emiten BNGA dan Kinerjanya - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQVzlvR3pWUWxiLWFOb1l5RjFBbWlvT0w5d0p6VnhxVkNSc0F6NEw5a2xBX2xXM1BWMERaempXaTloOFFmTVhJV3dMLXpWNm9yNXhKLXlDRjZTd3hlR3A0M19zWU5TMHRIb0J5ZXhsNl8yU2dJRGpGWjRwZHRqOHhya2wxOXdmbmFLdC1VZjRCZDB6OEctSEhLcy1zQkFlZkpLbkdqYXNyRWMzbHRrX1R2bzdXTDFjVF85ODhWdNIBtAFBVV95cUxNU2huVXlhSnpNMmtKRE5jaFMyZGVfLUZzUzV0NHNWTWQtUW1tamc5ZTdVR2ZxanFNSnBzd3hLeHFRcUN5aVpTZWdpQjJveVhxazJBVUtwMVU1YkY3TVVMX09VX05UcDhlSUZuTVJ3MkZtS2p2UTdYR01ncE9WZXdtalNSLTUtYkJEUUprcy01UFNGRG4wcmc1TzhmNGNBWW1PMEFFU0pZS3Bac1M1Q09tb3pxNjc?oc=5",
+      "description": "Menghijau di Tengah Wacana Delisting, Intip Kembali Profil Emiten BNGA dan Kinerjanya kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 11:03:44+07:00",
+      "pub_date_str": "2026-10-22 11:03 WIB",
+      "id": "3bdabcda18e0"
+    },
+    {
+      "title": "Analis Memproyeksikan Peningkatan Kualitas IHSG - SWA.co.id",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPU3IxVlFlcmFnRWJhY1IzdXVkX1RzeFpZaXNCZWVJSmRzeUxNaEVCRF9oWFoyZi1TbjRsaVJ4eDNadnpHdHBsV0xWYXRiM1d5UXFvTG42a0E3anF0RjJqUWNORXhObDgwdlA4Z0FBd0ozX0ZfbXEzcDZSV3NEZk5faWJSaw?oc=5",
+      "description": "Analis Memproyeksikan Peningkatan Kualitas IHSG SWA.co.id",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 10:57:00+07:00",
+      "pub_date_str": "2026-10-22 10:57 WIB",
+      "id": "b652995f10e8"
+    },
+    {
+      "title": "BEI Gembok 2 Saham ARA Beruntun, Emiten Influencer Disuspensi Jilid IV - Emitennews.com",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPdVVoWG9NeFVId3FTRldhb1FsOG9vem85WGVsN2FBaGhFak1KcGhoMmNPSkE1N1Q4TU94VTZvNl9XUVZvbFVfdnNpdXM5TmtCNGNSMlJtbkdQaHFTWUw4dE4ya0RXVXZId1l6YXZkYlJBazhKUThYRnFlbHR2ZU81a2lBTnJueDAtYmVNcmcxbVAtWVdmUnEyVDMxUFQ0Zw?oc=5",
+      "description": "BEI Gembok 2 Saham ARA Beruntun, Emiten Influencer Disuspensi Jilid IV Emitennews.com",
+      "source": "Emitennews via Google News",
+      "pub_datetime": "2026-10-22 10:57:00+07:00",
+      "pub_date_str": "2026-10-22 10:57 WIB",
+      "id": "5aaa56578ad7"
+    },
+    {
+      "title": "CIMB Group Bantah Kabar Delisting Saham CIMB Niaga (BNGA) - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQ3kzSlI0MHZVNjJiN1ptTmdOd1ZscE1qUk9xdGVjY0FqWWtPbU9YQnVjUGRnb0U0OE02el9Bd1ptazdDVHdBZjdhRDEtZnphVTJfc21YZzdPZVRFejJLQXl0b3dweE1tY2RJU0YwVDNSRlYxLVROWUIxM0VmX3hpQVBpQm50TU9lMmJxTThGWlNjTUZt0gGOAUFVX3lxTE5Ed2l1TDBlRElQdjF2alBIUGZQcVZQa3RyU1NCX0RENDFPZzBTNWhLWG1DYmdVNjRlQXl5OGRtak84dmIyRkpoUkx2aXlhc0h6YXFKVUFvWFdZY21FcW5ndEQ2V2xHU21aeDgta0Q1TkVHbElPUENERVhDSHlteW1BVTFYQ2I1ZnlLakRZMnc?oc=5",
+      "description": "CIMB Group Bantah Kabar Delisting Saham CIMB Niaga (BNGA) kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 10:43:25+07:00",
+      "pub_date_str": "2026-10-22 10:43 WIB",
+      "id": "01ff7dbddb98"
+    },
+    {
+      "title": "BRIDS Pangkas Target IHSG Jadi 6.000, Jagokan Saham AMMN, BBNI, hingga TINS - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNRjFGd1lKaG9wSVdidmJoUndIMk5Cd2N6LVdsUDRVS0F6cWVES3BnUHhCbG95bFpyRm5meV9LVEpxZWIxTFFYcDcyS01fdE5rVlRwQjZ5ZGRTMHE4Q2tZY0FFV3BodUM5ZDZOUGprUE1yRU5NcUg1Q2VEbTA4SVFIZlo1UGJhNVA4d1ZLZDJsdXFqWTBTQzE5TF9laXdyNU81MVpkdlNyUG16SW9PQkVxMUZHVGVLMUUyRVEzYThPXy0?oc=5",
+      "description": "BRIDS Pangkas Target IHSG Jadi 6.000, Jagokan Saham AMMN, BBNI, hingga TINS Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 10:42:23+07:00",
+      "pub_date_str": "2026-10-22 10:42 WIB",
+      "id": "3fbe396c9d5a"
+    },
+    {
+      "title": "CIMB Group Bantah Rencana Privatisasi CIMB Niaga, Ini Penjelasan Resminya - Infobanknews",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNRnZfRVVOMGtZLVJJM0FPZ3ZQSlJHb1M1NDQ1UFRPUUFCakpGaW9FQ01uLU83bVoxck5Xd1o1ZTAtSmRRT0NqclZ2WG1nclhQSmlyZGppWkU2QnVvUXdUdlY2ZHM0SzFVckE0Z0daVmRieVpwUWtMMkVUbEpwbHpycGJGVkx1NG9QWmtRNm1FRXpPQzZHS3Q3SWJFRlR5Zw?oc=5",
+      "description": "CIMB Group Bantah Rencana Privatisasi CIMB Niaga, Ini Penjelasan Resminya Infobanknews",
+      "source": "Infobanknews via Google News",
+      "pub_datetime": "2026-10-22 10:36:00+07:00",
+      "pub_date_str": "2026-10-22 10:36 WIB",
+      "id": "90671a5bdec7"
+    },
+    {
+      "title": "IHSG Menghijau Ditopang Saham-Saham BUMN, Danantara Masuk? - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOc1RNUUp3UV9WLUVLZm5JalN0djdWQ1IycjAwOHRfTmYyRXhaeUlvZUZtQUhNdEpsUDlRYWRkdW5BSlpQNXhGVXlsZXBud0V0RGMtMUVvVjA3cVlLdFZrdHJqbXhPVTcwVjcxb1FYYVNZRlpVTDVReWI4d3JESFE1RE9BZmpMbnY2MEs4QUwyWVZ5STdXNElQRlVJajlJR1Z3ejYzRVJrbUtuekxYWUctamkzVHpEVHhUdlHSAb8BQVVfeXFMT2hXVFJGQnViUlViUlBSU3pKSFgtaWZNY1U5NEd0RWFuSXZVRkprOHFCQ0NZYjU1NEZlRlJRWTBUSDZfX0RjbzhhSmJoMFcxQkJERDQ5Vi0xNlFzNU9laDk0N0NOUzdVOXo2Yk1KNF93WWdsMlRDcXhaUzdnLXBnOGVFSi0tUnplZmUzRHg0OWZwQ01TT2dmamRqMXhxUGduVm44US1FdGs4ajB6S3R4cm4yRGU1WVYwZDcyNmJtMlU?oc=5",
+      "description": "IHSG Menghijau Ditopang Saham-Saham BUMN, Danantara Masuk? CNBC Indonesia",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 10:35:17+07:00",
+      "pub_date_str": "2026-10-22 10:35 WIB",
+      "id": "33da57636f49"
+    },
+    {
+      "title": "CIMB Bantah Rencana Privatisasi Saham CIMB Niaga (BNGA) - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNV1d6SUdmMS14UEhQd29hb2c2ZEVsQW8wZGRLRkxRaF9hUzd4cXVoSHpuVko2aTVnR19GZ19Kd0p4Y3RGRGZzclJiTXhnM1dWdmdQem0wbFdfZXVJdGNqNUxhelluRzV0Q3dUUHN2bUgzVkRyV0RyS0swVkV0OTJKN3pnTVJHcXRKZkQxaXZtLXdaZlNMS0RZ0gGcAUFVX3lxTE9QcjVnbUxZRV9sNzF4MEVGdURfXzJFVHJ6MG5pclpQaHNzX0NrNklkOFBXMTZkcVhIYjljcVJERzU4WXNPNldWZE9ZZHNaNDUyaVY4N0JxcDd0Q0N1S1hXeld6VjhIa2k5TklDTWt0aHM4d3UtXzlWbHkzU3pzRkhqZlFYQkQ5OVNVckQ4UmhnMXpjWXFnOTJRXzFFVQ?oc=5",
+      "description": "CIMB Bantah Rencana Privatisasi Saham CIMB Niaga (BNGA) IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-10-22 10:34:00+07:00",
+      "pub_date_str": "2026-10-22 10:34 WIB",
+      "id": "cc577e2e04b4"
+    },
+    {
+      "title": "Sehari Disuspensi, Saham MSIN Kembali Diperdagangkan di BEI - StockWatch.id",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPY2VlR01sUEcwYzMteUNYTk5vZ2NlZ2NrNTBrZ1pPU2Y0S0NsVlZHQ2QzcWZBU1dnUWVOdDZ3aV9Gb005YWtjWWM1VmdpeFV2LW9vZ1dsSlFad0J5WTFkVjdjX09tX2lYdUJWbkU0cE9TYTl2OWhSaGJVMDdVejZaRkFEaHItejJR?oc=5",
+      "description": "Sehari Disuspensi, Saham MSIN Kembali Diperdagangkan di BEI StockWatch.id",
+      "source": "Stockwatch.id via Google News",
+      "pub_datetime": "2026-10-22 10:29:46+07:00",
+      "pub_date_str": "2026-10-22 10:29 WIB",
+      "id": "9cb7cec75f8e"
+    },
+    {
+      "title": "IHSG Kamis dibuka melemah 80,38 poin - ANTARA News Sultra",
+      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPTHZVVnE2eUxWOUg3dHlSX1k2blpWalJiT19ObEs4b01TQnpxS09sRGxKamRMYTcyTGxKc09xMVhZTkpDeE5VQXhiNnR6QnZ0QjRqZEVjaGxYZFlXYUJVbzIwci0wbHltcFJrQ0pIREpLLXFyQjJlelh3ZE9PeDJOVEtKWDlmQQ?oc=5",
+      "description": "IHSG Kamis dibuka melemah 80,38 poin ANTARA News Sultra",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 10:26:54+07:00",
+      "pub_date_str": "2026-10-22 10:26 WIB",
+      "id": "9e4f729a894c"
+    },
+    {
+      "title": "Penurunan Pagi Hanya Sesaat, IHSG Lanjutkan Penguatan 1% Lebih - Bloomberg Technoz",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOb09GUzJqemdkb3pzSFcwWjhUX0IwbmhHU2RPMVgwOC1abzEyR1dBanJ4c2FEel9qWjNXWE9LRWhCN0Q4WmFicENVb09kcHVqcUVpcHQyX3pTYjFLampTR3ZYOU82STJ2SkZ5NWxnWG1oS0xaRW5WNVhkS0locG5sb0lwU3FTR3E4d2hHVDd6ZU5wY2J2eE4zS296UFR6OXZINlRRQlRYSmllMmJ5M1lVVDlR?oc=5",
+      "description": "Penurunan Pagi Hanya Sesaat, IHSG Lanjutkan Penguatan 1% Lebih Bloomberg Technoz",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 10:26:28+07:00",
+      "pub_date_str": "2026-10-22 10:26 WIB",
+      "id": "5a80dd2d339f"
+    },
+    {
+      "title": "Kekayaan RI dibawa kabur, Prabowo: Pemerintahan kita ditipu - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxON014V3NmSVJnSEV1VlZaRzROQWV0YXM4ckx4MGVabnBqQ19jcDQ4RkN1Y2RxLTkyakw0Y2tPMHlTVHJ6ekZTbHBWak9kS1o2UUtzUmt4eG44WHR1YmFsY0E2Y1BiTkF1cU5kdzRxbE5PdEhFQnNrb3k4U3NhUFN1ZEhQVm5SeEJ1anJHYk9BbGNLX241QWswMFZCcEdudU8wa3U0?oc=5",
+      "description": "Kekayaan RI dibawa kabur, Prabowo: Pemerintahan kita ditipu IDNFinancials",
+      "source": "IDNFinancials via Google News",
+      "pub_datetime": "2026-10-22 10:20:00+07:00",
+      "pub_date_str": "2026-10-22 10:20 WIB",
+      "id": "63fa08887148"
+    },
+    {
+      "title": "IHSG Naik 1% Ini Penyebabnya - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNbEpaNVp0U214eU80LUtIdlgwMUtWSGVLbHh4TFNDMy1RMGozOElFdGdNYVhWenJJUm9tbHV6RXFlbXJXd05aMHpjYTVqLS13cG16X3FuLVc2WUlvZGE0OUQzcjBpQnp4d2doYkhOUlhpNWpRWFNEZ3IzX25uWjZMZHIwY0lUekViN01nNlRFdFJfWmPSAZgBQVVfeXFMTUEydWFNSk9LbV9ESDg4dFU5TEVuanA0MUtVUG9OUEVjb2FZY2NDS05MSmVaTkI4N1JkeGo3YURoS0FXLU1rdFVEa2l1V3JKOGtzRXoxRFdQUDRnU0dCeXFDWl9JVjdLN0phMThFRXVnWnRJLU5NVW12aVV4a0FsOTBmQUw1Zk1mLXNwWFYxbjIteG5nbWU2Sm4?oc=5",
+      "description": "IHSG Naik 1% Ini Penyebabnya CNBC Indonesia",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 10:14:54+07:00",
+      "pub_date_str": "2026-10-22 10:14 WIB",
+      "id": "0681f55e53cb"
+    },
+    {
+      "title": "IHSG Berbalik Naik, Saham-Saham Ini Melejit hingga 25% - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPbWFXLVBfVk80QnhvZGo3bHZKSVdmdkpaR0JwWDd4X1RFYlpKak9hUkpzRXpsdVhpQUozQ28zY0kxbmRTaVZpbnhMVXhzRjU4WmFZQjhHcHFicEZfX1dJSTIxdWxTM0xpRl9rX0ZtRk1xUGhoY18zM3liV01YQWxuczk4NERQT2pUajV5Z2J3?oc=5",
+      "description": "IHSG Berbalik Naik, Saham-Saham Ini Melejit hingga 25% investor.id",
+      "source": "Investor.id via Google News",
+      "pub_datetime": "2026-10-22 10:12:33+07:00",
+      "pub_date_str": "2026-10-22 10:12 WIB",
+      "id": "0d9e85887321"
+    },
+    {
+      "title": "TOBA Siapkan Pendanaan Rp7,83 Triliun Lewat Skema Hybrid, Tanpa Dilusi Saham Publik - Ajaib",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQSmRFM1NocExuR1prcjdLX3BtZ2ZydDBCWkcwZ1JWdnJJQ01SVmhwZVVHXzVqV0QzbGh1N2l0MFdUTzBXNGtqZ09XV3FBWDNRekZBQXplR1RWQmtlS1ZhSDAxcVVfVWJDRjNneTRwS3JuRGIzb2l3S0lFcWZlYnpXTFQ3MHlkcmgzcEctbzVHRExUZHJCUlZnUEdnRTJiRk96OHJKN1NQbmlGQmw4SkNjTklyZjM1Q0U?oc=5",
+      "description": "TOBA Siapkan Pendanaan Rp7,83 Triliun Lewat Skema Hybrid, Tanpa Dilusi Saham Publik Ajaib",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 10:10:58+07:00",
+      "pub_date_str": "2026-10-22 10:10 WIB",
+      "id": "091d14227510"
+    },
+    {
+      "title": "Penyebab IHSG Berhasil Bangkit, Kini Mantap di Jalur Hijau - Bloomberg Technoz",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPUXdUZ3NEb2pnWHlQVU1NQkpDM0RwMHFwNEtiZjZoZzN1dmZheE9tY2dmdGtQc2dBZ2RJX2ctVlVDbTdIdGR5V2ZFSXFTeTROUnZSR00wczRZMnBHcG9QWEVWLVVobE5qblpfV2dzZlFlLTBmTV96ZEhWZXZVaUhpZWtjSVE0cVlxLXpGbHV6WFV5c3ZENkIyWHljR3FENjR5SG05M3dpZGZwWm5JZ0E?oc=5",
+      "description": "Penyebab IHSG Berhasil Bangkit, Kini Mantap di Jalur Hijau Bloomberg Technoz",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:55:34+07:00",
+      "pub_date_str": "2026-10-22 09:55 WIB",
+      "id": "a8169f77c497"
+    },
+    {
+      "title": "Indeks Bisnis-27 Dibuka Melemah, Saham AMRT Masih Bertenaga - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQTmtpNGpnenFlRWlHWEpnbEk5YnItSC12Vng0dFNUXzRxM1Jjcjl6TlNtWTdUbjBJMW11eUNzYTZjQXFSYkdnWGt1X1F0Q21kaVZEQnctUVlaUTdBWTBDcnVXd2U3UVlPb2hQUXZPMGViUkhKWVRPeU1Ed1ZBVV9tNDZfc0lZd0l5amRRNmdBeERoMmp2Q1lVaTB6dEE3MlFzYTNOLV9UZldDbHFU?oc=5",
+      "description": "Indeks Bisnis-27 Dibuka Melemah, Saham AMRT Masih Bertenaga Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 09:44:48+07:00",
+      "pub_date_str": "2026-10-22 09:44 WIB",
+      "id": "2e5e91fbe688"
+    },
+    {
+      "title": "BEI Ubah Aturan Evaluasi IHSG, Saham Berstatus HSC Kini Tersingkir! - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOUU1xOGxIZlZKT3R6dGIxV3gzdGIxbTQ4RFhCeWV0V2VjekxSbnFxbXNtM1AzTlpwRGFRVURaUTBlQlJZS2ktcmt5RkZ0LUJjc1VGRzNhZUJWQVA4ZXk5MllDN0NFeDRabWZObG5ScTJsVmZRNF9RUFFtSFRfYjB0WjNSelV4Z3JEYVQ1YjgwQ3JuLTM0SXgwVkdDcnQyOExtZzZ1SA?oc=5",
+      "description": "BEI Ubah Aturan Evaluasi IHSG, Saham Berstatus HSC Kini Tersingkir! Pasardana",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:41:00+07:00",
+      "pub_date_str": "2026-10-22 09:41 WIB",
+      "id": "17a1285f9d16"
+    },
+    {
+      "title": "Saham HSC keluar dari hitungan IHSG mulai November 2026 - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPemtTRF9wZkxwa2RjVEtTUmZjbnF4TnJkLWlIRmJRaGtXYm94VmJsdGQwVVRZSW16QXIzbGFaRmNhMDRuZ1V6WkU1alZ4Z3FyY3R5VUhNdURQRE1ZazdxdnNpZzFUZHNsdFduMUc5enFiZHNJaS1ydXp5b0FFLTVmcDhXRVhCU1RlQjJWbDZsbXFSN0xPcDEwdFlVM2EzbDl1?oc=5",
+      "description": "Saham HSC keluar dari hitungan IHSG mulai November 2026 IDNFinancials",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 09:40:00+07:00",
+      "pub_date_str": "2026-10-22 09:40 WIB",
+      "id": "2e2d71c0a55b"
+    },
+    {
+      "title": "Sempat Anjlok, IHSG Balik Arah ke 5.363 - detikFinance",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOaEhFX3BRbUNzZzFMQkI3TkVLN0FESGVIRXZFdW1rV3IxcDNYU2ZTVVhHWlBwaEhHYnY2ajVCZ0xQRXp2NkNqTWxvNUo4R3phcWFBM2J0MVhZZ1BKNG5BVXpNV2ZvVWdlazRoWF85bXU2YXV3WEIxaENna2psR1AweWxpbUh4cmkyY3BUdF9UWnB5aVR10gGaAUFVX3lxTE84RzQ0QTFBSWxtTnNMZ1NLMUplWjVwbUZQeW5FLUVKZjRVUTBTMGJHTXk5T2FCQWtCWGYyUFByNlhYdl9mWC11MU95cEtyR1Azdkdfd011dTVxaDBoNFdiSnZwWURYeG40clFleXVOc0p6NmVsb0RiLXU1dnpXblhpS1d5bWJGSVZ1M3NyY0U3bTFFNnAzcUpFcmc?oc=5",
+      "description": "Sempat Anjlok, IHSG Balik Arah ke 5.363 detikFinance",
+      "source": "Detik Finance via Google News",
+      "pub_datetime": "2026-10-22 09:39:19+07:00",
+      "pub_date_str": "2026-10-22 09:39 WIB",
+      "id": "6d8e4fc79e11"
+    },
+    {
+      "title": "IHSG Berhasil Balikkan Kedudukan, Tadi Merah Sekarang Hijau - Bloomberg Technoz",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNZGQ1VEctZ21nNFNQeVU0aURXQWU2WFBJS1NoOUhnTFlrVnAwbkVDaV9GUWVaamMxekFSMG9vcnJwUWJaSWVFVndxZkNoSjljX2E4OFBQWkc4TXdRV09fWV94M0xzVmhxbWphckpBeGNJY0JqTEotMy1oQ2RjNVBXX0JEVzduX3ZEWjRmcEFGcDFDRDZ0WjRZVVh5aG9TSXdCVEFoRkRBNWx2anE5eHpF?oc=5",
+      "description": "IHSG Berhasil Balikkan Kedudukan, Tadi Merah Sekarang Hijau Bloomberg Technoz",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:37:27+07:00",
+      "pub_date_str": "2026-10-22 09:37 WIB",
+      "id": "42662d43b3da"
+    },
+    {
+      "title": "Bursa Asia Melemah Kamis (22/10), Investor Waspadai Konflik Teluk dan Belanja AI - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOd1B4UVhxS1ZCT1dSZDlwNk5FM3VOdVowQmNBMTg1ZGVhVmFWWFlZRi1RRUNqVXU0cWh2bnhxazZCV3lfcFJDMXFhbGRTeXlBMnVhYUM2ZlVlQ1l2ZUhidnV6ZzdEWWhYLTY2UXcxU2dEay1VN09idmRiRTUyUFFtSkNWMS1wNmVpV1I0ai15MjVVbmRBRGs0X3JUXzRBdXpqNEVWSlJ0ZkljRlVYNktLU3V1c3I4YWfSAaoBQVVfeXFMTUxjTnRaV1ZxbUNWZm15dGZ0UDAxRGNjV2dCN2Nfb1lRdWdNOWpjbFRIMGN6ZWJScVdLMzRTM3N3eFF2bUpmWDZFeTJ4a0xnV0VlOVRzR0Q4c2drQlJhY2p6T0p6RGRaWFpwZGp4ZGVKbmhVYmV0ZnYwcVJqbUdoOTh5bkFfSzlVVjVUZWduZ1VvUXQtMmlRcExjNFcwd2J0U18zdmVtVHFqU2c?oc=5",
+      "description": "Bursa Asia Melemah Kamis (22/10), Investor Waspadai Konflik Teluk dan Belanja AI kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 09:36:31+07:00",
+      "pub_date_str": "2026-10-22 09:36 WIB",
+      "id": "b312396cf07c"
+    },
+    {
+      "title": "Dibayangi MSCI, OJK Pastikan Presiden Dukung Pembenahan Bursa - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPTnVtYWVzenVBS2xyWnp6Q0o5a3dwejJnOHFVeGdxcFQ2NTdFeWR2V3o5c3hrUEEyaVliVEtOVjg2TFRyX1ZqZGJhRmQ0dmpYZU1VQ09oZG1fT1VwTWhjVzcxQ0s2Zm9UMUJ4ZUxzOWVLQ1Npclp3Nm9BMnhoUFFPMjgtMEdWbjlLYnZYWFJqTkViTEJ1S0twR1NJenlaQlVxSWVZaWtiWnIwOF8ybEFn?oc=5",
+      "description": "Dibayangi MSCI, OJK Pastikan Presiden Dukung Pembenahan Bursa Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 09:31:35+07:00",
+      "pub_date_str": "2026-10-22 09:31 WIB",
+      "id": "eed326ddf955"
+    },
+    {
+      "title": "IHSG Dibuka Melemah, Tekanan Jual Saham Unggulan Bayangi Pasar - TopBusiness.id",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOV3lQRl94UWE0eTBhZWliOU1yWVNndC1feWNzZGNJWFVHUkViYkxoV2dodXRreWUzLVYyeXpWMU92XzdZWmdUeVUySW5TWld0VlJUZ1RQZy1yYUdsUlBZLXdsR0pDZDdwNFNlVkY1TkhpSG5hUXFiUTVjZFFWVEotT0VXVGNjZnRsWlE0QlAxTUFVdmhkS05JT09IZVlNZXgzanc?oc=5",
+      "description": "IHSG Dibuka Melemah, Tekanan Jual Saham Unggulan Bayangi Pasar TopBusiness.id",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:28:00+07:00",
+      "pub_date_str": "2026-10-22 09:28 WIB",
+      "id": "9c5fd9ab1900"
+    },
+    {
+      "title": "IHSG Dibuka Anjlok 2%, Ini Penyebabnya - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxORmZXRUVCbDlXdF9EVmxUQ0xON01lTW1raVBvdTdKcm1rNnAtZzBObElJamsyMU1GWHlGTmNRcXJ5cXNOdVpnWjdEWERZaFBOMFBLSHZ1LXB3MVlOYXJfM0FNdkRXU1psTkJDWVdYV1RxLWNZLWxRNlNoS2tBV2UxZHplOFlaWU5FZ3FsRHFmR0ZWMjQ1YVRWclFiSEdYVTTSAaQBQVVfeXFMT0ItelRFUXBIUUVqdC1UMnUyaXhmRGFtUlN6Unh5ZGY2d0Z4ZWpmb2ZSdS1jeUNxbGRKWTEyV1lsS3d5YXhwejR6Uk5vU2t3Mlg4NzM0OWpuV21sd3RVeDlkZXpsWW5JcFdrSm94Y2ZXaGMtV0xUT2t5LVVOc1ZyZmJfMjBSb3pLeXNoYklkcWhMeGVmWWZ6eHBuV2dQeENOV3lydEQ?oc=5",
+      "description": "IHSG Dibuka Anjlok 2%, Ini Penyebabnya CNBC Indonesia",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:25:23+07:00",
+      "pub_date_str": "2026-10-22 09:25 WIB",
+      "id": "619b604c869b"
+    },
+    {
+      "title": "IHSG Dibuka Rontok 1,52% ke Level 5.247, Bursa Asia Kompak Melemah - Katadata.co.id",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQTVNnVm9nS00zdWNwWXJBcnNFZXhBLURMaDgxNm1zYUl2QVNqTE5fRU1XYUtHNjVEYWJ2dGVIdWZsamhwa3IwSTh3OTFYX3J0d2FnN1piM2ZZZVNqMi1nOGpvbE8zNTJwb0FIQnp4YllqQW1hQlE4RTdiMXBORHdjQjVTNE8ybXNzcWFyTmE3LWJ2LTd2UjZFT2x0YmVTWlZpUWI5bmNKbHBUZDJTelo3OTRIQ0twbk3SAbwBQVVfeXFMT1BfaFR6RWU0MWZxMjFlWE5uMUhPMEt0OU15SmFnOTJHX2tBRXVkUkZxVVZnUTFFRWlTdnpnTlBzbDA0ZmpGZlBhWmh6aGQwY0tSdDZQMXg4bkpOaEN5TGRoRnFxeldiZHFiSW4tbEpiTHVyTVlPdDN0T2pFc25vTlBIZ2pDM3hESFdWdzJHWW9ma1liTDJqWl9uUTYzYXNNVmR0U1JXZ2I0LVhlOVNkV1lXR2RrQmh3LUJEUEY?oc=5",
+      "description": "IHSG Dibuka Rontok 1,52% ke Level 5.247, Bursa Asia Kompak Melemah Katadata.co.id",
+      "source": "Katadata via Google News",
+      "pub_datetime": "2026-10-22 09:25:00+07:00",
+      "pub_date_str": "2026-10-22 09:25 WIB",
+      "id": "61cc4c5096ba"
+    },
+    {
+      "title": "ANALIS MARKET (22/10/2026): IHSG Diperkirakan Bergerak Mixed dengan Adanya Ruang Tertekan - YB Sekuritas",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPVThMZUFEN2lNRW5OY09Bc25tM2E3OGl2SUw1OXIyX3ZaaG5aQ0Z5T2ZCRHQ3OVVSM2RpWFNiVnY2Y1VSeUJlOWM2LS1LVHZvcXdiUTBJQlFRT0wtQnNDeW02SktqT3Q1SEw4U0lwb0lTVUg5ZnpialhqMEh5ckN4ZWpHVmZNam5USThFYmNBLUNYck5YdFBoUU5iZEtPbEJLTHM3YUhpMnhWazBSeER3OTVHV2dzSWNPdVB3?oc=5",
+      "description": "ANALIS MARKET (22/10/2026): IHSG Diperkirakan Bergerak Mixed dengan Adanya Ruang Tertekan YB Sekuritas",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:22:00+07:00",
+      "pub_date_str": "2026-10-22 09:22 WIB",
+      "id": "e3d2656296ec"
+    },
+    {
+      "title": "Sempat Dibuka Jatuh 1% Lebih, IHSG Memangkas Penurunan - Bloomberg Technoz",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOX0JsVWl0NVJLN212N3N3MWdBNVdQbUNheHN2UFpHUmhQZmtrVzB1M3I4ZHBGQzNyWjBUUFpNVENreGJGWWZyaVhiMEM4a2lHS0NXVlB3S1B1VmJwQVBaZGpuSzZXdHFtdjFmdFYxV05zY3picFYzQjAzTEVUbW96RmUyZ185RmhraDhyYW0wVkdoTi1qbjAyVjY1d3Z6aUZVaVc1Y1lsNA?oc=5",
+      "description": "Sempat Dibuka Jatuh 1% Lebih, IHSG Memangkas Penurunan Bloomberg Technoz",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:19:36+07:00",
+      "pub_date_str": "2026-10-22 09:19 WIB",
+      "id": "196849b83b88"
+    },
+    {
+      "title": "IHSG Dibuka Turun 2,51% ke 5.194, Saham TPIA hingga CUAN Longsor - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOWjNLT043ekZoWV9uZnpkM2hQeE1kODh0X1pkRGFnWFlJdDE1bzlTMWJaUEQ5N3hfbE9ibkQ3N2RvTHcyXy1TdmFlczNURG1NZVhTQ2Z1Smo4amYwOTRvbFlhZVloTUlqblhBWFhkVHl1S2tFakxUV1dGQXVkWmlVcGNrRTlLZjFlWXB5M2UtT1QxMGl1d09ybm1QaEJUU05oQktPNzFGc1RHbW95d1pz?oc=5",
+      "description": "IHSG Dibuka Turun 2,51% ke 5.194, Saham TPIA hingga CUAN Longsor Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 09:17:09+07:00",
+      "pub_date_str": "2026-10-22 09:17 WIB",
+      "id": "2419d228d288"
+    },
+    {
+      "title": "IHSG Rontok ke Level 5.256 Pagi Ini - detikFinance",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQdFZyakU4bm0zRnd2OG51bWs2WXAtVlVqX204SlVReG1kZENISk9Fa0hFV1ZoLXd4WGlGbnVOLXZONm9HMzhnc05UdjQzZ0ZxeTJtN05nNUxLb3R5bmp4LU9ZRi0yTmRjR0g3alhGUFdGdTJsZWVQS0JoQTJHMHBVZ1JiTHlCNmlqcEE3Vm9DcHHSAZYBQVVfeXFMTTVQVGVFT0traWcteXFGbmU0RXJtM3RlOEVpZ1NzZmNqdkxFLWJYTjNFeUVWcmxRelZBSmY5WlVqNTR3OWFybVVKb3VqeGo2cVdPZFZWdFFFOEF5bHhqWGVkSmVDTHlaSjNPNWNZb3BqR2t0YS1GbW5KVXBKU2lfS0Y5dXV2Unk0QjluM3JiS1JvTFdtcGNB?oc=5",
+      "description": "IHSG Rontok ke Level 5.256 Pagi Ini detikFinance",
+      "source": "Detik Finance via Google News",
+      "pub_datetime": "2026-10-22 09:15:55+07:00",
+      "pub_date_str": "2026-10-22 09:15 WIB",
+      "id": "338cc0433e21"
+    },
+    {
+      "title": "IHSG Dibuka Merosot 2,49 Persen ke Level 5.195, Mayoritas Saham Langsung Ambruk - Infobanknews",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPYm41Qk9LNi0wZWdJbDV6aDBVQ0RLMkxMRUN2b1NyUUpqdWltMG54cUQ3TU1oWU1uQUZZWjlzbGFyb21scXF3aWFROFlhejR1eF9PekF4Qk5RcU1CeUlxampiOFRzdlNhOFhSU0loWDJ0WTEtNXRoZXBlVElBZmZrR3J2c05OMzVsODFiOUlndHZCd2V4ZjhsX2s1a3E?oc=5",
+      "description": "IHSG Dibuka Merosot 2,49 Persen ke Level 5.195, Mayoritas Saham Langsung Ambruk Infobanknews",
+      "source": "Infobanknews via Google News",
+      "pub_datetime": "2026-10-22 09:15:00+07:00",
+      "pub_date_str": "2026-10-22 09:15 WIB",
+      "id": "e7bd1bd021cf"
+    },
+    {
+      "title": "BEI: Saham HSC Resmi Keluar dari IHSG Mulai 2 November - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQSm9Fa05JVDN6TGR2NUJ0LXA2SW1vTWFURHczN1QxQlY3QlU3MjVIQzEyVGxHNW5DNGc4aDE1UVZuaEtiOHNCMDExbnpyaW9EdXFQN29EcFhaekpaNlJMZzZlYzdkTkpHS0ZnY2dKS0JrMXdfVXc0MndhMFd5Z012bFV5U1Jsc21TWmlIdGhBRkR1eVB2cVdjZUhaXzhjbzQyOTZNVHVB?oc=5",
+      "description": "BEI: Saham HSC Resmi Keluar dari IHSG Mulai 2 November Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 09:13:20+07:00",
+      "pub_date_str": "2026-10-22 09:13 WIB",
+      "id": "d890ed30dfdd"
+    },
+    {
+      "title": "IHSG Dibuka Longsor, Turun ke Level 5.200 - detikFinance",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOeENaX0xpNnNYU3Jtd2hwc180bmpGWnZzWE40YlFQZV81VTlfRl9tX1pSYUszTnd4YktxU21hZTlUeEhWV0JZcXlYZVdtbUlfSG10Q1ByX0tTYzdmNW9rbU5MSU12bEZUOXNJYUlickRaQy10V05OOXVpdEJtSUhwTXNfMnEyR1g0OTA5aFVnUWh0QzRMQ0I00gGcAUFVX3lxTFBNZk9hLV94dUZ2MllrZnZuVTNMRXk3cU9vcS1VejR3NVNsRk5JVENtbkE3SmtOSTBmNlBWYkhyVkJVQWF2ZlFLOUlHd0hKR19VMkFmVzNOLVVDZi02eW92b2FFS1Awd2tEQWFua3RCdWFwWlk3RHB4NmdJeW1kXzJDNndEYVpMU183blM1TDJERV83eW5tT0dMZWVUQQ?oc=5",
+      "description": "IHSG Dibuka Longsor, Turun ke Level 5.200 detikFinance",
+      "source": "Detik Finance via Google News",
+      "pub_datetime": "2026-10-22 09:11:45+07:00",
+      "pub_date_str": "2026-10-22 09:11 WIB",
+      "id": "ee5aad0dcf89"
+    },
+    {
+      "title": "Balik Arah! Komisaris Noel Laras Borong 10 Juta Saham DRMA Senilai Rp8 Miliar - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxORHdXQ0tDTWZMbW1zN0I5cFRxYlVscnQ0WnFid3BjblRoN1pMcWZJQTQ3dXgzU0NQTDVLZDR3aWg2eWJLSXg3TmRnRDBRQ2R6Qzc0OWNWejdFN0d3aHZoaDlVYW9kMEJZUzhoUUpLRTNsNWFNaVJCWVNEWXVBM1pxTWEwWkR2Umw4MUY0aHF4R3l3X1pDd0dEdUV6QzBzUjd1QXFRb1I0SjNzcGowdXktSnkycw?oc=5",
+      "description": "Balik Arah! Komisaris Noel Laras Borong 10 Juta Saham DRMA Senilai Rp8 Miliar Pasardana",
+      "source": "Pasardana.id via Google News",
+      "pub_datetime": "2026-10-22 09:05:00+07:00",
+      "pub_date_str": "2026-10-22 09:05 WIB",
+      "id": "c70edf985fdb"
+    },
+    {
+      "title": "Wall Street Melaju Kencang, Indeks Dow Jones Lompat 360 Poin - StockWatch.id",
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNSlJZbWZkNGlFYU9ZREhPZ0FRNUo1LWctQWpQZ2RNLWh3RHBuSTlsR2U2eTBHdjJvWTJCVGdFYXJYRkdJS2c1ekhJZFhld2sySmVwejRtbkcyMDFIeUM1LVEwNG1kTFZ3RTJFeVdCMUQ1Z0poc1hBSzlFdVRsbTUtR05TVGZJMjQ4M1E?oc=5",
+      "description": "Wall Street Melaju Kencang, Indeks Dow Jones Lompat 360 Poin StockWatch.id",
+      "source": "Stockwatch.id via Google News",
+      "pub_datetime": "2026-10-22 09:03:50+07:00",
+      "pub_date_str": "2026-10-22 09:03 WIB",
+      "id": "e0e17b87213f"
+    },
+    {
+      "title": "Bursa Saham Asia Pasifik Dibuka Bervariasi, Nikkei 225 Menguat saat Kospi Tertekan - StockWatch.id",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNa1ZGTXpRa1k3R1A2c0VJMEFHekNzMkV5UHJUR05WTjE1WGJuLUdqUzBwQno5WUdiRjFCeVJ6dDQtZzJTMjkxSmZhVXY2UUZGU3ZpNnQySndEQUtlTVJLczNGSnN4T0NBdmJ6QUZJclRHenphWjdiUkFQZDR1b3hsS0F5SkMwb0wwZkppRGpXNXNueTVCLUEzYW5lT3pVUzl3ZzlER0ZlOA?oc=5",
+      "description": "Bursa Saham Asia Pasifik Dibuka Bervariasi, Nikkei 225 Menguat saat Kospi Tertekan StockWatch.id",
+      "source": "Stockwatch.id via Google News",
+      "pub_datetime": "2026-10-22 09:03:50+07:00",
+      "pub_date_str": "2026-10-22 09:03 WIB",
+      "id": "71b720d276b7"
+    },
+    {
+      "title": "Breaking! IHSG Dibuka Anjlok 2% - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQaUZlZ0l3cThVRUt0YUh6MndNZE4waTJyd1BBYjhJUEZiSlRlUWFRRG5vN3AxclMxcHJnQmVyTEFGWVVlXy1IRkJvUWlWSlVyR3NQdTd5UVRlMFdkRkN6V21IcG9nVjVHemhkWUlsd1RPdzZheEYxU3ZNaVVEYkJ4a254UmRWejJqZVNCZHpUWWdVc2N6WEHSAZsBQVVfeXFMTkpyZVlsU2dSQUpXYkFlSndwaTNoc04yYWMtdndMbll2LTlTLWpOSUhybVRBLXFvRngxaVRVblhQZ3MwTGdJSHQ4eXJCUXBOOUl3cERKZXBVN205WTFoelNoYl9vQVNzTHg1ZW9TZWxxb2xJeTdqeTJIVkY3S09INUNjaE5IQmV6dUNpRUQwSWE1b1BMdi1UdEhLVmc?oc=5",
+      "description": "Breaking! IHSG Dibuka Anjlok 2% CNBC Indonesia Saham-Saham BUMN Diborong, Kawal IHSG Parkir di Zona Hijau CNBC Indonesia Penurunan IHSG reda, asing terpantau belanja saham-saham ini IDNFinancials",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:03:38+07:00",
+      "pub_date_str": "2026-10-22 09:03 WIB",
+      "id": "18e6e1e27222"
+    },
+    {
+      "title": "IHSG Technical Rebound, Tapi Risiko Ini Masih Membayangi - KONTAN",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOVm1adlQ3SFpTa0FtSTdRZ2ZSdXlsLXVtWjRBZkRka21VTS1rUDVrYUpDUUd6OHN2UlhVZl95MnZWMXdXcGVOeEJJOUhVT1lFX01oYnE5Q3MwNnRjNWp0RFFROFVPdGFoOUw5bVVBd3k3dGF1OHFobVdtNjhwNDVLbTZzb2FjSUVxZ0xFN0gyOElQcFk?oc=5",
+      "description": "IHSG Technical Rebound, Tapi Risiko Ini Masih Membayangi KONTAN",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 09:02:54+07:00",
+      "pub_date_str": "2026-10-22 09:02 WIB",
+      "id": "ec4c560ebb0e"
+    },
+    {
+      "title": "Pernyataan Prabowo Tekan IHSG - Emitennews.com",
+      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1CTFczZklkdFFyYjlTUzR3ODR0NkhaRmdiZTBRZENPU2IwOEZYZ0VUZzNkSVA1YTZlakk1aUprSnY2Nm1YSTBaelFiQ1hWOXc4VEdZVFh3YVBJSVlLdEJtNFpPamkzMzFienlhcVJB?oc=5",
+      "description": "Pernyataan Prabowo Tekan IHSG Emitennews.com",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 09:01:00+07:00",
+      "pub_date_str": "2026-10-22 09:01 WIB",
+      "id": "544c509db4bc"
+    },
+    {
+      "title": "MBSS milik Grup Wibowo gelar buyback saham Rp200 miliar - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE84dVlFbk5velRDRGRUWDdNeUExZksxbUxzZXVnUmh6eE1LWnRtb3JyYmxwWUhKaUlNYkVDd0E0NmVvN0pyNEd3aF9qcTBONmRWckR6YmZ6X0hBZUJlaERnTWt6R0FJaGhqRmRyZkQ4UkRZNWtpd1VuTVpZUmp4OFFXUVVHSVRTcjZ1QnNSSnd3LUkzSkZVTnl5akNWQXB3?oc=5",
+      "description": "MBSS milik Grup Wibowo gelar buyback saham Rp200 miliar IDNFinancials",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 09:00:00+07:00",
+      "pub_date_str": "2026-10-22 09:00 WIB",
+      "id": "03b1d8b13e33"
+    },
+    {
+      "title": "Aman Resources Lepas 14,35 Juta Saham GULA, Nilainya Tembus Rp7,89 Miliar - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNZVE2ejk1RHRTSzlob1FxbkpfZ2xlR1IxSVRKWDVhS1FZcG82b0l3dU96enA1ZnZ4ZmpoZmtpZElVNklxTm9SWjlpOW1vbUNfekJ6SGRnXzE3YmQzcXVDRl9rcFR3ZF9kaTVVUnMzTUd5M2tibENzMlVlTEg1ZnB0RnNkN2lvY2h1N0FWOTJGT3pRalowUGNlLXJSaVVSTG13VWNNTW51LWtCaFpoZlE?oc=5",
+      "description": "Aman Resources Lepas 14,35 Juta Saham GULA, Nilainya Tembus Rp7,89 Miliar Pasardana",
+      "source": "Pasardana.id via Google News",
+      "pub_datetime": "2026-10-22 08:57:00+07:00",
+      "pub_date_str": "2026-10-22 08:57 WIB",
+      "id": "683be196308c"
+    },
+    {
+      "title": "Pasar Saham Tertekan MSCI, PGEO Punya Penopang Kuat - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQcXlXZlpnV2RPbXpITjEwUGRmSlk2bEJ3WnB2RkdQZHc3ejNqdXlQMHh5Z0hsYmUzbEZuZk5mVWNpUHUydEluLWxWTUU3VHd2dkd0ZWU5cWkyaDdrekt6NWJFZFgzdzdqZklCV3kxX2JNMjR6aThIbW1YVlJyWWoyOEJudUtwRVdzYUFCTw?oc=5",
+      "description": "Pasar Saham Tertekan MSCI, PGEO Punya Penopang Kuat investor.id",
+      "source": "Investor.id via Google News",
+      "pub_datetime": "2026-10-22 08:53:26+07:00",
+      "pub_date_str": "2026-10-22 08:53 WIB",
+      "id": "7ef965af4f64"
+    },
+    {
+      "title": "Jangan Asal Beli Saham - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9rQ3RIUThGVnhrRHJtdWotQTZvRkZWYi1WYldmbE1TUGx2TERBX0QxYlU1Z3hwZjRtYUhkY3JORlg0T2xaOFFZdldpZ3pHVk9JNWoyREJid2lnRTJKT3pqOEh6ektvemk5eWZZ?oc=5",
+      "description": "Jangan Asal Beli Saham investor.id",
+      "source": "Investor.id via Google News",
+      "pub_datetime": "2026-10-22 08:51:41+07:00",
+      "pub_date_str": "2026-10-22 08:51 WIB",
+      "id": "af9af4d947ff"
+    },
+    {
+      "title": "IHSG Masih akan Bergerak Fluktuatif di Kisaran Level 5.400 - Infobanknews",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPZzdGTm9VY09lNDMwdk5KS3ROLTgxbU5yR0pYLXpQVWd6Z2ZmNjZTRkYwbGhoYzRaaVhENjhQcGxDRFcxRWxEaGMwZDBmQlhfR3NQNTJxOHlGSTA5QkltM19NNHlYRVd2dE9jWVc2aTFSd3FUV1haRF9LYkVkaWxvd2pTM2JKb1FvOUxV?oc=5",
+      "description": "IHSG Masih akan Bergerak Fluktuatif di Kisaran Level 5.400 Infobanknews",
+      "source": "Infobanknews via Google News",
+      "pub_datetime": "2026-10-22 08:49:00+07:00",
+      "pub_date_str": "2026-10-22 08:49 WIB",
+      "id": "2bcd7ac645f9"
+    },
+    {
+      "title": "DMAS Bagi Dividen Rp1,4 Triliun, IPCC Catat Trafik Kargo Naik 19% - detikFinance",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOF9jYk85Q2JHc0FqWDBmWUFYbURiUGtBajhwSUNGdXVhU2htQ1h0V3pma0VsV3VIbkFtSmozbWVONlAwTGFoU1prQUlJcnNPdzlWNmYtcWRYMXN3ZnMwX2RGeEl1Vy1FXzMxNkVwM21kRmFfMVpWNzBhQU9HWlVOZG5CUEh4SkVzYWJobF9yQmduUURUVzVlSVl0dzcySDQ4WkxlMUtjS0ZNQTNYR1c2YXFPMWZTQdIBuwFBVV95cUxNVUdvTFFkOGUtXzZ6QzhQWVpzeWp1Y0p6NGFidERudWpwSXBpa0ktT0dDZlBjNUd0c2VITlFyOU16eTRZLXJLOHdtclQyOFg4VnhsTmlvTGh0M1p3Y0l3b3BiSklvRXJmemdMbjlrY0J5RzJrMFdTc1ZkeWRhT0tsWlk0T29ZT2JGd2pURmhXRlpwbmxGY1l4UVhRc0Z6UDdtYnVCSk54c2htWkdGS3ZiY0RhcWJyMlBjUDVV?oc=5",
+      "description": "DMAS Bagi Dividen Rp1,4 Triliun, IPCC Catat Trafik Kargo Naik 19% detikFinance",
+      "source": "Detik Finance via Google News",
+      "pub_datetime": "2026-10-22 08:45:32+07:00",
+      "pub_date_str": "2026-10-22 08:45 WIB",
+      "id": "b96b2c4b9b23"
+    },
+    {
+      "title": "Harga Emas Antam (ANTM) Hari Ini, Kamis 22 Oktober 2026: Koreksi Berlanjut - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOTDV5bkZOdWoxbTlRZXVIY2MwTTZUcDRLVE0wMHBMLW5qZ3VYTzNtVExpS3QtdFJOa29rUE9GV09IeldyZ0gwMzNkV2JaTGlaallEZmJYUURqUjhBa1NPWF9HWmY3Tzc4Wkc1bHRJVkF4eEtRMm9YbE1taXp5X2UybVg5bmcxX2VDczE2ZmxZT2hsSUh2ekIzRVBRZjlhQkZweDJHZkYxVQ?oc=5",
+      "description": "Harga Emas Antam (ANTM) Hari Ini, Kamis 22 Oktober 2026: Koreksi Berlanjut investor.id",
+      "source": "Investor.id via Google News",
+      "pub_datetime": "2026-10-22 08:44:47+07:00",
+      "pub_date_str": "2026-10-22 08:44 WIB",
+      "id": "233444c22f3b"
+    },
+    {
+      "title": "OJK Beri Sanksi kepada 9 Anggota Bursa Terlibat Kasus DSSA - StockWatch.id",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPNzV4d3B3ZWh0blN1Zko5WWlWNlhlcXZtWGh4UTYwMU9lTEFtbWktQkRMZnhCLTZaRTNiZ3cwMUdBN2loekN0SXlhVDBqZlQwbjducWhXazBKcVhsb0ozajlheU1fbG1ibW9wNjUxYjQzS3FZbVcyY2x5MUdaSGktWEhjMjlaT1RY?oc=5",
+      "description": "OJK Beri Sanksi kepada 9 Anggota Bursa Terlibat Kasus DSSA StockWatch.id",
+      "source": "Stockwatch.id via Google News",
+      "pub_datetime": "2026-10-22 08:43:46+07:00",
+      "pub_date_str": "2026-10-22 08:43 WIB",
+      "id": "c3aa34b00910"
+    },
+    {
+      "title": "Aset Drop, Laba UNVR Kuartal III Tumbuh 26,12 Persen - Emitennews.com",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNOEtVUVRZM0gwYnVJbmc2b05CRVdzZkxkVmNMMkZBdGY2Rzl3cHh4X2tYNEo5VlhoZXBKRVBzSzBqRUt3dExiNVNxUktLclBCOGdnejVXZ1NoSU9FSnYwMnRzZWdsS3hTZU5xc0prZDA3NjEteG9RTFFZRnZmQTVKUDdiLUQ?oc=5",
+      "description": "Aset Drop, Laba UNVR Kuartal III Tumbuh 26,12 Persen Emitennews.com",
+      "source": "Emitennews via Google News",
+      "pub_datetime": "2026-10-22 08:29:00+07:00",
+      "pub_date_str": "2026-10-22 08:29 WIB",
+      "id": "0d64526d286f"
+    },
+    {
+      "title": "Trinugraha Thohir Borong 470.000 Saham ADRO, Investasi Tembus Rp1 Miliar - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSzdjU0pocnRpb2RDZmJxQURHUnI1VkM5STJJTVBXRUR6cEItYWVNZzBnOWVRVG1UWmxySmpMR21vcnozRl95TC1oYTBEVzVhTTAzUHFFaVFIaEdtMzlxbkxsdHhGTHVVQ0QxME9uakxEU0I0UENocEFaSTRJQTBuVWVkWkhqXzF1WjdsaUVDTXRYVG4ya19rLWZNM2szS24ySnNQUUs5NHhsbDlZ?oc=5",
+      "description": "Trinugraha Thohir Borong 470.000 Saham ADRO, Investasi Tembus Rp1 Miliar Pasardana",
+      "source": "Pasardana.id via Google News",
+      "pub_datetime": "2026-10-22 08:29:00+07:00",
+      "pub_date_str": "2026-10-22 08:29 WIB",
+      "id": "46fe647073d8"
+    },
+    {
+      "title": "Antara Kebijakan Pemerintah dan MSCI, Berikut Rekomendasi Saham Hari Ini - KONTAN",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQcC1kQmVGRkFyNFR1dTZJeWtDYVJHc0xlT3h4cFl0a2RoMkppRzhBRF9sTFNoZXJuSGxZUWljTXBqNjlqc1VQOFFIZ0pQUDNaR0pMUjROWURBRGJ0eG5Cc0EwaDJTM3F6Q3ZmLW1FOHI5UkcwWi00LTlvRkVUZVk4THdOUFZndHVGS2xrdVYxcV9UaVRWRTRCVUVUX1BjTmROdExNdVZHVHM?oc=5",
+      "description": "Antara Kebijakan Pemerintah dan MSCI, Berikut Rekomendasi Saham Hari Ini KONTAN",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 08:26:47+07:00",
+      "pub_date_str": "2026-10-22 08:26 WIB",
+      "id": "2c46fb3c83da"
+    },
+    {
+      "title": "BEI Resmi Sesuaikan Kriteria IHSG, Nasib Saham HSC Diungkap Rinci - investor.id",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNMXpIWFc2ZHdkSHd4WGdMeVI4ZTI1eEs2ZWZjaUZGYlU3WHdqU2dxdlhaNW5KRW1NUGZXODZzU3hVeDY3Mmp2b1owOThMZktaZkVxZTN1RF9heWhUNFZfUGR1dkRZMmRIZkVnMDVleFJoek5HSUZnS1Frc0FBX01ndXc5b2Q5Y3hCR0toOGk0T1E1TUN0VW1OekI5a2xNb3c?oc=5",
+      "description": "BEI Resmi Sesuaikan Kriteria IHSG, Nasib Saham HSC Diungkap Rinci investor.id",
+      "source": "Investor.id via Google News",
+      "pub_datetime": "2026-10-22 08:23:13+07:00",
+      "pub_date_str": "2026-10-22 08:23 WIB",
+      "id": "cfa86c41b660"
+    },
+    {
+      "title": "Intip Peluang Cuan dari Imbal Hasil Dividen Saat Pasar Tertekan - KONTAN",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQRndqalNRN3p1LUY5RjNoZ3g4aTdISVlHVTdscXAxZ0N4TEN2Q2VZYUF1ZFJYY0NLaFdfMC1famo1R2hBZi1MeE1nVUs0bm1oNkRQOEpGdjNjellwQnBsZmR5MUh3ck5uVVhLSzhEOXZNZkxWem41Umd6THNmUldDbnpBSk1IejFSaHVrYi1BU2UwNkVxUFFjTUk2WGpkUQ?oc=5",
+      "description": "Intip Peluang Cuan dari Imbal Hasil Dividen Saat Pasar Tertekan KONTAN",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 08:21:40+07:00",
+      "pub_date_str": "2026-10-22 08:21 WIB",
+      "id": "7e834e060073"
+    },
+    {
+      "title": "Reaksi Prabowo ke MSCI dan outflow asing jadi penentu IHSG - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNMXdIVzhweWlSQWo2eWh0RDIyRlp1WVhCR1dRMlF1c3dycGhXSWhpZU9xcXo1a1I0TFlIdnlsVi1rbnBKZ01GS2JJNktoSjJLUWdPbjhfeW55aVRaNDFGaC1waG56OERrTmMzWU1Mb2hGTWZvdEFFUHNTRlV3dDNtNDE5TVlVc2UydHdidW83Vm0zcVRXSUQ1WmhNUmtyQWQ1dnh5ZA?oc=5",
+      "description": "Reaksi Prabowo ke MSCI dan outflow asing jadi penentu IHSG IDNFinancials",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 08:20:00+07:00",
+      "pub_date_str": "2026-10-22 08:20 WIB",
+      "id": "4796674f1fbb"
+    },
+    {
+      "title": "MBSS Siapkan Dana Rp 200 Miliar untuk Buyback Saham - KONTAN",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPZVh3clBZaFQ1UEQwd0pRTUM0LXVNUXVrNnlDdXp3UWdkd0ZJWFdJTGRsdTBQS0xaaUI5dXl2anVfcG9TNk85QS1wTGNjX3pFdy1pWnVlZFhma3pGNDZCVExMcU8zVENUT3UwbkhvZW9sd0Q4STFiTnpiWnlza3ctdUxfbzVkM01KaTVCRFRR?oc=5",
+      "description": "MBSS Siapkan Dana Rp 200 Miliar untuk Buyback Saham KONTAN",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 08:00:42+07:00",
+      "pub_date_str": "2026-10-22 08:00 WIB",
+      "id": "e94517fbb1ea"
+    },
+    {
+      "title": "ANALIS MARKET (22/10/2026): IHSG Diproyeksi Bergerak Sideways Cenderung Melemah - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNGlYX3Y3TEotWUhMMUh4SWpfcWdWRDNYN2lDdXFVVUJwTGNSX09uaGlGUDJ1Unh5azF1TG1pWjhnU1gwMUFJVWJGSDZKRkRiN2lZWHRfb0N5d1R2bkpvTkEzRVVTQWk5SUxJck5LOFhiY3owYWdnWGlDR3JaSXVEb3FJX2M5T1dMTWZxTENlek95MkNsOXhhYlpySGJDTmJEMGthRkt1UGxmNlQ3QkFGa0Nibw?oc=5",
+      "description": "ANALIS MARKET (22/10/2026): IHSG Diproyeksi Bergerak Sideways Cenderung Melemah Pasardana",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 08:00:28+07:00",
+      "pub_date_str": "2026-10-22 08:00 WIB",
+      "id": "5bff3e082a9f"
+    },
+    {
+      "title": "ANALIS MARKET (22/10/2026): Fluktuatif Cenderung Bullish! - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPT0lpdFV6VU95UWdaOVVudkVpVlI5ZExJanZlYThEUTNnY3ZmQXdCVmJaQ1lEYTU4dmZWQ0xvaldMTEF3TFlQQmU4ekc4TldDblMzTXhXb0VKQTk2VTk1VFJRSHNqOFVOYU1xU01jaFhwTmpxbi1fOHRTNmI5QXcyaEh6NktxNThuOVp4SXJHRVRLVTlC?oc=5",
+      "description": "ANALIS MARKET (22/10/2026): Fluktuatif Cenderung Bullish! Pasardana",
+      "source": "Pasardana.id via Google News",
+      "pub_datetime": "2026-10-22 07:59:00+07:00",
+      "pub_date_str": "2026-10-22 07:59 WIB",
+      "id": "7fcf44a14421"
+    },
+    {
+      "title": "IHSG Hari Ini Berpotensi Sideways Cenderung Melemah, Perhatikan Enam Saham Berikut - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOcWIwb09nZ3hYTU5yemtaWlJBa3VTYlZEV3Q5SU84WV9mSV9ZVEpqTkZLaGdzempkSURJUmUwVXNoUF9FVXFwY0xuWGxWUXRqUGw3ckozV1Q3U3dBY29VNS1nN1pqOEtCVmZKUHFLd3dUZ1pQeGxwb2RpWWJpRGsxOHJ3ajA1bGFYZ1VGWWFCRVludnN1WVBMOUdQUWtjQjFTZl81WXc2VnBPaXNpY3ZZNWI0VkotRkJtZ0o0ZNIBwgFBVV95cUxOcWVFYVlGaEF2TjdsMjBkM3Zael9fYzk0X3VYS3F0c2c0OWdxWUpHcVBCVFlZVHF6NzlhVGVfb2xPWkN4X2UzU1lxbzJPUlRpQkdzczZ5dy1abG1wZHBqcEFOMy1FZW93OGgzVHdxWV84UWxzbmFyZXZXTEkzT2hEQUFPLUcxc2pELUlMaEZRMFZ0QVpKQkVKNWduSEZhaFVURm1uMWdsQ1lFM1ZVMXN6MEtHenJXME9icHU2REkyempRZw?oc=5",
+      "description": "IHSG Hari Ini Berpotensi Sideways Cenderung Melemah, Perhatikan Enam Saham Berikut IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-10-22 07:56:00+07:00",
+      "pub_date_str": "2026-10-22 07:56 WIB",
+      "id": "823fd690490a"
+    },
+    {
+      "title": "Dapat Restu Pemegang Saham, IPAC Resmi Delisting dari BEI - KONTAN",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbjRuYlBRV1ZyNVZFdFBHamRtUk1IcWlLR1I2OTVoUDFIVzlSWHlCaFJlWUhJa0J4LWlUbzhnNFVsU3hycXZvYWNiY18wYTRMZk1ISTlFUWVfX2FUUjVObUZqaVp1SWNxYzg1WVZEM1VDaDNMTFNSUmNHZ1k5TVlsV2dHWnBMZlBIMExzMllqSnlTS3l2?oc=5",
+      "description": "Dapat Restu Pemegang Saham, IPAC Resmi Delisting dari BEI KONTAN",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 07:54:10+07:00",
+      "pub_date_str": "2026-10-22 07:54 WIB",
+      "id": "6a73f59930b6"
+    },
+    {
+      "title": "IHSG Ditutup Menguat 0,94%, Asing Borong 10 Saham Ini - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPTUhOMm9kNzhyLWp5cFlMN3F0a05yRm1NMlZGT0pqbk1CUW0zRU9BTHlqR29tblRNRDM3cy10bFYyUGYwVk5oRFVUWmFMWnhNYm9aN1VEaUNMMXJTNXZqN1gycGJnc0ZqSlRWUkdrYm1xWXNUWGRKRGhaeWZtbUxyQWk0NjdXU005bmdsVW1aV3RISkQyTlg3Mk5lN3dGbUJZQlpmalJTdUtSdUJmaUxGUzF30gG3AUFVX3lxTE9veFp1ekMwX3U2cE5TbS0zTFVzZGhZQ2o5cDlsazB4RHBCd0NhUWgzRGhkYnExOFFuQlJiMFNJOGxOSXRjWE1jaVE4cW9aZlFvM210YlJfZHNIV2FBUi13U196VXRoMjY4UzJYVVpmZ1RLcml5UDRvYkwydmFhdUZONm83MVgtb1BWSWZrWWtvNHdtdFdHbmFEdlJxTGZHNkN6Mko4eE9FTHNBRnZYMWpFQU4tXzZBMA?oc=5",
+      "description": "IHSG Ditutup Menguat 0,94%, Asing Borong 10 Saham Ini CNBC Indonesia",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 07:35:22+07:00",
+      "pub_date_str": "2026-10-22 07:35 WIB",
+      "id": "e843334fdc3c"
+    },
+    {
+      "title": "Harga Sulfur Turun 21,17%, Saham MBMA, NCKL, dan INCO Berpeluang Diuntungkan - KONTAN",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOTG1LQkxiVWVXWGF3X0g5TVZTREw1YU05NE9ZSUl6Y0VVN1VqZ1Axa1AzWVI4Q016aExfU05GUmhoNUdvTE9BNUI4a3R2TE1iRlFfZGREWlVnOTMyZmJ6Wk9obk1MdDhHVnlqcWUxZHEydEhsWDFHMUxxWS15TEZweFJYc2F3RnBMcThiYTBBeFFnMm9KeDd0bWVoRjJnZU5iNzUzdmF3TTY?oc=5",
+      "description": "Harga Sulfur Turun 21,17%, Saham MBMA, NCKL, dan INCO Berpeluang Diuntungkan KONTAN",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 07:27:46+07:00",
+      "pub_date_str": "2026-10-22 07:27 WIB",
+      "id": "af7f9c101d83"
+    },
+    {
+      "title": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNamFiZWM3VGlvX0VNVFczNlByb1ctUVdpZ3Y5dWZvcFZrRXk3VmktX1AxYVZRMnlXZ1YzNGRJNmYwZjNPdU45TF9hd3JjUWh5SHdOd3RZNmdkTjVUVzRPalRzaEMxZkxyanBUSFlXZURNSGw1UkQzaE5KbjA5UHowb2poQ2pDOEw3em1VRHRyRDlyQjJMMlZGcDZ5YWhYVHdVUGs3QU0tdTV1Y2VIX2c00gG0AUFVX3lxTFBLc09mQXMzOW9PTndjcXlzbnRSTWFEN3ZGYUdJVXhqXzFYWlF4bzU5S3pRektuYjBpQnp2VnZyQk9RbzRaanVCNTdtSXVKbG9JNGNYclJYemsyVUlwS1ZUdVEwTkw5bkZxdnVrTmt2dFJELVJTR3V6Q2NRNklKcDlOVHF2WUVCUTM5V2x3VFlsanJBRWpteGFVY2JBSnhTaGQ2WnhIMmZtTjNJVlhlUTU1OEZzVA?oc=5",
+      "description": "IHSG Masih dalam Fase Technical Rebound, Cermati HRUM, PTBA, BBNI, dan BUVA IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-10-22 07:10:00+07:00",
+      "pub_date_str": "2026-10-22 07:10 WIB",
+      "id": "c8deb87def02"
+    },
+    {
+      "title": "IHSG Dibayangi BI Rate dan MSCI, Simak Rekomendasi Saham Hari Ini (22/10) - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNR1UzUzI4QTBBSG05RHJ0dHdDYVpBWGo3MHdWek5wcVVjdk5YbEk2Sm84N3NEVzR2OUN4YzNmTEZMYnRXUnJ3WFhsQXNQcnlNdGxCa0FZQ1hEMmxDWUZvd1l4SWRkU180eF85UHItUmhEbGRYUkh2Z29sV21uMmZOZVdpdHZ3b2lsN2J0NUhfZmxuUkVRNnBLRWpwczItWXU2cnZvZ2s4WG9iTHhHMHJDRDViN1VRR3o2RjgzOFpB?oc=5",
+      "description": "IHSG Dibayangi BI Rate dan MSCI, Simak Rekomendasi Saham Hari Ini (22/10) Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 07:08:57+07:00",
+      "pub_date_str": "2026-10-22 07:08 WIB",
+      "id": "df33a97f38bb"
+    },
+    {
+      "title": "Jalan Terjal Mengadang Pasar Keuangan - KONTAN",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE03VFpHSHdPcks2RDEyeTBTaVJrOEFhSHNhdXVKR2RfTnFQVkgwQWhBZUJYWXlFM09qTldKbzF5bWtWUzE3dmIzTkctMjdqLUE5TU1fN1ZIX2hFTHhsc3Y2UURXQ1lGMldqREVReVhmWUllaTlFeFVBaU5zSQ?oc=5",
+      "description": "Jalan Terjal Mengadang Pasar Keuangan KONTAN",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 07:06:49+07:00",
+      "pub_date_str": "2026-10-22 07:06 WIB",
+      "id": "f55bed280003"
+    },
+    {
+      "title": "Wall Street Menguat Dipicu Lonjakan Saham Teknologi - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNaVlxcWl1WU9ZbTJVTVJBYTNZWV9SbFFWWExFUnQzYXNUa1ZBcFliVHN6Wl9JdWl2WXF5MzUzLVp5YTROOVE1NGI3MjgtTkt0djlIcVJfelB2LXR4TXhnaXpvU1dWeGNHMHFUekZHYzlSS2p2VUJFSVdIQUVjcldIWmNaSll3a0h4bkhsSjFobVR4MjJ1?oc=5",
+      "description": "Wall Street Menguat Dipicu Lonjakan Saham Teknologi Pasardana",
+      "source": "Pasardana.id via Google News",
+      "pub_datetime": "2026-10-22 07:03:00+07:00",
+      "pub_date_str": "2026-10-22 07:03 WIB",
+      "id": "71239182f899"
+    },
+    {
+      "title": "Prospek Saham WIIM 2027: Peluang dari Perubahan Aturan Cukai Rokok & Rotasi Sektoral - KONTAN",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPRldqTGlEM0k1YlRYOWVNWG5ZREs1QkZMRkEyNlBmRGJXZktGZUdjeVZxX2tVd0d4YktrU2cwY0dZQTBYU1dHZHliLW1mdFpFZzI4SjY0bFgtMVBaYzdSYUpuVnV4YVltbnJ5M2FrT2dodGJQTXgwa1o1R2JxU3loZmw5RG02UkZZR2ZMcXY0SENGamU1MWVZM24wWERsRVJYNG5TcmxCbHh2amlOU3hPVDJpQzRadw?oc=5",
+      "description": "Prospek Saham WIIM 2027: Peluang dari Perubahan Aturan Cukai Rokok & Rotasi Sektoral KONTAN",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-22 07:00:04+07:00",
+      "pub_date_str": "2026-10-22 07:00 WIB",
+      "id": "a8ac23d6ab8b"
+    },
+    {
+      "title": "Airlangga Hartarto tegaskan usulan MSCI tak ganggu ekonomi RI - IDNFinancials",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNWnV2UklvZzFLUWRmWi1hdVEyenVEdzJndW90N1pDekthTDBONUJRNUhESGFOeWNCUEJzcFVwU0VpTVBqNm1wSVYxMXdIaGlmeXNzbi1Jcjd5X0dhX2VSZEhwZ0lfdjRCekxsVGNhVEU2NUQtR0xUR19qd2NRSE5TLUQzYmY2Yk1BUTZqdVppQVNUSTMyVUVuNGx0cjZDSkw4b0JER1BpQW8?oc=5",
+      "description": "Airlangga Hartarto tegaskan usulan MSCI tak ganggu ekonomi RI IDNFinancials",
+      "source": "IDNFinancials via Google News",
+      "pub_datetime": "2026-10-22 07:00:00+07:00",
+      "pub_date_str": "2026-10-22 07:00 WIB",
+      "id": "35cc1a6d83c4"
+    }
+  ]
 }
