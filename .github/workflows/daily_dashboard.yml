@@ -1,0 +1,128 @@
+name: Otomasi Dashboard Berita Saham IDX
+
+on:
+  schedule:
+    # Sesi Pagi: 00.05 UTC (Senin–Jumat) = 07.05 WIB (Senin–Jumat)
+    - cron: "5 0 * * 1-5"
+    # Sesi Siang: 06.25 UTC (Senin–Jumat) = 13.25 WIB (Senin–Jumat)
+    - cron: "25 6 * * 1-5"
+
+  workflow_dispatch:
+    inputs:
+      sesi:
+        description: "Pilih sesi eksekusi (atau 'auto' sesuai jam berjalan)"
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - pagi
+          - siang
+      ignore_time_filter:
+        description: "Abaikan batas jam (hanya untuk pengetesan di luar jam bursa)"
+        required: false
+        default: false
+        type: boolean
+
+# Izin yang dibutuhkan untuk push commit arsip dan publikasi GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 📥 Checkout Repositori
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: 📦 Install Dependensi
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: ⚙️ Tentukan Sesi Berjalan
+        id: session_step
+        run: |
+          TARGET_SESI="${{ github.event.inputs.sesi }}"
+          
+          # Jika trigger adalah cron schedule
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "5 0 * * 1-5" ]; then
+              TARGET_SESI="pagi"
+            else
+              TARGET_SESI="siang"
+            fi
+          fi
+          
+          # Jika manual workflow_dispatch memilih 'auto'
+          if [ "$TARGET_SESI" = "auto" ] || [ -z "$TARGET_SESI" ]; then
+            # Ambil jam UTC saat ini
+            CURRENT_HOUR=$(date -u +"%H")
+            if [ "$CURRENT_HOUR" -ge 20 ] || [ "$CURRENT_HOUR" -lt 8 ]; then
+              TARGET_SESI="pagi"
+            else
+              TARGET_SESI="siang"
+            fi
+          fi
+          
+          echo "selected_session=$TARGET_SESI" >> $GITHUB_OUTPUT
+          echo "Sesi yang dipilih untuk dieksekusi: $TARGET_SESI"
+
+      - name: 🚀 Jalankan Pipeline Dashboard & Telegram
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-2.0-flash' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
+        run: |
+          EXTRA_ARGS=""
+          if [ "${{ github.event.inputs.ignore_time_filter }}" = "true" ]; then
+            EXTRA_ARGS="--ignore-time-filter"
+          fi
+          
+          python main.py --sesi ${{ steps.session_step.outputs.selected_session }} $EXTRA_ARGS
+
+      - name: 💾 Simpan Riwayat Arsip ke Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add index.html arsip/ data/
+          
+          if git diff --staged --quiet; then
+            echo "Tidak ada perubahan file baru untuk di-commit."
+          else
+            git commit -m "chore: perbarui dashboard & arsip sesi ${{ steps.session_step.outputs.selected_session }} [skip ci]"
+            git push origin HEAD
+          fi
+
+      - name: 🌐 Konfigurasi GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 📤 Upload Artifact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: 🚀 Deploy ke GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

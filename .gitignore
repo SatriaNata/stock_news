@@ -1,0 +1,23 @@
+# Lingkungan Python & Virtualenv
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Variabel Lingkungan & Rahasia (JANGAN PERNAH DI-COMMIT)
+.env
+.env.local
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Data sementara / testing lokal
+test_*.json
+temp/
