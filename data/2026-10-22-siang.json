@@ -2,30 +2,287 @@
   "date": "2026-10-22",
   "session": "siang",
   "session_label": "07.00 – 13.20 WIB",
-  "total_news": 12,
-  "total_sources": 4,
-  "total_stocks": 1,
+  "total_news": 36,
+  "total_sources": 5,
+  "total_stocks": 10,
   "stocks": {
-    "BNGA": {
-      "code": "BNGA",
-      "company_name": "Bank CIMB Niaga Tbk.",
+    "TLDN": {
+      "code": "TLDN",
+      "company_name": "Teladan Prima Agro Tbk.",
       "sentiment": "Netral",
       "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
       "news_count": 1,
       "news": [
         {
-          "title": "CIMB Bantah Rencana Privatisasi Saham CIMB Niaga (BNGA) - IDX Channel",
-          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNV1d6SUdmMS14UEhQd29hb2c2ZEVsQW8wZGRLRkxRaF9hUzd4cXVoSHpuVko2aTVnR19GZ19Kd0p4Y3RGRGZzclJiTXhnM1dWdmdQem0wbFdfZXVJdGNqNUxhelluRzV0Q3dUUHN2bUgzVkRyV0RyS0swVkV0OTJKN3pnTVJHcXRKZkQxaXZtLXdaZlNMS0RZ0gGcAUFVX3lxTE9QcjVnbUxZRV9sNzF4MEVGdURfXzJFVHJ6MG5pclpQaHNzX0NrNklkOFBXMTZkcVhIYjljcVJERzU4WXNPNldWZE9ZZHNaNDUyaVY4N0JxcDd0Q0N1S1hXeld6VjhIa2k5TklDTWt0aHM4d3UtXzlWbHkzU3pzRkhqZlFYQkQ5OVNVckQ4UmhnMXpjWXFnOTJRXzFFVQ?oc=5",
-          "description": "CIMB Bantah Rencana Privatisasi Saham CIMB Niaga (BNGA) IDX Channel",
+          "title": "Teladan Prima (TLDN) Tebar Dividen Interim Rp258,93 M, Simak Jadwalnya! - Bisnis.com - Market",
+          "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNSlRlY2JXc2xEazFoZFpTakk0bWFlcmdHTXF2d1BvUHVYUlR4b3loRWZUSzFZdjJGUUZiX0hHcUNueURMaHJnTjJNZVRpQkc1YkFEbXVHOGZkeE5VRGxBTGFESkRVVF9QTnhtb25sZkhNTDd6N1d4ay1rdWV6cDJJTDNRbWxUVFZvYzhjeFFGaW5kNDZPNHVaR2J3SDcxUlFsVGJ2UHNyOU5ud3BUVWd4bXV3bGpqcndtOHc?oc=5",
+          "description": "Teladan Prima (TLDN) Tebar Dividen Interim Rp258,93 M, Simak Jadwalnya! Bisnis.com - Market",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-22 15:15:41+07:00",
+          "pub_date_str": "2026-10-22 15:15 WIB",
+          "id": "80d06d297a1c"
+        }
+      ]
+    },
+    "DEWI": {
+      "code": "DEWI",
+      "company_name": "Dewi Shri Farmindo Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Sujito Ngatiman Lepas 53,51 Juta Saham DEWI, Porsi Kepemilikan Menyusut! - Pasardana",
+          "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOQXVYUFdoVkpQTXRzNEtfNy1SMWZLMGdEdkhfX194ZklPZFF1d05NUlVORGFmakxtbVJBLWdGWVNmaFBnclVwZ18wYkN4OUM2SW9BVlhiX0g0aGlGdW9uSVZWOHBIQ0l2Rm9wcWt2SmhjbWhYQWVFb1RFejFfbDh0d3lwUHZWT0Jtd0s4TDRfTGpuYlhhZWVob2xUWlBpYmVyTDktOWtuMlFrQzQ?oc=5",
+          "description": "Sujito Ngatiman Lepas 53,51 Juta Saham DEWI, Porsi Kepemilikan Menyusut! Pasardana",
           "source": "Google News (Topik: Saham)",
-          "pub_datetime": "2026-10-22 10:34:00+07:00",
-          "pub_date_str": "2026-10-22 10:34 WIB",
-          "id": "cc577e2e04b4"
+          "pub_datetime": "2026-10-22 14:41:00+07:00",
+          "pub_date_str": "2026-10-22 14:41 WIB",
+          "id": "98ddc26b1c96"
+        }
+      ]
+    },
+    "BREN": {
+      "code": "BREN",
+      "company_name": "Barito Renewables Energy Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Daftar 11 Perusahaan Dihukum OJK di Kasus Saham DSSA, BREN dan CUAN - CNN Indonesia",
+          "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQbTl4S2pfcjNDbnV2SkJXX3V2T3RPZFZkRGNpSVJHZ1NZWi02SWdxcEpjZ0sxekN5WUFEOWhnLUVSbk9RU2JteHNmVGFsbUw1WWpYSzh5OHZDTlgwbF9GTVpRTTNVSTNpXzBmN3FiRzR4VVl6M3hUT3RFRWk3ejlwcnpSMDlLXzRMcmtTRG0yZ1VHVHFoR19HSExPZ2kzWmkydURKX0hwVEVlN2d2ekZrSU5DREFodmNpYmxkZmN6OWZkQ0xiNDFicdIBzgFBVV95cUxPaXd4US1uR1lWQkgzZTRKWklzZjcycW9CbnY4bFdEY3ZtdHp2WXlHOEhGWU0wZGFxai1lLUdTUG45SmprTUpXZHNndFJnOFFnbUdkX0EwdGlfS1FILURzLURtRnBTTTRSekVpSlY1dElET0t3WGF3a0U4d3FPV0VpemZBNk9lZ09xZHFHTk9YZ25BWmZvY1luN2xPamhXekg3cWthODJVSjY3VEFVY3cydFJ1dUFQd1hkNkJORmk0ME9vamZxbjJrLVNHQ1p0UQ?oc=5",
+          "description": "Daftar 11 Perusahaan Dihukum OJK di Kasus Saham DSSA, BREN dan CUAN CNN Indonesia",
+          "source": "Google News (Topik: Saham)",
+          "pub_datetime": "2026-10-22 13:50:40+07:00",
+          "pub_date_str": "2026-10-22 13:50 WIB",
+          "id": "c9f74daf11b9"
+        }
+      ]
+    },
+    "DSSA": {
+      "code": "DSSA",
+      "company_name": "Dian Swastatika Sentosa Tbk",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Daftar 11 Perusahaan Dihukum OJK di Kasus Saham DSSA, BREN dan CUAN - CNN Indonesia",
+          "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQbTl4S2pfcjNDbnV2SkJXX3V2T3RPZFZkRGNpSVJHZ1NZWi02SWdxcEpjZ0sxekN5WUFEOWhnLUVSbk9RU2JteHNmVGFsbUw1WWpYSzh5OHZDTlgwbF9GTVpRTTNVSTNpXzBmN3FiRzR4VVl6M3hUT3RFRWk3ejlwcnpSMDlLXzRMcmtTRG0yZ1VHVHFoR19HSExPZ2kzWmkydURKX0hwVEVlN2d2ekZrSU5DREFodmNpYmxkZmN6OWZkQ0xiNDFicdIBzgFBVV95cUxPaXd4US1uR1lWQkgzZTRKWklzZjcycW9CbnY4bFdEY3ZtdHp2WXlHOEhGWU0wZGFxai1lLUdTUG45SmprTUpXZHNndFJnOFFnbUdkX0EwdGlfS1FILURzLURtRnBTTTRSekVpSlY1dElET0t3WGF3a0U4d3FPV0VpemZBNk9lZ09xZHFHTk9YZ25BWmZvY1luN2xPamhXekg3cWthODJVSjY3VEFVY3cydFJ1dUFQd1hkNkJORmk0ME9vamZxbjJrLVNHQ1p0UQ?oc=5",
+          "description": "Daftar 11 Perusahaan Dihukum OJK di Kasus Saham DSSA, BREN dan CUAN CNN Indonesia",
+          "source": "Google News (Topik: Saham)",
+          "pub_datetime": "2026-10-22 13:50:40+07:00",
+          "pub_date_str": "2026-10-22 13:50 WIB",
+          "id": "c9f74daf11b9"
+        }
+      ]
+    },
+    "CUAN": {
+      "code": "CUAN",
+      "company_name": "Petrindo Jaya Kreasi Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Daftar 11 Perusahaan Dihukum OJK di Kasus Saham DSSA, BREN dan CUAN - CNN Indonesia",
+          "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQbTl4S2pfcjNDbnV2SkJXX3V2T3RPZFZkRGNpSVJHZ1NZWi02SWdxcEpjZ0sxekN5WUFEOWhnLUVSbk9RU2JteHNmVGFsbUw1WWpYSzh5OHZDTlgwbF9GTVpRTTNVSTNpXzBmN3FiRzR4VVl6M3hUT3RFRWk3ejlwcnpSMDlLXzRMcmtTRG0yZ1VHVHFoR19HSExPZ2kzWmkydURKX0hwVEVlN2d2ekZrSU5DREFodmNpYmxkZmN6OWZkQ0xiNDFicdIBzgFBVV95cUxPaXd4US1uR1lWQkgzZTRKWklzZjcycW9CbnY4bFdEY3ZtdHp2WXlHOEhGWU0wZGFxai1lLUdTUG45SmprTUpXZHNndFJnOFFnbUdkX0EwdGlfS1FILURzLURtRnBTTTRSekVpSlY1dElET0t3WGF3a0U4d3FPV0VpemZBNk9lZ09xZHFHTk9YZ25BWmZvY1luN2xPamhXekg3cWthODJVSjY3VEFVY3cydFJ1dUFQd1hkNkJORmk0ME9vamZxbjJrLVNHQ1p0UQ?oc=5",
+          "description": "Daftar 11 Perusahaan Dihukum OJK di Kasus Saham DSSA, BREN dan CUAN CNN Indonesia",
+          "source": "Google News (Topik: Saham)",
+          "pub_datetime": "2026-10-22 13:50:40+07:00",
+          "pub_date_str": "2026-10-22 13:50 WIB",
+          "id": "c9f74daf11b9"
+        }
+      ]
+    },
+    "BBCA": {
+      "code": "BBCA",
+      "company_name": "Bank Central Asia Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [
+        "Buyback"
+      ],
+      "has_buyback": true,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "BCA (BBCA) Perpanjang Periode Buyback Saham hingga 23 Oktober 2026 - Bisnis.com",
+          "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPS2h6SzR6YVh4QlVkRlVOQWpvX1RrWUthWHFaZWgzM2JodlJOZlAxNlFvaUdyV2NPcFRGeFlVUjRZN3drQUpKWjJXSHBvLWJfcTZLUHBfdllSbG9EZVYxcW1yenBlUVFNMEc0ak5GSVZyM0lPVjhXS3dQZ0g1bG5DTHUza3dtNk9SRVNLSkJqdmdpUWZlWlE0d2prUERVWW5lc25aUlpsS01uQkJ1bHowRzBlUkxRT0xhMFE?oc=5",
+          "description": "BCA (BBCA) Perpanjang Periode Buyback Saham hingga 23 Oktober 2026 Bisnis.com",
+          "source": "Bisnis.com via Google News",
+          "pub_datetime": "2026-10-21 10:58:01+07:00",
+          "pub_date_str": "2026-10-21 10:58 WIB",
+          "id": "749bc09adbab"
+        }
+      ]
+    },
+    "BRPT": {
+      "code": "BRPT",
+      "company_name": "Barito Pacific Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Daftar Saham PER Terendah-Tertinggi LQ45 (20 Oktober 2026), BRPT Melesat 20% - kontan.co.id",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPTUhzVzRWc01OWXRjRktERkQxXzh5V2lzUzJLLXFndGZkUnYxc0FFOS1DQ3RDR1pqbVhwX25tS2VnbkNQWVJHZDFiTHh3QlB5dDNnYWhfY2JzZ2NjRHpMY211d3o3dlRlaFdqalRHaVdlZlRpTEpGUHZBb0NiSG1hV3hpY05GVlFSUFRkUzFQVVBjcUNRYm1hRUtuZEFQb2JZUy1CSGoyWmRJOWZE0gGkAUFVX3lxTE1FelpOeEtVMkV5RUNic0lMNjB5YXFIQnVsNURDdGpROXB1cWhmX2stLVo4d3diY1JsMlNJQ3JlTkpobzRZSnllMkh2bUxua3oyWVUwNHg1TEdTZlZrU1FCQ2lzcW5ESlFLZXhwaHhxM19SN1FBbms0RzFNZXVRd1hBY1llb29PMTAwZUxWX0Vvb0t6YzRiamNkZGJhTjFkVGh0dl9B?oc=5",
+          "description": "Daftar Saham PER Terendah-Tertinggi LQ45 (20 Oktober 2026), BRPT Melesat 20% kontan.co.id",
+          "source": "Kontan via Google News",
+          "pub_datetime": "2026-10-21 07:41:44+07:00",
+          "pub_date_str": "2026-10-21 07:41 WIB",
+          "id": "69331f72b4ae"
+        }
+      ]
+    },
+    "TMPO": {
+      "code": "TMPO",
+      "company_name": "Tempo Intimedia Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "10 Saham Top Gainer Perdagangan Senin 19 Oktober 2026, TMPO-PNSE Pimpin Kenaikan - IDX Channel",
+          "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOeE9MZ3lPcjQzNjhuWmJOZVV6c0h1WXpsdUEtQnVoQUZrcW00ME1ka005ZW1GV1o1MFpoYUV4N3NwS3pIX01KQndub28tbnFScmd2aElDX3BRbHIwbHEwSm14ZmtYUkJJOGRMV1lXbHdUUUFMd2Y0OVVBZ01VbnVGQ2VYSmdRSDJldHZVRGVwT2dTdHZyV19TaEFtR051SkxvM29jejVqaDN4dF90UzlFMFlJVTJqTWtob1HSAb8BQVVfeXFMTTZmbHV5czdsajVIZU9sSExWZWxFS0ctUFBiZFl5bzVKMkVQLTlwZ09ZeFYxTmNpMmdsYjJTcU0tMkdIZDNwLXFmV1E0MGh0Y3VpQXFRb08td0dhNFhuLWVfcUdfUmRmQjNHdGw4VmtQTllGeldRTF9WNHFvQzAzNlUydDY2d2RYc2MtbkEtZ29Nd0JkbDFuY0I3ZjVsaDhqdUVKbURUaDE1eDhZZWVoUFdpQllTWkRaYVFLMV9jcE0?oc=5",
+          "description": "10 Saham Top Gainer Perdagangan Senin 19 Oktober 2026, TMPO-PNSE Pimpin Kenaikan IDX Channel",
+          "source": "IDX Channel via Google News",
+          "pub_datetime": "2026-10-19 16:43:00+07:00",
+          "pub_date_str": "2026-10-19 16:43 WIB",
+          "id": "1b6f346e54ee"
+        }
+      ]
+    },
+    "PNSE": {
+      "code": "PNSE",
+      "company_name": "Pudjiadi & Sons Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "10 Saham Top Gainer Perdagangan Senin 19 Oktober 2026, TMPO-PNSE Pimpin Kenaikan - IDX Channel",
+          "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOeE9MZ3lPcjQzNjhuWmJOZVV6c0h1WXpsdUEtQnVoQUZrcW00ME1ka005ZW1GV1o1MFpoYUV4N3NwS3pIX01KQndub28tbnFScmd2aElDX3BRbHIwbHEwSm14ZmtYUkJJOGRMV1lXbHdUUUFMd2Y0OVVBZ01VbnVGQ2VYSmdRSDJldHZVRGVwT2dTdHZyV19TaEFtR051SkxvM29jejVqaDN4dF90UzlFMFlJVTJqTWtob1HSAb8BQVVfeXFMTTZmbHV5czdsajVIZU9sSExWZWxFS0ctUFBiZFl5bzVKMkVQLTlwZ09ZeFYxTmNpMmdsYjJTcU0tMkdIZDNwLXFmV1E0MGh0Y3VpQXFRb08td0dhNFhuLWVfcUdfUmRmQjNHdGw4VmtQTllGeldRTF9WNHFvQzAzNlUydDY2d2RYc2MtbkEtZ29Nd0JkbDFuY0I3ZjVsaDhqdUVKbURUaDE1eDhZZWVoUFdpQllTWkRaYVFLMV9jcE0?oc=5",
+          "description": "10 Saham Top Gainer Perdagangan Senin 19 Oktober 2026, TMPO-PNSE Pimpin Kenaikan IDX Channel",
+          "source": "IDX Channel via Google News",
+          "pub_datetime": "2026-10-19 16:43:00+07:00",
+          "pub_date_str": "2026-10-19 16:43 WIB",
+          "id": "1b6f346e54ee"
+        }
+      ]
+    },
+    "TRUK": {
+      "code": "TRUK",
+      "company_name": "Guna Timur Raya Tbk.",
+      "sentiment": "Netral",
+      "summary": "",
+      "tags": [],
+      "has_buyback": false,
+      "has_pp": false,
+      "news_count": 1,
+      "news": [
+        {
+          "title": "Saham TRUK Naik 9,94 Persen, Ini Perubahan Pemegang Sahamnya - IDX Channel",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPRVdTV1B3d0xoX0IzaVl4RHlJNXoxX2dNVjd2SG82djJ5d0pZZWNfRXV6aFhYRlZCR3pIYWpwS2ZYWXBPYlVMZ0kwVEZJWGExRkpTYklER2tBV2hoR1R0QS1faHV3RmZpdTl1NW40dko4R1lIVVFyYWlEMEZHVWd5M0hGUFBjRnhLVTNrRnZwOWRfTmR4MnRXT2dDbVNjd9IBowFBVV95cUxOSDFpbkd2MmR1Yk91MGM4YVVWejNPeHFXakhEc3pxNmtEUXp5ZWw4N05oNF9mVXltNmk3WmZoSEg3dXlKdUN5ZWxwVUxWOFd3THBmWXpab3J0THZQRGhVOW9vcHA5dDVaMHRBODZPekYxbl9KVTQ1eGNNdEg4Mjdja21iSVliY2hZQ3p3S2hhMk15dGtGei1SRmNpbXFuSzItYWFZ?oc=5",
+          "description": "Saham TRUK Naik 9,94 Persen, Ini Perubahan Pemegang Sahamnya IDX Channel",
+          "source": "IDX Channel via Google News",
+          "pub_datetime": "2026-09-22 14:00:00+07:00",
+          "pub_date_str": "2026-09-22 14:00 WIB",
+          "id": "d12da310e8a0"
         }
       ]
     }
   },
   "news_items": [
+    {
+      "title": "Teladan Prima (TLDN) Tebar Dividen Interim Rp258,93 M, Simak Jadwalnya! - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNSlRlY2JXc2xEazFoZFpTakk0bWFlcmdHTXF2d1BvUHVYUlR4b3loRWZUSzFZdjJGUUZiX0hHcUNueURMaHJnTjJNZVRpQkc1YkFEbXVHOGZkeE5VRGxBTGFESkRVVF9QTnhtb25sZkhNTDd6N1d4ay1rdWV6cDJJTDNRbWxUVFZvYzhjeFFGaW5kNDZPNHVaR2J3SDcxUlFsVGJ2UHNyOU5ud3BUVWd4bXV3bGpqcndtOHc?oc=5",
+      "description": "Teladan Prima (TLDN) Tebar Dividen Interim Rp258,93 M, Simak Jadwalnya! Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-22 15:15:41+07:00",
+      "pub_date_str": "2026-10-22 15:15 WIB",
+      "id": "80d06d297a1c"
+    },
+    {
+      "title": "Meta Cetak Rekor Pendapatan Rp 1.151 Triliun, Umumkan Split Saham 2:1 - Kompas.com",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPbGVCeHp0X3Y4cHYxQkMxUnFramJwSGJ4dlJmYTFIcjlWMUg2Q082UE9NUGJGYXctQTlwTWlTRkFiaC1SdjhJOVJ1REJXd0dYYXMwZ2E4dzBjVVREaUtLRk1JTTdkc1VxWXh1a0p2dndFYW41QW5vUk9CalpwbGk2dFhpc0FhLV9sOG1hZXc3cWsyc0U3eDR0WHZkSVVlZ2dyeHlISDEtcVNFMUpCbTN5TEFfUW9Db3lz?oc=5",
+      "description": "Meta Cetak Rekor Pendapatan Rp 1.151 Triliun, Umumkan Split Saham 2:1 Kompas.com",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 14:55:00+07:00",
+      "pub_date_str": "2026-10-22 14:55 WIB",
+      "id": "3b604bfd73bc"
+    },
+    {
+      "title": "Sujito Ngatiman Lepas 53,51 Juta Saham DEWI, Porsi Kepemilikan Menyusut! - Pasardana",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOQXVYUFdoVkpQTXRzNEtfNy1SMWZLMGdEdkhfX194ZklPZFF1d05NUlVORGFmakxtbVJBLWdGWVNmaFBnclVwZ18wYkN4OUM2SW9BVlhiX0g0aGlGdW9uSVZWOHBIQ0l2Rm9wcWt2SmhjbWhYQWVFb1RFejFfbDh0d3lwUHZWT0Jtd0s4TDRfTGpuYlhhZWVob2xUWlBpYmVyTDktOWtuMlFrQzQ?oc=5",
+      "description": "Sujito Ngatiman Lepas 53,51 Juta Saham DEWI, Porsi Kepemilikan Menyusut! Pasardana",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 14:41:00+07:00",
+      "pub_date_str": "2026-10-22 14:41 WIB",
+      "id": "98ddc26b1c96"
+    },
+    {
+      "title": "Marquette National Corp umumkan dividen $0,33 d... - Pluang",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOUU1SVG90MEZOM1YxTjlLQXF1UldmMFViMlBpTldGZy1FMF9wdFBpU01MeDljZzBCVnlPaEpPS2YxWVloN0tDRmdaTEw2dHhHcUpzWExMODZua2xkbEl2QW11c3Z3dnZxV0F2bXlGZm1yZHEtMm81X1lURXdaZkthV05vSmd6b19zRG1HNVNYQVMxeWNDbFR4VHBPM2xndFhPSlN3Q2RGOHE?oc=5",
+      "description": "Marquette National Corp umumkan dividen $0,33 d... Pluang",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 14:27:14+07:00",
+      "pub_date_str": "2026-10-22 14:27 WIB",
+      "id": "23cbba03c635"
+    },
+    {
+      "title": "Kartu Pokémon Melesat, Return Dekati Saham Nvidia - Nanovest",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPRUx4eGs2RmRpek9DdmE4akJaZmh0ck9iZl9LdVlVM3ZhTHR6cFkxWGlxS1U1RTdaVHFJcVpEUFZDbFhLbWMtbW4wWVRzbEd1aGtnSkhoZW9OUUZJVl9jdDNqMFIwWXdRZHU0YktDbmJ4ZExVQ2xDdG5xaHhJa3JBMUNVbWRVcE83eW5PdzNR?oc=5",
+      "description": "Kartu Pokémon Melesat, Return Dekati Saham Nvidia Nanovest",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 14:25:25+07:00",
+      "pub_date_str": "2026-10-22 14:25 WIB",
+      "id": "404630dad1a1"
+    },
+    {
+      "title": "Mengapa saham Rentokil Initial melonjak hari ini? - Investing.com Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQemFFZFJNdWItbTJSQ0xkMGhWRF9PbmJnbThfVVBfUU1qb3FNczl2cldrcTlqSXJUQU1nemFHUVRGc1djV28xQ2swNEJodHpNcjVhX1U3amdYUTRpNlZFSzY2QUlRdWpyM0ZpTXNKWWV3MEtfdUFRMC1MMW9DRTJYamVnYlhZWDJzaHVwbzNRSE5Id3N5WkJ1Zy0tVGwzWUV3N0c1ZFZWUWZJOFhQYlE?oc=5",
+      "description": "Mengapa saham Rentokil Initial melonjak hari ini? Investing.com Indonesia",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 14:23:28+07:00",
+      "pub_date_str": "2026-10-22 14:23 WIB",
+      "id": "859c7c8799ef"
+    },
+    {
+      "title": "Daftar 11 Perusahaan Dihukum OJK di Kasus Saham DSSA, BREN dan CUAN - CNN Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQbTl4S2pfcjNDbnV2SkJXX3V2T3RPZFZkRGNpSVJHZ1NZWi02SWdxcEpjZ0sxekN5WUFEOWhnLUVSbk9RU2JteHNmVGFsbUw1WWpYSzh5OHZDTlgwbF9GTVpRTTNVSTNpXzBmN3FiRzR4VVl6M3hUT3RFRWk3ejlwcnpSMDlLXzRMcmtTRG0yZ1VHVHFoR19HSExPZ2kzWmkydURKX0hwVEVlN2d2ekZrSU5DREFodmNpYmxkZmN6OWZkQ0xiNDFicdIBzgFBVV95cUxPaXd4US1uR1lWQkgzZTRKWklzZjcycW9CbnY4bFdEY3ZtdHp2WXlHOEhGWU0wZGFxai1lLUdTUG45SmprTUpXZHNndFJnOFFnbUdkX0EwdGlfS1FILURzLURtRnBTTTRSekVpSlY1dElET0t3WGF3a0U4d3FPV0VpemZBNk9lZ09xZHFHTk9YZ25BWmZvY1luN2xPamhXekg3cWthODJVSjY3VEFVY3cydFJ1dUFQd1hkNkJORmk0ME9vamZxbjJrLVNHQ1p0UQ?oc=5",
+      "description": "Daftar 11 Perusahaan Dihukum OJK di Kasus Saham DSSA, BREN dan CUAN CNN Indonesia",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 13:50:40+07:00",
+      "pub_date_str": "2026-10-22 13:50 WIB",
+      "id": "c9f74daf11b9"
+    },
     {
       "title": "Musim proxy 2026 catat penurunan proposal lingk... - Pluang",
       "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNaDRrVWtybnRURnFIdlpyRUVYS3h1YkgzdkNGVnVWaXBtNFF5eE9yUndYMWwzUlRyay1JZXlWZS1QUy1oVHpKeW9NS0JCZzRFVmZ2X0lRYVo5RVJYLW1mM1BOWnk1Tnc5NG5kQm1uTTMxZE5SMnE0OF8xNHAyVnA2OFozWmRIVm1HSThzazgzN0VTem5hZ1E1Rl95RXhiTDg?oc=5",
@@ -36,13 +293,22 @@
       "id": "c672f232a898"
     },
     {
-      "title": "Mengapa saham JD.com turun hari ini? - Investing.com Indonesia",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOcWZhQmpGaHBLRUcxUlNENVJUSGFIVl9tX1kwb3RRNHU3YUM4LVk2WDlFejNHTmRPSmRWS01nUHRNYzdoWEJ1dVV1ZDh6MXlQTmdla1UxdnVwdTVLZDBKMEZVMWdYaDNRU2Zia29xOW1tUnB4OWgtWjBrMGlQRkJlU2FXbFJPOTYtNjdqWHJkRFgyN1gyM0xnVG53QQ?oc=5",
-      "description": "Mengapa saham JD.com turun hari ini? Investing.com Indonesia",
+      "title": "Mengapa saham Alibaba turun hari ini? - Investing.com Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPdDl3dTFoRmtNV0dBSXlvYUtQQUJLbnE0cUR2bWlIZEpxRU52OGgwYzRpM0t0M2tnY042N05RLUo1eXo5QkdwQnhBdGMtNTVyeUt5TVBFdXZuMl8yNDVRVWdIUlFHZm5EZmlNVU5zcWpqUi1DVXhqRzFZamY1aGNXdkQ4dkhJR0h4RkxuUTRWTFZLUDc2OGVuOVZLMmxSQQ?oc=5",
+      "description": "Mengapa saham Alibaba turun hari ini? Investing.com Indonesia",
       "source": "Google News (Topik: Saham)",
       "pub_datetime": "2026-10-22 12:56:56+07:00",
       "pub_date_str": "2026-10-22 12:56 WIB",
-      "id": "a31f0d114ebc"
+      "id": "97f1130fe20a"
+    },
+    {
+      "title": "Saham Alibaba dan JD merosot akibat pengawasan regulasi China - Investing.com Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQR1J2SnRBaTFtQ2l5a0RsYnRGb2RXMi1WVjVCaUx2LXo2bHgtV3BZaUZybURsWkl1cmpTX0ZJeXZYalNlSkNaTGctOElYRzFfZlhlU1AxNEpUZ3pmQmlTMHpxOU5kR2swTC1YT2t6V0ljdDkybVc3bXdrNkVfdUVhUVNGbUdZWDdLMjJhUy1mVTMtRE9weVlGS0lRaENHQ0QtT21UVzN6c3hPdVFiTl9kLTBXMnJJUXNY?oc=5",
+      "description": "Saham Alibaba dan JD merosot akibat pengawasan regulasi China Investing.com Indonesia",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 12:37:09+07:00",
+      "pub_date_str": "2026-10-22 12:37 WIB",
+      "id": "156f81ae5bd9"
     },
     {
       "title": "IHSG Menguat 1,7 Persen ke 5.418 Siang Ini - CNN Indonesia",
@@ -72,15 +338,6 @@
       "id": "1daac1f3027f"
     },
     {
-      "title": "BEI Sesuaikan Kriteria Evaluasi IHSG, Efektif 2 November 2026 - Infobanknews",
-      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQRVVKVVgtWmpIT0FzZjRnclJWVFFmaENDSkNvVWlVYjZTeUxhUWp6cDB0ZWxZa0g0a0lVQ3B6ci1JX2Jzamx5Yk5mSFNtSG5ra3Q4VWJXMlI0d2RsUVpQTl9mX2ZkQUM4YUFsajFRM2RibkNGd2NxU2VEeXl6UUdETE1XTHRLN0JESU41WVl3?oc=5",
-      "description": "BEI Sesuaikan Kriteria Evaluasi IHSG, Efektif 2 November 2026 Infobanknews",
-      "source": "Google News (Topik: IHSG)",
-      "pub_datetime": "2026-10-22 11:23:00+07:00",
-      "pub_date_str": "2026-10-22 11:23 WIB",
-      "id": "783560037cf5"
-    },
-    {
       "title": "Saham Netflix turun pasca laporan laba, tetap B... - Pluang",
       "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQc0JvbFpfb29IVGd5ZFpUQVlaUWstazNiem96OHotWXNLOENYWTAtbU1UZXpScl9EQWNZUkhxQ1dUVzJnRmhlTGxaY1RTV3Vld2tSTHRtSXkzbmF6b3l5dmdSVFU1OHlKcFh2MkJXU3R3S2hpVmpMSXl0azJRS0Z6NjQ0cVZab2lad1dUSVRDUzdObktSZnAyUEQ2Njc?oc=5",
       "description": "Saham Netflix turun pasca laporan laba, tetap B... Pluang",
@@ -88,6 +345,15 @@
       "pub_datetime": "2026-10-22 11:17:02+07:00",
       "pub_date_str": "2026-10-22 11:17 WIB",
       "id": "40eed650d4db"
+    },
+    {
+      "title": "BEI Kecualikan Saham HSC dari IHSG, Efektif 2 November 2026 - SWA.co.id",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOcm1XLWdpcmpsZXZaYnAzRlZUWF95ZEt5WmRvbWg0UndzV0drbnhZOUtfS3NoTW1mamkwQjgtQWZHekRiLTBPNTliNWtXQzFvZmk5T2tpcFpaZW9hMFNyTEhZaTg5MkZPTk9SRmJVWG1QV2F3bElYUTJIT0hkSS05U0htSkNKQUVyVGc5ZDZyNzFOUQ?oc=5",
+      "description": "BEI Kecualikan Saham HSC dari IHSG, Efektif 2 November 2026 SWA.co.id",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 11:00:32+07:00",
+      "pub_date_str": "2026-10-22 11:00 WIB",
+      "id": "0bf25e4ca93a"
     },
     {
       "title": "BUMN Singapura Temasek & GIC Bantah Lobi MSCI Untuk Turunkan Status Pasar Saham Indonesia - Kontan TV",
@@ -99,13 +365,13 @@
       "id": "75810c60426b"
     },
     {
-      "title": "CIMB Bantah Rencana Privatisasi Saham CIMB Niaga (BNGA) - IDX Channel",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNV1d6SUdmMS14UEhQd29hb2c2ZEVsQW8wZGRLRkxRaF9hUzd4cXVoSHpuVko2aTVnR19GZ19Kd0p4Y3RGRGZzclJiTXhnM1dWdmdQem0wbFdfZXVJdGNqNUxhelluRzV0Q3dUUHN2bUgzVkRyV0RyS0swVkV0OTJKN3pnTVJHcXRKZkQxaXZtLXdaZlNMS0RZ0gGcAUFVX3lxTE9QcjVnbUxZRV9sNzF4MEVGdURfXzJFVHJ6MG5pclpQaHNzX0NrNklkOFBXMTZkcVhIYjljcVJERzU4WXNPNldWZE9ZZHNaNDUyaVY4N0JxcDd0Q0N1S1hXeld6VjhIa2k5TklDTWt0aHM4d3UtXzlWbHkzU3pzRkhqZlFYQkQ5OVNVckQ4UmhnMXpjWXFnOTJRXzFFVQ?oc=5",
-      "description": "CIMB Bantah Rencana Privatisasi Saham CIMB Niaga (BNGA) IDX Channel",
-      "source": "Google News (Topik: Saham)",
-      "pub_datetime": "2026-10-22 10:34:00+07:00",
-      "pub_date_str": "2026-10-22 10:34 WIB",
-      "id": "cc577e2e04b4"
+      "title": "IHSG Lanjut Rebound - Emitennews.com",
+      "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBuS1VFOEpvQmtmNWpWM0NaM3pVVFVDRXpnOG5nU2kxUTBYR3c1Q0p0dkVjbFFyd0ZZZjYxazJ1WlF2WkR1aGR2S01wYmZJdVh0bmlrODgzZVI1UDU0OFdjNQ?oc=5",
+      "description": "IHSG Lanjut Rebound Emitennews.com",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-22 08:52:00+07:00",
+      "pub_date_str": "2026-10-22 08:52 WIB",
+      "id": "5687023e61d8"
     },
     {
       "title": "IHSG Menguat, Net Sell Asing Turun | BI Rate Tetap | Apa yang Perlu Diwaspadai? - Maybank Trade ID",
@@ -126,13 +392,157 @@
       "id": "2d7fbd97604e"
     },
     {
-      "title": "IHSG Berpeluang Rebound, tapi Ancaman Yield Obligasi dan MSCI Masih Membayangi - Warta Ekonomi",
-      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOQlM5MWFydTJWSmlWWm9FU2gwWGVjTlJhTlBrb1p0Zkdob090RWJ3NGU0UVNKVXRkR3oydzEyYURhRUNERTlLSFF6XzdKc29vSVluWXdtdWlCZ05HRk9WUk1ubUQ2LVVXS1c3ZlV3UWVrSUVhUHE5dDVMamZWRkVjYVZNbEo1bTZuMXZkVjZWamd4dUxfWW1kUTRHUHhHYWRjaDdwQ3M0c3dpWHJ6TXBtYmRHb3lBQdIBuwFBVV95cUxONU1zTlJlR3VsRDVXengzeHlocnRNc3FxTGctOHV4OGFDNnlTTFoxbHgyOTBsaU44U29zOU1yZ09SdzZpX0RCTTFrWHdTWG5wUVo3VmJiRFo3QW02ZlF0Y1F4Z1RIaW1nYXNlem1xYTFRVlJlRlRuX2FBSEp4d3JtNGJhQWpUdGtMaGpoLVlMN1lXZlNwT3Nxd2RtQ0FKV3NVcmxpMUFwc2lLaElaa1RoaTRqcVlBVXJJT3Rz?oc=5",
-      "description": "IHSG Berpeluang Rebound, tapi Ancaman Yield Obligasi dan MSCI Masih Membayangi Warta Ekonomi",
+      "title": "Saham Meta naik 4% setelah pendapatan Q3 melamp... - Pluang",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNd0ItMFRMZ25hM3ZrbkU0LWRaMjE5dGlVbk02UF9xRXhYbkF1X2VSZHZBSUc5UVVjQ3RJLXdqcWV2MHhKRHVnTThFZ0pacE9iZkFLUkFKRHRVdHlraVVQSVFtQ1NqTmlCaHFDQ2NFV3FkdG5JcnJUb2stS3gyWHY3TDlhdG5lcDRKdGZVNUpZM2RhZkpnMlViRTNGeVJTaEdnRkVTSmlieVVwM00?oc=5",
+      "description": "Saham Meta naik 4% setelah pendapatan Q3 melamp... Pluang",
+      "source": "Google News (Topik: Saham)",
+      "pub_datetime": "2026-10-22 05:32:22+07:00",
+      "pub_date_str": "2026-10-22 05:32 WIB",
+      "id": "f7fb059be42e"
+    },
+    {
+      "title": "IHSG Menguat 0,94%, Simak Proyeksi dan Rekomendasi Saham Kamis (22/10) - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMEdZX1hJcmk3anIwb3FhYUVUUkplbFhEX2owZHA3NXVTWm15a0FwMDlXX3ZDQThFLW1xZVpXSnJuR2UwVkd5Ui1jeHE4V3RWa0t6YkJpOEpkZlZLMHlLUzZKclpUR2xzNlV2MTFhZnRNVXFLRlk4eTA4NE5XMmtpN21wVTEtSnRsYThZTVpuUWN4Qkh4bVI2LVVLWHZLdkdIQVHSAZoBQVVfeXFMUFRxcWF1bnd0RWFndElxX2hUeGdCb1ZGUGlCWm5URkt0NDg4WVpuQmtETUdKN1lNYUM2bzdnOTNmejlGaGdLRlhkLWw2MlItMlBYMG85eWF0ZzFfRG01QmNqU2FCTHRIWTl6Yi1lVXp1TlBRTlJjd3hLZERWUGYwQXNyTFhDRzJPTjFRd3M4azI3RWlLZ2pZSHZZZw?oc=5",
+      "description": "IHSG Menguat 0,94%, Simak Proyeksi dan Rekomendasi Saham Kamis (22/10) kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-21 19:15:28+07:00",
+      "pub_date_str": "2026-10-21 19:15 WIB",
+      "id": "d436c12d9f6c"
+    },
+    {
+      "title": "Cermati Dinamika Pasar, Jasa Marga Buka Ruang Potensi Opsi Buyback Saham - Bisnis.com - Market",
+      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPTWswU0JtSzY3a3QzNVZlNXAxWTU4a0hQSW5rdUpDUmZudWc1M0I5VF9qV0J1SDRPMjZCX1pjMFNIdXU5MldYUm1jSEh2cVhNZjU5SDJBX3pLSHM4Sm4tUVhUSGxEWmV3N21sMUdJV0RRSnlPWFI3SHQtMUxhV3QyQ2YxSjdTaU5yMHFWQndLdEdLWnUwX3Q2QzA4YnBlVXhrTk52LXdMbmhOb3J5UkVfdlV4ZDRSQ1ZjYlRMbUJB?oc=5",
+      "description": "Cermati Dinamika Pasar, Jasa Marga Buka Ruang Potensi Opsi Buyback Saham Bisnis.com - Market",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-21 15:45:18+07:00",
+      "pub_date_str": "2026-10-21 15:45 WIB",
+      "id": "2925bc086d1c"
+    },
+    {
+      "title": "BCA (BBCA) Perpanjang Periode Buyback Saham hingga 23 Oktober 2026 - Bisnis.com",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPS2h6SzR6YVh4QlVkRlVOQWpvX1RrWUthWHFaZWgzM2JodlJOZlAxNlFvaUdyV2NPcFRGeFlVUjRZN3drQUpKWjJXSHBvLWJfcTZLUHBfdllSbG9EZVYxcW1yenBlUVFNMEc0ak5GSVZyM0lPVjhXS3dQZ0g1bG5DTHUza3dtNk9SRVNLSkJqdmdpUWZlWlE0d2prUERVWW5lc25aUlpsS01uQkJ1bHowRzBlUkxRT0xhMFE?oc=5",
+      "description": "BCA (BBCA) Perpanjang Periode Buyback Saham hingga 23 Oktober 2026 Bisnis.com",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-21 10:58:01+07:00",
+      "pub_date_str": "2026-10-21 10:58 WIB",
+      "id": "749bc09adbab"
+    },
+    {
+      "title": "IHSG Anjlok 1%, Ini Penyebabnya - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOVEFuWndHcGV0RXppdnZaQkNUTzRGZlZlM3RKQjlsM0trQ2lYYU5rSWxPbWxZb0N3WFBsbGt0UzhRWWxOOEhheG1RckVXOVJLR3I3cGNQUmYyWXdKUzBnV0FpQjZoWlk0N3BJZzBXVTlMZEQxRmNKWXZ0WFpZby0xNkdIVF9kMVo1UkNuVHNZOFczbUZBZ3fSAZsBQVVfeXFMTmc1X0RrMDY1aExIOTFUbWVTNE9VM0ZhOUpZNnFvUFBYQ1RJNi1XRS1wUndGMXBJbXloMWFlZHJWZHh1LWZvN0ZlZF9oeUh0a05aUWxtQzJsSldDUHhYbGpoaWpNOFJzN2xuU2VmZHRqak16UndDcGs0bXVGVlFPSzhuTk10RFJJMkZKenFxalJiSFplWGlTYnVuMTQ?oc=5",
+      "description": "IHSG Anjlok 1%, Ini Penyebabnya CNBC Indonesia",
       "source": "Google News (Topik: IHSG)",
-      "pub_datetime": "2026-10-22 07:18:00+07:00",
-      "pub_date_str": "2026-10-22 07:18 WIB",
-      "id": "45be40f2efca"
+      "pub_datetime": "2026-10-21 09:57:40+07:00",
+      "pub_date_str": "2026-10-21 09:57 WIB",
+      "id": "af01b8ec1b3c"
+    },
+    {
+      "title": "Breaking! IHSG Anjlok 1% - CNBC Indonesia",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQT01udzkzUnBDMjZ0ZTJiNjkwckRhWVZGSEY3QjdfZlhYcnNHQkZLT2JnWXZsc19hZEQ0X1V3aC1xLV9FSUhQNmpDRS11NXF0NHRtLXhJdmViSVhsQlpjcHA0b0E2M01NaDlzbDktQ0l6ZW45Tk5lc2FwOTZJUFRhRTNxVDV6dkx5dWtPNtIBkgFBVV95cUxQUzBidU9jeFV0Y2NoYzg5cVhGRmJzakVOMEllejljbDVMMEptNko3bmlLX0t2NmpaVlZ6eUdWczR5ZC11ejBzNkRVeEJLVVhnUVNsbFQzSFloTDJ6cDdTcmNPTVpMRlhERlJzVTRmNV9HSHRoRzFYU2NfWlhKdjJmbFB4cHdUNmtNQnNtRWxwUy1WZw?oc=5",
+      "description": "Breaking! IHSG Anjlok 1% CNBC Indonesia",
+      "source": "Google News (Topik: IHSG)",
+      "pub_datetime": "2026-10-21 09:42:14+07:00",
+      "pub_date_str": "2026-10-21 09:42 WIB",
+      "id": "79670995b90e"
+    },
+    {
+      "title": "Grafik Harga Emas Antam Batangan Hari Ini (21/10), Naik atau Turun? - Pusat Data Kontan",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQeFZXQTJGZkpxQzFRUmN3TXZWc2IxY3dDNU5Bd0h1N2Rnd0VXSTNQczlDeFNMZXJxQVJ0RTd4N2hMQWx2OWV0cjVtZ2Q1dmx1T19lNXptLWlWM2U5NEM1VWxrTzBhQjhHMVVZWDBLb2w5alIzSGZ0Q2poRkxpUDNDZU5OWnpRdmJzX3lWNEhiY3RSVTM2dEZ0S3p6STNmSkE?oc=5",
+      "description": "Grafik Harga Emas Antam Batangan Hari Ini (21/10), Naik atau Turun? Pusat Data Kontan",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-21 09:08:37+07:00",
+      "pub_date_str": "2026-10-21 09:08 WIB",
+      "id": "2535b8fafc6c"
+    },
+    {
+      "title": "Daftar Saham PER Terendah-Tertinggi LQ45 (20 Oktober 2026), BRPT Melesat 20% - kontan.co.id",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPTUhzVzRWc01OWXRjRktERkQxXzh5V2lzUzJLLXFndGZkUnYxc0FFOS1DQ3RDR1pqbVhwX25tS2VnbkNQWVJHZDFiTHh3QlB5dDNnYWhfY2JzZ2NjRHpMY211d3o3dlRlaFdqalRHaVdlZlRpTEpGUHZBb0NiSG1hV3hpY05GVlFSUFRkUzFQVVBjcUNRYm1hRUtuZEFQb2JZUy1CSGoyWmRJOWZE0gGkAUFVX3lxTE1FelpOeEtVMkV5RUNic0lMNjB5YXFIQnVsNURDdGpROXB1cWhmX2stLVo4d3diY1JsMlNJQ3JlTkpobzRZSnllMkh2bUxua3oyWVUwNHg1TEdTZlZrU1FCQ2lzcW5ESlFLZXhwaHhxM19SN1FBbms0RzFNZXVRd1hBY1llb29PMTAwZUxWX0Vvb0t6YzRiamNkZGJhTjFkVGh0dl9B?oc=5",
+      "description": "Daftar Saham PER Terendah-Tertinggi LQ45 (20 Oktober 2026), BRPT Melesat 20% kontan.co.id",
+      "source": "Kontan via Google News",
+      "pub_datetime": "2026-10-21 07:41:44+07:00",
+      "pub_date_str": "2026-10-21 07:41 WIB",
+      "id": "69331f72b4ae"
+    },
+    {
+      "title": "10 Saham Top Gainer Perdagangan Senin 19 Oktober 2026, TMPO-PNSE Pimpin Kenaikan - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOeE9MZ3lPcjQzNjhuWmJOZVV6c0h1WXpsdUEtQnVoQUZrcW00ME1ka005ZW1GV1o1MFpoYUV4N3NwS3pIX01KQndub28tbnFScmd2aElDX3BRbHIwbHEwSm14ZmtYUkJJOGRMV1lXbHdUUUFMd2Y0OVVBZ01VbnVGQ2VYSmdRSDJldHZVRGVwT2dTdHZyV19TaEFtR051SkxvM29jejVqaDN4dF90UzlFMFlJVTJqTWtob1HSAb8BQVVfeXFMTTZmbHV5czdsajVIZU9sSExWZWxFS0ctUFBiZFl5bzVKMkVQLTlwZ09ZeFYxTmNpMmdsYjJTcU0tMkdIZDNwLXFmV1E0MGh0Y3VpQXFRb08td0dhNFhuLWVfcUdfUmRmQjNHdGw4VmtQTllGeldRTF9WNHFvQzAzNlUydDY2d2RYc2MtbkEtZ29Nd0JkbDFuY0I3ZjVsaDhqdUVKbURUaDE1eDhZZWVoUFdpQllTWkRaYVFLMV9jcE0?oc=5",
+      "description": "10 Saham Top Gainer Perdagangan Senin 19 Oktober 2026, TMPO-PNSE Pimpin Kenaikan IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-10-19 16:43:00+07:00",
+      "pub_date_str": "2026-10-19 16:43 WIB",
+      "id": "1b6f346e54ee"
+    },
+    {
+      "title": "Denera Kuasai 51% Saham di 8 PSEL Tahap II, Kantongi Minat Pembiayaan US$3,6 Miliar - Bisnis.com",
+      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNM3dQT0pPSHpockg2MTJsQlU4QjZTQ1FMdmpSUjRGZm8wRExDdC1qS3draHZGX281SXRTUU4yRkdEUlBSZTBNbWxZY2RON2VVZ2taeEMwTE9tQ3NERk9oNEw4SWZTdURUZTZ4bEt4SnFXa1FVNUpfWmJKTzVmUmVHc1JmYWxZb0JNNlZaU3FZbDVkWTBrRDRETlVvWlExOVI3b2hkNTIyZlBpQ0o4Um1sUFVrc1dsUjd2T0k1RkpuZDBVWHpkQUhIc21R?oc=5",
+      "description": "Denera Kuasai 51% Saham di 8 PSEL Tahap II, Kantongi Minat Pembiayaan US$3,6 Miliar Bisnis.com",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-19 15:45:57+07:00",
+      "pub_date_str": "2026-10-19 15:45 WIB",
+      "id": "f94de0ae91ea"
+    },
+    {
+      "title": "Menakar Fundamental Emiten saat Pasar Saham RI Tertekan MSCI - Bisnis Indonesia Premium",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNOUZNSG9BZE15Mml6NUdRY21wcEl1cUZNdEFUU0tXUThJRmx2RURlaEM3dWhLZmsxNTd0OEVlZGxkMzNwdHI4cVhHZUtDWGs5dU5FR2RsaFhfU3cwNXc1WDY2U09lRi1MSk5VZjZWb0xBSTlZMFlIcTdETkQ1MG1iS3B5UHJaX3M4MkgtckdwVUdidWctNWRnbWhLaEdpOFZzWHlEOEdvYjczOV9feGRQbHhHNA?oc=5",
+      "description": "Menakar Fundamental Emiten saat Pasar Saham RI Tertekan MSCI Bisnis Indonesia Premium",
+      "source": "Bisnis.com via Google News",
+      "pub_datetime": "2026-10-19 06:00:00+07:00",
+      "pub_date_str": "2026-10-19 06:00 WIB",
+      "id": "e28b08ede5cd"
+    },
+    {
+      "title": "Wall Street Pekan Depan: Laporan Laba Akan Uji Reli Saham AS di Kuartal IV - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaDlZOVBJazJEdmE4SVdhc3UyamEzUDRpanNtcDFHYVE3c0VWM1dRYVBVbkYtUUlJX3VtM3hnMkZLMDFpT29TZmhDd0p5M3RCeWQ4cnBJZG43UlBCbGo5VjlWSnpuSWk5dlhzR0FrX1JyZ2ZrNl9vaWRqUmd5X0pDSEZNeUFVSEpxZXMyLWU0T2o1SllXcHlKTGluTC1qOUtvN194YzQ1ZXE0ZkwtVVdJa1dR0gG3AUFVX3lxTE1BaVZFT0lVVXFZalpPQllqYm9zNHFHZEJDa3djTktjUnRYRG5weWpZc2RvQWhGSHhLVDdBdF91UjVYdF9sLWNBVE1JQTdmSFhiTV9UTWVGVVhNS2M1M0NlMkNBNWcyU05QSEVQMGNMV01NZnhoQmVrblpPbFFHUERSYTRsenFETFphcHFvd1pQNnpuRVhpRXJDOGJBUnczMzBzUTVOeDhGYW1YNVNMbzNLV19GS1M3OA?oc=5",
+      "description": "Wall Street Pekan Depan: Laporan Laba Akan Uji Reli Saham AS di Kuartal IV IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-10-04 14:00:00+07:00",
+      "pub_date_str": "2026-10-04 14:00 WIB",
+      "id": "6c317e10cfe6"
+    },
+    {
+      "title": "10 Saham Paling Banyak Dilepas Asing Terbesar Sepekan - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPS2I3UkF1YU5PXzRfaGdLSl95dHNjRFk1Nl9fNkoybWRYZExfeDQySXdpaC02aS1zOVp3OU5rTG1KckN1azU2YnBaQnoydHJxai11MXd1Y2FxQjFQV1RZTm9FTC1hVUJjMkpTSjhrM2hWa1A0dnhndUxTUXlLMUpvejRFdEl1VjJNWFI0aHJ0MkIwcmUyU3R30gGcAUFVX3lxTE1Ub2hDM2JNVlo0bjdQeXM4U2JRVjRkaVJxQzdzSkNaUXIxbTdaUjJEWGVCYUVzWGVRUld1Nm82QUVIc1hHV0M3TTVwNHVqUnI4QWt1QWJYemxTbzItRmMwZ2pYMlNpaV85NGtRMktJN3BIb2toMXR2dDEtbnRrTjlONkFMNS1DUEM5Um10Mm53Y2xPbUhSLXp5Tk8yZw?oc=5",
+      "description": "10 Saham Paling Banyak Dilepas Asing Terbesar Sepekan IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-10-03 14:00:00+07:00",
+      "pub_date_str": "2026-10-03 14:00 WIB",
+      "id": "df44c3b39909"
+    },
+    {
+      "title": "BEI Ubah Aturan Papan Pemantauan Khusus, 92 Saham Keluar dari Daftar Hari Ini - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxORUpYNG56UkNiODJHY1BtX2lqWFdzZnI2bE9aNXY5YVd6X2NRMVoyUi1LajRKWjJvelJoLVBVWkY4WUZyUTVsN3JTa2tSeFR1TU9CTVpCQWswNDdzd3pXSXMzWDRjLVQ0ZXRrdmp1aDE5U2M3M0h2c0ZFaENUeWdfWE5NaVgxS29rRnhxeDNNZmNsTGo1RHEzbExwNWlyNENOcUxUakJVVzNmQVphNkI5R09GNzVMd9IBuwFBVV95cUxQYU1PME5nbzBtSWYwNEI3VFR0ZU1IdFFub3VOY0RoUEhtYzg0RUxqS19GS3VZbVN2N2oyX25lQ0tGakNLc1dVX1RnWUVnMERSSGh5TWNmY1puYjZCdlV4UkV5VGtKTlMxZGt6WEp6Q3cyaFlCcnppdTFCVHluQnp0NzB3dzNmYWh1RDJOd04wT2FfV044b2xzN2VSR2czMnAwSnl6cGh4Vk1PLWYtUm1wdGV1YkltZGFxY1ln?oc=5",
+      "description": "BEI Ubah Aturan Papan Pemantauan Khusus, 92 Saham Keluar dari Daftar Hari Ini IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-09-28 14:00:00+07:00",
+      "pub_date_str": "2026-09-28 14:00 WIB",
+      "id": "a525e288be81"
+    },
+    {
+      "title": "IHSG Hari Ini Berpotensi Teknikal Rebound ke 6.300-6.320, Intip Enam Saham Pilihan - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNcFBmUUVnM1VESEJmQWlwUXgwVFhVb3A2UnRUeXdDQS1LR3FQLXd5OXk1X0Z4Y2lmMDJtYjQtX0NVdFNxczdNTmI2S0NRVWZHWlV0TUVfbUlXNmU1UnkwQWs4VTktQTdERzAybmNtbmwzR1ZBejYtbVR3M1h0Wk84UzRVYlVCWkVwRzZCeUQ4WHhjUnJDWkxub1AzNDBGVFdoVW1zLTlFbmFCdlJ0ek1OYVhXWFdzOXNrZ0HSAb8BQVVfeXFMT1k1b05mbmxDNXpKT0tBaS1xNnBaNE13c1dQMV9OVGpGUE9nclZXeVhnQzc1ZHNUeUIyaDQxQTgwMURjLXdyN3l5cTltX19qT1NpRk84UEstdDR5dzJNOHFtV1A1ZXRmMTJmN3U1OVREMmNNcERDdy1hM08yYmNNNTl5SXE0bnVKUXpWM0daMWFReHRUazk2MEl2cGNsX1lJdkFhRXlpbWY3VHhwVHQyYzlOMGljMXBNbmdoaWp4Q2s?oc=5",
+      "description": "IHSG Hari Ini Berpotensi Teknikal Rebound ke 6.300-6.320, Intip Enam Saham Pilihan IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-09-23 14:00:00+07:00",
+      "pub_date_str": "2026-09-23 14:00 WIB",
+      "id": "842bfdcde1ca"
+    },
+    {
+      "title": "Saham TRUK Naik 9,94 Persen, Ini Perubahan Pemegang Sahamnya - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPRVdTV1B3d0xoX0IzaVl4RHlJNXoxX2dNVjd2SG82djJ5d0pZZWNfRXV6aFhYRlZCR3pIYWpwS2ZYWXBPYlVMZ0kwVEZJWGExRkpTYklER2tBV2hoR1R0QS1faHV3RmZpdTl1NW40dko4R1lIVVFyYWlEMEZHVWd5M0hGUFBjRnhLVTNrRnZwOWRfTmR4MnRXT2dDbVNjd9IBowFBVV95cUxOSDFpbkd2MmR1Yk91MGM4YVVWejNPeHFXakhEc3pxNmtEUXp5ZWw4N05oNF9mVXltNmk3WmZoSEg3dXlKdUN5ZWxwVUxWOFd3THBmWXpab3J0THZQRGhVOW9vcHA5dDVaMHRBODZPekYxbl9KVTQ1eGNNdEg4Mjdja21iSVliY2hZQ3p3S2hhMk15dGtGei1SRmNpbXFuSzItYWFZ?oc=5",
+      "description": "Saham TRUK Naik 9,94 Persen, Ini Perubahan Pemegang Sahamnya IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2026-09-22 14:00:00+07:00",
+      "pub_date_str": "2026-09-22 14:00 WIB",
+      "id": "d12da310e8a0"
+    },
+    {
+      "title": "Berita Terbaru Saham Hari Ini, Dapatkan Informasi Lain Terlengkap Di IDX Channel - IDX Channel",
+      "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE8xazVEZ0R0R1B0ZDFobFg4ZHBGaDJqWXNNNjNydE5YRGItb0FkZXFoT2s4V1lkZExMVWZfbjZRVENTTmNRelA5SFczeXE?oc=5",
+      "description": "Berita Terbaru Saham Hari Ini, Dapatkan Informasi Lain Terlengkap Di IDX Channel IDX Channel",
+      "source": "IDX Channel via Google News",
+      "pub_datetime": "2021-12-07 21:41:58+07:00",
+      "pub_date_str": "2021-12-07 21:41 WIB",
+      "id": "b841f27f78be"
     }
   ]
 }
