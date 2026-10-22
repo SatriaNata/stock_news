@@ -25,7 +25,7 @@ from datetime import datetime
 
 from config import TIMEZONE
 from src.scraper import collect_news, get_session_window
-from src.analyzer import analyze_news
+from src.analyzer import analyze_news, analyze_past_news
 from src.generator import generate_dashboard
 from src.notifier import notify_success, notify_failure
 
@@ -114,12 +114,16 @@ def main():
             ignore_time_filter=args.ignore_time_filter,
         )
         news_items = news_data["news_items"]
+        past_news_items = news_data["past_news_items"]
         session_label = news_data["session_label"]
         total_sources = news_data["total_sources"]
 
         # 3. Analisis Saham & Sentimen AI
         use_ai = not args.skip_ai
         sorted_stocks = analyze_news(news_items, use_ai=use_ai)
+
+        # 3b. Berita Lama: pakai ulang hasil AI tersimpan, tanpa panggilan Gemini baru
+        past_stocks = analyze_past_news(past_news_items, exclude_filename=f"{date_str}-{target_session}.json")
 
         # 4. Pembuatan Dashboard Web Statis (HTML & JSON)
         files_created = generate_dashboard(
@@ -130,6 +134,8 @@ def main():
             total_sources=total_sources,
             sorted_stocks=sorted_stocks,
             news_items=news_items,
+            past_stocks=past_stocks,
+            past_news_items=past_news_items,
         )
         logger.info(f"Dashboard utama diperbarui: {files_created['index_html']}")
         logger.info(f"Arsip sesi disimpan      : {files_created['archive_html']}")

@@ -14,6 +14,7 @@ Fitur:
 import os
 import re
 import csv
+import glob
 import json
 import time
 import logging
@@ -32,6 +33,7 @@ from config import (
     AI_MAX_RETRIES,
     AI_RETRY_DELAY,
     EMITEN_CSV_PATH,
+    DATA_DIR,
 )
 
 logger = logging.getLogger(__name__)
@@ -417,3 +419,87 @@ def analyze_news(news_items: List[dict], use_ai: bool = True) -> Dict[str, dict]
     )
 
     return sorted_stocks
+
+
+def load_cached_ai_results(exclude_filename: str = "") -> Dict[str, Dict[str, dict]]:
+    """
+    Membaca hasil AI yang sudah tersimpan di data/*.json (sesi-sesi sebelumnya).
+    Mengembalikan peta: link berita -> {kode saham: {sentiment, summary, ai_from}}.
+    Hanya saham yang punya ringkasan AI yang dicatat; sesi terbaru menimpa yang lama.
+    """
+    cache = {}
+    # Nama file YYYY-MM-DD-{pagi|siang}.json -> urutan abjad = urutan waktu
+    for path in sorted(glob.glob(os.path.join(DATA_DIR, "*.json"))):
+        filename = os.path.basename(path)
+        if filename == exclude_filename:
+            continue
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception as e:
+            logger.warning(f"Gagal membaca cache AI {filename} ({e}). Dilewati.")
+            continue
+
+        ai_from = filename.replace(".json", "")
+        for code, stock in data.get("stocks", {}).items():
+            if not stock.get("summary"):
+                continue
+            info = {"sentiment": stock.get("sentiment", "Netral"), "summary": stock["summary"], "ai_from": ai_from}
+            for n in stock.get("news", []):
+                if n.get("link"):
+                    cache.setdefault(n["link"].strip(), {})[code] = info
+    return cache
+
+
+def analyze_past_news(news_items: List[dict], exclude_filename: str = "") -> Dict[str, dict]:
+    """
+    Mengelompokkan "Berita Lama" per saham TANPA memanggil Gemini API:
+    1. Berita yang pernah dianalisis di sesi sebelumnya memakai kembali hasil AI tersimpan.
+    2. Berita yang belum pernah dianalisis dideteksi lewat regex lokal, tanpa sentimen/ringkasan.
+    """
+    if not news_items:
+        return {}
+
+    code_to_name, name_to_code = load_emiten_dict()
+    cache = load_cached_ai_results(exclude_filename)
+
+    stock_news: Dict[str, List[dict]] = {}
+    stock_ai: Dict[str, dict] = {}
+    uncached = []
+
+    for item in news_items:
+        hits = cache.get(item["link"].strip())
+        if not hits:
+            uncached.append(item)
+            continue
+        for code, info in hits.items():
+            stock_news.setdefault(code, []).append(item)
+            # Pakai analisis dari sesi paling baru
+            if code not in stock_ai or info["ai_from"] > stock_ai[code]["ai_from"]:
+                stock_ai[code] = info
+
+    for code, items in fallback_detect_stocks(uncached, code_to_name, name_to_code).items():
+        stock_news.setdefault(code, []).extend(items)
+
+    analyzed_stocks = {}
+    for code, items in stock_news.items():
+        tags = detect_corporate_actions(items)
+        ai = stock_ai.get(code, {})
+        analyzed_stocks[code] = {
+            "code": code,
+            "company_name": code_to_name.get(code, code),
+            "sentiment": ai.get("sentiment", ""),  # kosong = belum pernah dianalisis AI
+            "summary": ai.get("summary", ""),
+            "ai_from": ai.get("ai_from", ""),
+            "tags": tags,
+            "has_buyback": "Buyback" in tags,
+            "has_pp": "Private Placement" in tags,
+            "news_count": len(items),
+            "news": items,
+        }
+
+    logger.info(
+        f"Berita lama: {len(analyzed_stocks)} saham dari {len(news_items)} berita "
+        f"({len(stock_ai)} saham memakai hasil AI tersimpan)."
+    )
+    return dict(sorted(analyzed_stocks.items(), key=lambda x: x[1]["news_count"], reverse=True))

@@ -6,6 +6,7 @@ Mendukung:
 - Tombol pemindah (switcher) antara Sesi Pagi dan Sesi Siang untuk tanggal yang sama (nonaktif jika belum rilis).
 - Desain bersih & responsif (font IBM Plex Sans & Mono, warna aksen biru #1D4ED8, kartu border membulat).
 - Toolbar pencarian instan dan filter sentimen berbasis JavaScript murni (tanpa reload).
+- Tab "Berita Lama" untuk berita yang terbit sebelum rentang sesi (tanpa panggilan AI baru).
 - Sidebar: Top 5 saham terpopuler dengan diagram batang, rekap sentimen, dan riwayat arsip sesi.
 - Menyimpan ke index.html (sesi terbaru), arsip/YYYY-MM-DD-{sesi}.html, dan data/YYYY-MM-DD-{sesi}.json.
 """
@@ -69,6 +70,7 @@ def render_dashboard_html(
     sorted_stocks: Dict[str, dict],
     archives: List[dict],
     is_archive_page: bool = False,
+    past_stocks: Dict[str, dict] = None,
 ) -> str:
     """
     Menghasilkan kode HTML lengkap (CSS + JS inline) untuk dashboard.
@@ -99,11 +101,14 @@ def render_dashboard_html(
     pagi_link = f"{prefix}arsip/{date_str}-pagi.html" if session != "pagi" else "#"
     siang_link = f"{prefix}arsip/{date_str}-siang.html" if session != "siang" else "#"
 
-    # Buat HTML kartu saham
-    cards_html = []
-    for code, stock in sorted_stocks.items():
+    past_stocks = past_stocks or {}
+
+    # Buat HTML kartu saham (dipakai tab Sesi Ini dan tab Berita Lama)
+    def render_stock_card(code, stock):
         sentiment = stock.get("sentiment", "Netral")
-        pill_class = f"pill-{sentiment.lower()}"
+        # Sentimen kosong = berita lama yang belum pernah dianalisis AI
+        pill_class = f"pill-{sentiment.lower()}" if sentiment else "pill-none"
+        sentiment_text = sentiment or "Tanpa AI"
         company_name = stock.get("company_name", code)
         summary = stock.get("summary", "")
         news_items = stock.get("news", [])
@@ -111,12 +116,14 @@ def render_dashboard_html(
 
         # Komponen ringkasan AI
         summary_html = ""
+        ai_from = stock.get("ai_from", "")
+        ai_from_html = f' <span class="ai-from">· dari sesi {ai_from.replace("-pagi", " pagi").replace("-siang", " siang")}</span>' if ai_from else ""
         if summary:
             summary_html = f"""
             <div class="summary-box">
                 <div class="summary-header">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-                    Ringkasan AI
+                    Ringkasan AI{ai_from_html}
                 </div>
                 <p class="summary-text">{summary}</p>
             </div>
@@ -170,7 +177,7 @@ def render_dashboard_html(
             action_pills.append('<span class="action-pill pill-pp" title="Aksi Korporasi: Private Placement / PMTHMETD">⚡ Private Placement</span>')
         action_pills_html = "".join(action_pills)
 
-        cards_html.append(f"""
+        return f"""
         <article class="stock-card" data-code="{code}" data-name="{company_name.lower()}" data-sentiment="{sentiment}" data-has-buyback="{'true' if has_buyback else 'false'}" data-has-pp="{'true' if has_pp else 'false'}">
             <div class="card-top">
                 <div class="ticker-group">
@@ -179,7 +186,7 @@ def render_dashboard_html(
                 </div>
                 <div class="badge-group">
                     {action_pills_html}
-                    <span class="sentiment-pill {pill_class}">{sentiment}</span>
+                    <span class="sentiment-pill {pill_class}">{sentiment_text}</span>
                     <span class="count-badge">{news_count} Berita</span>
                 </div>
             </div>
@@ -192,7 +199,11 @@ def render_dashboard_html(
                 {extra_section}
             </div>
         </article>
-        """)
+        """
+
+    cards_html = [render_stock_card(code, stock) for code, stock in sorted_stocks.items()]
+    past_cards_html = [render_stock_card(code, stock) for code, stock in past_stocks.items()]
+    past_total_news = len({n["link"] for s in past_stocks.values() for n in s.get("news", [])})
 
     # Render daftar 5 saham teratas di sidebar
     top_5_bars_html = []
@@ -534,9 +545,80 @@ def render_dashboard_html(
 
         /* Daftar Kartu Saham */
         .stock-cards-list {{
+            min-width: 0;
+        }}
+
+        /* Panel tab: [hidden] tidak diberi display agar hidden="until-found" tetap bisa dicari Ctrl+F */
+        .tab-panel:not([hidden]) {{
             display: flex;
             flex-direction: column;
             gap: 16px;
+        }}
+
+        /* Tab Sesi Ini / Berita Lama */
+        .tab-bar {{
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }}
+
+        .tab-btn {{
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+        }}
+
+        .tab-btn:hover {{
+            color: var(--text-main);
+        }}
+
+        .tab-btn.active {{
+            color: var(--blue-accent);
+            border-bottom-color: var(--blue-accent);
+        }}
+
+        .tab-count {{
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }}
+
+        .past-note {{
+            font-size: 13px;
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+        }}
+
+        .empty-state {{
+            text-align: center;
+            color: var(--text-muted);
+            padding: 32px 16px;
+        }}
+
+        .pill-none {{
+            background-color: var(--bg-page);
+            color: var(--text-muted);
+            border: 1px dashed var(--border-color);
+        }}
+
+        .ai-from {{
+            font-weight: 400;
+            color: var(--text-muted);
         }}
 
         .stock-card {{
@@ -1039,6 +1121,12 @@ def render_dashboard_html(
             .filter-buttons {{
                 justify-content: center;
             }}
+            .tab-btn {{
+                flex: 1;
+                flex-direction: column;
+                align-items: center;
+                gap: 2px;
+            }}
         }}
     </style>
 </head>
@@ -1091,6 +1179,18 @@ def render_dashboard_html(
     </header>
 
     <div class="container">
+        <!-- Tab: Sesi Ini / Berita Lama -->
+        <div class="tab-bar" role="tablist">
+            <button class="tab-btn active" type="button" role="tab" aria-selected="true" data-tab="session">
+                {"Sesi Pagi" if session == "pagi" else "Sesi Siang"}
+                <span class="tab-count">{total_stocks} emiten</span>
+            </button>
+            <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="past">
+                Berita Lama
+                <span class="tab-count">{len(past_stocks)} emiten · {past_total_news} berita</span>
+            </button>
+        </div>
+
         <!-- Toolbar Pencarian & Filter Sentimen Interaktif -->
         <div class="toolbar">
             <div class="search-box">
@@ -1098,12 +1198,12 @@ def render_dashboard_html(
                 <input type="text" id="searchInput" class="search-input" placeholder="Cari kode saham, nama emiten, atau judul berita (misal: BBCA, Bank Mandiri, dividen)...">
             </div>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Semua ({total_stocks})</button>
-                <button class="filter-btn" data-filter="Positif">Positif ({count_positif})</button>
-                <button class="filter-btn" data-filter="Netral">Netral ({count_netral})</button>
-                <button class="filter-btn" data-filter="Negatif">Negatif ({count_negatif})</button>
-                <button class="filter-btn filter-action-btn btn-buyback" data-filter="buyback">🎯 Buyback ({count_buyback})</button>
-                <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement ({count_pp})</button>
+                <button class="filter-btn active" data-filter="all">Semua (<span class="filter-count">{total_stocks}</span>)</button>
+                <button class="filter-btn" data-filter="Positif">Positif (<span class="filter-count">{count_positif}</span>)</button>
+                <button class="filter-btn" data-filter="Netral">Netral (<span class="filter-count">{count_netral}</span>)</button>
+                <button class="filter-btn" data-filter="Negatif">Negatif (<span class="filter-count">{count_negatif}</span>)</button>
+                <button class="filter-btn filter-action-btn btn-buyback" data-filter="buyback">🎯 Buyback (<span class="filter-count">{count_buyback}</span>)</button>
+                <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement (<span class="filter-count">{count_pp}</span>)</button>
             </div>
         </div>
 
@@ -1111,7 +1211,14 @@ def render_dashboard_html(
         <main class="main-layout">
             <!-- Kolom Kiri: Kartu Saham -->
             <section class="stock-cards-list" id="stockCardsContainer">
-                {''.join(cards_html) if cards_html else '<div class="empty-state">Tidak ada saham yang memenuhi kriteria filter.</div>'}
+                <div class="tab-panel" data-tab="session">
+                    {''.join(cards_html) if cards_html else '<div class="empty-state">Tidak ada saham yang memenuhi kriteria filter.</div>'}
+                </div>
+                <!-- hidden="until-found": Ctrl+F tetap bisa menemukan isi tab ini dan membukanya -->
+                <div class="tab-panel" data-tab="past" hidden="until-found">
+                    <div class="past-note">Berita yang terbit sebelum rentang sesi ini. Ringkasan AI hanya muncul jika berita tersebut pernah dianalisis di sesi sebelumnya.</div>
+                    {''.join(past_cards_html) if past_cards_html else '<div class="empty-state">Belum ada berita lama untuk sesi ini.</div>'}
+                </div>
             </section>
 
             <!-- Kolom Kanan / Bawah: Sidebar -->
@@ -1177,7 +1284,46 @@ def render_dashboard_html(
             const searchInput = document.getElementById('searchInput');
             const filterButtons = document.querySelectorAll('.filter-btn');
             const cards = document.querySelectorAll('.stock-card');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanels = document.querySelectorAll('.tab-panel');
             let currentFilter = 'all';
+
+            // Pindah tab Sesi Ini / Berita Lama + hitung ulang angka di tombol filter
+            function showTab(tab) {{
+                tabButtons.forEach(b => {{
+                    const active = b.dataset.tab === tab;
+                    b.classList.toggle('active', active);
+                    b.setAttribute('aria-selected', active ? 'true' : 'false');
+                }});
+                tabPanels.forEach(p => {{
+                    if (p.dataset.tab === tab) {{
+                        p.removeAttribute('hidden');
+                    }} else {{
+                        p.setAttribute('hidden', 'until-found');
+                    }}
+                }});
+
+                const panelCards = document.querySelectorAll(`.tab-panel[data-tab="${{tab}}"] .stock-card`);
+                const counts = {{ all: panelCards.length, Positif: 0, Netral: 0, Negatif: 0, buyback: 0, pp: 0 }};
+                panelCards.forEach(c => {{
+                    if (c.dataset.sentiment in counts) counts[c.dataset.sentiment]++;
+                    if (c.dataset.hasBuyback === 'true') counts.buyback++;
+                    if (c.dataset.hasPp === 'true') counts.pp++;
+                }});
+                filterButtons.forEach(b => {{
+                    const el = b.querySelector('.filter-count');
+                    if (el) el.textContent = counts[b.dataset.filter] ?? 0;
+                }});
+            }}
+
+            tabButtons.forEach(btn => {{
+                btn.addEventListener('click', () => showTab(btn.dataset.tab));
+            }});
+
+            // Ctrl+F menemukan teks di tab yang sedang tersembunyi -> pindah ke tab tersebut
+            tabPanels.forEach(panel => {{
+                panel.addEventListener('beforematch', () => showTab(panel.dataset.tab));
+            }});
 
             // Buka / tutup daftar berita tambahan (lebih dari 3) pada sebuah kartu
             function setExpanded(card, open) {{
@@ -1298,6 +1444,8 @@ def generate_dashboard(
     total_sources: int,
     sorted_stocks: Dict[str, dict],
     news_items: List[dict] = None,
+    past_stocks: Dict[str, dict] = None,
+    past_news_items: List[dict] = None,
 ) -> dict:
     """
     Fungsi utama pembuatan dan penyimpanan file dashboard:
@@ -1320,6 +1468,8 @@ def generate_dashboard(
         "total_stocks": len(sorted_stocks),
         "stocks": sorted_stocks,
         "news_items": news_items or [],
+        "past_stocks": past_stocks or {},
+        "past_news_items": past_news_items or [],
     }
 
     with open(json_filepath, "w", encoding="utf-8") as f:
@@ -1347,6 +1497,7 @@ def generate_dashboard(
         sorted_stocks=sorted_stocks,
         archives=archives,
         is_archive_page=True,
+        past_stocks=past_stocks,
     )
     archive_filepath = os.path.join(ARCHIVE_DIR, f"{date_str}-{session}.html")
     with open(archive_filepath, "w", encoding="utf-8") as f:
@@ -1362,6 +1513,7 @@ def generate_dashboard(
         sorted_stocks=sorted_stocks,
         archives=archives,
         is_archive_page=False,
+        past_stocks=past_stocks,
     )
     with open(INDEX_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(index_html)

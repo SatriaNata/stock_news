@@ -333,7 +333,7 @@ def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_t
     Fungsi utama pengumpulan berita:
     1. Tentukan jendela waktu sesi.
     2. Ambil dari seluruh sumber RSS yang aktif.
-    3. Filter rentang waktu sesi.
+    3. Filter rentang waktu sesi; berita sebelum rentang sesi dipisah ke "past_news_items".
     4. Hilangkan duplikat internal (link sama / judul mirip).
     5. Jika sesi siang, hilangkan berita yang sudah tayang di sesi pagi.
 
@@ -372,7 +372,9 @@ def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_t
     logger.info(f"Total item mentah terkumpul: {len(all_raw_items)} dari {active_sources_count} sumber.")
 
     # 2. Filter rentang waktu & deduplikasi cepat
+    # Berita yang terbit sebelum awal sesi (tapi setelah MIN_NEWS_DATE) masuk ke daftar "Berita Lama"
     filtered_items = []
+    past_items = []
     seen_links = set()
     seen_exact_titles = set()
     seen_tokens_list = []  # Menyimpan (tokens_set, title_string)
@@ -386,10 +388,11 @@ def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_t
         if pub_dt is not None and pub_dt < MIN_NEWS_DATE:
             continue
 
-        # Filter waktu (kecuali jika flag ignore_time_filter aktif)
-        if not ignore_time_filter and pub_dt is not None:
-            if not (start_dt <= pub_dt <= end_dt):
-                continue
+        # Tentukan tujuan: sesi ini atau Berita Lama.
+        # ignore_time_filter hanya melonggarkan batas akhir (berita setelah jam sesi tetap masuk sesi ini).
+        is_past = pub_dt is not None and pub_dt < start_dt
+        if pub_dt is not None and pub_dt > end_dt and not ignore_time_filter:
+            continue
 
         # Cek duplikasi link persis
         if link in seen_links:
@@ -430,15 +433,15 @@ def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_t
         seen_links.add(link)
         seen_exact_titles.add(norm_title)
         seen_tokens_list.append((current_tokens, title))
-        filtered_items.append(item)
+        (past_items if is_past else filtered_items).append(item)
 
     # Urutkan berita dari yang paling baru
-    filtered_items.sort(
-        key=lambda x: x["pub_datetime"] if x["pub_datetime"] else datetime.min.replace(tzinfo=TIMEZONE),
-        reverse=True
-    )
+    sort_key = lambda x: x["pub_datetime"] if x["pub_datetime"] else datetime.min.replace(tzinfo=TIMEZONE)
+    filtered_items.sort(key=sort_key, reverse=True)
+    past_items.sort(key=sort_key, reverse=True)
 
     logger.info(f"Berita berhasil disaring untuk {session.upper()}: {len(filtered_items)} berita valid & unik.")
+    logger.info(f"Berita lama (sebelum rentang sesi, sejak {MIN_NEWS_DATE.date()}): {len(past_items)} berita.")
 
     # Hitung jumlah sumber unik yang beritanya masuk dalam filter
     unique_sources = list({item["source"] for item in filtered_items})
@@ -453,6 +456,7 @@ def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_t
         "total_sources": len(unique_sources),
         "sources_list": unique_sources,
         "news_items": filtered_items,
+        "past_news_items": past_items,
     }
 
 
