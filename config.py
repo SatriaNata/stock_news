@@ -6,6 +6,7 @@ agar mudah diubah sewaktu-waktu tanpa membongkar kode utama.
 """
 
 import os
+from datetime import datetime
 from zoneinfo import ZoneInfo
 
 # Muat variabel dari file .env jika ada (untuk pengujian lokal)
@@ -48,6 +49,10 @@ SESSION_CONFIG = {
         "end_minute": 20,
     }
 }
+
+# Batas tanggal terbit paling lama yang diterima (WIB).
+# Tetap berlaku meskipun --ignore-time-filter aktif, agar berita lama dari RSS tidak ikut terambil.
+MIN_NEWS_DATE = datetime(2025, 7, 1, tzinfo=TIMEZONE)
 
 # ==============================================================================
 # 2. DAFTAR SUMBER BERITA (RSS FEEDS)

@@ -33,6 +33,7 @@ from config import (
     HTTP_HEADERS,
     REQUEST_TIMEOUT,
     DATA_DIR,
+    MIN_NEWS_DATE,
 )
 
 # Konfigurasi logging agar mudah dibaca di terminal dan file log GitHub Actions
@@ -380,6 +381,10 @@ def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_t
         link = item["link"].strip()
         title = item["title"].strip()
         pub_dt = item["pub_datetime"]
+
+        # Buang berita yang terlalu lama (berlaku juga saat ignore_time_filter aktif)
+        if pub_dt is not None and pub_dt < MIN_NEWS_DATE:
+            continue
 
         # Filter waktu (kecuali jika flag ignore_time_filter aktif)
         if not ignore_time_filter and pub_dt is not None:
