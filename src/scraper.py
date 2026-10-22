@@ -15,6 +15,7 @@ import json
 import glob
 import html
 import hashlib
+import time
 import logging
 from datetime import datetime, timedelta
 from xml.etree import ElementTree as ET
@@ -33,6 +34,7 @@ from config import (
     RSS_SOURCES,
     HTTP_HEADERS,
     REQUEST_TIMEOUT,
+    FEED_MAX_RETRIES,
     DATA_DIR,
     MIN_NEWS_DATE,
     PAST_NEWS_DIR,
@@ -179,29 +181,34 @@ def fetch_feed_items(source_info: dict) -> list:
     url = source_info["url"]
 
     logger.info(f"Mengunduh feed: {name} ...")
-    try:
-        if requests is not None:
-            response = requests.get(
-                url,
-                headers=HTTP_HEADERS,
-                timeout=REQUEST_TIMEOUT,
-            )
-            if response.status_code != 200:
-                logger.warning(f"Sumber '{name}' mengembalikan status HTTP {response.status_code}. Dilewati.")
-                return []
-            xml_content = response.content
-        else:
-            req = urllib.request.Request(url, headers=HTTP_HEADERS)
-            with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
-                if resp.status != 200:
-                    logger.warning(f"Sumber '{name}' mengembalikan status HTTP {resp.status}. Dilewati.")
-                    return []
-                xml_content = resp.read()
+    root = None
+    # Coba hingga FEED_MAX_RETRIES kali: server sesekali menolak/membatasi permintaan sementara
+    for attempt in range(1, FEED_MAX_RETRIES + 1):
+        try:
+            if requests is not None:
+                response = requests.get(
+                    url,
+                    headers=HTTP_HEADERS,
+                    timeout=REQUEST_TIMEOUT,
+                )
+                if response.status_code != 200:
+                    raise ValueError(f"status HTTP {response.status_code}")
+                xml_content = response.content
+            else:
+                req = urllib.request.Request(url, headers=HTTP_HEADERS)
+                with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+                    if resp.status != 200:
+                        raise ValueError(f"status HTTP {resp.status}")
+                    xml_content = resp.read()
 
-        root = ET.fromstring(xml_content)
-    except Exception as e:
-        logger.warning(f"Koneksi atau parsing '{name}' gagal ({e}). Dilewati.")
-        return []
+            root = ET.fromstring(xml_content)
+            break
+        except Exception as e:
+            if attempt == FEED_MAX_RETRIES:
+                logger.warning(f"Koneksi atau parsing '{name}' gagal ({e}) setelah {attempt} percobaan. Dilewati.")
+                return []
+            logger.warning(f"Koneksi atau parsing '{name}' gagal ({e}). Mencoba lagi ({attempt}/{FEED_MAX_RETRIES})...")
+            time.sleep(3 * attempt)
 
     items = []
 
@@ -372,6 +379,13 @@ def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_t
         logger.info(f"  -> {src['name']}: {len(items)} item mentah diperoleh.")
 
     logger.info(f"Total item mentah terkumpul: {len(all_raw_items)} dari {active_sources_count} sumber.")
+
+    # Pengaman: jika semua sumber gagal, hentikan proses agar data & dashboard sebelumnya tidak tertimpa kosong
+    if not all_raw_items:
+        raise RuntimeError(
+            f"Semua {active_sources_count} sumber RSS gagal diambil (0 berita). "
+            "Kemungkinan koneksi diblokir/dibatasi sementara. Data sebelumnya tidak diubah."
+        )
 
     # 2. Filter rentang waktu & deduplikasi cepat
     # Berita yang terbit sebelum awal sesi (tapi setelah MIN_NEWS_DATE) masuk ke daftar "Berita Lama"

@@ -150,6 +150,7 @@ HTTP_HEADERS = {
 
 # Timeout dalam detik saat menghubungi setiap feed
 REQUEST_TIMEOUT = 12
+FEED_MAX_RETRIES = 3  # Percobaan ulang per sumber RSS jika gagal/ditolak sementara
 
 # ==============================================================================
 # 3. PENGATURAN AI (GEMINI API)
