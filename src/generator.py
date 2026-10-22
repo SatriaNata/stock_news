@@ -22,6 +22,7 @@ from config import (
     DATA_DIR,
     ARCHIVE_DIR,
     INDEX_HTML_PATH,
+    PAST_NEWS_HTML_PATH,
     TIMEZONE,
 )
 
@@ -224,11 +225,10 @@ def render_dashboard_html(
     if not archive_links_html:
         archive_links_html.append('<div class="empty-archive">Belum ada arsip hari lain.</div>')
 
-    # Pemilih halaman: Sesi Pagi | Sesi Siang | Berita Lama (untuk tanggal yang sama)
+    # Pemilih sesi: Sesi Pagi | Sesi Siang (untuk tanggal yang sama)
     switcher_items = [
         ("pagi", "Sesi Pagi", '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>'),
         ("siang", "Sesi Siang", '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>'),
-        ("lama", "Berita Lama", '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>'),
     ]
     switcher_html = []
     for key, label, icon in switcher_items:
@@ -244,10 +244,16 @@ def render_dashboard_html(
                 f'{icon_svg} {label} <span class="status-tag">belum tersedia</span></a>'
             )
 
+    # Tombol Berita Lama terpisah: satu halaman global berita-lama.html, tampil di semua halaman
+    history_icon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>'
+    history_active = " active" if session == "lama" else ""
+    history_href = "#" if session == "lama" else f"{prefix}berita-lama.html"
+    history_btn_html = f'<a href="{history_href}" class="history-btn{history_active}">{history_icon} Berita Lama</a>'
+
     if session == "lama":
         header_badge = "BERITA LAMA"
         session_title = f"Berita Lama · {session_label}"
-        past_note_html = '<div class="past-note">Berita yang terbit sebelum rentang sesi terbaru. Ringkasan AI hanya muncul jika berita tersebut pernah dianalisis di sesi sebelumnya.</div>'
+        past_note_html = '<div class="past-note">Kumpulan berita sebelum sesi pagi &amp; siang hari ini (sejak 1 Juli 2025), bertambah setiap update. Ringkasan AI hanya muncul jika berita tersebut pernah dianalisis di sesi sebelumnya.</div>'
         empty_text = "Belum ada berita lama."
     else:
         header_badge = "RANGKUMAN PAGI" if session == "pagi" else "RANGKUMAN SIANG"
@@ -371,6 +377,40 @@ def render_dashboard_html(
         .meta-session {{
             font-weight: 600;
             color: var(--blue-accent);
+        }}
+
+        /* Navigasi header: switcher sesi + tombol Berita Lama */
+        .header-nav {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }}
+
+        .history-btn {{
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: all 0.15s ease;
+        }}
+
+        .history-btn:hover {{
+            border-color: var(--border-hover);
+            color: var(--text-main);
+        }}
+
+        .history-btn.active {{
+            color: var(--blue-accent);
+            border-color: var(--blue-accent);
+            background-color: var(--blue-light);
         }}
 
         /* Switcher Sesi */
@@ -1057,9 +1097,16 @@ def render_dashboard_html(
             .header-top {{
                 flex-direction: column;
             }}
+            .header-nav {{
+                width: 100%;
+            }}
             .session-switcher {{
                 width: 100%;
                 justify-content: stretch;
+            }}
+            .history-btn {{
+                width: 100%;
+                justify-content: center;
             }}
             .session-btn {{
                 flex: 1;
@@ -1094,9 +1141,12 @@ def render_dashboard_html(
                     </div>
                 </div>
 
-                <!-- Pemindah Halaman (Pagi / Siang / Berita Lama) -->
-                <div class="session-switcher">
-                    {''.join(switcher_html)}
+                <!-- Pemindah Sesi (Pagi / Siang) + tombol Berita Lama terpisah -->
+                <div class="header-nav">
+                    <div class="session-switcher">
+                        {''.join(switcher_html)}
+                    </div>
+                    {history_btn_html}
                 </div>
             </div>
 
@@ -1333,9 +1383,10 @@ def generate_dashboard(
     """
     Fungsi utama pembuatan dan penyimpanan file dashboard:
     1. Menyimpan data mentah ke data/YYYY-MM-DD-{sesi}.json
-    2. Merender halaman Berita Lama ke arsip/YYYY-MM-DD-lama.html (dari run terbaru)
+    2. Merender halaman global Berita Lama ke berita-lama.html
     3. Merender HTML arsip ke arsip/YYYY-MM-DD-{sesi}.html
-    4. Merender HTML utama ke index.html (selalu menampilkan sesi terbaru)
+    4. Merender ulang arsip sesi lain di tanggal yang sama (agar tombol sesinya ikut aktif)
+    5. Merender HTML utama ke index.html (selalu menampilkan sesi terbaru)
     """
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(ARCHIVE_DIR, exist_ok=True)
@@ -1352,16 +1403,13 @@ def generate_dashboard(
         "total_stocks": len(sorted_stocks),
         "stocks": sorted_stocks,
         "news_items": news_items or [],
-        "past_stocks": past_stocks or {},
-        "past_news_items": past_news_items or [],
     }
 
     with open(json_filepath, "w", encoding="utf-8") as f:
         json.dump(payload_to_save, f, ensure_ascii=False, indent=2, default=str)
 
-    # 2. Dapatkan daftar arsip terkini
+    # Dapatkan daftar arsip terkini & pastikan sesi saat ini terdaftar
     archives = get_archive_list()
-    # Pastikan sesi saat ini terdaftar jika belum ada
     current_entry = {
         "date": date_str,
         "session": session,
@@ -1371,24 +1419,27 @@ def generate_dashboard(
     if not any(a["filename"] == current_entry["filename"] for a in archives):
         archives.insert(0, current_entry)
 
-    # 3. Render halaman Berita Lama lebih dulu agar tombolnya aktif di halaman sesi
-    past_stocks = past_stocks or {}
+    # Tulis arsip sesi saat ini lebih dulu agar tombol sesi di halaman lain mendeteksinya
+    archive_filepath = os.path.join(ARCHIVE_DIR, f"{date_str}-{session}.html")
+    with open(archive_filepath, "w", encoding="utf-8") as f:
+        f.write("")
+
+    # 2. Halaman global Berita Lama (berada di root, sejajar index.html)
     past_news_items = past_news_items or []
     lama_html = render_dashboard_html(
         session="lama",
-        session_label=f"sebelum {'Sesi Pagi' if session == 'pagi' else 'Sesi Siang'} ({session_label})",
+        session_label=f"sebelum sesi {date_str}",
         date_str=date_str,
         total_news=len(past_news_items),
         total_sources=len({n["source"] for n in past_news_items}),
-        sorted_stocks=past_stocks,
+        sorted_stocks=past_stocks or {},
         archives=archives,
-        is_archive_page=True,
+        is_archive_page=False,
     )
-    lama_filepath = os.path.join(ARCHIVE_DIR, f"{date_str}-lama.html")
-    with open(lama_filepath, "w", encoding="utf-8") as f:
+    with open(PAST_NEWS_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(lama_html)
 
-    # 4. Render file arsip (is_archive_page=True)
+    # 3. Render file arsip (is_archive_page=True)
     archive_html = render_dashboard_html(
         session=session,
         session_label=session_label,
@@ -1399,9 +1450,27 @@ def generate_dashboard(
         archives=archives,
         is_archive_page=True,
     )
-    archive_filepath = os.path.join(ARCHIVE_DIR, f"{date_str}-{session}.html")
     with open(archive_filepath, "w", encoding="utf-8") as f:
         f.write(archive_html)
+
+    # 4. Render ulang arsip sesi lain di tanggal yang sama dari JSON-nya
+    other_session = "siang" if session == "pagi" else "pagi"
+    other_json = os.path.join(DATA_DIR, f"{date_str}-{other_session}.json")
+    if os.path.exists(other_json):
+        with open(other_json, "r", encoding="utf-8") as f:
+            other = json.load(f)
+        other_html = render_dashboard_html(
+            session=other_session,
+            session_label=other.get("session_label", ""),
+            date_str=date_str,
+            total_news=other.get("total_news", len(other.get("news_items", []))),
+            total_sources=other.get("total_sources", 0),
+            sorted_stocks=other.get("stocks", {}),
+            archives=archives,
+            is_archive_page=True,
+        )
+        with open(os.path.join(ARCHIVE_DIR, f"{date_str}-{other_session}.html"), "w", encoding="utf-8") as f:
+            f.write(other_html)
 
     # 5. Render file index.html (is_archive_page=False)
     index_html = render_dashboard_html(
@@ -1420,6 +1489,6 @@ def generate_dashboard(
     return {
         "index_html": INDEX_HTML_PATH,
         "archive_html": archive_filepath,
-        "lama_html": lama_filepath,
+        "lama_html": PAST_NEWS_HTML_PATH,
         "json_path": json_filepath,
     }

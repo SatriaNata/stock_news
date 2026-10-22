@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Berita Saham IDX - Berita Lama · sebelum Sesi Siang (07.00 – 13.20 WIB)</title>
+    <title>Dashboard Berita Saham IDX - Berita Lama · sebelum sesi 2026-10-22</title>
     <!-- Google Fonts: IBM Plex Sans & IBM Plex Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -114,6 +114,40 @@
         .meta-session {
             font-weight: 600;
             color: var(--blue-accent);
+        }
+
+        /* Navigasi header: switcher sesi + tombol Berita Lama */
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .history-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: all 0.15s ease;
+        }
+
+        .history-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--text-main);
+        }
+
+        .history-btn.active {
+            color: var(--blue-accent);
+            border-color: var(--blue-accent);
+            background-color: var(--blue-light);
         }
 
         /* Switcher Sesi */
@@ -800,9 +834,16 @@
             .header-top {
                 flex-direction: column;
             }
+            .header-nav {
+                width: 100%;
+            }
             .session-switcher {
                 width: 100%;
                 justify-content: stretch;
+            }
+            .history-btn {
+                width: 100%;
+                justify-content: center;
             }
             .session-btn {
                 flex: 1;
@@ -831,15 +872,18 @@
                     <span class="header-tag">BERITA LAMA</span>
                     <h1 class="dashboard-title">Berita Saham Hari Ini</h1>
                     <div class="header-meta">
-                        <span class="meta-session">Berita Lama · sebelum Sesi Siang (07.00 – 13.20 WIB)</span>
+                        <span class="meta-session">Berita Lama · sebelum sesi 2026-10-22</span>
                         <span>•</span>
-                        <span>Update: 22 Oct 2026, 17:37 WIB</span>
+                        <span>Update: 22 Oct 2026, 18:01 WIB</span>
                     </div>
                 </div>
 
-                <!-- Pemindah Halaman (Pagi / Siang / Berita Lama) -->
-                <div class="session-switcher">
-                    <a href="../arsip/2026-10-22-pagi.html" class="session-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> Sesi Pagi</a><a href="../arsip/2026-10-22-siang.html" class="session-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg> Sesi Siang</a><a href="#" class="session-btn active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg> Berita Lama</a>
+                <!-- Pemindah Sesi (Pagi / Siang) + tombol Berita Lama terpisah -->
+                <div class="header-nav">
+                    <div class="session-switcher">
+                        <a href="arsip/2026-10-22-pagi.html" class="session-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> Sesi Pagi</a><a href="arsip/2026-10-22-siang.html" class="session-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg> Sesi Siang</a>
+                    </div>
+                    <a href="#" class="history-btn active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg> Berita Lama</a>
                 </div>
             </div>
 
@@ -882,7 +926,7 @@
         <main class="main-layout">
             <!-- Kolom Kiri: Kartu Saham -->
             <section class="stock-cards-list" id="stockCardsContainer">
-                <div class="past-note">Berita yang terbit sebelum rentang sesi terbaru. Ringkasan AI hanya muncul jika berita tersebut pernah dianalisis di sesi sebelumnya.</div>
+                <div class="past-note">Kumpulan berita sebelum sesi pagi &amp; siang hari ini (sejak 1 Juli 2025), bertambah setiap update. Ringkasan AI hanya muncul jika berita tersebut pernah dianalisis di sesi sebelumnya.</div>
                 
         <article class="stock-card" data-code="BREN" data-name="barito renewables energy tbk." data-sentiment="" data-has-buyback="true" data-has-pp="false">
             <div class="card-top">
@@ -5717,11 +5761,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="RAJA" data-name="rukun raharja tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="ANTM" data-name="aneka tambang tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">RAJA</span>
-                    <span class="company-name" title="Rukun Raharja Tbk.">Rukun Raharja Tbk.</span>
+                    <span class="ticker-code">ANTM</span>
+                    <span class="company-name" title="Aneka Tambang Tbk.">Aneka Tambang Tbk.</span>
                 </div>
                 <div class="badge-group">
                     
@@ -5750,11 +5794,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="ANTM" data-name="aneka tambang tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="RAJA" data-name="rukun raharja tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">ANTM</span>
-                    <span class="company-name" title="Aneka Tambang Tbk.">Aneka Tambang Tbk.</span>
+                    <span class="ticker-code">RAJA</span>
+                    <span class="company-name" title="Rukun Raharja Tbk.">Rukun Raharja Tbk.</span>
                 </div>
                 <div class="badge-group">
                     
@@ -5915,11 +5959,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="MAYA" data-name="bank mayapada internasional tb" data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="SRAJ" data-name="sejahteraraya anugrahjaya tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">MAYA</span>
-                    <span class="company-name" title="Bank Mayapada Internasional Tb">Bank Mayapada Internasional Tb</span>
+                    <span class="ticker-code">SRAJ</span>
+                    <span class="company-name" title="Sejahteraraya Anugrahjaya Tbk.">Sejahteraraya Anugrahjaya Tbk.</span>
                 </div>
                 <div class="badge-group">
                     
@@ -5948,11 +5992,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="SRAJ" data-name="sejahteraraya anugrahjaya tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="MAYA" data-name="bank mayapada internasional tb" data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">SRAJ</span>
-                    <span class="company-name" title="Sejahteraraya Anugrahjaya Tbk.">Sejahteraraya Anugrahjaya Tbk.</span>
+                    <span class="ticker-code">MAYA</span>
+                    <span class="company-name" title="Bank Mayapada Internasional Tb">Bank Mayapada Internasional Tb</span>
                 </div>
                 <div class="badge-group">
                     
@@ -6971,39 +7015,6 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="SMGR" data-name="semen indonesia (persero) tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
-            <div class="card-top">
-                <div class="ticker-group">
-                    <span class="ticker-code">SMGR</span>
-                    <span class="company-name" title="Semen Indonesia (Persero) Tbk.">Semen Indonesia (Persero) Tbk.</span>
-                </div>
-                <div class="badge-group">
-                    
-                    <span class="sentiment-pill pill-none">Tanpa AI</span>
-                    <span class="count-badge">1 Berita</span>
-                </div>
-            </div>
-            
-            <div class="card-news-section">
-                <div class="section-label">Berita Terkait:</div>
-                <ul class="news-list">
-                    
-            <li class="news-item">
-                <a href="https://news.google.com/rss/articles/CBMiwAJBVV95cUxOWXJoTm1GSm9HeFBIT3F0WVNuX2R1aEk0QklnS0c0Q1dNZFlIcDRhMUN2WWZYeGhDblhBSGpvYW1XRDdvZ0NGNE5DU0gwMV81V1ROS0RCOXVFS3ZRM0dYZmctZmVNMnJ3Zjhxa2NLREJ1S2NRUmc1S21oUjJMV3VtRm5MX2xYcmF6TXk2aXhEbHFwdG53djdydG1RRDNKMGFLdjBUZ0FSTlZDN210bUpmNWF3UVZqZGtUc0FOZnZ2dVFMazJTazBKVlBDRW4zeEZleEl1TXd0S1ljamhMLWwycGtiZXEzeUgxQ09EcEJpRnRMMDQtSGJCbWZtMGp5YlNiUWdMSlJNQVo3WVVaZzJpc0s3NXhhLVJZemVKV0t6WS1OeFlPd0NsVklaSXNfQm5ZLVI1QlE0TGZUM09peFlMUw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
-                    Indeks Kompas100 Melemah, Tapi INCO, KPIG, SMGR Malah Cuan - Indo Premier Sekuritas
-                </a>
-                <div class="news-meta">
-                    <span class="news-source">Ipotnews via Google News</span>
-                    <span class="news-dot">•</span>
-                    <span class="news-time">2026-10-08 14:00 WIB</span>
-                </div>
-            </li>
-            
-                </ul>
-                
-            </div>
-        </article>
-        
         <article class="stock-card" data-code="KPIG" data-name="mnc land tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
@@ -7037,11 +7048,44 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="NICK" data-name="charnic capital tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="SMGR" data-name="semen indonesia (persero) tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">NICK</span>
-                    <span class="company-name" title="Charnic Capital Tbk.">Charnic Capital Tbk.</span>
+                    <span class="ticker-code">SMGR</span>
+                    <span class="company-name" title="Semen Indonesia (Persero) Tbk.">Semen Indonesia (Persero) Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-none">Tanpa AI</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiwAJBVV95cUxOWXJoTm1GSm9HeFBIT3F0WVNuX2R1aEk0QklnS0c0Q1dNZFlIcDRhMUN2WWZYeGhDblhBSGpvYW1XRDdvZ0NGNE5DU0gwMV81V1ROS0RCOXVFS3ZRM0dYZmctZmVNMnJ3Zjhxa2NLREJ1S2NRUmc1S21oUjJMV3VtRm5MX2xYcmF6TXk2aXhEbHFwdG53djdydG1RRDNKMGFLdjBUZ0FSTlZDN210bUpmNWF3UVZqZGtUc0FOZnZ2dVFMazJTazBKVlBDRW4zeEZleEl1TXd0S1ljamhMLWwycGtiZXEzeUgxQ09EcEJpRnRMMDQtSGJCbWZtMGp5YlNiUWdMSlJNQVo3WVVaZzJpc0s3NXhhLVJZemVKV0t6WS1OeFlPd0NsVklaSXNfQm5ZLVI1QlE0TGZUM09peFlMUw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Indeks Kompas100 Melemah, Tapi INCO, KPIG, SMGR Malah Cuan - Indo Premier Sekuritas
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Ipotnews via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-10-08 14:00 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+                
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="POLA" data-name="pool advista finance tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">POLA</span>
+                    <span class="company-name" title="Pool Advista Finance Tbk.">Pool Advista Finance Tbk.</span>
                 </div>
                 <div class="badge-group">
                     
@@ -7070,11 +7114,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="POLA" data-name="pool advista finance tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="NICK" data-name="charnic capital tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">POLA</span>
-                    <span class="company-name" title="Pool Advista Finance Tbk.">Pool Advista Finance Tbk.</span>
+                    <span class="ticker-code">NICK</span>
+                    <span class="company-name" title="Charnic Capital Tbk.">Charnic Capital Tbk.</span>
                 </div>
                 <div class="badge-group">
                     
@@ -7433,11 +7477,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="ALKA" data-name="alakasa industrindo tbk" data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="SEMA" data-name="semacom integrated tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">ALKA</span>
-                    <span class="company-name" title="Alakasa Industrindo Tbk">Alakasa Industrindo Tbk</span>
+                    <span class="ticker-code">SEMA</span>
+                    <span class="company-name" title="Semacom Integrated Tbk.">Semacom Integrated Tbk.</span>
                 </div>
                 <div class="badge-group">
                     
@@ -7466,11 +7510,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="SEMA" data-name="semacom integrated tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="ALKA" data-name="alakasa industrindo tbk" data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">SEMA</span>
-                    <span class="company-name" title="Semacom Integrated Tbk.">Semacom Integrated Tbk.</span>
+                    <span class="ticker-code">ALKA</span>
+                    <span class="company-name" title="Alakasa Industrindo Tbk">Alakasa Industrindo Tbk</span>
                 </div>
                 <div class="badge-group">
                     
@@ -7928,11 +7972,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="ATAP" data-name="trimitra prawara goldland tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="DATA" data-name="remala abadi tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">ATAP</span>
-                    <span class="company-name" title="Trimitra Prawara Goldland Tbk.">Trimitra Prawara Goldland Tbk.</span>
+                    <span class="ticker-code">DATA</span>
+                    <span class="company-name" title="Remala Abadi Tbk.">Remala Abadi Tbk.</span>
                 </div>
                 <div class="badge-group">
                     
@@ -7961,11 +8005,11 @@
             </div>
         </article>
         
-        <article class="stock-card" data-code="DATA" data-name="remala abadi tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
+        <article class="stock-card" data-code="ATAP" data-name="trimitra prawara goldland tbk." data-sentiment="" data-has-buyback="false" data-has-pp="false">
             <div class="card-top">
                 <div class="ticker-group">
-                    <span class="ticker-code">DATA</span>
-                    <span class="company-name" title="Remala Abadi Tbk.">Remala Abadi Tbk.</span>
+                    <span class="ticker-code">ATAP</span>
+                    <span class="company-name" title="Trimitra Prawara Goldland Tbk.">Trimitra Prawara Goldland Tbk.</span>
                 </div>
                 <div class="badge-group">
                     
@@ -8221,12 +8265,12 @@
                     </h2>
                     <div class="archive-list">
                         
-        <a href="../arsip/2026-10-22-siang.html" class="archive-item ">
+        <a href="arsip/2026-10-22-siang.html" class="archive-item ">
             <span class="archive-date">2026-10-22</span>
             <span class="archive-badge badge-siang">Sesi Siang</span>
         </a>
         
-        <a href="../arsip/2026-10-22-pagi.html" class="archive-item ">
+        <a href="arsip/2026-10-22-pagi.html" class="archive-item ">
             <span class="archive-date">2026-10-22</span>
             <span class="archive-badge badge-pagi">Sesi Pagi</span>
         </a>

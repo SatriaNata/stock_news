@@ -24,7 +24,7 @@ import logging
 from datetime import datetime
 
 from config import TIMEZONE
-from src.scraper import collect_news, get_session_window
+from src.scraper import collect_news, get_session_window, update_past_news_store
 from src.analyzer import analyze_news, analyze_past_news
 from src.generator import generate_dashboard
 from src.notifier import notify_success, notify_failure
@@ -122,7 +122,9 @@ def main():
         use_ai = not args.skip_ai
         sorted_stocks = analyze_news(news_items, use_ai=use_ai)
 
-        # 3b. Berita Lama: pakai ulang hasil AI tersimpan, tanpa panggilan Gemini baru
+        # 3b. Berita Lama: tambahkan berita lama baru ke kumpulan data/berita-lama.json,
+        #     lalu kelompokkan per saham memakai hasil AI tersimpan (tanpa panggilan Gemini baru)
+        past_news_items = update_past_news_store(past_news_items, date_str, news_items)
         past_stocks = analyze_past_news(past_news_items, exclude_filename=f"{date_str}-{target_session}.json")
 
         # 4. Pembuatan Dashboard Web Statis (HTML & JSON)
@@ -139,7 +141,7 @@ def main():
         )
         logger.info(f"Dashboard utama diperbarui: {files_created['index_html']}")
         logger.info(f"Arsip sesi disimpan      : {files_created['archive_html']}")
-        logger.info(f"Halaman Berita Lama      : {files_created['lama_html']}")
+        logger.info(f"Halaman Berita Lama      : {files_created['lama_html']} ({len(past_news_items)} berita)")
         logger.info(f"Data JSON disimpan       : {files_created['json_path']}")
 
         # 5. Notifikasi Telegram

@@ -12,6 +12,7 @@ Fitur:
 import os
 import re
 import json
+import glob
 import html
 import hashlib
 import logging
@@ -34,6 +35,7 @@ from config import (
     REQUEST_TIMEOUT,
     DATA_DIR,
     MIN_NEWS_DATE,
+    PAST_NEWS_STORE_PATH,
 )
 
 # Konfigurasi logging agar mudah dibaca di terminal dan file log GitHub Actions
@@ -458,6 +460,74 @@ def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_t
         "news_items": filtered_items,
         "past_news_items": past_items,
     }
+
+
+def _as_datetime(value):
+    """pub_datetime bisa berupa datetime (hasil scraping) atau string (dari JSON)."""
+    if isinstance(value, datetime):
+        return value
+    if value:
+        try:
+            return datetime.fromisoformat(str(value))
+        except ValueError:
+            return None
+    return None
+
+
+def update_past_news_store(new_past_items: list, date_str: str, current_session_items: list) -> list:
+    """
+    Memperbarui kumpulan "Berita Lama" di data/berita-lama.json lalu mengembalikan seluruh isinya.
+    - Menambahkan berita lama dari run ini + berita sesi pagi/siang dari tanggal sebelumnya
+      (berita sesi kemarin otomatis menjadi berita lama hari ini).
+    - Berita yang sedang tampil di sesi pagi/siang hari ini tidak dimasukkan.
+    - Hanya berita sejak MIN_NEWS_DATE; duplikat (link sama) diabaikan.
+    """
+    store = []
+    if os.path.exists(PAST_NEWS_STORE_PATH):
+        try:
+            with open(PAST_NEWS_STORE_PATH, "r", encoding="utf-8") as f:
+                store = json.load(f).get("news_items", [])
+        except Exception as e:
+            logger.warning(f"Gagal membaca {PAST_NEWS_STORE_PATH} ({e}). Memulai kumpulan Berita Lama baru.")
+
+    # Berita sesi hari ini (sesi yang sedang berjalan + sesi lain di tanggal yang sama)
+    today_links = {n["link"].strip() for n in current_session_items}
+    candidates = list(new_past_items)
+    for path in sorted(glob.glob(os.path.join(DATA_DIR, "*-*-*-*.json"))):
+        name = os.path.basename(path).replace(".json", "")
+        file_date, _, file_session = name.rpartition("-")
+        if file_session not in ("pagi", "siang"):
+            continue
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                session_items = json.load(f).get("news_items", [])
+        except Exception:
+            continue
+        if file_date == date_str:
+            today_links.update(n["link"].strip() for n in session_items)
+        elif file_date < date_str:
+            candidates.extend(session_items)
+
+    store_links = {n["link"].strip() for n in store}
+    merged = {}
+    added = 0
+    for item in store + candidates:
+        link = item["link"].strip()
+        pub_dt = _as_datetime(item.get("pub_datetime"))
+        if link in merged or link in today_links:
+            continue
+        if pub_dt is not None and pub_dt < MIN_NEWS_DATE:
+            continue
+        if link not in store_links:
+            added += 1
+        merged[link] = {**item, "pub_datetime": pub_dt.isoformat() if pub_dt else None}
+
+    items = sorted(merged.values(), key=lambda x: x["pub_datetime"] or "", reverse=True)
+    with open(PAST_NEWS_STORE_PATH, "w", encoding="utf-8") as f:
+        json.dump({"updated": datetime.now(TIMEZONE).isoformat(), "news_items": items}, f, ensure_ascii=False, indent=2)
+
+    logger.info(f"Kumpulan Berita Lama: {len(items)} berita ({added} baru ditambahkan).")
+    return items
 
 
 if __name__ == "__main__":
