@@ -74,9 +74,9 @@ jobs:
           
           # Jika manual workflow_dispatch memilih 'auto'
           if [ "$TARGET_SESI" = "auto" ] || [ -z "$TARGET_SESI" ]; then
-            # Ambil jam UTC saat ini
-            CURRENT_HOUR=$(date -u +"%H")
-            if [ "$CURRENT_HOUR" -ge 20 ] || [ "$CURRENT_HOUR" -lt 8 ]; then
+            # Ambil jam WIB saat ini: sebelum 07.00 WIB -> pagi, sejak 07.00 WIB -> siang
+            CURRENT_HOUR=$(TZ=Asia/Jakarta date +"%-H")
+            if [ "$CURRENT_HOUR" -lt 7 ]; then
               TARGET_SESI="pagi"
             else
               TARGET_SESI="siang"

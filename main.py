@@ -40,11 +40,11 @@ logger = logging.getLogger("main")
 def determine_default_session() -> str:
     """
     Menentukan sesi otomatis berdasarkan jam saat ini di zona WIB jika user tidak menyatakannya.
-    Sebelum pukul 11.00 WIB -> 'pagi'
-    Pukul 11.00 WIB ke atas -> 'siang'
+    Sebelum pukul 07.00 WIB -> 'pagi'
+    Pukul 07.00 WIB ke atas -> 'siang' (sesi siang memuat berita terbaru hari ini)
     """
     now_hour = datetime.now(TIMEZONE).hour
-    if now_hour < 11:
+    if now_hour < 7:
         return "pagi"
     return "siang"
 
@@ -139,6 +139,7 @@ def main():
         )
         logger.info(f"Dashboard utama diperbarui: {files_created['index_html']}")
         logger.info(f"Arsip sesi disimpan      : {files_created['archive_html']}")
+        logger.info(f"Halaman Berita Lama      : {files_created['lama_html']}")
         logger.info(f"Data JSON disimpan       : {files_created['json_path']}")
 
         # 5. Notifikasi Telegram

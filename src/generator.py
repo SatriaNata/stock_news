@@ -46,6 +46,8 @@ def get_archive_list() -> List[dict]:
         if len(parts) >= 4:
             date_str = f"{parts[0]}-{parts[1]}-{parts[2]}"
             session_str = parts[3].lower()
+            if session_str not in ("pagi", "siang"):
+                continue  # halaman Berita Lama tidak masuk daftar arsip
             archives.append({
                 "date": date_str,
                 "session": session_str,
@@ -70,7 +72,6 @@ def render_dashboard_html(
     sorted_stocks: Dict[str, dict],
     archives: List[dict],
     is_archive_page: bool = False,
-    past_stocks: Dict[str, dict] = None,
 ) -> str:
     """
     Menghasilkan kode HTML lengkap (CSS + JS inline) untuk dashboard.
@@ -89,21 +90,9 @@ def render_dashboard_html(
     top_5_stocks = list(sorted_stocks.values())[:5]
     max_news_count = top_5_stocks[0]["news_count"] if top_5_stocks else 1
 
-    # Tentukan status switcher sesi untuk tanggal yang sama
-    other_session = "siang" if session == "pagi" else "pagi"
-    other_filename = f"{date_str}-{other_session}.html"
-    other_file_exists = os.path.exists(os.path.join(ARCHIVE_DIR, other_filename))
-
     prefix = "../" if is_archive_page else ""
-    home_link = "../index.html" if is_archive_page else "index.html"
 
-    # URL tautan untuk sesi pagi dan siang pada tanggal ini
-    pagi_link = f"{prefix}arsip/{date_str}-pagi.html" if session != "pagi" else "#"
-    siang_link = f"{prefix}arsip/{date_str}-siang.html" if session != "siang" else "#"
-
-    past_stocks = past_stocks or {}
-
-    # Buat HTML kartu saham (dipakai tab Sesi Ini dan tab Berita Lama)
+    # Buat HTML kartu saham
     def render_stock_card(code, stock):
         sentiment = stock.get("sentiment", "Netral")
         # Sentimen kosong = berita lama yang belum pernah dianalisis AI
@@ -202,8 +191,6 @@ def render_dashboard_html(
         """
 
     cards_html = [render_stock_card(code, stock) for code, stock in sorted_stocks.items()]
-    past_cards_html = [render_stock_card(code, stock) for code, stock in past_stocks.items()]
-    past_total_news = len({n["link"] for s in past_stocks.values() for n in s.get("news", [])})
 
     # Render daftar 5 saham teratas di sidebar
     top_5_bars_html = []
@@ -237,25 +224,36 @@ def render_dashboard_html(
     if not archive_links_html:
         archive_links_html.append('<div class="empty-archive">Belum ada arsip hari lain.</div>')
 
-    # Status tombol switch sesi
-    pagi_btn_class = "session-btn active" if session == "pagi" else "session-btn"
-    siang_btn_class = "session-btn active" if session == "siang" else "session-btn"
-
-    if session == "pagi":
-        pagi_attr = 'href="#"'
-        if other_file_exists:
-            siang_attr = f'href="{siang_link}"'
-            siang_sub = ""
+    # Pemilih halaman: Sesi Pagi | Sesi Siang | Berita Lama (untuk tanggal yang sama)
+    switcher_items = [
+        ("pagi", "Sesi Pagi", '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>'),
+        ("siang", "Sesi Siang", '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>'),
+        ("lama", "Berita Lama", '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>'),
+    ]
+    switcher_html = []
+    for key, label, icon in switcher_items:
+        filename = f"{date_str}-{key}.html"
+        icon_svg = f'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">{icon}</svg>'
+        if key == session:
+            switcher_html.append(f'<a href="#" class="session-btn active">{icon_svg} {label}</a>')
+        elif os.path.exists(os.path.join(ARCHIVE_DIR, filename)):
+            switcher_html.append(f'<a href="{prefix}arsip/{filename}" class="session-btn">{icon_svg} {label}</a>')
         else:
-            siang_attr = 'href="javascript:void(0)" class="session-btn disabled" title="Sesi Siang belum tersedia"'
-            siang_sub = '<span class="status-tag">belum tersedia</span>'
-    else:  # Sesi siang
-        siang_attr = 'href="#"'
-        pagi_attr = f'href="{pagi_link}"'
-        siang_sub = ""
+            switcher_html.append(
+                f'<a href="javascript:void(0)" class="session-btn disabled" title="{label} belum tersedia">'
+                f'{icon_svg} {label} <span class="status-tag">belum tersedia</span></a>'
+            )
 
-    header_badge = "RANGKUMAN PAGI" if session == "pagi" else "RANGKUMAN SIANG"
-    session_title = "Sesi Pagi · 13.20–07.00 WIB" if session == "pagi" else "Sesi Siang · 07.00–13.20 WIB"
+    if session == "lama":
+        header_badge = "BERITA LAMA"
+        session_title = f"Berita Lama · {session_label}"
+        past_note_html = '<div class="past-note">Berita yang terbit sebelum rentang sesi terbaru. Ringkasan AI hanya muncul jika berita tersebut pernah dianalisis di sesi sebelumnya.</div>'
+        empty_text = "Belum ada berita lama."
+    else:
+        header_badge = "RANGKUMAN PAGI" if session == "pagi" else "RANGKUMAN SIANG"
+        session_title = "Sesi Pagi · 13.20–07.00 WIB" if session == "pagi" else "Sesi Siang · 07.00–13.20 WIB"
+        past_note_html = ""
+        empty_text = "Tidak ada saham yang memenuhi kriteria filter."
 
     return f"""<!DOCTYPE html>
 <html lang="id">
@@ -545,54 +543,10 @@ def render_dashboard_html(
 
         /* Daftar Kartu Saham */
         .stock-cards-list {{
-            min-width: 0;
-        }}
-
-        /* Panel tab: [hidden] tidak diberi display agar hidden="until-found" tetap bisa dicari Ctrl+F */
-        .tab-panel:not([hidden]) {{
             display: flex;
             flex-direction: column;
             gap: 16px;
-        }}
-
-        /* Tab Sesi Ini / Berita Lama */
-        .tab-bar {{
-            display: flex;
-            gap: 4px;
-            margin-bottom: 16px;
-            border-bottom: 1px solid var(--border-color);
-        }}
-
-        .tab-btn {{
-            display: inline-flex;
-            align-items: baseline;
-            gap: 8px;
-            padding: 10px 16px;
-            font-size: 14px;
-            font-weight: 600;
-            font-family: var(--font-sans);
-            color: var(--text-secondary);
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -1px;
-            cursor: pointer;
-            transition: color 0.15s ease, border-color 0.15s ease;
-        }}
-
-        .tab-btn:hover {{
-            color: var(--text-main);
-        }}
-
-        .tab-btn.active {{
-            color: var(--blue-accent);
-            border-bottom-color: var(--blue-accent);
-        }}
-
-        .tab-count {{
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--text-muted);
+            min-width: 0;
         }}
 
         .past-note {{
@@ -1121,12 +1075,6 @@ def render_dashboard_html(
             .filter-buttons {{
                 justify-content: center;
             }}
-            .tab-btn {{
-                flex: 1;
-                flex-direction: column;
-                align-items: center;
-                gap: 2px;
-            }}
         }}
     </style>
 </head>
@@ -1146,17 +1094,9 @@ def render_dashboard_html(
                     </div>
                 </div>
 
-                <!-- Pemindah Sesi (Pagi <-> Siang) -->
+                <!-- Pemindah Halaman (Pagi / Siang / Berita Lama) -->
                 <div class="session-switcher">
-                    <a {pagi_attr} class="{pagi_btn_class}">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-                        Sesi Pagi
-                    </a>
-                    <a {siang_attr} class="{siang_btn_class}">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
-                        Sesi Siang
-                        {siang_sub}
-                    </a>
+                    {''.join(switcher_html)}
                 </div>
             </div>
 
@@ -1179,18 +1119,6 @@ def render_dashboard_html(
     </header>
 
     <div class="container">
-        <!-- Tab: Sesi Ini / Berita Lama -->
-        <div class="tab-bar" role="tablist">
-            <button class="tab-btn active" type="button" role="tab" aria-selected="true" data-tab="session">
-                {"Sesi Pagi" if session == "pagi" else "Sesi Siang"}
-                <span class="tab-count">{total_stocks} emiten</span>
-            </button>
-            <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="past">
-                Berita Lama
-                <span class="tab-count">{len(past_stocks)} emiten · {past_total_news} berita</span>
-            </button>
-        </div>
-
         <!-- Toolbar Pencarian & Filter Sentimen Interaktif -->
         <div class="toolbar">
             <div class="search-box">
@@ -1211,14 +1139,8 @@ def render_dashboard_html(
         <main class="main-layout">
             <!-- Kolom Kiri: Kartu Saham -->
             <section class="stock-cards-list" id="stockCardsContainer">
-                <div class="tab-panel" data-tab="session">
-                    {''.join(cards_html) if cards_html else '<div class="empty-state">Tidak ada saham yang memenuhi kriteria filter.</div>'}
-                </div>
-                <!-- hidden="until-found": Ctrl+F tetap bisa menemukan isi tab ini dan membukanya -->
-                <div class="tab-panel" data-tab="past" hidden="until-found">
-                    <div class="past-note">Berita yang terbit sebelum rentang sesi ini. Ringkasan AI hanya muncul jika berita tersebut pernah dianalisis di sesi sebelumnya.</div>
-                    {''.join(past_cards_html) if past_cards_html else '<div class="empty-state">Belum ada berita lama untuk sesi ini.</div>'}
-                </div>
+                {past_note_html}
+                {''.join(cards_html) if cards_html else f'<div class="empty-state">{empty_text}</div>'}
             </section>
 
             <!-- Kolom Kanan / Bawah: Sidebar -->
@@ -1284,46 +1206,7 @@ def render_dashboard_html(
             const searchInput = document.getElementById('searchInput');
             const filterButtons = document.querySelectorAll('.filter-btn');
             const cards = document.querySelectorAll('.stock-card');
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            const tabPanels = document.querySelectorAll('.tab-panel');
             let currentFilter = 'all';
-
-            // Pindah tab Sesi Ini / Berita Lama + hitung ulang angka di tombol filter
-            function showTab(tab) {{
-                tabButtons.forEach(b => {{
-                    const active = b.dataset.tab === tab;
-                    b.classList.toggle('active', active);
-                    b.setAttribute('aria-selected', active ? 'true' : 'false');
-                }});
-                tabPanels.forEach(p => {{
-                    if (p.dataset.tab === tab) {{
-                        p.removeAttribute('hidden');
-                    }} else {{
-                        p.setAttribute('hidden', 'until-found');
-                    }}
-                }});
-
-                const panelCards = document.querySelectorAll(`.tab-panel[data-tab="${{tab}}"] .stock-card`);
-                const counts = {{ all: panelCards.length, Positif: 0, Netral: 0, Negatif: 0, buyback: 0, pp: 0 }};
-                panelCards.forEach(c => {{
-                    if (c.dataset.sentiment in counts) counts[c.dataset.sentiment]++;
-                    if (c.dataset.hasBuyback === 'true') counts.buyback++;
-                    if (c.dataset.hasPp === 'true') counts.pp++;
-                }});
-                filterButtons.forEach(b => {{
-                    const el = b.querySelector('.filter-count');
-                    if (el) el.textContent = counts[b.dataset.filter] ?? 0;
-                }});
-            }}
-
-            tabButtons.forEach(btn => {{
-                btn.addEventListener('click', () => showTab(btn.dataset.tab));
-            }});
-
-            // Ctrl+F menemukan teks di tab yang sedang tersembunyi -> pindah ke tab tersebut
-            tabPanels.forEach(panel => {{
-                panel.addEventListener('beforematch', () => showTab(panel.dataset.tab));
-            }});
 
             // Buka / tutup daftar berita tambahan (lebih dari 3) pada sebuah kartu
             function setExpanded(card, open) {{
@@ -1450,8 +1333,9 @@ def generate_dashboard(
     """
     Fungsi utama pembuatan dan penyimpanan file dashboard:
     1. Menyimpan data mentah ke data/YYYY-MM-DD-{sesi}.json
-    2. Merender HTML arsip ke arsip/YYYY-MM-DD-{sesi}.html
-    3. Merender HTML utama ke index.html (selalu menampilkan sesi terbaru)
+    2. Merender halaman Berita Lama ke arsip/YYYY-MM-DD-lama.html (dari run terbaru)
+    3. Merender HTML arsip ke arsip/YYYY-MM-DD-{sesi}.html
+    4. Merender HTML utama ke index.html (selalu menampilkan sesi terbaru)
     """
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(ARCHIVE_DIR, exist_ok=True)
@@ -1487,7 +1371,24 @@ def generate_dashboard(
     if not any(a["filename"] == current_entry["filename"] for a in archives):
         archives.insert(0, current_entry)
 
-    # 3. Render file arsip (is_archive_page=True)
+    # 3. Render halaman Berita Lama lebih dulu agar tombolnya aktif di halaman sesi
+    past_stocks = past_stocks or {}
+    past_news_items = past_news_items or []
+    lama_html = render_dashboard_html(
+        session="lama",
+        session_label=f"sebelum {'Sesi Pagi' if session == 'pagi' else 'Sesi Siang'} ({session_label})",
+        date_str=date_str,
+        total_news=len(past_news_items),
+        total_sources=len({n["source"] for n in past_news_items}),
+        sorted_stocks=past_stocks,
+        archives=archives,
+        is_archive_page=True,
+    )
+    lama_filepath = os.path.join(ARCHIVE_DIR, f"{date_str}-lama.html")
+    with open(lama_filepath, "w", encoding="utf-8") as f:
+        f.write(lama_html)
+
+    # 4. Render file arsip (is_archive_page=True)
     archive_html = render_dashboard_html(
         session=session,
         session_label=session_label,
@@ -1497,13 +1398,12 @@ def generate_dashboard(
         sorted_stocks=sorted_stocks,
         archives=archives,
         is_archive_page=True,
-        past_stocks=past_stocks,
     )
     archive_filepath = os.path.join(ARCHIVE_DIR, f"{date_str}-{session}.html")
     with open(archive_filepath, "w", encoding="utf-8") as f:
         f.write(archive_html)
 
-    # 4. Render file index.html (is_archive_page=False)
+    # 5. Render file index.html (is_archive_page=False)
     index_html = render_dashboard_html(
         session=session,
         session_label=session_label,
@@ -1513,7 +1413,6 @@ def generate_dashboard(
         sorted_stocks=sorted_stocks,
         archives=archives,
         is_archive_page=False,
-        past_stocks=past_stocks,
     )
     with open(INDEX_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(index_html)
@@ -1521,5 +1420,6 @@ def generate_dashboard(
     return {
         "index_html": INDEX_HTML_PATH,
         "archive_html": archive_filepath,
+        "lama_html": lama_filepath,
         "json_path": json_filepath,
     }
