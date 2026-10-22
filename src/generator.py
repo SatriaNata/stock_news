@@ -76,10 +76,12 @@ def render_dashboard_html(
     now_wib = datetime.now(TIMEZONE).strftime("%d %b %Y, %H:%M WIB")
     total_stocks = len(sorted_stocks)
 
-    # Hitung rekap sentimen
+    # Hitung rekap sentimen & aksi korporasi
     count_positif = sum(1 for s in sorted_stocks.values() if s.get("sentiment") == "Positif")
     count_netral = sum(1 for s in sorted_stocks.values() if s.get("sentiment") == "Netral")
     count_negatif = sum(1 for s in sorted_stocks.values() if s.get("sentiment") == "Negatif")
+    count_buyback = sum(1 for s in sorted_stocks.values() if s.get("has_buyback"))
+    count_pp = sum(1 for s in sorted_stocks.values() if s.get("has_pp"))
 
     # Ambil 5 saham teratas untuk visualisasi batang di sidebar
     top_5_stocks = list(sorted_stocks.values())[:5]
@@ -136,14 +138,25 @@ def render_dashboard_html(
             </li>
             """)
 
+        # Buat badge aksi korporasi jika ada
+        has_buyback = stock.get("has_buyback", False)
+        has_pp = stock.get("has_pp", False)
+        action_pills = []
+        if has_buyback:
+            action_pills.append('<span class="action-pill pill-buyback" title="Aksi Korporasi: Buyback Saham">🎯 Buyback</span>')
+        if has_pp:
+            action_pills.append('<span class="action-pill pill-pp" title="Aksi Korporasi: Private Placement / PMTHMETD">⚡ Private Placement</span>')
+        action_pills_html = "".join(action_pills)
+
         cards_html.append(f"""
-        <article class="stock-card" data-code="{code}" data-name="{company_name.lower()}" data-sentiment="{sentiment}">
+        <article class="stock-card" data-code="{code}" data-name="{company_name.lower()}" data-sentiment="{sentiment}" data-has-buyback="{'true' if has_buyback else 'false'}" data-has-pp="{'true' if has_pp else 'false'}">
             <div class="card-top">
                 <div class="ticker-group">
                     <span class="ticker-code">{code}</span>
                     <span class="company-name" title="{company_name}">{company_name}</span>
                 </div>
                 <div class="badge-group">
+                    {action_pills_html}
                     <span class="sentiment-pill {pill_class}">{sentiment}</span>
                     <span class="count-badge">{news_count} Berita</span>
                 </div>
@@ -585,6 +598,41 @@ def render_dashboard_html(
             border: 1px solid var(--neg-border);
         }}
 
+        /* Aksi Korporasi: Buyback & Private Placement */
+        .action-pill {{
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: var(--radius-pill);
+            display: inline-flex;
+            align-items: center;
+            letter-spacing: 0.02em;
+        }}
+
+        .pill-buyback {{
+            background-color: #ECFDF5;
+            color: #047857;
+            border: 1px solid #A7F3D0;
+        }}
+
+        .pill-pp {{
+            background-color: #F5F3FF;
+            color: #6D28D9;
+            border: 1px solid #DDD6FE;
+        }}
+
+        .filter-action-btn.btn-buyback:hover, .filter-action-btn.btn-buyback.active {{
+            background-color: #047857 !important;
+            border-color: #047857 !important;
+            color: #FFFFFF !important;
+        }}
+
+        .filter-action-btn.btn-pp:hover, .filter-action-btn.btn-pp.active {{
+            background-color: #6D28D9 !important;
+            border-color: #6D28D9 !important;
+            color: #FFFFFF !important;
+        }}
+
         .count-badge {{
             font-size: 12px;
             font-weight: 500;
@@ -977,6 +1025,8 @@ def render_dashboard_html(
                 <button class="filter-btn" data-filter="Positif">Positif ({count_positif})</button>
                 <button class="filter-btn" data-filter="Netral">Netral ({count_netral})</button>
                 <button class="filter-btn" data-filter="Negatif">Negatif ({count_negatif})</button>
+                <button class="filter-btn filter-action-btn btn-buyback" data-filter="buyback">🎯 Buyback ({count_buyback})</button>
+                <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement ({count_pp})</button>
             </div>
         </div>
 
@@ -1059,9 +1109,23 @@ def render_dashboard_html(
                     const code = card.getAttribute('data-code').toLowerCase();
                     const name = card.getAttribute('data-name').toLowerCase();
                     const sentiment = card.getAttribute('data-sentiment');
+                    const hasBuyback = card.getAttribute('data-has-buyback') === 'true';
+                    const hasPP = card.getAttribute('data-has-pp') === 'true';
 
-                    const matchesSearch = !query || code.includes(query) || name.includes(query);
-                    const matchesFilter = (currentFilter === 'all') || (sentiment === currentFilter);
+                    const matchesSearch = !query || code.includes(query) || name.includes(query)
+                        || (query === 'buyback' && hasBuyback)
+                        || (query.includes('placement') && hasPP);
+
+                    let matchesFilter = false;
+                    if (currentFilter === 'all') {{
+                        matchesFilter = true;
+                    }} else if (currentFilter === 'buyback') {{
+                        matchesFilter = hasBuyback;
+                    }} else if (currentFilter === 'pp') {{
+                        matchesFilter = hasPP;
+                    }} else {{
+                        matchesFilter = (sentiment === currentFilter);
+                    }}
 
                     if (matchesSearch && matchesFilter) {{
                         card.classList.remove('hidden');

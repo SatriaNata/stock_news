@@ -262,9 +262,29 @@ def detect_stocks_with_ai(news_items: List[dict], code_to_name: Dict[str, str]) 
     return stock_news
 
 
+def detect_corporate_actions(news_items: List[dict]) -> List[str]:
+    """
+    Mendeteksi aksi korporasi khusus (Buyback dan Private Placement)
+    dari kumpulan judul dan deskripsi berita untuk saham tertentu.
+    """
+    tags = []
+    all_text = " ".join([f"{itm['title']} {itm.get('description', '')}" for itm in news_items]).lower()
+
+    # 1. Deteksi Buyback Saham
+    if re.search(r"\b(buyback|buy-back|buy back|pembelian kembali saham|beli kembali saham)\b", all_text):
+        tags.append("Buyback")
+
+    # 2. Deteksi Private Placement (PMTHMETD)
+    if re.search(r"\b(private placement|pmthmetd|tanpa hak memesan efek|penambahan modal tanpa hak|non-preemptive)\b", all_text):
+        tags.append("Private Placement")
+
+    return tags
+
+
 def analyze_sentiments_and_summaries(stock_news: Dict[str, List[dict]], code_to_name: Dict[str, str]) -> Dict[str, dict]:
     """
-    Membuat label sentimen (Positif / Netral / Negatif) dan ringkasan 1-2 kalimat untuk setiap saham.
+    Membuat label sentimen (Positif / Netral / Negatif), ringkasan 1-2 kalimat,
+    serta mendeteksi aksi korporasi (Buyback / Private Placement) untuk setiap saham.
     Mengirimkan seluruh saham dalam batch hemat kuota ke Gemini API.
     """
     analyzed_stocks = {}
@@ -283,13 +303,14 @@ def analyze_sentiments_and_summaries(stock_news: Dict[str, List[dict]], code_to_
 
     prompt = (
         "Kamu adalah analis pasar modal Indonesia profesional.\n"
-        "Berdasarkan judul dan deskripsi berita terkini berikut, tentukan SENTIMEN dan RINGKASAN SINGKAT untuk setiap saham.\n\n"
+        "Berdasarkan judul dan deskripsi berita terkini berikut, tentukan SENTIMEN, RINGKASAN SINGKAT, dan AKSI KORPORASI untuk setiap saham.\n\n"
         "Aturan:\n"
         "1. sentiment: Pilih salah satu dari 'Positif', 'Netral', atau 'Negatif'.\n"
         "2. summary: Tulis ringkasan padat dan informatif sebanyak 1–2 kalimat dalam bahasa Indonesia mengenai inti sentimen atau peristiwa yang dialami saham tersebut.\n"
-        "3. Keluaran HANYA berupa objek JSON dengan kode saham sebagai key, contoh:\n"
+        "3. corporate_actions: Array string aksi korporasi (hanya isi 'Buyback' atau 'Private Placement' jika benar-benar dibahas dalam berita, kosongkan [] jika tidak ada).\n"
+        "4. Keluaran HANYA berupa objek JSON dengan kode saham sebagai key, contoh:\n"
         "{\n"
-        "  \"BBCA\": {\"sentiment\": \"Positif\", \"summary\": \"Laba bersih BBCA kuartal III meningkat berkat ekspansi kredit yang kuat.\"}\n"
+        "  \"BBRI\": {\"sentiment\": \"Positif\", \"summary\": \"BBRI mengumumkan rencana buyback saham senilai triliunan rupiah.\", \"corporate_actions\": [\"Buyback\"]}\n"
         "}\n\n"
         "Data Berita Saham:\n\n" + "\n\n".join(stocks_prompt_data)
     )
@@ -312,11 +333,22 @@ def analyze_sentiments_and_summaries(stock_news: Dict[str, List[dict]], code_to_
             sentiment = "Netral"
         summary = ai_info.get("summary", "")
 
+        # Gabungkan deteksi aksi korporasi dari regex kata kunci + AI
+        regex_tags = detect_corporate_actions(items)
+        ai_tags = ai_info.get("corporate_actions", [])
+        if isinstance(ai_tags, list):
+            for t in ai_tags:
+                if t in ["Buyback", "Private Placement"] and t not in regex_tags:
+                    regex_tags.append(t)
+
         analyzed_stocks[code] = {
             "code": code,
             "company_name": code_to_name.get(code, code),
             "sentiment": sentiment,
             "summary": summary,
+            "tags": regex_tags,
+            "has_buyback": "Buyback" in regex_tags,
+            "has_pp": "Private Placement" in regex_tags,
             "news_count": len(items),
             "news": items,
         }
@@ -366,11 +398,15 @@ def analyze_news(news_items: List[dict], use_ai: bool = True) -> Dict[str, dict]
     else:
         analyzed_stocks = {}
         for code, items in stock_news.items():
+            tags = detect_corporate_actions(items)
             analyzed_stocks[code] = {
                 "code": code,
                 "company_name": code_to_name.get(code, code),
                 "sentiment": "Netral",
                 "summary": "",
+                "tags": tags,
+                "has_buyback": "Buyback" in tags,
+                "has_pp": "Private Placement" in tags,
                 "news_count": len(items),
                 "news": items,
             }

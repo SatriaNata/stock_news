@@ -22,6 +22,9 @@ def test_generator():
             "company_name": "Bank Central Asia Tbk.",
             "sentiment": "Positif",
             "summary": "Kinerja BBCA melesat didorong pertumbuhan kredit dan laba bersih kuartal III.",
+            "has_buyback": True,
+            "has_pp": False,
+            "tags": ["Buyback"],
             "news_count": 2,
             "news": [
                 {
@@ -99,6 +102,9 @@ def test_generator():
         assert "RANGKUMAN PAGI" in content
         assert "Sesi Pagi" in content
         assert "Sesi Siang" in content
+        assert "Buyback" in content
+        assert "pill-buyback" in content
+        assert "Private Placement" in content
 
     print("-> LULUS: Dashboard HTML berhasil dirender dan diverifikasi!")
 

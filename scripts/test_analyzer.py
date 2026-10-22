@@ -33,20 +33,20 @@ def test_analyzer():
     print(f"Sample: BBCA -> {code_to_name['BBCA']}")
     print("-> LULUS: Kamus emiten berhasil dimuat.")
 
-    # 2. Uji deteksi berita contoh
+    # 2. Uji deteksi berita contoh (termasuk aksi korporasi Buyback & Private Placement)
     sample_news = [
         {
             "id": "berita-1",
-            "title": "Saham BBCA dan BBRI Catatkan Rekor Laba Baru, IHSG Ikut Menguat",
-            "description": "Perbankan besar membukukan kinerja gemilang pada kuartal ini.",
+            "title": "BBRI Umumkan Rencana Buyback Saham Senilai Rp 3 Triliun",
+            "description": "Manajemen menyiapkan dana segar untuk melakukan pembelian kembali saham perseroan.",
             "source": "CNBC Indonesia",
             "pub_date_str": "2026-10-22 09:00 WIB",
             "link": "https://example.com/1",
         },
         {
             "id": "berita-2",
-            "title": "Harga Nikel Dunia Naik, Saham ANTM dan Vale Indonesia Rebound",
-            "description": "Sentimen komoditas logam mengerek saham tambang nikel.",
+            "title": "BRPT Siap Gelar Private Placement (PMTHMETD) untuk Ekspansi Geotermal",
+            "description": "Aksi korporasi penambahan modal tanpa hak memesan efek telah disetujui RUPS.",
             "source": "Kontan",
             "pub_date_str": "2026-10-22 09:30 WIB",
             "link": "https://example.com/2",
@@ -66,9 +66,8 @@ def test_analyzer():
     for code, items in detected.items():
         print(f"  • {code} ({code_to_name.get(code)}): {len(items)} berita")
 
-    assert "BBCA" in detected, "BBCA harus terdeteksi pada berita 1!"
     assert "BBRI" in detected, "BBRI harus terdeteksi pada berita 1!"
-    assert "ANTM" in detected, "ANTM harus terdeteksi pada berita 2!"
+    assert "BRPT" in detected, "BRPT harus terdeteksi pada berita 2!"
     assert "XYZW" not in detected, "XYZW tidak boleh terdeteksi karena tidak ada di emiten.csv!"
     assert "IHSG" not in detected, "IHSG tidak boleh terdeteksi sebagai saham!"
     print("-> LULUS: Deteksi saham dan validasi emiten tepat.")
@@ -77,7 +76,11 @@ def test_analyzer():
     results = analyze_news(sample_news, use_ai=False)
     print(f"\nHasil Akhir Analisis (Urutan Paling Banyak Diberitakan):")
     for code, data in results.items():
-        print(f"  [{code}] Sentimen: {data['sentiment']} | Jumlah Berita: {data['news_count']}")
+        print(f"  [{code}] Sentimen: {data['sentiment']} | Tags: {data.get('tags')} | Jumlah Berita: {data['news_count']}")
+
+    assert results["BBRI"]["has_buyback"], "BBRI harus terdeteksi memiliki Buyback!"
+    assert results["BRPT"]["has_pp"], "BRPT harus terdeteksi memiliki Private Placement!"
+    print("-> LULUS: Deteksi aksi korporasi Buyback & Private Placement terverifikasi!")
 
     print("\n-> SEMUA PENGUJIAN ANALYZER LULUS DENGAN BAIK!")
 

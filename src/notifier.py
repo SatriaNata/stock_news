@@ -101,12 +101,27 @@ def notify_success(
 
     top_3_text = "\n".join(top_3_lines) if top_3_lines else "<i>Tidak ada saham dominan</i>"
 
+    # Cek aksi korporasi (Buyback & Private Placement)
+    buyback_stocks = [f"${s['code']}" for s in sorted_stocks.values() if s.get("has_buyback")]
+    pp_stocks = [f"${s['code']}" for s in sorted_stocks.values() if s.get("has_pp")]
+
+    action_lines = []
+    if buyback_stocks:
+        action_lines.append(f"🎯 <b>Buyback:</b> {', '.join(buyback_stocks[:5])}")
+    if pp_stocks:
+        action_lines.append(f"⚡ <b>Private Placement:</b> {', '.join(pp_stocks[:5])}")
+
+    action_text = ""
+    if action_lines:
+        action_text = f"\n\n🔥 <b>Aksi Korporasi:</b>\n" + "\n".join(action_lines)
+
     message = (
         f"📊 <b>Rangkuman Saham — {session_name} ({session_label})</b>\n"
         f"📅 Tanggal: {date_str}\n"
         f"📈 {total_news} Berita Disaring • {total_stocks} Emiten Terdeteksi\n\n"
         f"🔥 <b>3 Saham Paling Ramai:</b>\n"
-        f"{top_3_text}\n\n"
+        f"{top_3_text}"
+        f"{action_text}\n\n"
         f"🌐 <b>Buka Dashboard Lengkap:</b>\n"
         f"{target_url}"
     )
