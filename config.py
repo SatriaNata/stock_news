@@ -90,6 +90,51 @@ RSS_SOURCES = [
         "url": "https://news.google.com/rss/search?q=site:idxchannel.com+saham&hl=id&gl=ID&ceid=ID:id",
         "enabled": True,
     },
+    {
+        "name": "Investor.id via Google News",
+        "url": "https://news.google.com/rss/search?q=site:investor.id+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Katadata via Google News",
+        "url": "https://news.google.com/rss/search?q=site:katadata.co.id+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Emitennews via Google News",
+        "url": "https://news.google.com/rss/search?q=site:emitennews.com+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Ipotnews via Google News",
+        "url": "https://news.google.com/rss/search?q=site:ipotnews.com+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "IDNFinancials via Google News",
+        "url": "https://news.google.com/rss/search?q=site:idnfinancials.com+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Pasardana.id via Google News",
+        "url": "https://news.google.com/rss/search?q=site:pasardana.id+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Infobanknews via Google News",
+        "url": "https://news.google.com/rss/search?q=site:infobanknews.com+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Stockwatch.id via Google News",
+        "url": "https://news.google.com/rss/search?q=site:stockwatch.id+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Detik Finance via Google News",
+        "url": "https://news.google.com/rss/search?q=site:finance.detik.com+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
 ]
 
 # User-Agent untuk HTTP request agar tidak diblokir oleh CDN media berita

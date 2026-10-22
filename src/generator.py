@@ -122,10 +122,14 @@ def render_dashboard_html(
             </div>
             """
 
-        # Daftar judul berita untuk saham ini
-        headlines_html = []
-        for n in news_items:
-            headlines_html.append(f"""
+        # Daftar judul berita untuk saham ini — pisahkan 3 teratas dan sisanya
+        MAX_VISIBLE = 3
+        visible_items = news_items[:MAX_VISIBLE]
+        extra_items = news_items[MAX_VISIBLE:]
+        extra_count = len(extra_items)
+
+        def render_news_li(n):
+            return f"""
             <li class="news-item">
                 <a href="{n['link']}" target="_blank" rel="noopener noreferrer" class="news-link">
                     {n['title']}
@@ -136,7 +140,25 @@ def render_dashboard_html(
                     <span class="news-time">{n['pub_date_str']}</span>
                 </div>
             </li>
-            """)
+            """
+
+        visible_lis = "".join([render_news_li(n) for n in visible_items])
+
+        # Bangun bagian extra (accordion) jika ada lebih dari 3 berita
+        extra_section = ""
+        if extra_count > 0:
+            extra_lis = "".join([render_news_li(n) for n in extra_items])
+            extra_section = f"""
+                <div class="news-extra" hidden="until-found">
+                    <ul class="news-list">
+                        {extra_lis}
+                    </ul>
+                </div>
+                <button class="expand-btn" type="button" aria-expanded="false" data-extra-count="{extra_count}">
+                    <svg class="expand-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+                    <span class="expand-label">Lihat {extra_count} berita lainnya</span>
+                </button>
+            """
 
         # Buat badge aksi korporasi jika ada
         has_buyback = stock.get("has_buyback", False)
@@ -165,8 +187,9 @@ def render_dashboard_html(
             <div class="card-news-section">
                 <div class="section-label">Berita Terkait:</div>
                 <ul class="news-list">
-                    {''.join(headlines_html)}
+                    {visible_lis}
                 </ul>
+                {extra_section}
             </div>
         </article>
         """)
@@ -729,6 +752,60 @@ def render_dashboard_html(
             color: var(--text-muted);
         }}
 
+        /* Accordion: Berita Tersembunyi & Tombol Expand */
+        .news-extra {{
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.25s ease;
+        }}
+
+        /* hidden="until-found" tetap bisa ditemukan Ctrl+F; browser membukanya lewat event beforematch */
+        .news-extra[hidden] {{
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+        }}
+
+        .news-extra:not([hidden]) {{
+            max-height: 5000px;
+            opacity: 1;
+            margin-top: 10px;
+        }}
+
+        .expand-btn {{
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 6px 14px;
+            font-size: 12.5px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            color: var(--blue-accent);
+            background-color: var(--blue-light);
+            border: 1px solid var(--blue-border);
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }}
+
+        .expand-btn:hover {{
+            background-color: #DBEAFE;
+        }}
+
+        .expand-btn[aria-expanded="true"] {{
+            background-color: var(--bg-page);
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }}
+
+        .expand-btn[aria-expanded="true"] .expand-icon {{
+            transform: rotate(180deg);
+        }}
+
+        .expand-icon {{
+            transition: transform 0.2s ease;
+        }}
+
         /* Sidebar */
         .sidebar {{
             display: flex;
@@ -1018,7 +1095,7 @@ def render_dashboard_html(
         <div class="toolbar">
             <div class="search-box">
                 <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <input type="text" id="searchInput" class="search-input" placeholder="Cari kode saham atau nama emiten (misal: BBCA, Bank Mandiri)...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari kode saham, nama emiten, atau judul berita (misal: BBCA, Bank Mandiri, dividen)...">
             </div>
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">Semua ({total_stocks})</button>
@@ -1102,6 +1179,47 @@ def render_dashboard_html(
             const cards = document.querySelectorAll('.stock-card');
             let currentFilter = 'all';
 
+            // Buka / tutup daftar berita tambahan (lebih dari 3) pada sebuah kartu
+            function setExpanded(card, open) {{
+                const extra = card.querySelector('.news-extra');
+                const btn = card.querySelector('.expand-btn');
+                if (!extra || !btn) return;
+                if (open) {{
+                    extra.removeAttribute('hidden');
+                }} else {{
+                    extra.setAttribute('hidden', 'until-found');
+                }}
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                btn.querySelector('.expand-label').textContent = open
+                    ? 'Sembunyikan berita'
+                    : `Lihat ${{btn.dataset.extraCount}} berita lainnya`;
+            }}
+
+            cards.forEach(card => {{
+                const btn = card.querySelector('.expand-btn');
+                const extra = card.querySelector('.news-extra');
+                if (!btn || !extra) return;
+
+                btn.addEventListener('click', function() {{
+                    delete card.dataset.autoExpanded;
+                    setExpanded(card, this.getAttribute('aria-expanded') !== 'true');
+                }});
+
+                // Ctrl+F / Cmd+F menemukan teks di berita tersembunyi -> sinkronkan tombol
+                extra.addEventListener('beforematch', function() {{
+                    setExpanded(card, true);
+                }});
+            }});
+
+            // Fallback untuk browser tanpa dukungan hidden="until-found": buka semua saat Ctrl+F ditekan
+            if (!('onbeforematch' in document.body)) {{
+                document.addEventListener('keydown', function(e) {{
+                    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {{
+                        cards.forEach(card => setExpanded(card, true));
+                    }}
+                }});
+            }}
+
             function applyFilters() {{
                 const query = searchInput.value.toLowerCase().trim();
 
@@ -1112,9 +1230,27 @@ def render_dashboard_html(
                     const hasBuyback = card.getAttribute('data-has-buyback') === 'true';
                     const hasPP = card.getAttribute('data-has-pp') === 'true';
 
+                    const extraTitles = Array.from(card.querySelectorAll('.news-extra .news-link'))
+                        .map(a => a.textContent.toLowerCase());
+                    const allTitles = Array.from(card.querySelectorAll('.news-link'))
+                        .map(a => a.textContent.toLowerCase());
+
                     const matchesSearch = !query || code.includes(query) || name.includes(query)
+                        || allTitles.some(t => t.includes(query))
                         || (query === 'buyback' && hasBuyback)
                         || (query.includes('placement') && hasPP);
+
+                    // Otomatis buka berita tambahan jika kata kunci ditemukan di dalamnya;
+                    // tutup kembali yang dibuka otomatis saat pencarian berubah / dikosongkan
+                    if (query && extraTitles.some(t => t.includes(query))) {{
+                        if (card.querySelector('.expand-btn')?.getAttribute('aria-expanded') !== 'true') {{
+                            card.dataset.autoExpanded = '1';
+                            setExpanded(card, true);
+                        }}
+                    }} else if (card.dataset.autoExpanded) {{
+                        delete card.dataset.autoExpanded;
+                        setExpanded(card, false);
+                    }}
 
                     let matchesFilter = false;
                     if (currentFilter === 'all') {{
