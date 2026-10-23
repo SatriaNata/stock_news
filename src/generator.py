@@ -1527,7 +1527,7 @@ def generate_dashboard(
     2. Merender halaman global Berita Lama ke berita-lama.html
     3. Merender HTML arsip ke arsip/YYYY-MM-DD-{sesi}.html
     4. Merender ulang arsip sesi lain di tanggal yang sama (agar tombol sesinya ikut aktif)
-    5. Merender HTML utama ke index.html (selalu menampilkan sesi terbaru)
+    5. Merender HTML utama ke index.html (sesi terbaru di tanggal itu; siang lebih baru dari pagi)
     """
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(ARCHIVE_DIR, exist_ok=True)
@@ -1597,6 +1597,7 @@ def generate_dashboard(
     # 4. Render ulang arsip sesi lain di tanggal yang sama dari JSON-nya
     other_session = "siang" if session == "pagi" else "pagi"
     other_json = os.path.join(DATA_DIR, f"{date_str}-{other_session}.json")
+    other = None
     if os.path.exists(other_json):
         with open(other_json, "r", encoding="utf-8") as f:
             other = json.load(f)
@@ -1613,17 +1614,30 @@ def generate_dashboard(
         with open(os.path.join(ARCHIVE_DIR, f"{date_str}-{other_session}.html"), "w", encoding="utf-8") as f:
             f.write(other_html)
 
-    # 5. Render file index.html (is_archive_page=False)
-    index_html = render_dashboard_html(
-        session=session,
-        session_label=session_label,
-        date_str=date_str,
-        total_news=total_news,
-        total_sources=total_sources,
-        sorted_stocks=sorted_stocks,
-        archives=archives,
-        is_archive_page=False,
-    )
+    # 5. Render file index.html (is_archive_page=False): selalu sesi terbaru di tanggal ini.
+    #    Run pagi yang datang belakangan tidak mengambil alih halaman utama dari sesi siang yang sudah berisi.
+    if session == "pagi" and other and other.get("news_items"):
+        index_html = render_dashboard_html(
+            session="siang",
+            session_label=other.get("session_label", ""),
+            date_str=date_str,
+            total_news=other.get("total_news", len(other["news_items"])),
+            total_sources=other.get("total_sources", 0),
+            sorted_stocks=other.get("stocks", {}),
+            archives=archives,
+            is_archive_page=False,
+        )
+    else:
+        index_html = render_dashboard_html(
+            session=session,
+            session_label=session_label,
+            date_str=date_str,
+            total_news=total_news,
+            total_sources=total_sources,
+            sorted_stocks=sorted_stocks,
+            archives=archives,
+            is_archive_page=False,
+        )
     with open(INDEX_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(index_html)
 

@@ -24,7 +24,7 @@ import logging
 from datetime import datetime
 
 from config import TIMEZONE
-from src.scraper import collect_news, get_session_window, update_past_news_store
+from src.scraper import collect_news, get_session_window, update_past_news_store, merge_with_saved_session
 from src.analyzer import analyze_news
 from src.generator import generate_dashboard
 from src.notifier import notify_success, notify_failure
@@ -113,14 +113,23 @@ def main():
             ref_date=ref_date,
             ignore_time_filter=args.ignore_time_filter,
         )
-        news_items = news_data["news_items"]
         past_news_items = news_data["past_news_items"]
         session_label = news_data["session_label"]
-        total_sources = news_data["total_sources"]
+
+        # 2b. Gabungkan dengan berita sesi yang sama yang sudah tersimpan (run ulang menambah, tidak menimpa)
+        news_items, saved_stocks = merge_with_saved_session(target_session, ref_date, news_data["news_items"])
+        total_sources = len({item["source"] for item in news_items})
 
         # 3. Analisis Saham & Sentimen AI
         use_ai = not args.skip_ai
         sorted_stocks = analyze_news(news_items, use_ai=use_ai)
+
+        # Pertahankan ringkasan & sentimen AI dari run sebelumnya jika run ini tidak menghasilkannya
+        for code, stock in sorted_stocks.items():
+            saved = saved_stocks.get(code, {})
+            if saved.get("summary") and not stock.get("summary"):
+                stock["sentiment"] = saved.get("sentiment", stock["sentiment"])
+                stock["summary"] = saved["summary"]
 
         # 3b. Berita Lama: saring berita lama baru (skor kualitas, tanpa AI) ke data/berita-lama/YYYY-MM.json
         past_months = update_past_news_store(past_news_items, ref_date)

@@ -337,6 +337,44 @@ def load_pagi_session_keys(target_date: datetime.date) -> set:
     return seen_keys
 
 
+def merge_with_saved_session(session: str, ref_date: datetime.date, new_items: list):
+    """
+    Menggabungkan berita hasil run ini dengan berita sesi yang sama yang sudah tersimpan
+    (data/YYYY-MM-DD-{sesi}.json), agar run ulang hanya MENAMBAH berita dan tidak menimpa.
+    Duplikat (link atau judul ternormalisasi sama) diabaikan.
+    Mengembalikan (daftar berita gabungan, data saham tersimpan untuk mempertahankan hasil AI).
+    """
+    path = os.path.join(DATA_DIR, f"{ref_date.strftime('%Y-%m-%d')}-{session}.json")
+    if not os.path.exists(path):
+        return new_items, {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            saved = json.load(f)
+    except Exception as e:
+        logger.warning(f"Gagal membaca data sesi tersimpan {path} ({e}). Tidak digabung.")
+        return new_items, {}
+
+    saved_items = saved.get("news_items", [])
+    merged, seen_links, seen_titles = [], set(), set()
+    for item in saved_items + new_items:
+        link = item["link"].strip()
+        norm_title = normalize_title(item["title"])
+        if link in seen_links or (norm_title and norm_title in seen_titles):
+            continue
+        seen_links.add(link)
+        seen_titles.add(norm_title)
+        merged.append({**item, "pub_datetime": _as_datetime(item.get("pub_datetime"))})
+
+    merged.sort(
+        key=lambda x: x["pub_datetime"] if x["pub_datetime"] else datetime.min.replace(tzinfo=TIMEZONE),
+        reverse=True
+    )
+    logger.info(
+        f"Digabung dengan data tersimpan: {len(saved_items)} berita lama + "
+        f"{len(merged) - len(saved_items)} berita baru = {len(merged)} berita."
+    )
+    return merged, saved.get("stocks", {})
+
 def collect_news(session: str = "pagi", ref_date: datetime.date = None, ignore_time_filter: bool = False) -> dict:
     """
     Fungsi utama pengumpulan berita:
