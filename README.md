@@ -1,3 +1,35 @@
+# 📈 IDX Stock News Dashboard
+
+Automated twice-daily news dashboard for the Indonesian stock market (IDX). Every trading day it collects market news from 15+ RSS sources, detects which listed companies (emiten) are mentioned, summarizes and scores sentiment with Google Gemini, publishes a static dashboard to GitHub Pages, and sends a summary to Telegram.
+
+🔗 **Live dashboard:** [LINK_GITHUB_PAGES_KAMU](LINK_GITHUB_PAGES_KAMU)
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?style=flat&logo=googlegemini&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=flat&logo=githubpages&logoColor=white)
+![Telegram](https://img.shields.io/badge/Telegram_Bot-26A5E4?style=flat&logo=telegram&logoColor=white)
+
+## ✨ Highlights
+
+- **Two sessions per trading day**: a morning brief before the market opens (07.05 WIB) and a midday brief before Session 2 (13.25 WIB), each with a fixed news time window
+- **Emiten detection** against a dictionary of ~934 IDX tickers, with a regex fallback when the AI is unavailable
+- **AI summaries & sentiment** per news item using Google Gemini
+- **Resilient scraping**: deduplication, retries per RSS source, and the run stops safely if every source fails
+- **Archive & history**: every session is saved as JSON and HTML, plus a "Berita Lama" page with monthly data and per-ticker pagination
+- **Fully serverless**: scheduled with GitHub Actions cron, secrets stored in GitHub Secrets, hosted on GitHub Pages
+
+## 🤖 How this project was built
+
+This project was built with **AI-assisted development**: most of the code was generated with Claude and Antigravity.
+
+My role:
+- Defined the idea and requirements based on my own stock-market routine (investing in IDX since 2020)
+- TULIS_PERANMU_DI_SINI (contoh: menentukan jadwal sesi & sumber berita, menguji hasil, memperbaiki bug, men-deploy ke GitHub Actions)
+
+---
+
+
 # 📈 Dashboard Berita Saham IDX (Otomatis 2 Sesi Harian)
 
 Proyek otomatisasi untuk memantau berita pasar modal Indonesia (Bursa Efek Indonesia / IDX). Setiap hari kerja (Senin–Jumat), sistem otomatis mengumpulkan berita, mendeteksi emiten saham yang dibahas, menganalisis sentimen & ringkasan berita menggunakan AI (Google Gemini), menerbitkan web dashboard statis ke **GitHub Pages**, dan mengirim ringkasan langsung ke akun **Telegram** Anda.
