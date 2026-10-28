@@ -915,7 +915,7 @@
                     <div class="header-meta">
                         <span class="meta-session">Sesi Pagi · 13.20–07.00 WIB</span>
                         <span>•</span>
-                        <span>Update: 28 Oct 2026, 12:26 WIB</span>
+                        <span>Update: 28 Oct 2026, 14:00 WIB</span>
                     </div>
                 </div>
 
@@ -924,6 +924,7 @@
                     <div class="session-switcher">
                         <a href="#" class="session-btn active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> Sesi Pagi</a><a href="../arsip/2026-10-28-siang.html" class="session-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg> Sesi Siang</a>
                     </div>
+                    <a href="../makro.html" class="history-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Makro</a>
                     <a href="../berita-lama.html" class="history-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg> Berita Lama</a>
                 </div>
             </div>
@@ -2877,14 +2878,14 @@
                     </h2>
                     <div class="archive-list">
                         
-        <a href="../arsip/2026-10-28-pagi.html" class="archive-item active">
-            <span class="archive-date">2026-10-28</span>
-            <span class="archive-badge badge-pagi">Sesi Pagi</span>
-        </a>
-        
         <a href="../arsip/2026-10-28-siang.html" class="archive-item ">
             <span class="archive-date">2026-10-28</span>
             <span class="archive-badge badge-siang">Sesi Siang</span>
+        </a>
+        
+        <a href="../arsip/2026-10-28-pagi.html" class="archive-item active">
+            <span class="archive-date">2026-10-28</span>
+            <span class="archive-badge badge-pagi">Sesi Pagi</span>
         </a>
         
         <a href="../arsip/2026-10-27-siang.html" class="archive-item ">
@@ -2944,8 +2945,11 @@
     <!-- JavaScript Murni: Paginasi Berita, Pencarian & Filter Instan -->
     <script>
         const NEWS_PAGE_SIZE = 4;
-        const IS_LAMA = false;
-        const LAMA_MONTHS = [];
+        const IS_ARCHIVE_VIEW = false;
+        const ARCHIVE_MONTHS = [];
+        const ARCHIVE_DATA_DIR = 'data/berita-lama';
+        const SHOW_CATEGORY = true;  // di Makro kartu = topik, label kategori tidak perlu
+        const TODAY_START = '';
 
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
@@ -3074,7 +3078,7 @@
                 });
             });
 
-            // ===== Berita Lama: data dimuat per bulan dari data/berita-lama/YYYY-MM.json =====
+            // ===== Berita Lama / Makro: data dimuat per bulan dari ARCHIVE_DATA_DIR/YYYY-MM.json =====
             function buildLamaCards(data) {
                 const groups = {};
                 data.items.forEach(n => n.codes.forEach(code => (groups[code] = groups[code] || []).push(n)));
@@ -3088,7 +3092,7 @@
                         <li class="news-item"${i >= NEWS_PAGE_SIZE ? ' hidden="until-found"' : ''}>
                             <a href="${esc(n.link)}" target="_blank" rel="noopener noreferrer" class="news-link">${esc(n.title)}</a>
                             <div class="news-meta">
-                                <span class="cat-tag">${esc(n.category)}</span>
+                                ${SHOW_CATEGORY ? `<span class="cat-tag">${esc(n.category)}</span>` : ''}
                                 <span class="news-source">${esc(n.source)}</span>
                                 <span class="news-dot">•</span>
                                 <span class="news-time">${esc(n.pub_date_str)}</span>
@@ -3110,7 +3114,7 @@
                             <ul class="news-list">${lis}</ul>
                         </div>
                     </article>`;
-                }).join('') : '<div class="empty-state">Belum ada berita lama di bulan ini.</div>';
+                }).join('') : '<div class="empty-state">Belum ada berita di periode ini.</div>';
 
                 // Statistik, top 5, dan jumlah emiten per kategori
                 document.getElementById('statNews').textContent = data.items.length;
@@ -3135,25 +3139,38 @@
                 });
             }
 
+            async function fetchMonth(month) {
+                const res = await fetch(`${ARCHIVE_DATA_DIR}/${month}.json`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            }
+
             async function loadMonth(month) {
                 document.querySelectorAll('.month-btn').forEach(b => b.classList.toggle('active', b.dataset.month === month));
                 container.innerHTML = '<div class="empty-state">Memuat berita…</div>';
                 try {
-                    const res = await fetch(`data/berita-lama/${month}.json`);
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    buildLamaCards(await res.json());
+                    if (month === 'today') {
+                        // "Hari Ini": berita sejak awal sesi pagi hari ini (bisa melintasi pergantian bulan)
+                        const start = new Date(TODAY_START);
+                        const months = [...new Set([TODAY_START.slice(0, 7), ARCHIVE_MONTHS[0]])].filter(m => ARCHIVE_MONTHS.includes(m));
+                        const parts = await Promise.all(months.map(fetchMonth));
+                        const items = parts.flatMap(p => p.items).filter(n => new Date(n.pub_datetime) >= start);
+                        buildLamaCards({ names: parts[0] ? parts[0].names : {}, items });
+                    } else {
+                        buildLamaCards(await fetchMonth(month));
+                    }
                 } catch (e) {
-                    container.innerHTML = `<div class="empty-state">Gagal memuat berita bulan ${esc(month)} (${esc(e.message)}).</div>`;
+                    container.innerHTML = `<div class="empty-state">Gagal memuat berita ${esc(month)} (${esc(e.message)}).</div>`;
                 }
                 initCards();
             }
 
-            if (IS_LAMA) {
+            if (IS_ARCHIVE_VIEW) {
                 document.querySelectorAll('.month-btn').forEach(b => b.addEventListener('click', () => loadMonth(b.dataset.month)));
-                if (LAMA_MONTHS.length) {
-                    loadMonth(LAMA_MONTHS[0]);
+                if (ARCHIVE_MONTHS.length) {
+                    loadMonth(document.querySelector('.month-btn[data-month="today"]') ? 'today' : ARCHIVE_MONTHS[0]);
                 } else {
-                    container.innerHTML = '<div class="empty-state">Belum ada berita lama.</div>';
+                    container.innerHTML = '<div class="empty-state">Belum ada berita.</div>';
                 }
             } else {
                 initCards();
