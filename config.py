@@ -53,6 +53,8 @@ SESSION_CONFIG = {
 # Batas tanggal terbit paling lama yang diterima (WIB).
 # Tetap berlaku meskipun --ignore-time-filter aktif, agar berita lama dari RSS tidak ikut terambil.
 MIN_NEWS_DATE = datetime(2026, 6, 1, tzinfo=TIMEZONE)
+# Batas tanggal terbit paling lama untuk arsip Berita Makro
+MIN_MACRO_DATE = datetime(2026, 1, 1, tzinfo=TIMEZONE)
 
 # ==============================================================================
 # 2. DAFTAR SUMBER BERITA (RSS FEEDS)
@@ -156,6 +158,27 @@ RSS_SOURCES = [
         "url": "https://news.google.com/rss/search?q=kinerja+kuartal+emiten+saham&hl=id&gl=ID&ceid=ID:id",
         "enabled": True,
     },
+    # Khusus Berita Makro (suku bunga, rupiah, inflasi & ekonomi, komoditas)
+    {
+        "name": "Makro: Suku Bunga via Google News",
+        "url": "https://news.google.com/rss/search?q=%22suku+bunga%22+BI+OR+%22The+Fed%22&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Makro: Rupiah via Google News",
+        "url": "https://news.google.com/rss/search?q=kurs+rupiah+dolar&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Makro: Inflasi & Ekonomi via Google News",
+        "url": "https://news.google.com/rss/search?q=inflasi+OR+%22pertumbuhan+ekonomi%22+Indonesia&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Makro: Komoditas via Google News",
+        "url": "https://news.google.com/rss/search?q=harga+batu+bara+OR+nikel+OR+CPO+OR+minyak&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
 ]
 
 # User-Agent untuk HTTP request agar tidak diblokir oleh CDN media berita
@@ -201,3 +224,5 @@ EMITEN_CSV_PATH = os.path.join(DATA_DIR, "emiten.csv")
 INDEX_HTML_PATH = os.path.join(BASE_DIR, "index.html")
 PAST_NEWS_DIR = os.path.join(DATA_DIR, "berita-lama")  # Kumpulan Berita Lama per bulan: YYYY-MM.json
 PAST_NEWS_HTML_PATH = os.path.join(BASE_DIR, "berita-lama.html")
+MACRO_NEWS_DIR = os.path.join(DATA_DIR, "makro")  # Kumpulan Berita Makro per bulan: YYYY-MM.json
+MACRO_NEWS_HTML_PATH = os.path.join(BASE_DIR, "makro.html")

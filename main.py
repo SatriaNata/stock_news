@@ -26,6 +26,7 @@ from datetime import datetime
 from config import TIMEZONE
 from src.scraper import collect_news, get_session_window, update_past_news_store, merge_with_saved_session
 from src.analyzer import analyze_news
+from src.macro import update_macro_store
 from src.generator import generate_dashboard
 from src.notifier import notify_success, notify_failure
 
@@ -134,6 +135,10 @@ def main():
         # 3b. Berita Lama: saring berita lama baru (skor kualitas, tanpa AI) ke data/berita-lama/YYYY-MM.json
         past_months = update_past_news_store(past_news_items, ref_date)
 
+        # 3c. Berita Makro: berita pasar & ekonomi tanpa emiten ke data/makro/YYYY-MM.json
+        macro_months = update_macro_store(news_data["news_items"] + past_news_items, datetime.now(TIMEZONE))
+        today_start = get_session_window("pagi", ref_date)[0].isoformat()
+
         # 4. Pembuatan Dashboard Web Statis (HTML & JSON)
         files_created = generate_dashboard(
             session=target_session,
@@ -144,10 +149,13 @@ def main():
             sorted_stocks=sorted_stocks,
             news_items=news_items,
             past_months=past_months,
+            macro_months=macro_months,
+            today_start=today_start,
         )
         logger.info(f"Dashboard utama diperbarui: {files_created['index_html']}")
         logger.info(f"Arsip sesi disimpan      : {files_created['archive_html']}")
         logger.info(f"Halaman Berita Lama      : {files_created['lama_html']} ({len(past_months)} bulan)")
+        logger.info(f"Halaman Berita Makro     : {files_created['makro_html']} ({len(macro_months)} bulan)")
         logger.info(f"Data JSON disimpan       : {files_created['json_path']}")
 
         # 5. Notifikasi Telegram

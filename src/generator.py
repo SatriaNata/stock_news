@@ -23,9 +23,11 @@ from config import (
     ARCHIVE_DIR,
     INDEX_HTML_PATH,
     PAST_NEWS_HTML_PATH,
+    MACRO_NEWS_HTML_PATH,
     TIMEZONE,
 )
 from src.quality import CATEGORIES as QUALITY_CATEGORIES
+from src.macro import MACRO_TOPICS
 
 # Jumlah berita per halaman pada setiap kartu emiten (sisanya lewat paginasi)
 NEWS_PAGE_SIZE = 4
@@ -79,12 +81,15 @@ def render_dashboard_html(
     archives: List[dict],
     is_archive_page: bool = False,
     past_months: List[str] = None,
+    today_start: str = "",
 ) -> str:
     """
     Menghasilkan kode HTML lengkap (CSS + JS inline) untuk dashboard.
-    session 'lama' menghasilkan halaman Berita Lama yang memuat data per bulan (past_months) lewat JavaScript.
+    session 'lama' (Berita Lama) dan 'makro' (Berita Makro) memuat data per bulan (past_months) lewat JavaScript.
+    today_start (ISO) menjadi batas awal pilihan "Hari Ini" di halaman Makro.
     """
-    is_lama = session == "lama"
+    is_makro = session == "makro"
+    is_archive_view = session in ("lama", "makro")
     past_months = past_months or []
     now_wib = datetime.now(TIMEZONE).strftime("%d %b %Y, %H:%M WIB")
     total_stocks = len(sorted_stocks)
@@ -239,18 +244,27 @@ def render_dashboard_html(
     history_href = "#" if session == "lama" else f"{prefix}berita-lama.html"
     history_btn_html = f'<a href="{history_href}" class="history-btn{history_active}">{history_icon} Berita Lama</a>'
 
+    # Tombol Berita Makro terpisah: satu halaman global makro.html
+    makro_icon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
+    makro_active = " active" if is_makro else ""
+    makro_href = "#" if is_makro else f"{prefix}makro.html"
+    makro_btn_html = f'<a href="{makro_href}" class="history-btn{makro_active}">{makro_icon} Makro</a>'
+
     month_bar_html = ""
-    if is_lama:
-        # Filter kategori (dari aturan skor) menggantikan filter sentimen
+    if is_archive_view:
+        # Filter kategori (Berita Lama) atau topik (Makro) menggantikan filter sentimen
+        filter_labels = [t[0] for t in (MACRO_TOPICS if is_makro else QUALITY_CATEGORIES)]
         category_buttons = "".join(
             f'<button class="filter-btn" data-filter="{label}">{label} (<span class="filter-count">0</span>)</button>'
-            for label, _, _ in QUALITY_CATEGORIES
+            for label in filter_labels
         )
         filter_buttons_html = f'<button class="filter-btn active" data-filter="all">Semua (<span class="filter-count">0</span>)</button>{category_buttons}'
         month_buttons = "".join(
             f'<button type="button" class="month-btn" data-month="{m}">{MONTH_NAMES[int(m[5:7]) - 1]} {m[:4]}</button>'
             for m in past_months
         )
+        if is_makro:
+            month_buttons = '<button type="button" class="month-btn" data-month="today">Hari Ini</button>' + month_buttons
         month_bar_html = f'<div class="month-bar" id="monthBar">{month_buttons}</div>'
     else:
         filter_buttons_html = f"""<button class="filter-btn active" data-filter="all">Semua (<span class="filter-count">{total_stocks}</span>)</button>
@@ -261,7 +275,17 @@ def render_dashboard_html(
                 <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement (<span class="filter-count">{count_pp}</span>)</button>
                 <button class="filter-btn filter-action-btn btn-lapkeu" data-filter="lapkeu">📊 Laporan Keuangan (<span class="filter-count">{count_lapkeu}</span>)</button>"""
 
-    if is_lama:
+    if is_makro:
+        header_badge = "BERITA MAKRO"
+        session_title = "Berita Makro · pasar &amp; ekonomi"
+        dashboard_title = "Berita Makro"
+        past_note_html = (
+            '<div class="past-note">Berita pasar &amp; ekonomi yang tidak membahas emiten tertentu, sejak 1 Januari 2026. '
+            '"Hari Ini" berisi berita sejak sesi pagi hari ini dimulai. Disaring otomatis: maksimal 5 berita terbaik '
+            'per topik per hari.</div>'
+        )
+        empty_text = "Memuat berita…"
+    elif is_archive_view:
         header_badge = "BERITA LAMA"
         session_title = f"Berita Lama · {session_label}"
         dashboard_title = "Berita Saham Sebelumnya"
@@ -1204,6 +1228,7 @@ def render_dashboard_html(
                     <div class="session-switcher">
                         {''.join(switcher_html)}
                     </div>
+                    {makro_btn_html}
                     {history_btn_html}
                 </div>
             </div>
@@ -1264,7 +1289,7 @@ def render_dashboard_html(
                 </div>
 
                 <!-- Widget Rekap Sentimen (tidak dipakai di Berita Lama karena tanpa AI) -->
-                <div class="side-widget"{' hidden' if is_lama else ''}>
+                <div class="side-widget"{' hidden' if is_archive_view else ''}>
                     <h2 class="widget-title">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
                         Rekap Sentimen Saham
@@ -1310,8 +1335,11 @@ def render_dashboard_html(
     <!-- JavaScript Murni: Paginasi Berita, Pencarian & Filter Instan -->
     <script>
         const NEWS_PAGE_SIZE = {NEWS_PAGE_SIZE};
-        const IS_LAMA = {'true' if is_lama else 'false'};
-        const LAMA_MONTHS = {json.dumps(past_months)};
+        const IS_ARCHIVE_VIEW = {'true' if is_archive_view else 'false'};
+        const ARCHIVE_MONTHS = {json.dumps(past_months)};
+        const ARCHIVE_DATA_DIR = '{'data/makro' if is_makro else 'data/berita-lama'}';
+        const SHOW_CATEGORY = {'false' if is_makro else 'true'};  // di Makro kartu = topik, label kategori tidak perlu
+        const TODAY_START = '{today_start}';
 
         document.addEventListener('DOMContentLoaded', function() {{
             const searchInput = document.getElementById('searchInput');
@@ -1440,7 +1468,7 @@ def render_dashboard_html(
                 }});
             }});
 
-            // ===== Berita Lama: data dimuat per bulan dari data/berita-lama/YYYY-MM.json =====
+            // ===== Berita Lama / Makro: data dimuat per bulan dari ARCHIVE_DATA_DIR/YYYY-MM.json =====
             function buildLamaCards(data) {{
                 const groups = {{}};
                 data.items.forEach(n => n.codes.forEach(code => (groups[code] = groups[code] || []).push(n)));
@@ -1454,7 +1482,7 @@ def render_dashboard_html(
                         <li class="news-item"${{i >= NEWS_PAGE_SIZE ? ' hidden="until-found"' : ''}}>
                             <a href="${{esc(n.link)}}" target="_blank" rel="noopener noreferrer" class="news-link">${{esc(n.title)}}</a>
                             <div class="news-meta">
-                                <span class="cat-tag">${{esc(n.category)}}</span>
+                                ${{SHOW_CATEGORY ? `<span class="cat-tag">${{esc(n.category)}}</span>` : ''}}
                                 <span class="news-source">${{esc(n.source)}}</span>
                                 <span class="news-dot">•</span>
                                 <span class="news-time">${{esc(n.pub_date_str)}}</span>
@@ -1476,7 +1504,7 @@ def render_dashboard_html(
                             <ul class="news-list">${{lis}}</ul>
                         </div>
                     </article>`;
-                }}).join('') : '<div class="empty-state">Belum ada berita lama di bulan ini.</div>';
+                }}).join('') : '<div class="empty-state">Belum ada berita di periode ini.</div>';
 
                 // Statistik, top 5, dan jumlah emiten per kategori
                 document.getElementById('statNews').textContent = data.items.length;
@@ -1501,25 +1529,38 @@ def render_dashboard_html(
                 }});
             }}
 
+            async function fetchMonth(month) {{
+                const res = await fetch(`${{ARCHIVE_DATA_DIR}}/${{month}}.json`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            }}
+
             async function loadMonth(month) {{
                 document.querySelectorAll('.month-btn').forEach(b => b.classList.toggle('active', b.dataset.month === month));
                 container.innerHTML = '<div class="empty-state">Memuat berita…</div>';
                 try {{
-                    const res = await fetch(`data/berita-lama/${{month}}.json`);
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    buildLamaCards(await res.json());
+                    if (month === 'today') {{
+                        // "Hari Ini": berita sejak awal sesi pagi hari ini (bisa melintasi pergantian bulan)
+                        const start = new Date(TODAY_START);
+                        const months = [...new Set([TODAY_START.slice(0, 7), ARCHIVE_MONTHS[0]])].filter(m => ARCHIVE_MONTHS.includes(m));
+                        const parts = await Promise.all(months.map(fetchMonth));
+                        const items = parts.flatMap(p => p.items).filter(n => new Date(n.pub_datetime) >= start);
+                        buildLamaCards({{ names: parts[0] ? parts[0].names : {{}}, items }});
+                    }} else {{
+                        buildLamaCards(await fetchMonth(month));
+                    }}
                 }} catch (e) {{
-                    container.innerHTML = `<div class="empty-state">Gagal memuat berita bulan ${{esc(month)}} (${{esc(e.message)}}).</div>`;
+                    container.innerHTML = `<div class="empty-state">Gagal memuat berita ${{esc(month)}} (${{esc(e.message)}}).</div>`;
                 }}
                 initCards();
             }}
 
-            if (IS_LAMA) {{
+            if (IS_ARCHIVE_VIEW) {{
                 document.querySelectorAll('.month-btn').forEach(b => b.addEventListener('click', () => loadMonth(b.dataset.month)));
-                if (LAMA_MONTHS.length) {{
-                    loadMonth(LAMA_MONTHS[0]);
+                if (ARCHIVE_MONTHS.length) {{
+                    loadMonth(document.querySelector('.month-btn[data-month="today"]') ? 'today' : ARCHIVE_MONTHS[0]);
                 }} else {{
-                    container.innerHTML = '<div class="empty-state">Belum ada berita lama.</div>';
+                    container.innerHTML = '<div class="empty-state">Belum ada berita.</div>';
                 }}
             }} else {{
                 initCards();
@@ -1540,11 +1581,13 @@ def generate_dashboard(
     sorted_stocks: Dict[str, dict],
     news_items: List[dict] = None,
     past_months: List[str] = None,
+    macro_months: List[str] = None,
+    today_start: str = "",
 ) -> dict:
     """
     Fungsi utama pembuatan dan penyimpanan file dashboard:
     1. Menyimpan data mentah ke data/YYYY-MM-DD-{sesi}.json
-    2. Merender halaman global Berita Lama ke berita-lama.html
+    2. Merender halaman global Berita Lama ke berita-lama.html dan Berita Makro ke makro.html
     3. Merender HTML arsip ke arsip/YYYY-MM-DD-{sesi}.html
     4. Merender ulang arsip sesi lain di tanggal yang sama (agar tombol sesinya ikut aktif)
     5. Merender HTML utama ke index.html (sesi terbaru di tanggal itu; siang lebih baru dari pagi)
@@ -1599,6 +1642,22 @@ def generate_dashboard(
     )
     with open(PAST_NEWS_HTML_PATH, "w", encoding="utf-8") as f:
         f.write(lama_html)
+
+    # 2b. Halaman global Berita Makro (root); isinya dimuat per bulan oleh JavaScript
+    makro_html = render_dashboard_html(
+        session="makro",
+        session_label="",
+        date_str=date_str,
+        total_news=0,
+        total_sources=0,
+        sorted_stocks={},
+        archives=archives,
+        is_archive_page=False,
+        past_months=macro_months,
+        today_start=today_start,
+    )
+    with open(MACRO_NEWS_HTML_PATH, "w", encoding="utf-8") as f:
+        f.write(makro_html)
 
     # 3. Render file arsip (is_archive_page=True)
     archive_html = render_dashboard_html(
@@ -1665,5 +1724,6 @@ def generate_dashboard(
         "index_html": INDEX_HTML_PATH,
         "archive_html": archive_filepath,
         "lama_html": PAST_NEWS_HTML_PATH,
+        "makro_html": MACRO_NEWS_HTML_PATH,
         "json_path": json_filepath,
     }
