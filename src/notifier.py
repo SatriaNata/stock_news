@@ -104,12 +104,15 @@ def notify_success(
     # Cek aksi korporasi (Buyback & Private Placement)
     buyback_stocks = [f"${s['code']}" for s in sorted_stocks.values() if s.get("has_buyback")]
     pp_stocks = [f"${s['code']}" for s in sorted_stocks.values() if s.get("has_pp")]
+    lapkeu_stocks = [f"${s['code']}" for s in sorted_stocks.values() if s.get("has_lapkeu")]
 
     action_lines = []
     if buyback_stocks:
         action_lines.append(f"🎯 <b>Buyback:</b> {', '.join(buyback_stocks[:5])}")
     if pp_stocks:
         action_lines.append(f"⚡ <b>Private Placement:</b> {', '.join(pp_stocks[:5])}")
+    if lapkeu_stocks:
+        action_lines.append(f"📊 <b>Laporan Keuangan:</b> {', '.join(lapkeu_stocks[:5])}")
 
     action_text = ""
     if action_lines:

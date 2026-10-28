@@ -140,6 +140,22 @@ RSS_SOURCES = [
         "url": "https://news.google.com/rss/search?q=site:finance.detik.com+saham&hl=id&gl=ID&ceid=ID:id",
         "enabled": True,
     },
+    # Khusus berita hasil laporan keuangan (ramai di musim rilis: akhir Apr, Jul, Okt, Mar)
+    {
+        "name": "Laporan Keuangan: Laba Bersih via Google News",
+        "url": "https://news.google.com/rss/search?q=%22laba+bersih%22+emiten&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Laporan Keuangan: Lapkeu via Google News",
+        "url": "https://news.google.com/rss/search?q=%22laporan+keuangan%22+emiten&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
+    {
+        "name": "Laporan Keuangan: Kinerja Kuartal via Google News",
+        "url": "https://news.google.com/rss/search?q=kinerja+kuartal+emiten+saham&hl=id&gl=ID&ceid=ID:id",
+        "enabled": True,
+    },
 ]
 
 # User-Agent untuk HTTP request agar tidak diblokir oleh CDN media berita

@@ -95,6 +95,7 @@ def render_dashboard_html(
     count_negatif = sum(1 for s in sorted_stocks.values() if s.get("sentiment") == "Negatif")
     count_buyback = sum(1 for s in sorted_stocks.values() if s.get("has_buyback"))
     count_pp = sum(1 for s in sorted_stocks.values() if s.get("has_pp"))
+    count_lapkeu = sum(1 for s in sorted_stocks.values() if s.get("has_lapkeu"))
 
     # Ambil 5 saham teratas untuk visualisasi batang di sidebar
     top_5_stocks = list(sorted_stocks.values())[:5]
@@ -146,15 +147,18 @@ def render_dashboard_html(
         # Buat badge aksi korporasi jika ada
         has_buyback = stock.get("has_buyback", False)
         has_pp = stock.get("has_pp", False)
+        has_lapkeu = stock.get("has_lapkeu", False)
         action_pills = []
         if has_buyback:
             action_pills.append('<span class="action-pill pill-buyback" title="Aksi Korporasi: Buyback Saham">🎯 Buyback</span>')
         if has_pp:
             action_pills.append('<span class="action-pill pill-pp" title="Aksi Korporasi: Private Placement / PMTHMETD">⚡ Private Placement</span>')
+        if has_lapkeu:
+            action_pills.append('<span class="action-pill pill-lapkeu" title="Berita hasil laporan keuangan">📊 Laporan Keuangan</span>')
         action_pills_html = "".join(action_pills)
 
         return f"""
-        <article class="stock-card" data-code="{code}" data-name="{company_name.lower()}" data-sentiment="{sentiment}" data-has-buyback="{'true' if has_buyback else 'false'}" data-has-pp="{'true' if has_pp else 'false'}">
+        <article class="stock-card" data-code="{code}" data-name="{company_name.lower()}" data-sentiment="{sentiment}" data-has-buyback="{'true' if has_buyback else 'false'}" data-has-pp="{'true' if has_pp else 'false'}" data-has-lapkeu="{'true' if has_lapkeu else 'false'}">
             <div class="card-top">
                 <div class="ticker-group">
                     <span class="ticker-code">{code}</span>
@@ -254,7 +258,8 @@ def render_dashboard_html(
                 <button class="filter-btn" data-filter="Netral">Netral (<span class="filter-count">{count_netral}</span>)</button>
                 <button class="filter-btn" data-filter="Negatif">Negatif (<span class="filter-count">{count_negatif}</span>)</button>
                 <button class="filter-btn filter-action-btn btn-buyback" data-filter="buyback">🎯 Buyback (<span class="filter-count">{count_buyback}</span>)</button>
-                <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement (<span class="filter-count">{count_pp}</span>)</button>"""
+                <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement (<span class="filter-count">{count_pp}</span>)</button>
+                <button class="filter-btn filter-action-btn btn-lapkeu" data-filter="lapkeu">📊 Laporan Keuangan (<span class="filter-count">{count_lapkeu}</span>)</button>"""
 
     if is_lama:
         header_badge = "BERITA LAMA"
@@ -762,6 +767,18 @@ def render_dashboard_html(
         .filter-action-btn.btn-buyback:hover, .filter-action-btn.btn-buyback.active {{
             background-color: #047857 !important;
             border-color: #047857 !important;
+            color: #FFFFFF !important;
+        }}
+
+        .pill-lapkeu {{
+            background-color: #FFF7ED;
+            color: #C2410C;
+            border: 1px solid #FED7AA;
+        }}
+
+        .filter-action-btn.btn-lapkeu:hover, .filter-action-btn.btn-lapkeu.active {{
+            background-color: #C2410C !important;
+            border-color: #C2410C !important;
             color: #FFFFFF !important;
         }}
 
@@ -1377,12 +1394,14 @@ def render_dashboard_html(
                     const name = card.dataset.name.toLowerCase();
                     const hasBuyback = card.dataset.hasBuyback === 'true';
                     const hasPP = card.dataset.hasPp === 'true';
+                    const hasLapkeu = card.dataset.hasLapkeu === 'true';
                     const categories = (card.dataset.categories || '').split('|');
                     const titleHit = query ? card._titles.findIndex(t => t.includes(query)) : -1;
 
                     const matchesSearch = !query || code.includes(query) || name.includes(query) || titleHit >= 0
                         || (query === 'buyback' && hasBuyback)
-                        || (query.includes('placement') && hasPP);
+                        || (query.includes('placement') && hasPP)
+                        || ((query === 'lapkeu' || query.includes('laporan keuangan')) && hasLapkeu);
 
                     // Lompat ke halaman berisi berita yang cocok; kembali ke halaman 1 saat pencarian berubah
                     if (titleHit >= 0) {{
@@ -1397,6 +1416,7 @@ def render_dashboard_html(
                     if (currentFilter === 'all') matchesFilter = true;
                     else if (currentFilter === 'buyback') matchesFilter = hasBuyback;
                     else if (currentFilter === 'pp') matchesFilter = hasPP;
+                    else if (currentFilter === 'lapkeu') matchesFilter = hasLapkeu;
                     else matchesFilter = card.dataset.sentiment === currentFilter || categories.includes(currentFilter);
 
                     card.classList.toggle('hidden', !(matchesSearch && matchesFilter));
@@ -1441,7 +1461,7 @@ def render_dashboard_html(
                             </div>
                         </li>`).join('');
                     return `
-                    <article class="stock-card" data-code="${{esc(code)}}" data-name="${{esc(name.toLowerCase())}}" data-sentiment="" data-categories="${{esc(cats.join('|'))}}" data-has-buyback="false" data-has-pp="false">
+                    <article class="stock-card" data-code="${{esc(code)}}" data-name="${{esc(name.toLowerCase())}}" data-sentiment="" data-categories="${{esc(cats.join('|'))}}" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="${{cats.includes('Laporan Keuangan')}}">
                         <div class="card-top">
                             <div class="ticker-group">
                                 <span class="ticker-code">${{esc(code)}}</span>

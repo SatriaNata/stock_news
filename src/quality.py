@@ -9,7 +9,7 @@ Penilaian kualitas berita untuk halaman "Berita Lama" (berbasis aturan, tanpa AI
 import re
 from typing import Dict, List, Tuple
 
-from src.analyzer import load_emiten_dict, fallback_detect_stocks
+from src.analyzer import load_emiten_dict, fallback_detect_stocks, FINANCIAL_REPORT_PATTERN
 from src.scraper import is_title_duplicate
 
 QUALITY_THRESHOLD = 4
@@ -23,6 +23,7 @@ CAPITAL_MARKET_MEDIA = [
 
 # (label, poin, pola). Kategori dengan poin tertinggi yang dipakai; urutan menentukan pemenang saat seri.
 CATEGORIES = [
+    ("Laporan Keuangan", 3, FINANCIAL_REPORT_PATTERN),
     ("Aksi Korporasi", 3, r"buyback|buy back|right issue|rights issue|hmetd|private placement|pmthmetd|akuisisi|mengakuisisi|ambil alih|merger|tender offer|stock split|reverse stock|\bipo\b|penawaran umum|obligasi|sukuk|\brups|spin.?off|divestasi|tambah modal|menambah modal|suntik|patungan|anak usaha|anak perusahaan|aksi korporasi|lepas bisnis|jual bisnis|treasuri"),
     ("Kinerja", 3, r"\blaba\b|\brugi\b|pendapatan|penjualan|marketing sales|kinerja|kuartal|semester|dividen|ebitda|\bmargin\b|lapkeu|laporan keuangan|profit|\butang\b"),
     ("Kepemilikan", 3, r"kepemilikan|pemegang saham|pengendali|lepas saham|melepas|\blego\b|borong|memborong|serok|akumulasi|tambah saham|jual saham|beli saham|jual beli|caplok|genggam|investor strategis|investor kakap|\b(jual|lepas|beli|lego|serok|borong|tambah|timbun|kurangi)\b.{0,30}\bsaham\b|\bsaham\b.{0,30}\b(jual|lepas|beli|lego|serok|borong|tambah|timbun|kurangi)\b"),

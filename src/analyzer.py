@@ -262,10 +262,19 @@ def detect_stocks_with_ai(news_items: List[dict], code_to_name: Dict[str, str]) 
     return stock_news
 
 
+# Berita hasil laporan keuangan: laba/rugi/pendapatan + periode laporan, atau istilah laporan keuangan langsung
+_FIN_METRIC = r"(\blaba\b|\brugi\b|pendapatan|penjualan|ebitda)"
+_FIN_PERIOD = r"(kuartal|kuarter|\bq[1-4]\b|semester|\b1h\b|\b9m\b|sembilan bulan|9 bulan|enam bulan|6 bulan|tahun buku|triwulan|\btw ?[1-4]\b|sepanjang (tahun|20\d\d))"
+FINANCIAL_REPORT_PATTERN = (
+    r"lapkeu|laporan keuangan|laporan tahunan|rilis kinerja|kinerja (keuangan|kuartal|semester|9 bulan|sembilan bulan)"
+    rf"|{_FIN_METRIC}.{{0,60}}{_FIN_PERIOD}|{_FIN_PERIOD}.{{0,60}}{_FIN_METRIC}"
+)
+
+
 def detect_corporate_actions(news_items: List[dict]) -> List[str]:
     """
-    Mendeteksi aksi korporasi khusus (Buyback dan Private Placement)
-    dari kumpulan judul dan deskripsi berita untuk saham tertentu.
+    Mendeteksi aksi korporasi khusus (Buyback dan Private Placement) serta berita
+    Laporan Keuangan dari kumpulan judul dan deskripsi berita untuk saham tertentu.
     """
     tags = []
     all_text = " ".join([f"{itm['title']} {itm.get('description', '')}" for itm in news_items]).lower()
@@ -277,6 +286,10 @@ def detect_corporate_actions(news_items: List[dict]) -> List[str]:
     # 2. Deteksi Private Placement (PMTHMETD)
     if re.search(r"\b(private placement|pmthmetd|tanpa hak memesan efek|penambahan modal tanpa hak|non-preemptive)\b", all_text):
         tags.append("Private Placement")
+
+    # 3. Deteksi berita hasil Laporan Keuangan (kuartalan / semesteran / tahunan)
+    if re.search(FINANCIAL_REPORT_PATTERN, all_text):
+        tags.append("Laporan Keuangan")
 
     return tags
 
@@ -349,6 +362,7 @@ def analyze_sentiments_and_summaries(stock_news: Dict[str, List[dict]], code_to_
             "tags": regex_tags,
             "has_buyback": "Buyback" in regex_tags,
             "has_pp": "Private Placement" in regex_tags,
+            "has_lapkeu": "Laporan Keuangan" in regex_tags,
             "news_count": len(items),
             "news": items,
         }
@@ -407,6 +421,7 @@ def analyze_news(news_items: List[dict], use_ai: bool = True) -> Dict[str, dict]
                 "tags": tags,
                 "has_buyback": "Buyback" in tags,
                 "has_pp": "Private Placement" in tags,
+                "has_lapkeu": "Laporan Keuangan" in tags,
                 "news_count": len(items),
                 "news": items,
             }
