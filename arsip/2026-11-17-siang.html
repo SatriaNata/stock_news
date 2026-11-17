@@ -1,0 +1,2802 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Berita Saham IDX - Sesi Siang · 07.00–13.20 WIB</title>
+    <!-- Google Fonts: IBM Plex Sans & IBM Plex Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #F4F6F9;
+            --bg-card: #FFFFFF;
+            --border-color: #E2E8F0;
+            --border-hover: #CBD5E1;
+            --text-main: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --blue-accent: #1D4ED8;
+            --blue-light: #EFF6FF;
+            --blue-border: #BFDBFE;
+            
+            /* Sentimen */
+            --pos-text: #1D4ED8;
+            --pos-bg: #EFF6FF;
+            --pos-border: #DBEAFE;
+            --net-text: #334155;
+            --net-bg: #F1F5F9;
+            --net-border: #E2E8F0;
+            --neg-text: #C2410C;
+            --neg-bg: #FFF7ED;
+            --neg-border: #FFEDD5;
+
+            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'IBM Plex Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --radius-pill: 9999px;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 60px;
+        }
+
+        /* Container utama */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header.dashboard-header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 32px 0 24px;
+            margin-bottom: 24px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .header-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--blue-accent);
+            background-color: var(--blue-light);
+            border: 1px solid var(--blue-border);
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            margin-bottom: 8px;
+        }
+
+        h1.dashboard-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .header-meta {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .meta-session {
+            font-weight: 600;
+            color: var(--blue-accent);
+        }
+
+        /* Navigasi header: switcher sesi + tombol Berita Lama */
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .history-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: all 0.15s ease;
+        }
+
+        .history-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--text-main);
+        }
+
+        .history-btn.active {
+            color: var(--blue-accent);
+            border-color: var(--blue-accent);
+            background-color: var(--blue-light);
+        }
+
+        /* Switcher Sesi */
+        .session-switcher {
+            display: inline-flex;
+            background-color: var(--bg-page);
+            border: 1px solid var(--border-color);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            gap: 4px;
+        }
+
+        .session-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            transition: all 0.15s ease;
+        }
+
+        .session-btn:hover:not(.disabled):not(.active) {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--text-main);
+        }
+
+        .session-btn.active {
+            background-color: var(--bg-card);
+            color: var(--blue-accent);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .session-btn.disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            color: var(--text-muted);
+        }
+
+        .status-tag {
+            font-size: 10px;
+            background-color: #E2E8F0;
+            color: #64748B;
+            padding: 2px 6px;
+            border-radius: var(--radius-pill);
+            font-weight: 500;
+        }
+
+        /* Kotak Statistik */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stat-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* Toolbar Kontrol (Pencarian & Filter) */
+        .toolbar {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 14px 10px 38px;
+            font-size: 14px;
+            font-family: var(--font-sans);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            outline: none;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            transition: border-color 0.15s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--blue-accent);
+            background-color: #FFFFFF;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 14px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--text-main);
+        }
+
+        .filter-btn.active {
+            background-color: var(--blue-accent);
+            color: #FFFFFF;
+            border-color: var(--blue-accent);
+        }
+
+        /* Tata Letak Konten & Sidebar */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Daftar Kartu Saham */
+        .stock-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-width: 0;
+        }
+
+        .stock-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Pilihan bulan di halaman Berita Lama */
+        .month-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .month-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            padding: 7px 14px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .month-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--text-main);
+        }
+
+        .month-btn.active {
+            background-color: var(--blue-accent);
+            border-color: var(--blue-accent);
+            color: #FFFFFF;
+        }
+
+        .past-note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 32px 16px;
+        }
+
+        .stock-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+
+        .stock-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stock-card.hidden {
+            display: none !important;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .ticker-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ticker-code {
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--blue-accent);
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+        }
+
+        .company-name {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .badge-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sentiment-pill {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            display: inline-flex;
+            align-items: center;
+            letter-spacing: 0.02em;
+        }
+
+        .pill-positif {
+            background-color: var(--pos-bg);
+            color: var(--pos-text);
+            border: 1px solid var(--pos-border);
+        }
+
+        .pill-netral {
+            background-color: var(--net-bg);
+            color: var(--net-text);
+            border: 1px solid var(--net-border);
+        }
+
+        .pill-negatif {
+            background-color: var(--neg-bg);
+            color: var(--neg-text);
+            border: 1px solid var(--neg-border);
+        }
+
+        /* Aksi Korporasi: Buyback & Private Placement */
+        .action-pill {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: var(--radius-pill);
+            display: inline-flex;
+            align-items: center;
+            letter-spacing: 0.02em;
+        }
+
+        .pill-buyback {
+            background-color: #ECFDF5;
+            color: #047857;
+            border: 1px solid #A7F3D0;
+        }
+
+        .pill-pp {
+            background-color: #F5F3FF;
+            color: #6D28D9;
+            border: 1px solid #DDD6FE;
+        }
+
+        .filter-action-btn.btn-buyback:hover, .filter-action-btn.btn-buyback.active {
+            background-color: #047857 !important;
+            border-color: #047857 !important;
+            color: #FFFFFF !important;
+        }
+
+        .pill-lapkeu {
+            background-color: #FFF7ED;
+            color: #C2410C;
+            border: 1px solid #FED7AA;
+        }
+
+        .filter-action-btn.btn-lapkeu:hover, .filter-action-btn.btn-lapkeu.active {
+            background-color: #C2410C !important;
+            border-color: #C2410C !important;
+            color: #FFFFFF !important;
+        }
+
+        .filter-action-btn.btn-pp:hover, .filter-action-btn.btn-pp.active {
+            background-color: #6D28D9 !important;
+            border-color: #6D28D9 !important;
+            color: #FFFFFF !important;
+        }
+
+        .count-badge {
+            font-size: 12px;
+            font-weight: 500;
+            background-color: var(--bg-page);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Ringkasan AI Box */
+        .summary-box {
+            background-color: #F8FAFC;
+            border-left: 3px solid var(--blue-accent);
+            border-radius: 4px var(--radius-sm) var(--radius-sm) 4px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+        }
+
+        .summary-header {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--blue-accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .summary-text {
+            font-size: 13.5px;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        /* Bagian Berita */
+        .card-news-section {
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .news-list {
+            list-style: none;
+            margin-bottom: -10px;
+        }
+
+        /* Item di halaman lain diberi hidden="until-found"; display hanya untuk item yang tampil
+           agar browser tetap bisa menyembunyikannya dan Ctrl+F tetap bisa menemukannya */
+        .news-item:not([hidden]) {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 10px;
+        }
+
+        .news-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-main);
+            text-decoration: none;
+            line-height: 1.4;
+            transition: color 0.15s ease;
+        }
+
+        .news-link:hover {
+            color: var(--blue-accent);
+            text-decoration: underline;
+        }
+
+        .news-meta {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cat-tag {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--blue-accent);
+            background-color: var(--blue-light);
+            border-radius: var(--radius-pill);
+            padding: 1px 8px;
+        }
+
+        .news-source {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .news-dot {
+            color: var(--text-muted);
+        }
+
+        /* Paginasi berita per emiten */
+        .pager {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+            margin-top: 14px;
+        }
+
+        .pager-btn {
+            min-width: 30px;
+            height: 30px;
+            padding: 0 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            color: var(--text-secondary);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .pager-btn:hover:not(:disabled):not(.active) {
+            border-color: var(--border-hover);
+            color: var(--text-main);
+        }
+
+        .pager-btn.active {
+            background-color: var(--blue-accent);
+            border-color: var(--blue-accent);
+            color: #FFFFFF;
+        }
+
+        .pager-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pager-gap {
+            color: var(--text-muted);
+            padding: 0 2px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .side-widget {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .widget-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Widget Top 5 Progress Bar */
+        .rank-item {
+            margin-bottom: 12px;
+        }
+
+        .rank-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .rank-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12.5px;
+            margin-bottom: 4px;
+        }
+
+        .rank-ticker {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .rank-count {
+            color: var(--text-secondary);
+            font-size: 11.5px;
+        }
+
+        .progress-track {
+            height: 6px;
+            background-color: var(--bg-page);
+            border-radius: var(--radius-pill);
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--blue-accent);
+            border-radius: var(--radius-pill);
+        }
+
+        /* Widget Rekap Sentimen */
+        .sentiment-recap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .recap-box {
+            padding: 10px 6px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recap-box.box-pos {
+            background-color: var(--pos-bg);
+            border: 1px solid var(--pos-border);
+        }
+
+        .recap-box.box-net {
+            background-color: var(--net-bg);
+            border: 1px solid var(--net-border);
+        }
+
+        .recap-box.box-neg {
+            background-color: var(--neg-bg);
+            border: 1px solid var(--neg-border);
+        }
+
+        .recap-num {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            line-height: 1.1;
+        }
+
+        .recap-box.box-pos .recap-num { color: var(--pos-text); }
+        .recap-box.box-net .recap-num { color: var(--net-text); }
+        .recap-box.box-neg .recap-num { color: var(--neg-text); }
+
+        .recap-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Widget Arsip */
+        .archive-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .archive-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            background-color: var(--bg-page);
+            border: 1px solid transparent;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 12.5px;
+            transition: all 0.15s ease;
+        }
+
+        .archive-item:hover {
+            background-color: #FFFFFF;
+            border-color: var(--border-color);
+        }
+
+        .archive-item.active {
+            background-color: var(--blue-light);
+            border-color: var(--blue-border);
+            color: var(--blue-accent);
+            font-weight: 600;
+        }
+
+        .archive-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+        }
+
+        .badge-pagi {
+            background-color: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .badge-siang {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .empty-archive {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 12px 0;
+        }
+
+        /* Footer & Catatan Kaki */
+        footer.dashboard-footer {
+            margin-top: 48px;
+            text-align: center;
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+        }
+
+        .disclaimer {
+            background-color: #FFFBEB;
+            border: 1px solid #FEF3C7;
+            color: #92400E;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+            margin-bottom: 12px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Responsive Breakpoints (Mobile Friendly) */
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                order: 2;
+            }
+            .stock-column {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-top {
+                flex-direction: column;
+            }
+            .header-nav {
+                width: 100%;
+            }
+            .session-switcher {
+                width: 100%;
+                justify-content: stretch;
+            }
+            .history-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .session-btn {
+                flex: 1;
+                justify-content: center;
+            }
+            h1.dashboard-title {
+                font-size: 24px;
+            }
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Halaman -->
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="header-top">
+                <div>
+                    <span class="header-tag">RANGKUMAN SIANG</span>
+                    <h1 class="dashboard-title">Berita Saham Hari Ini</h1>
+                    <div class="header-meta">
+                        <span class="meta-session">Sesi Siang · 07.00–13.20 WIB</span>
+                        <span>•</span>
+                        <span>Update: 17 Nov 2026, 23:15 WIB</span>
+                    </div>
+                </div>
+
+                <!-- Pemindah Sesi (Pagi / Siang) + tombol Berita Lama terpisah -->
+                <div class="header-nav">
+                    <div class="session-switcher">
+                        <a href="../arsip/2026-11-17-pagi.html" class="session-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> Sesi Pagi</a><a href="#" class="session-btn active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg> Sesi Siang</a>
+                    </div>
+                    <a href="../makro.html" class="history-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Makro</a>
+                    <a href="../berita-lama.html" class="history-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg> Berita Lama</a>
+                </div>
+            </div>
+
+            <!-- Tiga Kotak Angka Ringkasan -->
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <span class="stat-value" id="statNews">222</span>
+                    <span class="stat-label">Total Berita Disaring</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value" id="statStocks">34</span>
+                    <span class="stat-label">Saham IDX Dibahas</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value" id="statSources">19</span>
+                    <span class="stat-label">Sumber Berita Aktif</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+
+        <!-- Toolbar Pencarian & Filter Sentimen Interaktif -->
+        <div class="toolbar">
+            <div class="search-box">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari kode saham, nama emiten, atau judul berita (misal: BBCA, Bank Mandiri, dividen)...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Semua (<span class="filter-count">34</span>)</button>
+                <button class="filter-btn" data-filter="Positif">Positif (<span class="filter-count">0</span>)</button>
+                <button class="filter-btn" data-filter="Netral">Netral (<span class="filter-count">34</span>)</button>
+                <button class="filter-btn" data-filter="Negatif">Negatif (<span class="filter-count">0</span>)</button>
+                <button class="filter-btn filter-action-btn btn-buyback" data-filter="buyback">🎯 Buyback (<span class="filter-count">1</span>)</button>
+                <button class="filter-btn filter-action-btn btn-pp" data-filter="pp">⚡ Private Placement (<span class="filter-count">1</span>)</button>
+                <button class="filter-btn filter-action-btn btn-lapkeu" data-filter="lapkeu">📊 Laporan Keuangan (<span class="filter-count">3</span>)</button>
+            </div>
+        </div>
+
+        <!-- Tata Letak Utama -->
+        <main class="main-layout">
+            <!-- Kolom Kiri: Kartu Saham -->
+            <div class="stock-column">
+                
+                <section class="stock-cards-list" id="stockCardsContainer">
+                    
+        <article class="stock-card" data-code="MBMA" data-name="merdeka battery materials tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="true" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">MBMA</span>
+                    <span class="company-name" title="Merdeka Battery Materials Tbk.">Merdeka Battery Materials Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    <span class="action-pill pill-pp" title="Aksi Korporasi: Private Placement / PMTHMETD">⚡ Private Placement</span>
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">5 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQTW5Ud1JBS2NTUnlhbGVfbnV3Vk96cE5qc1hkR2I3VWc1cG1XNTlheTdjcEx1bkVnbG5xa2NZSWpRODZzaW1mMmszbHdCc0NreGw4NE8xUkthWWNERVo1YmtiZDhpa2x4RTA3YXVCZFJBVURuaEo5dS05MV9JVGJ3bnFvVDJBcHRkTlN4b19Tb0pXRi1mZVBVRUFTU1E?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    BEI minta penjelasan PMTHMETD II, MBMA beri tanggapan - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDNFinancials via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:50 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPYlR5SVVQQTBhQWZVaW1ieFQzMmlRMXR3X2t0WjRFdEtqbXVuaDFIcVVtd3FHTTNWekVFbkFnWXUzUExGcTVNMjlITU9KS3NtS0ZmYjZ2bC1ZNUdNOUVoZ045dHJZWE52SkdnT0s3NkZLUFFBRmtSVGwzU0k2dTN3b1F1QVpJd2RFZEJhcmFJdmxEamxwa2NUeHRZdmprNWl0cTlBa0trSUNMS2NwTk1QYk5rQUlzSEo0SXdkUA?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Indeks Bisnis-27 Dibuka Menguat, Saham MBMA, BBRI hingga BMRI Tancap Gas - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:35 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQQlJOWHlkb2RNWFN4UHJDMnlBTlQ2ZllKTXlMX0lXaUFQUjh6WlN3QllzcVNlSEhoRkFUdU5PWWtmVUowNUNWOEtCNDR3ZXVFbVdaZFZOS2o2c3duUjJsTzlBbWg4WXZqZE5CSDR5QjN1UkI5dFFjMVhTblQyUWlmS3M4c09OMm5HRURzVkl2M2hKc2R4Mm4tdE40VHRKS2dncklheTlIOURZeEJ5RzRvM2ZZcDNGcHc?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Dibuka Melemah 0,34% ke 5.303, Saham GOTO, MBMA, BBRI Justru Melaju - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:31 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQQ3ZPaW96NnJ2MHVoTjZ4SUZ6UXFxcGhJNVhqbWIyb0ozTmhCdVU3cmhBM2FQenlqdkREcW41UHgwZDlqay1rQWI2bWZibUM4em0zdGZxeXNJdVNXZXJGZm1aNmM0UTVwUFE5bExwdG1iQjBZUTNjQW9Qc1JRaWV2SFJ5T2tiTTlfTkVBalBBZE5Bby0zU3VxcDE2eW04YjY2UjBjYUVpTjR6RVZfaHfSAaYBQVVfeXFMTlp3ZTExMjQ0NWV6OXh6dHRIMlhzZ1FIVmVkcGhsbWQ1UDBRMUlUQXYyRW5OZjVNdUtNd3JueC0zd2pqYy1QRmdmUHo0R3N3NFBhZDRQN21yNUZjczZsVnMzMHdfUTlRaU5qbjBaZjhsMDM0UmlnOEJENlpaTzlZbWI1QThleXJzTHFXMHRhZlRxQTlZYUdMSU5aaWZmV3RVU1lvSWY4QQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Menguat 0,5% ke 5.347,6 di Pagi Ini (17/11), Top Gainers LQ45: GOTO, SMGR, MBMA - kontan.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:22 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item" hidden="until-found">
+                <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxNWVUybkZnNXVFbWE0elBURFRzR0E2bXZzYmNDY3V4b3B3ZXJuVjkyRzZMZXZ2eTZfMDdQNTA4RDlSelN4RjJXZ0syNU5QU0k3b0dRNkNoal9WTVI3dVlybWRhUnZZczRJaFUxMldlTGMwLUo4akNielVJTjI3VmZXaWRBNTJ4emNKTUE4Y0lOZFlmMFdWT0czX3JmMHI4OUk?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Jawab BEI, MBMA Ungkap Harga dan Calon Investor PMTHMETD II Belum Ditentukan - StockWatch.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Stockwatch.id via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 07:07 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="BMRI" data-name="bank mandiri (persero) tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">BMRI</span>
+                    <span class="company-name" title="Bank Mandiri (Persero) Tbk.">Bank Mandiri (Persero) Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">4 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNMTNPT1g0ZVdKZXYzbkJNNjE1cVFkV28taXQ0S012bU1mN0tPazloUWdQajRMWmNpSTF5bFNibkZvTWxWeGxuVXJEWW0wY1o5M0plNDlvemRMczBjNTdLNGFzbVBqcWtLdlZfUUdzUTFSRU5RSThLajBsN3JsdGFiSTdCUS1kNnNlakFseWM5b0ducmpsSjhJX3hpMkxBRzNL?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Asing jual saham-saham ini saat IHSG berbalik naik 0,39% - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:40 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE42Vkk3X20yci1MZ0l0elVXVm01UGlyQzJ6czAydjBqWXNqNE1hb2lSS21HQ1pxV1NUWkllZGlSRWV0UVFzU2x4Y2NoWkNEVFdYZVdaU0xVd2tjMng5aVlGdzkzRjdYUEVtcDJxWkNUM3N6X205SF9HRWFTX2pFUQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Saham BMRI 2026: Kinerja Bank Mandiri, Dividen & Prospek - Ajaib
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:31 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPYlR5SVVQQTBhQWZVaW1ieFQzMmlRMXR3X2t0WjRFdEtqbXVuaDFIcVVtd3FHTTNWekVFbkFnWXUzUExGcTVNMjlITU9KS3NtS0ZmYjZ2bC1ZNUdNOUVoZ045dHJZWE52SkdnT0s3NkZLUFFBRmtSVGwzU0k2dTN3b1F1QVpJd2RFZEJhcmFJdmxEamxwa2NUeHRZdmprNWl0cTlBa0trSUNMS2NwTk1QYk5rQUlzSEo0SXdkUA?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Indeks Bisnis-27 Dibuka Menguat, Saham MBMA, BBRI hingga BMRI Tancap Gas - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:35 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNN0xpYjVTcmlOZ0hmNldpMFhnOHBneHhrb0I2WGh3bFp2ZzVnWWtTX21xd0p5dHc2UGxjM2xMSV9JN0ZRRE9WQXo1cTUyelpOXzQ2TWhub1hpbXJ4Y2dQeHVtUFduX1plR3B0Y0ktMU5Kd212UjhhckUyYXdOS1JmemZ0dEVKWTlNZFpWeWNaRzh2c095d2tCLXg0VmV4N2Y0MUptczlDZ9IBrAFBVV95cUxPdzJta1RLVkZuYm5rWHBheVVaRFlXWFlTc25SMHRmRmpiWmVTdWhZZ3hFRGV4eW41cURYcjZNVi04ZDVfSjF2eTVWcFNDT0VSbjB3c005VGJIM0ViQXdqWEplQXlvbE9kWG8tdVdFN0UxeHFPeVZkQjhiOVJhR2phR05Xd2hmbHRSUm1KNzZHOXltWTM1b2Mtd1BPcldBZzlWMXlzRVBVYTQyb3VH?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Berpotensi Menguat Hari Ini, Perhatikan ERAA, BMRI, hingga GGRM - IDX Channel
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDX Channel via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:52 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="BBRI" data-name="bank rakyat indonesia (persero" data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">BBRI</span>
+                    <span class="company-name" title="Bank Rakyat Indonesia (Persero">Bank Rakyat Indonesia (Persero</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">4 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTE5qWHZMNERSakdzZmx4MVl5QzlON0NfUmloWWZzTXVDVTRsWXpndERMWnRHekhvaTdQYjNIeXB0Q29fd3N6S2xuT3pBWndBTW9oMFQwdHB6SUQxRkZDYUZKT1ZFdVY1aS1hY2NIbEpLTFNaTzBvempqSnVkc3k?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Saham BBRI Diborong Asing Rp272 Miliar Jelang RDG BI - Ajaib
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:01 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPYlR5SVVQQTBhQWZVaW1ieFQzMmlRMXR3X2t0WjRFdEtqbXVuaDFIcVVtd3FHTTNWekVFbkFnWXUzUExGcTVNMjlITU9KS3NtS0ZmYjZ2bC1ZNUdNOUVoZ045dHJZWE52SkdnT0s3NkZLUFFBRmtSVGwzU0k2dTN3b1F1QVpJd2RFZEJhcmFJdmxEamxwa2NUeHRZdmprNWl0cTlBa0trSUNMS2NwTk1QYk5rQUlzSEo0SXdkUA?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Indeks Bisnis-27 Dibuka Menguat, Saham MBMA, BBRI hingga BMRI Tancap Gas - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:35 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQQlJOWHlkb2RNWFN4UHJDMnlBTlQ2ZllKTXlMX0lXaUFQUjh6WlN3QllzcVNlSEhoRkFUdU5PWWtmVUowNUNWOEtCNDR3ZXVFbVdaZFZOS2o2c3duUjJsTzlBbWg4WXZqZE5CSDR5QjN1UkI5dFFjMVhTblQyUWlmS3M4c09OMm5HRURzVkl2M2hKc2R4Mm4tdE40VHRKS2dncklheTlIOURZeEJ5RzRvM2ZZcDNGcHc?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Dibuka Melemah 0,34% ke 5.303, Saham GOTO, MBMA, BBRI Justru Melaju - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:31 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://www.cnbcindonesia.com/market/20261117081513-17-785800/usai-ihsg-ditutup-melemah-04-simak-5-saham-pilihan-hari-ini" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Usai IHSG Ditutup Melemah 0,4%, Simak 5 Saham Pilihan Hari Ini
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">CNBC Indonesia (Market)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:48 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="ASII" data-name="astra international tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">ASII</span>
+                    <span class="company-name" title="Astra International Tbk.">Astra International Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">3 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxOUTI1RFhZZDBSU21SeV9CSnJJVVpadHJwajRXaGcwT1Nvb2hpNUFRaWEwdnlrY3ItTzhsQ0t6RU92UnhPTGtvV1JVOEFieUpIX1JVRzRxYTBScXl6QlFRRWZ2TUJkZDFlaGFiY2pMZW5ZUWVMeW1saU1pMGU5cUgtVGd4b3I0YXZTeV9ja2k4V294RFlZUFZYVmxBRmpSRjA5TFdWdDV0SElsdHhLbi1pdGN5dmtKdm5FcXVKUWNKb9IBxAFBVV95cUxNamlpRmMtYkdqMnc1aGl4ZTU1YmVCX29DdEFiMXQ0RzJNamx3eDBRX1MxUTdEUGF5WS1nODJKRXVUY3RLWk02YWxsb3kwb185SFFTNmxzbXI1VUEtOXM5U3BEUllSVjZTSUhGTTZNYUNCRkVqUGRVWUFnQkJuWG43WU8tV290ek15RTdncjcwSDF4VVBMd2stckRqY3VvakdLdUhMcFR5Tmg0OVFHR1B2bHVfWV9qWGlzZ1hHY2ctenlKdlJw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Sesi I Menguat ke 5.341, Saham ASII, ANTM hingga ICBP Jadi Penopang - Katadata.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Katadata via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:58 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://www.cnbcindonesia.com/market/20261117081513-17-785800/usai-ihsg-ditutup-melemah-04-simak-5-saham-pilihan-hari-ini" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Usai IHSG Ditutup Melemah 0,4%, Simak 5 Saham Pilihan Hari Ini
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">CNBC Indonesia (Market)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:48 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOYlpQS0tUYlVlQXhtdC1XdzhBMWtPa1M4MmxHdFBaNnhUMnNvTklhcFM4U2p2QWxpWEZPTE1IQmNsTDVuZTkzZlY1T0JvanF6b0RCVk1BWHBiV1RZblk2SWxVZy1Jc2h0ZU9RVnkycExlc25vMWVVUThlaUJzckl0eVZTamoxWlBQazVIOU5n?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    ASII Menyiapkan Strategi Pertumbuhan Jangka Panjang - KONTAN
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 07:52 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="EXCL" data-name="xl axiata tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">EXCL</span>
+                    <span class="company-name" title="XL Axiata Tbk.">XL Axiata Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">3 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNMTNPT1g0ZVdKZXYzbkJNNjE1cVFkV28taXQ0S012bU1mN0tPazloUWdQajRMWmNpSTF5bFNibkZvTWxWeGxuVXJEWW0wY1o5M0plNDlvemRMczBjNTdLNGFzbVBqcWtLdlZfUUdzUTFSRU5RSThLajBsN3JsdGFiSTdCUS1kNnNlakFseWM5b0ducmpsSjhJX3hpMkxBRzNL?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Asing jual saham-saham ini saat IHSG berbalik naik 0,39% - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:40 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNamRoOXhaYnppSmduNU9fVnFLbWFPdXViOEt1bU5VWlRTcG5fMmQ5NUtiRDVoWmJhcUV6dl9SWFlzQmJOaGtRdVQyYlFFRGNzME9lN09oT2JrbjRkTkNsYmRiQlNwMGVBM0RuM2pQdDgtc3UzdkhsYXFpSFg2cDBxbENlMFVHRzhVN2VpaW92RmxycUFnSWtXZm9naU9nSzlLMUY4?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Berpeluang Rebound ke 5.360, BRI Danareksa Rekomendasikan EXCL, BBNI, dan CTRA - tutur.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: IHSG)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:28 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZ1BfT1BjZmhKWjYwY3NFbmpnRVN2QXhUb1RLdVI4OW1ldktuUXZMU2poWFRRd004ZHlkcWluUkxHYXZsWnFvcExSajV4dTNMVnhFMXBjcW5jMHZOMmhwWWZkc1R1QlFyV1JYSHlXaWlrTV9aR0VRank0cVNNS3p2eUNuVng2QlY5STh4aExPSDVnaWpiRkZXb3k5Nk1zTDd1VGlTNDJaZ3QtdWdvaFREa2FVeXdGdkUxM3pwT1RiNUxsUQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Dibayangi Volatilitas, BRIDS Rekomendasikan Saham EXCL, BBNI, dan CTRA - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 07:50 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="GOTO" data-name="goto gojek tokopedia tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">GOTO</span>
+                    <span class="company-name" title="GoTo Gojek Tokopedia Tbk.">GoTo Gojek Tokopedia Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">3 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxOZE52ZG1oZUx0M2hqUS1uRVJXYlEwc05Oa25fSE1YSUdMVmRoSkJHZV9MTmtzVUlESEFRWV9lM1FQUDlLYVVsZ1VjbDNyQ1lQazlkZjRWM0dQRlNPaUhHLWV6RVJPdzhseEZQWGJpQWZHN3BCVGtvZnBfb0YtWTFWSUJiVWU1NEpyUERoSGIzTXpuV2Nrc2doYXVrZXRzTGcyM2NJeVF1Z1FpMFYyeVHSAaYBQVVfeXFMT21pV3VvSnp0RTNOUnh6UzR2dUxZV1QxNW5oTE1nZHRVOHlXOUd3clRiQWRSUWNPVlpQRUtmWVFjQnE1NkpoVG5zNkM0ZDJDVWgwWUd3eFZuOFlBTHBDdXIwWnBZaXh1c05VeFNhRjRBOHRQTHBvclhJYktsNk9QX3ZnVG5ZdnAyc0JxblFEdUgzYm5qMmlMUTBxaC00ZlpqbndCWjV1Zw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Menguat 0,39% ke 5.341,6 di Sesi Pertama, Top Gainers LQ45: GOTO, KLBF, BBTN - kontan.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:13 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQQlJOWHlkb2RNWFN4UHJDMnlBTlQ2ZllKTXlMX0lXaUFQUjh6WlN3QllzcVNlSEhoRkFUdU5PWWtmVUowNUNWOEtCNDR3ZXVFbVdaZFZOS2o2c3duUjJsTzlBbWg4WXZqZE5CSDR5QjN1UkI5dFFjMVhTblQyUWlmS3M4c09OMm5HRURzVkl2M2hKc2R4Mm4tdE40VHRKS2dncklheTlIOURZeEJ5RzRvM2ZZcDNGcHc?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Dibuka Melemah 0,34% ke 5.303, Saham GOTO, MBMA, BBRI Justru Melaju - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:31 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQQ3ZPaW96NnJ2MHVoTjZ4SUZ6UXFxcGhJNVhqbWIyb0ozTmhCdVU3cmhBM2FQenlqdkREcW41UHgwZDlqay1rQWI2bWZibUM4em0zdGZxeXNJdVNXZXJGZm1aNmM0UTVwUFE5bExwdG1iQjBZUTNjQW9Qc1JRaWV2SFJ5T2tiTTlfTkVBalBBZE5Bby0zU3VxcDE2eW04YjY2UjBjYUVpTjR6RVZfaHfSAaYBQVVfeXFMTlp3ZTExMjQ0NWV6OXh6dHRIMlhzZ1FIVmVkcGhsbWQ1UDBRMUlUQXYyRW5OZjVNdUtNd3JueC0zd2pqYy1QRmdmUHo0R3N3NFBhZDRQN21yNUZjczZsVnMzMHdfUTlRaU5qbjBaZjhsMDM0UmlnOEJENlpaTzlZbWI1QThleXJzTHFXMHRhZlRxQTlZYUdMSU5aaWZmV3RVU1lvSWY4QQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Menguat 0,5% ke 5.347,6 di Pagi Ini (17/11), Top Gainers LQ45: GOTO, SMGR, MBMA - kontan.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:22 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="GMFI" data-name="garuda maintenance facility ae" data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">GMFI</span>
+                    <span class="company-name" title="Garuda Maintenance Facility Ae">Garuda Maintenance Facility Ae</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">3 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxQX2VzM1N5ZEZLVDBGMENiUjFfQ2ljTG9UaG5Ub3dKSU4tOUhwNy1OV0tZX0NrU2JOeU5uMDA1SHlxRzhjakdVYkVUbGVrZ1RaTDVWV1ZGMXFhVWE3REJMUEQwX0RTamZHeGFZcld0SEFsRS05T2MzWWdnQkt2WS1mdFdyUGt4NjFDV1M2RHItbjNzLUcwQWVCbnF5Uy0zckNnck9YbGdZV20?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Right Issue 22,02 Miliar Saham, Aset GMFI Bakal Meledak Signifikan - Lotus Andalan Sekuritas
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:13 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxObm9RUnVveDQxbnpvQ0RMX0gwYllRTVdZcUVxc0ZyTzNyRGNiUjVWNWYtZUo3SlpVcTlPSVY1YmdtWFZhcXZoclVDNnI5WnZpcGV4QzBuNGY1Q0Z0NDV3R2RmS3NlNFZMSFc4bUgzbVdhVVhyUFVMLWl4SFdXdjlYZklVUGdOYlM5MV83SlhpUEtqOGU1OS1rcDVqN0xiczVvTWFqbFlabUk?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    GMFI siapkan rights issue jumbo, targetkan dana Rp1,05 triliun - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDNFinancials via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 10:30 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxQMGFpRVZjYWlmeUpFSk4zODRRQ3JVWUVQSHVJVmV0bW13N3NORnhJV3ZwaXVhVEZzLUZXS3JmMnpiVG9PVVZLMDIxcGE5aGJmdG5kaG5valhyazlma0R2bm4wbl9VMEhzWnpmamdRRDVNV3g4X2Z0S1dvSnE2RVplamRXS1VOMWJDcjljWGhrSTZQTE0?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    GMFI Siapkan Rights Issue , Terbitkan 22 Miliar Saham Baru - investor.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Investor.id via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 07:05 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="BUMI" data-name="bumi resources tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="true">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">BUMI</span>
+                    <span class="company-name" title="Bumi Resources Tbk.">Bumi Resources Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    <span class="action-pill pill-lapkeu" title="Berita hasil laporan keuangan">📊 Laporan Keuangan</span>
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">3 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxQYmZJNkMzQTdkYUpMMmdmVjAwb1h3bXVBZTRYWlc2Zl9QQUYxYUQ2b0NPYkJFRHpTSTl4MjFyY2hvSWVZVFV5MHBoLXFVbU1sek5kLXBycG5JVzlmQlNDb054Si1JdjllZk5Sdl9OTlp0TVFoekI1V3NFaTNfZkEyZ3pHN0dsMUg2LVd4cVg3SzlVZw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Saham BUMI Turun 3,68% saat Asing Net Sell Rp54,88 Miliar dan Tenggat Akuisisi Bauksit Diperpanjang - Ajaib
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 10:46 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5Sazg3YzZGS1JVNWs5bkdmN3RsdDRvaUktaHotYnFLVDY3UUZPakJHYlNhS1VwLTZIbzR1djdFc3NPNTNvYWRVMzh1UXFYZnI1SXJzSDQzMFoxY0Q3V01GWVM4dlJkMGR5SFVCRnh3?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    BUMI Belum Rilis Laporan Keuangan Sembilan Bulan 2026 - Demokratis.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Laporan Keuangan: Lapkeu via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:25 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNSVliNC11eWJidFZaN0ZwZVBOTXFnTzh1Q3ZzNHQ2MzlSQVg4Q2laMjVudi11MGhnTmVESkRRSGJ1N3VEc1Y2aDdaX3plUE1scEpwTnJ0MDNfalFzZU5leVhIaDFIZ3RhbjhBUzBYQTVSbEt5Qjg5ZkJlT01qcG5wYWpn?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Nasib Laporan Keuangan Bumi Resources (BUMI) - investor.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Laporan Keuangan: Lapkeu via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:23 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="TOWR" data-name="sarana menara nusantara tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">TOWR</span>
+                    <span class="company-name" title="Sarana Menara Nusantara Tbk.">Sarana Menara Nusantara Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQOHJfaTVFY1dCSFRtSFJEaXJMN3prS1MxLVBrUU1GWnU1UWJ4cFljX0RZdDNhVkl5U2pnS3NjN0s1WGYzOVdFMFRWa0kyTlhTUlRNZlg1V2V0Tmg1RFFFeTBIdGRzTFFIM1ZsZVJ6bm5XQkcwTmhqVkRFVVNPNTZDOF9Da3BmeTJoRVV3NERXX2NmOTJmdldocFBQWWctOXQzQmpxNEt3NWxKVTQyRTk4d2FDV2V4VTjSAa8BQVVfeXFMTUJqcTYtVXpYQ0lHbVpWTkJwZ2FEcWs0YjV6NTJCQWkxWkNPdElSbUQxWnliTGsxd0FsQmFZbDNTZk1wQlpiX0xrQUlYT0NSQXY4Mk1tekh0YjI1cERkSkxlNDR5X0JIcGVIcnV1Wl9ucEdqMGRybURPV1dxM3RBRVFkbW1obFlWTUJoVk9selV4aU5CemkwZm9LUUlGeTM4NUNhUjZSal9TdWtYWExSSQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Sarana Menara (TOWR) Gabungkan Tiga Anak Usaha, Protelindo Jadi Perusahaan Penerima - kontan.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 13:10 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxOVTQzSThfTVFyWUpGdm5xLVpCOGJrY0JvQ21XY2JQUWtrR016d3RDSVhMSnZoeTFtYkhQMzhxZ0ZWWWpPRjN2NkFHYUJwVC1XR2xyTUVCN1FLSnVlQW1TcU9NVFA1RDExb0pMckIzQjRkaHBMbHRBZWhaTENxXzVXWWhYLTVlejIyTWRDckV0c2lWR2E2c1FON2N4Snkyc09IX2xEdmhwOF8?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Profil Utang TOWR Berubah, Laba Bersih dan Nasib Dividen Jadi Pertaruhan? - KONTAN
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:44 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="ANTM" data-name="aneka tambang tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">ANTM</span>
+                    <span class="company-name" title="Aneka Tambang Tbk.">Aneka Tambang Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxOUTI1RFhZZDBSU21SeV9CSnJJVVpadHJwajRXaGcwT1Nvb2hpNUFRaWEwdnlrY3ItTzhsQ0t6RU92UnhPTGtvV1JVOEFieUpIX1JVRzRxYTBScXl6QlFRRWZ2TUJkZDFlaGFiY2pMZW5ZUWVMeW1saU1pMGU5cUgtVGd4b3I0YXZTeV9ja2k4V294RFlZUFZYVmxBRmpSRjA5TFdWdDV0SElsdHhLbi1pdGN5dmtKdm5FcXVKUWNKb9IBxAFBVV95cUxNamlpRmMtYkdqMnc1aGl4ZTU1YmVCX29DdEFiMXQ0RzJNamx3eDBRX1MxUTdEUGF5WS1nODJKRXVUY3RLWk02YWxsb3kwb185SFFTNmxzbXI1VUEtOXM5U3BEUllSVjZTSUhGTTZNYUNCRkVqUGRVWUFnQkJuWG43WU8tV290ek15RTdncjcwSDF4VVBMd2stckRqY3VvakdLdUhMcFR5Tmg0OVFHR1B2bHVfWV9qWGlzZ1hHY2ctenlKdlJw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Sesi I Menguat ke 5.341, Saham ASII, ANTM hingga ICBP Jadi Penopang - Katadata.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Katadata via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:58 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQaGxUaUg5bUZBSUxUX2RMLWFXZGhJVjZOQVZQejdSWmk5M2Zsbm9hZHdzc0tfbE1tWTJrd1c1LVlKeU5DTWtoaVo3aXJVXzVPb2VEUklZd1laVDVfQVlzUGstbXZIaUh3bWV3ek0tLUo4SkRnN0Jva3BqN1hucmgzSFpod3laZ3dPWENvbU1pQUtIeDc5X1JBVkt5d2xqTVJxNXViY0pSeVdDd1oxSWJwRmQ4RVp1V0Q1bEstckd30gHDAUFVX3lxTE5IbklVQ09CUS1Zc1dMSTZwb1NrYXV2UlZmUUFnMVVrVGV2LWdPU3lNd0w2V0FVdG93R0lWY0dLSnZ2c1BiQ3pucGZLQmNWdGpxQkstNnItQW51WWhGeHRlTEZmb2NUTk1jdHZkc3pldGxtSTVNc2x0NnI1YVdlMTFBZGh4Zy1meGZUcG5wbVVXODRzZGcyMzl3RGVOemxVT0o2WGpQcHdDcTNZQkl1MEozNDZZNjlYWFZjc0FHaFhjektiRQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    DRMA dan ANTM Cetak Pertumbuhan Laba, WINS Tetapkan Dividen Rp 22,31 M - detikFinance
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Detik Finance via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:35 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="KLBF" data-name="kalbe farma tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">KLBF</span>
+                    <span class="company-name" title="Kalbe Farma Tbk.">Kalbe Farma Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNMTNPT1g0ZVdKZXYzbkJNNjE1cVFkV28taXQ0S012bU1mN0tPazloUWdQajRMWmNpSTF5bFNibkZvTWxWeGxuVXJEWW0wY1o5M0plNDlvemRMczBjNTdLNGFzbVBqcWtLdlZfUUdzUTFSRU5RSThLajBsN3JsdGFiSTdCUS1kNnNlakFseWM5b0ducmpsSjhJX3hpMkxBRzNL?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Asing jual saham-saham ini saat IHSG berbalik naik 0,39% - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:40 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxOZE52ZG1oZUx0M2hqUS1uRVJXYlEwc05Oa25fSE1YSUdMVmRoSkJHZV9MTmtzVUlESEFRWV9lM1FQUDlLYVVsZ1VjbDNyQ1lQazlkZjRWM0dQRlNPaUhHLWV6RVJPdzhseEZQWGJpQWZHN3BCVGtvZnBfb0YtWTFWSUJiVWU1NEpyUERoSGIzTXpuV2Nrc2doYXVrZXRzTGcyM2NJeVF1Z1FpMFYyeVHSAaYBQVVfeXFMT21pV3VvSnp0RTNOUnh6UzR2dUxZV1QxNW5oTE1nZHRVOHlXOUd3clRiQWRSUWNPVlpQRUtmWVFjQnE1NkpoVG5zNkM0ZDJDVWgwWUd3eFZuOFlBTHBDdXIwWnBZaXh1c05VeFNhRjRBOHRQTHBvclhJYktsNk9QX3ZnVG5ZdnAyc0JxblFEdUgzYm5qMmlMUTBxaC00ZlpqbndCWjV1Zw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Menguat 0,39% ke 5.341,6 di Sesi Pertama, Top Gainers LQ45: GOTO, KLBF, BBTN - kontan.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:13 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="BRIS" data-name="bank syariah indonesia tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">BRIS</span>
+                    <span class="company-name" title="Bank Syariah Indonesia Tbk.">Bank Syariah Indonesia Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNMTNPT1g0ZVdKZXYzbkJNNjE1cVFkV28taXQ0S012bU1mN0tPazloUWdQajRMWmNpSTF5bFNibkZvTWxWeGxuVXJEWW0wY1o5M0plNDlvemRMczBjNTdLNGFzbVBqcWtLdlZfUUdzUTFSRU5RSThLajBsN3JsdGFiSTdCUS1kNnNlakFseWM5b0ducmpsSjhJX3hpMkxBRzNL?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Asing jual saham-saham ini saat IHSG berbalik naik 0,39% - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:40 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQdGpEMGd6RFpYWEMzVjBpYmtSd2hBanVKd2VyWGUzZjVKc1k5d04wUFEtTFBuQzFJZC0xZlg3aTJtV3U3dzJWMW0zNVlmSlEza2VVZVZ0bnd2ekJ0c1hSbDJxOFRsNlJEQ010MWFzTGpBOUJoWnV4UTJLQlNoTlU0VDhsWFV1ZVBqY0syMFFPNlZRMkIzdDRlcjFTWHM5V2FGdVplZE1B0gGrAUFVX3lxTE1vSWxyUVFVQ0RIVXQ3ZDM5VHpOY1BuX2FmZXJoSXVkV19XWi1RSjRDZ1RWUWUzUC0yVDdCWnA4Vmg1Q09YWUt3djJrSDVGTWVJTE1HVUtZZUtnMHhuX19fVWFiWWlhdHZhTXp5SmctVGQwc1JuR1RwWEFlcXJWNmIxTzJxNnVyRnB6eEZ5N3l5eHRLTnE3RzRYYi1fbWtfMEF1Z1M1S2VTcm5QMA?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Saham BRIS Melesat 8 Persen, Seberapa Besar Peluang Balik Arahnya? - IDX Channel
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDX Channel via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:14 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="ERAA" data-name="erajaya swasembada tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="true">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">ERAA</span>
+                    <span class="company-name" title="Erajaya Swasembada Tbk.">Erajaya Swasembada Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    <span class="action-pill pill-lapkeu" title="Berita hasil laporan keuangan">📊 Laporan Keuangan</span>
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxOaE53YnpxR1liaG1Lc1hoX3FnMkwtRmZjWkxReVpRT1I1MldsVXpUWDB2R1BON2RGVnV6QWhVVDNFaGhUeUlVb3Y0Vm1lLUlXYkFvR1Ywb280NUNMaUxXeVlST21MZEtUUGFvQ0xtU2ZYMDIxQmZHSnlENzZ4cm1fZTQyQkg4bDBPMlpKQmxjNEQ4MVNiTUNiUjh2aVQ0ZFpSMXdZZVlfSFNtU0J2R0kwSWJsNjlmNGZia1ZTM1ozUWtuTjFCdG03UkQydmFfYWJ2?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Laba Erajaya (ERAA) Tembus Rp1 Triliun per Kuartal III 2026, Kini Masuk LQ45 - Databoks
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Katadata via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:48 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNN0xpYjVTcmlOZ0hmNldpMFhnOHBneHhrb0I2WGh3bFp2ZzVnWWtTX21xd0p5dHc2UGxjM2xMSV9JN0ZRRE9WQXo1cTUyelpOXzQ2TWhub1hpbXJ4Y2dQeHVtUFduX1plR3B0Y0ktMU5Kd212UjhhckUyYXdOS1JmemZ0dEVKWTlNZFpWeWNaRzh2c095d2tCLXg0VmV4N2Y0MUptczlDZ9IBrAFBVV95cUxPdzJta1RLVkZuYm5rWHBheVVaRFlXWFlTc25SMHRmRmpiWmVTdWhZZ3hFRGV4eW41cURYcjZNVi04ZDVfSjF2eTVWcFNDT0VSbjB3c005VGJIM0ViQXdqWEplQXlvbE9kWG8tdVdFN0UxeHFPeVZkQjhiOVJhR2phR05Xd2hmbHRSUm1KNzZHOXltWTM1b2Mtd1BPcldBZzlWMXlzRVBVYTQyb3VH?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Berpotensi Menguat Hari Ini, Perhatikan ERAA, BMRI, hingga GGRM - IDX Channel
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDX Channel via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:52 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="HRUM" data-name="harum energy tbk." data-sentiment="Netral" data-has-buyback="true" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">HRUM</span>
+                    <span class="company-name" title="Harum Energy Tbk.">Harum Energy Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    <span class="action-pill pill-buyback" title="Aksi Korporasi: Buyback Saham">🎯 Buyback</span>
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxNZElMZGNGdDZXZEEwZGJTQk10YUZ1LXN1ZUxlNlR1X0FWNVN2TXh0clRnbXoxVWN2a05rM19jM3dOZEJoZmhfNnRad1pDSXByNVZoSW5Eejh3aE5hT0hTTWRiQzBPZTZRaWZRMzIzN3JQU3ZRSFlKOFRoY1FTcUkxcmZVZ1FsWHphLXJBUGhR?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Harum Energy (HRUM) Stop Rencana Buyback Saham - Lotus Andalan Sekuritas
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:03 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxNWUZhVE9ycWNOS3YteEFpd2Vqa2VIRnBLSDUyU2JlczZiM1VfeGRNdWdRUGNWWXV2TTFZNlI3WThhUEpsa3F3dXh0bEtkYVVkNEZzanBMNjBubURwTTVjQm94TlVfdWFhNzFiOXZvR2tnU0drVVlrdF9GS0RianZva1NValh4N0ZTN2xjSnlwLW9ucC1LRUtBd0NhM0VUc0R3czkyUA?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    HRUM setop buyback 111 juta saham lebih awal, ini alasannya - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDNFinancials via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:10 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="HEAL" data-name="medikaloka hermina tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">HEAL</span>
+                    <span class="company-name" title="Medikaloka Hermina Tbk.">Medikaloka Hermina Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxPVmVkUnFZbmI0MF92YkFLcXY2UWJFck5Sc19ySWw0QW5yZkVJS25SU0VRelR6NnVWU25FdWRNZC1ncW9LVlFQeEw3c2dCNU5iXzM3eWs3bXBjX2psd0JZa1hKNWVVUTVPRGFEeDF2dU5oWlBOZlluMXpKQ1BBTVE2OUp1QXpuSGwwTDBlQWtyYTRaeXdkbzZrQWhqSVpxM0E?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Dirut HEAL Sempat Serok 2,5 Juta Saham di Harga Bawah Pasar - Lotus Andalan Sekuritas
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: Saham)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 10:53 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPUWdLRkdDeTgyTkZPdlJhSUxhMlBKYngxdVYzM1lzYlJ3cGFoZWtRT08tTXVXc0dCYU5uYjhyRUJEWVpoNmdHRGlERF9QSU91d2ZxUjlfS090TWx4WXdaUTB1RjY2MVlVZ2dkME5XbEFfMDF5dG9DT1FzTGhMMUVDS1RseHd2SXJyMmJMMktrb1M1OXRsYkM1NUpxR2JoeHJfUmJUbmlKTmF3SnNpNmprYnFB?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Yulisar Khiat tambah kepemilikan saham HEAL sebanyak 2,5 juta lembar - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDNFinancials via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 07:20 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="WINS" data-name="wintermar offshore marine tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">WINS</span>
+                    <span class="company-name" title="Wintermar Offshore Marine Tbk.">Wintermar Offshore Marine Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPSGhYaVNPVGgwdWp5a0gwekNLa05pUkduMGFFZEQwb1FGQ05SV3ZDWW1lUUZ3cGlsUV9xTGFyTzR0cmw1U29vczdBNzZDNnB5NktNV1lCMmI3cGNrcEY2Q3NiQzdmckpQbDhTd3hTbnFHRFZXLUt6T2wyMEhHaEdsX3c0WlRROWlpUUppXzh1Nms?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Wintermar (WINS) Sebar Dividen Interim Rp5/Saham, Total Rp 22,3M - Emitennews.com
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Emitennews via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 10:36 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQaGxUaUg5bUZBSUxUX2RMLWFXZGhJVjZOQVZQejdSWmk5M2Zsbm9hZHdzc0tfbE1tWTJrd1c1LVlKeU5DTWtoaVo3aXJVXzVPb2VEUklZd1laVDVfQVlzUGstbXZIaUh3bWV3ek0tLUo4SkRnN0Jva3BqN1hucmgzSFpod3laZ3dPWENvbU1pQUtIeDc5X1JBVkt5d2xqTVJxNXViY0pSeVdDd1oxSWJwRmQ4RVp1V0Q1bEstckd30gHDAUFVX3lxTE5IbklVQ09CUS1Zc1dMSTZwb1NrYXV2UlZmUUFnMVVrVGV2LWdPU3lNd0w2V0FVdG93R0lWY0dLSnZ2c1BiQ3pucGZLQmNWdGpxQkstNnItQW51WWhGeHRlTEZmb2NUTk1jdHZkc3pldGxtSTVNc2x0NnI1YVdlMTFBZGh4Zy1meGZUcG5wbVVXODRzZGcyMzl3RGVOemxVT0o2WGpQcHdDcTNZQkl1MEozNDZZNjlYWFZjc0FHaFhjektiRQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    DRMA dan ANTM Cetak Pertumbuhan Laba, WINS Tetapkan Dividen Rp 22,31 M - detikFinance
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Detik Finance via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:35 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="DOOH" data-name="era media sejahtera tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">DOOH</span>
+                    <span class="company-name" title="Era Media Sejahtera Tbk.">Era Media Sejahtera Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQTnVJbnZhYU1OOHNabmhRNzhySk1qNklDRHFwd3o0MTNVWU9ETWxFTU1CRmZhajlMdFRsSzh5NHkwU0RhRGtEc0dkN3owVm9ENkZQTUlPZ25kUkNocHlhODFKWGdVWGlhZVROUWZhVGNEMkxNcnNFc3RvaHF3aXFfUzBSVHRiNENNRnRhQTlUN0daNUVrQzd5Vmk0eHZkZ0VsSkdNeXh4MUVmRHBIelE?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    OJK Tahan Tiga Tersangka Manipulasi Waran CHEM dan DOOH, Kerugian Ditaksir Rp6,97 Miliar - StockWatch.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Stockwatch.id via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 10:30 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://www.cnbcindonesia.com/market/20261117092227-17-785829/terseret-kasus-manipulasi-pasar-ini-sosok-pengendali-emiten-dooh" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Terseret Kasus Manipulasi Pasar, Ini Sosok Pengendali Emiten DOOH
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">CNBC Indonesia (Market)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:35 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="BBNI" data-name="bank negara indonesia (persero" data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">BBNI</span>
+                    <span class="company-name" title="Bank Negara Indonesia (Persero">Bank Negara Indonesia (Persero</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNamRoOXhaYnppSmduNU9fVnFLbWFPdXViOEt1bU5VWlRTcG5fMmQ5NUtiRDVoWmJhcUV6dl9SWFlzQmJOaGtRdVQyYlFFRGNzME9lN09oT2JrbjRkTkNsYmRiQlNwMGVBM0RuM2pQdDgtc3UzdkhsYXFpSFg2cDBxbENlMFVHRzhVN2VpaW92RmxycUFnSWtXZm9naU9nSzlLMUY4?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Berpeluang Rebound ke 5.360, BRI Danareksa Rekomendasikan EXCL, BBNI, dan CTRA - tutur.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: IHSG)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:28 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZ1BfT1BjZmhKWjYwY3NFbmpnRVN2QXhUb1RLdVI4OW1ldktuUXZMU2poWFRRd004ZHlkcWluUkxHYXZsWnFvcExSajV4dTNMVnhFMXBjcW5jMHZOMmhwWWZkc1R1QlFyV1JYSHlXaWlrTV9aR0VRank0cVNNS3p2eUNuVng2QlY5STh4aExPSDVnaWpiRkZXb3k5Nk1zTDd1VGlTNDJaZ3QtdWdvaFREa2FVeXdGdkUxM3pwT1RiNUxsUQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Dibayangi Volatilitas, BRIDS Rekomendasikan Saham EXCL, BBNI, dan CTRA - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 07:50 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="CTRA" data-name="ciputra development tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">CTRA</span>
+                    <span class="company-name" title="Ciputra Development Tbk.">Ciputra Development Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">2 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxNamRoOXhaYnppSmduNU9fVnFLbWFPdXViOEt1bU5VWlRTcG5fMmQ5NUtiRDVoWmJhcUV6dl9SWFlzQmJOaGtRdVQyYlFFRGNzME9lN09oT2JrbjRkTkNsYmRiQlNwMGVBM0RuM2pQdDgtc3UzdkhsYXFpSFg2cDBxbENlMFVHRzhVN2VpaW92RmxycUFnSWtXZm9naU9nSzlLMUY4?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Berpeluang Rebound ke 5.360, BRI Danareksa Rekomendasikan EXCL, BBNI, dan CTRA - tutur.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Google News (Topik: IHSG)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:28 WIB</span>
+                </div>
+            </li>
+            
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZ1BfT1BjZmhKWjYwY3NFbmpnRVN2QXhUb1RLdVI4OW1ldktuUXZMU2poWFRRd004ZHlkcWluUkxHYXZsWnFvcExSajV4dTNMVnhFMXBjcW5jMHZOMmhwWWZkc1R1QlFyV1JYSHlXaWlrTV9aR0VRank0cVNNS3p2eUNuVng2QlY5STh4aExPSDVnaWpiRkZXb3k5Nk1zTDd1VGlTNDJaZ3QtdWdvaFREa2FVeXdGdkUxM3pwT1RiNUxsUQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Dibayangi Volatilitas, BRIDS Rekomendasikan Saham EXCL, BBNI, dan CTRA - Bisnis.com - Market
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 07:50 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="ICBP" data-name="indofood cbp sukses makmur tbk" data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">ICBP</span>
+                    <span class="company-name" title="Indofood CBP Sukses Makmur Tbk">Indofood CBP Sukses Makmur Tbk</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxOUTI1RFhZZDBSU21SeV9CSnJJVVpadHJwajRXaGcwT1Nvb2hpNUFRaWEwdnlrY3ItTzhsQ0t6RU92UnhPTGtvV1JVOEFieUpIX1JVRzRxYTBScXl6QlFRRWZ2TUJkZDFlaGFiY2pMZW5ZUWVMeW1saU1pMGU5cUgtVGd4b3I0YXZTeV9ja2k4V294RFlZUFZYVmxBRmpSRjA5TFdWdDV0SElsdHhLbi1pdGN5dmtKdm5FcXVKUWNKb9IBxAFBVV95cUxNamlpRmMtYkdqMnc1aGl4ZTU1YmVCX29DdEFiMXQ0RzJNamx3eDBRX1MxUTdEUGF5WS1nODJKRXVUY3RLWk02YWxsb3kwb185SFFTNmxzbXI1VUEtOXM5U3BEUllSVjZTSUhGTTZNYUNCRkVqUGRVWUFnQkJuWG43WU8tV290ek15RTdncjcwSDF4VVBMd2stckRqY3VvakdLdUhMcFR5Tmg0OVFHR1B2bHVfWV9qWGlzZ1hHY2ctenlKdlJw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Sesi I Menguat ke 5.341, Saham ASII, ANTM hingga ICBP Jadi Penopang - Katadata.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Katadata via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:58 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="INDY" data-name="indika energy tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">INDY</span>
+                    <span class="company-name" title="Indika Energy Tbk.">Indika Energy Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://www.cnbcindonesia.com/market/20261117123308-17-785908/bei-soroti-sengketa-lahan-anak-usaha-indika--indy--di-tambang-emas" target="_blank" rel="noopener noreferrer" class="news-link">
+                    BEI Soroti Sengketa Lahan Anak Usaha Indika (INDY) di Tambang Emas
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">CNBC Indonesia (Market)</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:36 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="BBTN" data-name="bank tabungan negara (persero)" data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">BBTN</span>
+                    <span class="company-name" title="Bank Tabungan Negara (Persero)">Bank Tabungan Negara (Persero)</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxOZE52ZG1oZUx0M2hqUS1uRVJXYlEwc05Oa25fSE1YSUdMVmRoSkJHZV9MTmtzVUlESEFRWV9lM1FQUDlLYVVsZ1VjbDNyQ1lQazlkZjRWM0dQRlNPaUhHLWV6RVJPdzhseEZQWGJpQWZHN3BCVGtvZnBfb0YtWTFWSUJiVWU1NEpyUERoSGIzTXpuV2Nrc2doYXVrZXRzTGcyM2NJeVF1Z1FpMFYyeVHSAaYBQVVfeXFMT21pV3VvSnp0RTNOUnh6UzR2dUxZV1QxNW5oTE1nZHRVOHlXOUd3clRiQWRSUWNPVlpQRUtmWVFjQnE1NkpoVG5zNkM0ZDJDVWgwWUd3eFZuOFlBTHBDdXIwWnBZaXh1c05VeFNhRjRBOHRQTHBvclhJYktsNk9QX3ZnVG5ZdnAyc0JxblFEdUgzYm5qMmlMUTBxaC00ZlpqbndCWjV1Zw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Menguat 0,39% ke 5.341,6 di Sesi Pertama, Top Gainers LQ45: GOTO, KLBF, BBTN - kontan.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 12:13 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="BBCA" data-name="bank central asia tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">BBCA</span>
+                    <span class="company-name" title="Bank Central Asia Tbk.">Bank Central Asia Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxOM2E1UGJrSlBoSUdSWXV3eVl4dUxjZWRDRV9oNGZxTXI2Qjh4UlBMQzRpckF2X3JtQ3BKWFc0amZabFJob3VqMHBISmVSVkczNlR5dVRUOFhwQnViWDFaVUktdDJDcDF5WFlvcFZtbmNpeXVRdkJzUGlZU05DeE9VTTNzSWVJLWV6VERMTjU5VTRkWjJyNVpTODZ6UEVpRURIanZLTm1WMi02VGZlcllOTjIwVUpTUQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Ekonom BCA (BBCA) Proyeksi BI Rate Naik dalam RDG November 2026 - Bisnis.com
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Makro: Suku Bunga via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:51 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="PWON" data-name="pakuwon jati tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="true">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">PWON</span>
+                    <span class="company-name" title="Pakuwon Jati Tbk.">Pakuwon Jati Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    <span class="action-pill pill-lapkeu" title="Berita hasil laporan keuangan">📊 Laporan Keuangan</span>
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxPOHlDTkluM2N2bS1ia2tOTTZEVFpDSktkWlhKa3FiMHdRXzQtTzdDQ1htYjdlY2ZtRWg3UzFqZno4amxhY1lMbERQTlNVcTFtbkJ5ejh5MEE0Nld2a05jOUlYamRlREZfOHF0NXNGWmNibjVwRjhTTkFBRXNWSnAwdV9hMXhILVlENVUtSXhzZkNXRzVlTVVqTlJsMFc3RlhyQTVUS2tvVExJLXNrQ0FSY25VcWJ1NXNFa2V1T0JwTlVLX3RpRDhORlE1RlI4dw?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Pakuwon (PWON) Masuk LQ45, Ini Kinerja Keuangannya sampai Kuartal III 2026 - Databoks
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Katadata via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:44 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="SPTO" data-name="surya pertiwi tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">SPTO</span>
+                    <span class="company-name" title="Surya Pertiwi Tbk.">Surya Pertiwi Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNejRSRXJrVTRuQ0pEM1JOZUNfUE84dXZpZWYxZVJtUFI0ZHl6NGtlVzFiS2xSLTF3ZzlmM1h4VzNCWUxBVENMUXFqaFoyQ2doaXV5dWlvd2dBcVhDdm5GeE9rOUpyZXR2VExpVWdoV1plM0lFZXc1X0FES2g3Ukk0TlBJTGdHbXllZHQ5Y3FqR0ZHWkU?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Surya Pertiwi (SPTO) Bagikan Dividen Interim 64% dari Laba - investor.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Investor.id via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:22 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="INET" data-name="sinergi inti andalan prima tbk" data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">INET</span>
+                    <span class="company-name" title="Sinergi Inti Andalan Prima Tbk">Sinergi Inti Andalan Prima Tbk</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxQTURSWEdGR1h1NW5EY2daU2JVMm01ZW9ad3BHZFRUSDNpWklDaEh5NkxIQUJKWnBnUWQyOC1XNnFwVWQ1dlE3Q0pFOUZmNFlFOFJJNVB6WkZvbkNyYTM4TFJQYWwyNjlkX1VzX09idkZ6WW5kZWVLTG5vQi0yWHU2bDR5b2NaNkYxcWVab1ZRSjJNVVZVb2RjVURKakdVeGM?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Transaksi Jumbo! Pengendali INET Jual 6,685 Miliar Saham, Kantongi Rp2 Triliun - StockWatch.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Stockwatch.id via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:21 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="ASRI" data-name="alam sutera realty tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">ASRI</span>
+                    <span class="company-name" title="Alam Sutera Realty Tbk.">Alam Sutera Realty Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxNbENjZmhnSVZsWjBaNWVfOHFNVVpnRjlwc3gyQ1loT1VwSXJFMlJIWlU5R0kwdkw5NmVxNzhxcnIwVzRIRWFkcjRqeV9kOE1sOWpYSjg5U1d3UHphSWlYdVZuaG9sQTNHYU9vc1lxa0x1WWNzanQyaFJVQTl6LVNyOXJsUjNCVG9HYThjLV9tdWVjME9ZTTlnQlZaeG9IMVk?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Manunggal Prime Lakukan Transaksi Repo 356,21 Juta Saham ASRI, Kini Miliki 21% - StockWatch.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Stockwatch.id via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 11:01 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="CHEM" data-name="chemstar indonesia tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">CHEM</span>
+                    <span class="company-name" title="Chemstar Indonesia Tbk.">Chemstar Indonesia Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQTnVJbnZhYU1OOHNabmhRNzhySk1qNklDRHFwd3o0MTNVWU9ETWxFTU1CRmZhajlMdFRsSzh5NHkwU0RhRGtEc0dkN3owVm9ENkZQTUlPZ25kUkNocHlhODFKWGdVWGlhZVROUWZhVGNEMkxNcnNFc3RvaHF3aXFfUzBSVHRiNENNRnRhQTlUN0daNUVrQzd5Vmk0eHZkZ0VsSkdNeXh4MUVmRHBIelE?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    OJK Tahan Tiga Tersangka Manipulasi Waran CHEM dan DOOH, Kerugian Ditaksir Rp6,97 Miliar - StockWatch.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Stockwatch.id via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 10:30 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="SMGR" data-name="semen indonesia (persero) tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">SMGR</span>
+                    <span class="company-name" title="Semen Indonesia (Persero) Tbk.">Semen Indonesia (Persero) Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQQ3ZPaW96NnJ2MHVoTjZ4SUZ6UXFxcGhJNVhqbWIyb0ozTmhCdVU3cmhBM2FQenlqdkREcW41UHgwZDlqay1rQWI2bWZibUM4em0zdGZxeXNJdVNXZXJGZm1aNmM0UTVwUFE5bExwdG1iQjBZUTNjQW9Qc1JRaWV2SFJ5T2tiTTlfTkVBalBBZE5Bby0zU3VxcDE2eW04YjY2UjBjYUVpTjR6RVZfaHfSAaYBQVVfeXFMTlp3ZTExMjQ0NWV6OXh6dHRIMlhzZ1FIVmVkcGhsbWQ1UDBRMUlUQXYyRW5OZjVNdUtNd3JueC0zd2pqYy1QRmdmUHo0R3N3NFBhZDRQN21yNUZjczZsVnMzMHdfUTlRaU5qbjBaZjhsMDM0UmlnOEJENlpaTzlZbWI1QThleXJzTHFXMHRhZlRxQTlZYUdMSU5aaWZmV3RVU1lvSWY4QQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Menguat 0,5% ke 5.347,6 di Pagi Ini (17/11), Top Gainers LQ45: GOTO, SMGR, MBMA - kontan.co.id
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Kontan via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:22 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="BUVA" data-name="bukit uluwatu villa tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">BUVA</span>
+                    <span class="company-name" title="Bukit Uluwatu Villa Tbk.">Bukit Uluwatu Villa Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQUTdJaFFvdzFzLUpWVVBQcUoxYlE0UFJPSU1xMjZBUlgteGduVVFtcEtTUjEycklvQUZxdExsZE14UmtpYXlWTktwVFBBM2p3QzVvZW5GNTJERzV1S2VOWUwyYTV2UkdyWFd2NTY2T25hakktQjFjbFpyUjlwOUJqa0UxckY5d0NPSGJianhTdGpkTnBOeGZEYkpoQ3JDQ2d3S05LaGRn?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Pengendali lepas 600 juta lembar BUVA, sisakan 58,20% kontrol - IDNFinancials
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDNFinancials via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 09:00 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="GGRM" data-name="gudang garam tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">GGRM</span>
+                    <span class="company-name" title="Gudang Garam Tbk.">Gudang Garam Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNN0xpYjVTcmlOZ0hmNldpMFhnOHBneHhrb0I2WGh3bFp2ZzVnWWtTX21xd0p5dHc2UGxjM2xMSV9JN0ZRRE9WQXo1cTUyelpOXzQ2TWhub1hpbXJ4Y2dQeHVtUFduX1plR3B0Y0ktMU5Kd212UjhhckUyYXdOS1JmemZ0dEVKWTlNZFpWeWNaRzh2c095d2tCLXg0VmV4N2Y0MUptczlDZ9IBrAFBVV95cUxPdzJta1RLVkZuYm5rWHBheVVaRFlXWFlTc25SMHRmRmpiWmVTdWhZZ3hFRGV4eW41cURYcjZNVi04ZDVfSjF2eTVWcFNDT0VSbjB3c005VGJIM0ViQXdqWEplQXlvbE9kWG8tdVdFN0UxeHFPeVZkQjhiOVJhR2phR05Xd2hmbHRSUm1KNzZHOXltWTM1b2Mtd1BPcldBZzlWMXlzRVBVYTQyb3VH?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    IHSG Berpotensi Menguat Hari Ini, Perhatikan ERAA, BMRI, hingga GGRM - IDX Channel
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">IDX Channel via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:52 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="DRMA" data-name="dharma polimetal tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">DRMA</span>
+                    <span class="company-name" title="Dharma Polimetal Tbk.">Dharma Polimetal Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQaGxUaUg5bUZBSUxUX2RMLWFXZGhJVjZOQVZQejdSWmk5M2Zsbm9hZHdzc0tfbE1tWTJrd1c1LVlKeU5DTWtoaVo3aXJVXzVPb2VEUklZd1laVDVfQVlzUGstbXZIaUh3bWV3ek0tLUo4SkRnN0Jva3BqN1hucmgzSFpod3laZ3dPWENvbU1pQUtIeDc5X1JBVkt5d2xqTVJxNXViY0pSeVdDd1oxSWJwRmQ4RVp1V0Q1bEstckd30gHDAUFVX3lxTE5IbklVQ09CUS1Zc1dMSTZwb1NrYXV2UlZmUUFnMVVrVGV2LWdPU3lNd0w2V0FVdG93R0lWY0dLSnZ2c1BiQ3pucGZLQmNWdGpxQkstNnItQW51WWhGeHRlTEZmb2NUTk1jdHZkc3pldGxtSTVNc2x0NnI1YVdlMTFBZGh4Zy1meGZUcG5wbVVXODRzZGcyMzl3RGVOemxVT0o2WGpQcHdDcTNZQkl1MEozNDZZNjlYWFZjc0FHaFhjektiRQ?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    DRMA dan ANTM Cetak Pertumbuhan Laba, WINS Tetapkan Dividen Rp 22,31 M - detikFinance
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Detik Finance via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:35 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="ITMG" data-name="indo tambangraya megah tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">ITMG</span>
+                    <span class="company-name" title="Indo Tambangraya Megah Tbk.">Indo Tambangraya Megah Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOczB2UEtVZ0RsSzhDU3JJWkFzcGNpZ25qVDRJVXk0MUdKbVVYQnoxZmNoaE9DeUpvNHQ1dlR1RUNhRlRuRU5VM0lnMlN4dlZOaXJNbEJXWmVHRzltVDdqb0tOYkFURkVmRng4NGVqY1Z0b0F2VExaMmhJWkRPbGd5U1ItZERFTmdvY3VGa3dTQWRObmJ1cWNwbF9BdjMzajFK?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Nama-Nama yang Siap Panen Dividen Interim ITMG - Bisnis Indonesia Premium
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Bisnis.com via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 08:05 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+        <article class="stock-card" data-code="TOTO" data-name="surya toto indonesia tbk." data-sentiment="Netral" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="false">
+            <div class="card-top">
+                <div class="ticker-group">
+                    <span class="ticker-code">TOTO</span>
+                    <span class="company-name" title="Surya Toto Indonesia Tbk.">Surya Toto Indonesia Tbk.</span>
+                </div>
+                <div class="badge-group">
+                    
+                    <span class="sentiment-pill pill-netral">Netral</span>
+                    <span class="count-badge">1 Berita</span>
+                </div>
+            </div>
+            
+            <div class="card-news-section">
+                <div class="section-label">Berita Terkait:</div>
+                <ul class="news-list">
+                    
+            <li class="news-item">
+                <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxPRDlhZDM3Q3RvSHBKTGVPSzZiV2xVSzBBYXJLeXZTYkJYTnlyS08tVVdUU08zNTZWODNpUjMtcFo2NWdtTDFTQnh0cjVPSS1hdnpDNUtQeWlZUXBQcjdaMW41WW9JdnpFVzYxaDJ4aVFNUDloTC1kZWZiNkhNbU1SX2wtZmJmVnJPVFRUaGR3V3RGVkF0SGdGRFpUNm92QTMtU1IyREN3?oc=5" target="_blank" rel="noopener noreferrer" class="news-link">
+                    Laba Tembus Rp152 Miliar, TOTO Tebar Dividen Interim Rp103,2 Miliar - Pasardana
+                </a>
+                <div class="news-meta">
+                    <span class="news-source">Pasardana.id via Google News</span>
+                    <span class="news-dot">•</span>
+                    <span class="news-time">2026-11-17 07:31 WIB</span>
+                </div>
+            </li>
+            
+                </ul>
+            </div>
+        </article>
+        
+                </section>
+            </div>
+
+            <!-- Kolom Kanan / Bawah: Sidebar -->
+            <aside class="sidebar">
+                <!-- Widget Top 5 Saham -->
+                <div class="side-widget">
+                    <h2 class="widget-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                        Paling Ramai Diberitakan
+                    </h2>
+                    <div class="top-ranks" id="topRanks">
+                        
+        <div class="rank-item">
+            <div class="rank-info">
+                <span class="rank-ticker">MBMA</span>
+                <span class="rank-count">5 berita</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar" style="width: 100%"></div>
+            </div>
+        </div>
+        
+        <div class="rank-item">
+            <div class="rank-info">
+                <span class="rank-ticker">BMRI</span>
+                <span class="rank-count">4 berita</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar" style="width: 80%"></div>
+            </div>
+        </div>
+        
+        <div class="rank-item">
+            <div class="rank-info">
+                <span class="rank-ticker">BBRI</span>
+                <span class="rank-count">4 berita</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar" style="width: 80%"></div>
+            </div>
+        </div>
+        
+        <div class="rank-item">
+            <div class="rank-info">
+                <span class="rank-ticker">ASII</span>
+                <span class="rank-count">3 berita</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar" style="width: 60%"></div>
+            </div>
+        </div>
+        
+        <div class="rank-item">
+            <div class="rank-info">
+                <span class="rank-ticker">EXCL</span>
+                <span class="rank-count">3 berita</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar" style="width: 60%"></div>
+            </div>
+        </div>
+        
+                    </div>
+                </div>
+
+                <!-- Widget Rekap Sentimen (tidak dipakai di Berita Lama karena tanpa AI) -->
+                <div class="side-widget">
+                    <h2 class="widget-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                        Rekap Sentimen Saham
+                    </h2>
+                    <div class="sentiment-recap-grid">
+                        <div class="recap-box box-pos">
+                            <span class="recap-num">0</span>
+                            <span class="recap-label">Positif</span>
+                        </div>
+                        <div class="recap-box box-net">
+                            <span class="recap-num">34</span>
+                            <span class="recap-label">Netral</span>
+                        </div>
+                        <div class="recap-box box-neg">
+                            <span class="recap-num">0</span>
+                            <span class="recap-label">Negatif</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Widget Riwayat Arsip -->
+                <div class="side-widget">
+                    <h2 class="widget-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
+                        Arsip Sesi Sebelumnya
+                    </h2>
+                    <div class="archive-list">
+                        
+        <a href="../arsip/2026-11-17-siang.html" class="archive-item active">
+            <span class="archive-date">2026-11-17</span>
+            <span class="archive-badge badge-siang">Sesi Siang</span>
+        </a>
+        
+        <a href="../arsip/2026-11-17-pagi.html" class="archive-item ">
+            <span class="archive-date">2026-11-17</span>
+            <span class="archive-badge badge-pagi">Sesi Pagi</span>
+        </a>
+        
+        <a href="../arsip/2026-11-16-siang.html" class="archive-item ">
+            <span class="archive-date">2026-11-16</span>
+            <span class="archive-badge badge-siang">Sesi Siang</span>
+        </a>
+        
+        <a href="../arsip/2026-11-16-pagi.html" class="archive-item ">
+            <span class="archive-date">2026-11-16</span>
+            <span class="archive-badge badge-pagi">Sesi Pagi</span>
+        </a>
+        
+        <a href="../arsip/2026-11-13-siang.html" class="archive-item ">
+            <span class="archive-date">2026-11-13</span>
+            <span class="archive-badge badge-siang">Sesi Siang</span>
+        </a>
+        
+        <a href="../arsip/2026-11-13-pagi.html" class="archive-item ">
+            <span class="archive-date">2026-11-13</span>
+            <span class="archive-badge badge-pagi">Sesi Pagi</span>
+        </a>
+        
+        <a href="../arsip/2026-11-12-siang.html" class="archive-item ">
+            <span class="archive-date">2026-11-12</span>
+            <span class="archive-badge badge-siang">Sesi Siang</span>
+        </a>
+        
+        <a href="../arsip/2026-11-12-pagi.html" class="archive-item ">
+            <span class="archive-date">2026-11-12</span>
+            <span class="archive-badge badge-pagi">Sesi Pagi</span>
+        </a>
+        
+        <a href="../arsip/2026-11-11-siang.html" class="archive-item ">
+            <span class="archive-date">2026-11-11</span>
+            <span class="archive-badge badge-siang">Sesi Siang</span>
+        </a>
+        
+        <a href="../arsip/2026-11-11-pagi.html" class="archive-item ">
+            <span class="archive-date">2026-11-11</span>
+            <span class="archive-badge badge-pagi">Sesi Pagi</span>
+        </a>
+        
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Footer & Disclaimer -->
+        <footer class="dashboard-footer">
+            <div class="disclaimer">
+                ⚠️ <strong>Catatan:</strong> Ringkasan dan sentimen dibuat otomatis oleh AI dari judul berita, bisa keliru. Bukan rekomendasi jual/beli saham.
+            </div>
+            <p>Dashboard Berita Saham IDX • Diperbarui otomatis via GitHub Actions & Gemini API</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript Murni: Paginasi Berita, Pencarian & Filter Instan -->
+    <script>
+        const NEWS_PAGE_SIZE = 4;
+        const IS_ARCHIVE_VIEW = false;
+        const ARCHIVE_MONTHS = [];
+        const ARCHIVE_DATA_DIR = 'data/berita-lama';
+        const SHOW_CATEGORY = true;  // di Makro kartu = topik, label kategori tidak perlu
+        const TODAY_START = '';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const container = document.getElementById('stockCardsContainer');
+            let cards = [];
+            let currentFilter = 'all';
+
+            const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[c]);
+
+            // ===== Paginasi berita per emiten =====
+            function pageCount(card) {
+                return Math.max(1, Math.ceil(card._items.length / NEWS_PAGE_SIZE));
+            }
+
+            function showPage(card, page) {
+                page = Math.max(0, Math.min(page, pageCount(card) - 1));
+                card._page = page;
+                card._items.forEach((li, i) => {
+                    if (Math.floor(i / NEWS_PAGE_SIZE) === page) {
+                        li.removeAttribute('hidden');
+                    } else {
+                        li.setAttribute('hidden', 'until-found');
+                    }
+                });
+                renderPager(card);
+            }
+
+            function renderPager(card) {
+                if (!card._pager) return;
+                const total = pageCount(card), page = card._page;
+                // Nomor halaman ringkas: 1 … (p-1) p (p+1) … N
+                const nums = [...new Set([0, page - 1, page, page + 1, total - 1])]
+                    .filter(p => p >= 0 && p < total).sort((a, b) => a - b);
+                let html = `<button type="button" class="pager-btn" data-page="${page - 1}" ${page === 0 ? 'disabled' : ''} aria-label="Halaman sebelumnya">‹</button>`;
+                nums.forEach((p, i) => {
+                    if (i > 0 && p - nums[i - 1] > 1) html += '<span class="pager-gap">…</span>';
+                    html += `<button type="button" class="pager-btn${p === page ? ' active' : ''}" data-page="${p}">${p + 1}</button>`;
+                });
+                html += `<button type="button" class="pager-btn" data-page="${page + 1}" ${page === total - 1 ? 'disabled' : ''} aria-label="Halaman berikutnya">›</button>`;
+                card._pager.innerHTML = html;
+            }
+
+            function setupCard(card) {
+                const list = card.querySelector('.news-list');
+                card._items = Array.from(list.children);
+                card._titles = card._items.map(li => li.querySelector('.news-link').textContent.toLowerCase());
+                if (card._items.length > NEWS_PAGE_SIZE) {
+                    card._pager = document.createElement('nav');
+                    card._pager.className = 'pager';
+                    card._pager.setAttribute('aria-label', 'Halaman berita ' + card.dataset.code);
+                    list.after(card._pager);
+                    card._pager.addEventListener('click', e => {
+                        const btn = e.target.closest('.pager-btn');
+                        if (!btn || btn.disabled) return;
+                        delete card.dataset.autoPage;
+                        showPage(card, Number(btn.dataset.page));
+                    });
+                    // Ctrl+F menemukan berita di halaman lain -> pindah ke halaman tersebut
+                    card._items.forEach((li, i) => li.addEventListener('beforematch', () => showPage(card, Math.floor(i / NEWS_PAGE_SIZE))));
+                }
+                showPage(card, 0);
+            }
+
+            // Fallback untuk browser tanpa dukungan hidden="until-found": tampilkan semua berita saat Ctrl+F ditekan
+            if (!('onbeforematch' in document.body)) {
+                document.addEventListener('keydown', e => {
+                    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+                        cards.forEach(card => card._items.forEach(li => li.removeAttribute('hidden')));
+                    }
+                });
+            }
+
+            // ===== Pencarian & filter =====
+            function applyFilters() {
+                const query = searchInput.value.toLowerCase().trim();
+
+                cards.forEach(card => {
+                    const code = card.dataset.code.toLowerCase();
+                    const name = card.dataset.name.toLowerCase();
+                    const hasBuyback = card.dataset.hasBuyback === 'true';
+                    const hasPP = card.dataset.hasPp === 'true';
+                    const hasLapkeu = card.dataset.hasLapkeu === 'true';
+                    const categories = (card.dataset.categories || '').split('|');
+                    const titleHit = query ? card._titles.findIndex(t => t.includes(query)) : -1;
+
+                    const matchesSearch = !query || code.includes(query) || name.includes(query) || titleHit >= 0
+                        || (query === 'buyback' && hasBuyback)
+                        || (query.includes('placement') && hasPP)
+                        || ((query === 'lapkeu' || query.includes('laporan keuangan')) && hasLapkeu);
+
+                    // Lompat ke halaman berisi berita yang cocok; kembali ke halaman 1 saat pencarian berubah
+                    if (titleHit >= 0) {
+                        card.dataset.autoPage = '1';
+                        showPage(card, Math.floor(titleHit / NEWS_PAGE_SIZE));
+                    } else if (card.dataset.autoPage) {
+                        delete card.dataset.autoPage;
+                        showPage(card, 0);
+                    }
+
+                    let matchesFilter;
+                    if (currentFilter === 'all') matchesFilter = true;
+                    else if (currentFilter === 'buyback') matchesFilter = hasBuyback;
+                    else if (currentFilter === 'pp') matchesFilter = hasPP;
+                    else if (currentFilter === 'lapkeu') matchesFilter = hasLapkeu;
+                    else matchesFilter = card.dataset.sentiment === currentFilter || categories.includes(currentFilter);
+
+                    card.classList.toggle('hidden', !(matchesSearch && matchesFilter));
+                });
+            }
+
+            function initCards() {
+                cards = Array.from(container.querySelectorAll('.stock-card'));
+                cards.forEach(setupCard);
+                applyFilters();
+            }
+
+            searchInput.addEventListener('input', applyFilters);
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+                    applyFilters();
+                });
+            });
+
+            // ===== Berita Lama / Makro: data dimuat per bulan dari ARCHIVE_DATA_DIR/YYYY-MM.json =====
+            function buildLamaCards(data) {
+                const groups = {};
+                data.items.forEach(n => n.codes.forEach(code => (groups[code] = groups[code] || []).push(n)));
+                const codes = Object.keys(groups).sort((a, b) => groups[b].length - groups[a].length || a.localeCompare(b));
+
+                container.innerHTML = codes.length ? codes.map(code => {
+                    const items = groups[code];
+                    const name = data.names[code] || code;
+                    const cats = [...new Set(items.map(n => n.category))];
+                    const lis = items.map((n, i) => `
+                        <li class="news-item"${i >= NEWS_PAGE_SIZE ? ' hidden="until-found"' : ''}>
+                            <a href="${esc(n.link)}" target="_blank" rel="noopener noreferrer" class="news-link">${esc(n.title)}</a>
+                            <div class="news-meta">
+                                ${SHOW_CATEGORY ? `<span class="cat-tag">${esc(n.category)}</span>` : ''}
+                                <span class="news-source">${esc(n.source)}</span>
+                                <span class="news-dot">•</span>
+                                <span class="news-time">${esc(n.pub_date_str)}</span>
+                            </div>
+                        </li>`).join('');
+                    return `
+                    <article class="stock-card" data-code="${esc(code)}" data-name="${esc(name.toLowerCase())}" data-sentiment="" data-categories="${esc(cats.join('|'))}" data-has-buyback="false" data-has-pp="false" data-has-lapkeu="${cats.includes('Laporan Keuangan')}">
+                        <div class="card-top">
+                            <div class="ticker-group">
+                                <span class="ticker-code">${esc(code)}</span>
+                                <span class="company-name" title="${esc(name)}">${esc(name)}</span>
+                            </div>
+                            <div class="badge-group">
+                                <span class="count-badge">${items.length} Berita</span>
+                            </div>
+                        </div>
+                        <div class="card-news-section">
+                            <div class="section-label">Berita Terkait:</div>
+                            <ul class="news-list">${lis}</ul>
+                        </div>
+                    </article>`;
+                }).join('') : '<div class="empty-state">Belum ada berita di periode ini.</div>';
+
+                // Statistik, top 5, dan jumlah emiten per kategori
+                document.getElementById('statNews').textContent = data.items.length;
+                document.getElementById('statStocks').textContent = codes.length;
+                document.getElementById('statSources').textContent = new Set(data.items.map(n => n.source)).size;
+                const max = codes.length ? groups[codes[0]].length : 1;
+                document.getElementById('topRanks').innerHTML = codes.slice(0, 5).map(code => `
+                    <div class="rank-item">
+                        <div class="rank-info">
+                            <span class="rank-ticker">${esc(code)}</span>
+                            <span class="rank-count">${groups[code].length} berita</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-bar" style="width: ${Math.round(groups[code].length / max * 100)}%"></div>
+                        </div>
+                    </div>`).join('');
+                filterButtons.forEach(btn => {
+                    const f = btn.dataset.filter;
+                    btn.querySelector('.filter-count').textContent = f === 'all'
+                        ? codes.length
+                        : codes.filter(c => groups[c].some(n => n.category === f)).length;
+                });
+            }
+
+            async function fetchMonth(month) {
+                const res = await fetch(`${ARCHIVE_DATA_DIR}/${month}.json`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            }
+
+            async function loadMonth(month) {
+                document.querySelectorAll('.month-btn').forEach(b => b.classList.toggle('active', b.dataset.month === month));
+                container.innerHTML = '<div class="empty-state">Memuat berita…</div>';
+                try {
+                    if (month === 'today') {
+                        // "Hari Ini": berita sejak awal sesi pagi hari ini (bisa melintasi pergantian bulan)
+                        const start = new Date(TODAY_START);
+                        const months = [...new Set([TODAY_START.slice(0, 7), ARCHIVE_MONTHS[0]])].filter(m => ARCHIVE_MONTHS.includes(m));
+                        const parts = await Promise.all(months.map(fetchMonth));
+                        const items = parts.flatMap(p => p.items).filter(n => new Date(n.pub_datetime) >= start);
+                        buildLamaCards({ names: parts[0] ? parts[0].names : {}, items });
+                    } else {
+                        buildLamaCards(await fetchMonth(month));
+                    }
+                } catch (e) {
+                    container.innerHTML = `<div class="empty-state">Gagal memuat berita ${esc(month)} (${esc(e.message)}).</div>`;
+                }
+                initCards();
+            }
+
+            if (IS_ARCHIVE_VIEW) {
+                document.querySelectorAll('.month-btn').forEach(b => b.addEventListener('click', () => loadMonth(b.dataset.month)));
+                if (ARCHIVE_MONTHS.length) {
+                    loadMonth(document.querySelector('.month-btn[data-month="today"]') ? 'today' : ARCHIVE_MONTHS[0]);
+                } else {
+                    container.innerHTML = '<div class="empty-state">Belum ada berita.</div>';
+                }
+            } else {
+                initCards();
+            }
+        });
+    </script>
+</body>
+</html>
